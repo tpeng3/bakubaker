@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("nanoreno2020")
+define config.name = _("Baku Baker")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -23,21 +23,31 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "1.0"
+define config.version = "2.4"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("""
+define gui.about = _p("""This Ren'Py GUI Template was put together by BáiYù with additional
+    code by {a=https://bobcgames.itch.io/}bobcgames{/a}, {a=https://twitter.com/minutekiwi}minute{/a} and {a=https://npckc.itch.io}npckc{/a}.
+    This release is under a {a=https://opensource.org/licenses/MIT}MIT license{/a},
+    meaning you may modify and use this code in any games you make, even
+    commercial ones. You do not to need to ask permission from me, bobcgames, minute, or npckc
+    to use the code in this project, though credit to us all is highly appreciated. If you wish to use the visual and audio
+    assets in your game, please refer to those individual licenses.
+    \nEileen Sprite made with {a=https://ar14.itch.io/mannequin}Mannequin by AR14{/a}
+    \nBackgrounds made by {a=https://lemmasoft.renai.us/forums/viewtopic.php?f=52&t=17302}mugenjohncel{/a}
+    \nMusic composed by {a=https://soundimage.org/}Eric Matyas{/a}
+    \nIf you'd like to see more free Ren'Py codes and GUIs in the future or
+    support the other things I do, consider pledging to me on {a=https://www.patreon.com/tofurocks}Patreon{/a}.
 """)
-
 
 ## A short name for the game used for executables and directories in the built
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "nanoreno2020"
+define build.name = "All-In-OneGUITemplate"
 
 
 ## Sounds and music ############################################################
@@ -61,7 +71,7 @@ define config.has_voice = True
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-# define config.main_menu_music = "main-menu-theme.ogg"
+define config.main_menu_music = concrete
 
 
 ## Transitions #################################################################
@@ -142,7 +152,7 @@ default preferences.afm_time = 15
 ## This generally should not be changed, and if it is, should always be a
 ## literal string, not an expression.
 
-define config.save_directory = "nanoreno2020-1582971238"
+define config.save_directory = "BakuBaker-1551133530"
 
 
 ## Icon ########################################################################
@@ -193,6 +203,11 @@ init python:
 
     build.documentation('*.html')
     build.documentation('*.txt')
+
+## Set this to a string containing your Apple Developer ID Application to enable
+## codesigning on the Mac. Be sure to change it to your own Apple-issued ID.
+
+# define build.mac_identity = "Developer ID Application: Guy Shy (XHTE5H7Z42)"
 
 
 ## A Google Play license key is required to download expansion files and perform
