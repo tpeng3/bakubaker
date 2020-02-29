@@ -1,7 +1,7 @@
 *.txt
 tmp/
 game/*.bak
-game/*.rpyb
+game/cache/*.rpyb
 game/*.rpyc
 game/saves/
 game/assets/
