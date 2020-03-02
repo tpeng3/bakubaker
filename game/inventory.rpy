@@ -28,8 +28,19 @@ init -1 python:
 # CUSTOMIZE THOUGHT INVENTORY SCREEN
 #--------------------------------------------------------------------------
 screen inventory():
-    textbutton "close inventory" xpos 1000 ypos 520 action Hide('inventory')
+    zorder 2
+    modal True
+    frame:
+        pass
 
+    imagebutton:
+        idle "gui/button/button_back.png"
+        hover im.MatrixColor("gui/button/button_back.png", im.matrix.desaturate() * im.matrix.tint(0.9, 0.9, 1.0))
+        xalign 1.0 yalign 0
+        action [ToggleScreen('inventory')]
+
+
+    #TODO: add better positions for the inventory, after UI is decided
     hbox:
         for item in inventory.items:
             imagebutton:
@@ -37,16 +48,19 @@ screen inventory():
                 action [Function(inventory.select, item)]
                 tooltip item.tooltip
 
-    if inventory.selitem is not None:
-        text "sel item is" + inventory.selitem.name ypos 520
+    # this is if we want to select any items to focus, otherwise we don't need this code
+    # if inventory.selitem is not None:
+    #     text "sel item is" + inventory.selitem.name ypos 520
 
     $ tooltip = GetTooltip()
     if tooltip:
-        text "[tooltip]"
+        text "[tooltip]":
+            xalign 0.5 yalign 0.5 #tmp
 
 #--------------------------------------------------------------------------
 # DEFINE ITEMS (thoughts)
 #--------------------------------------------------------------------------
 init python:
-    item_cake = Item("Imaginary Cake", image = "[insert image path]",
-        tooltip="this is a temp item, here to show the format of initializing items")
+    kirby = Item("Kirby with Shortcake", image = "/images/items/item_kirby.png",
+        tooltip="Free him...")
+    

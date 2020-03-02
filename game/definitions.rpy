@@ -18,6 +18,7 @@ init -1:
     # image future_office = "images/BG/future_office.jpg"
     # image room = "images/BG/room.jpg"
     # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
+    image dreamland = "images/BG/bg_dreamland.jpg" 
 ## CGs:
     # image cg_locked = "images/CG/cg_locked.jpg"
 
