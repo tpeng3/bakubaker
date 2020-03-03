@@ -1,4 +1,11 @@
 label tina:
+    menu:
+        "version 1 (page panning, hover outline click)":
+            jump tina1
+        "version 2 (hover tooltip, multiple actions options)":
+            jump tina2
+
+label tina1:
     $ inventory = Inventory()
     $ finished = False
     scene dreamland:
@@ -28,7 +35,7 @@ label kirby:
 screen dream_test(pos=0):
     zorder -10
 
-    # candy
+    # kirby
     imagebutton:
         idle "images/BG/bg_dreamland_kirby.png"
         hover "images/BG/bg_dreamland_kirby2.png"
@@ -51,9 +58,9 @@ screen dream_test(pos=0):
     textbutton "Go left":
         xalign 1 yalign 0.5
         # xanchor 0 yanchor 0.5
-        action [Hide('dream_test'), Call('lookaround', pos+200)]
+        action [Hide('dream_test'), Call('lookaround', 'dream_test', pos+200)]
     # if not pos <= gui.width:
     textbutton "Go right":
         xalign 0.8 yalign 0.5
         # xanchor 1 yanchor 0.5
-        action [Hide('dream_test'), Call('lookaround', pos-200)]
+        action [Hide('dream_test'), Call('lookaround', 'dream_test', pos-200)]

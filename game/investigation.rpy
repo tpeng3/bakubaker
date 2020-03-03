@@ -1,25 +1,25 @@
-label lookaround(pos):
-    show dreamland with move:
+# 'function' for updating background panning
+label lookaround(screenName, bg, pos):
+    scene expression bg with move:
         xalign 0.5 xoffset pos
-    show screen dream_test(pos)
+    $ renpy.show_screen(screenName, pos)
     $ renpy.pause(hard=True)
-    
-    # $ xpos = i
 
-# ignore below code, this is if we want to give multiple options for each interaction (ported from onm jakf;jewk)
+    
+# ignore below code, this is if we want to give multiple options for each interaction
 # --------------------------------------------------------------------------
 # INITIALIZE INVESTIGATION CHOICES
 # --------------------------------------------------------------------------
 
 init -1 python:
     class Probe(store.object):
-        def __init__(self, name, type, cost=0, label="", tooltip="???"):
+        def __init__(self, name, image, tooltip="???", actions={},):
             self.name = name # description of the action
-            self.type = type # type of probe (observation -> action -> discussion)
-            self.cost = cost # time cost of action
-            self.label = label # label to jump to for discussion
-            self.viewed = False
+            self.image = image
             self.tooltip = tooltip
+            self.actions = actions # dict of possible actions {actionName: jumpLabel)
+            self.viewed = False
+
         def view(self):
             self.viewed = True
 
@@ -27,5 +27,10 @@ init -1 python:
 # PROBE OBJECTS FOR TEST KITCHEN
 #--------------------------------------------------------------------------
 init python:
-    t_kirby = Probe("Look at the box of candy", 1, cost=10, label="view_candy", tooltip="Kirby")
+    t_kirby = Probe("Kirby", "images/BG/bg_dreamland_kirby.png", tooltip="Kirby",
+        actions = {
+            "Talk to Kirby": "kirby_talk",
+            "Steal his Shortcake": "kirby_steal"
+        }
+    )
 
