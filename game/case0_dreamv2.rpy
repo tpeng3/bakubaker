@@ -22,10 +22,11 @@ label kirby_talk:
         $ inventory.add(kirby)
         "Hi Kirby!"
         "Kirby doesn't respond because they're a sticker."
+        r neutral "We have ways of making you talk..."
     else:
         "It's just another day for Kirby in Dreamland..."
     jump dream_start2
-    
+
 label kirby_steal:
     "Now why would you want to do that?"
     jump dream_start2
@@ -49,7 +50,7 @@ screen dream_test2(pos=0):
     if tooltip:
         text "[tooltip]":
             xalign 0.2 ypos 0.2 #tmp
-    
+
 
     # inventory button
     # technically we can (or should?) put this on a seperate screen
