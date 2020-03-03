@@ -82,30 +82,30 @@ label splashscreen:
     ## Here begins our splashscreen animation.
     show splash_anim_1
     show splash_anim_2
-    
+
     ## The first time the game is launched, players cannot skip the animation.
     if not persistent.seen_splash:
-        
+
         ## No input will be detected for the set time stated.
         ## Set this to be a little longer than how long the animation takes.
         $ renpy.pause(8.5, hard=True)
- 
+
         $ persistent.seen_splash = True
-    
+
     ## Players can skip the animation in subsequent launches of the game.
     else:
- 
+
         if renpy.pause(8.5):
- 
+
             jump skip_splash
 
     scene black
     with fade
- 
+
     label skip_splash:
- 
+
         pass
- 
+
     return
 
 ## The game starts here.
@@ -115,6 +115,8 @@ label start:
             jump accessibility
         "Tina's room for prototyping mechanics":
             jump tina
+        "Cynthia's ULTIMATE LAB":
+            jump cynthia
 
 
 label accessibility:
@@ -134,7 +136,7 @@ label accessibility:
 
     # Placing the effect after both image statements will apply said
     # effect on both images.
-    
+
     with fade
 
     # This plays our music file in a way that if audio captions are on,
@@ -167,13 +169,13 @@ label accessibility:
     e "Thanks for downloading this Baku Baker! After you play through this script, be sure to open up the files and adapt them to your project's needs."
 
     e "You can even make a copy of the entire {color=#32CD32}game{/color} folder and start your project from there."
-    
+
     e "So now, let's demonstrate some of the custom Accessibility Options."
 
     e "When you run this project for the first time, you should have been able to adjust the Audio and Image Caption options."
 
     e "I'll make some sounds now. If Audio Captions are on, you'll see a notification in the top-left corner describing the sound."
-    
+
     # This plays our sound file in a way that if audio captions are on,
     # it will describe the sound being played.
     $ play_sound(door)
@@ -315,7 +317,7 @@ label accessibility:
     $ renpy.end_replay()
 
 label credits:
-    
+
     # End Credits
 
     ## We hide the quickmenu for the End Credits so they don't appear at the bottom.
@@ -332,10 +334,10 @@ label credits:
 
     scene black
     with fade
-    
+
     # Players can skip the credits in subsequent playthroughs of the game.
     label skip_credits:
- 
+
         pass
 
     ## We re-enable the quickscreen as the credits are over.
@@ -348,7 +350,7 @@ label credits:
 
     ## We display a screen that shows how much the player has seen and played of the game.
     show screen results
-    
+
     centered "Fin"
 
     if persistent.game_clear:
