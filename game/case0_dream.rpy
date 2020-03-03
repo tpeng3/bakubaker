@@ -8,9 +8,10 @@ label tina:
 label tina1:
     $ inventory = Inventory()
     $ finished = False
-    scene dreamland:
+    # have to initialize scene bg as an expression for lookaround to work later
+    $ bg = "dreamland"
+    scene expression bg:
         xalign 0.5
-    "I don't have anything here yet... but I will..."
     show screen dream_test()
     jump dream_start
 
@@ -58,9 +59,9 @@ screen dream_test(pos=0):
     textbutton "Go left":
         xalign 1 yalign 0.5
         # xanchor 0 yanchor 0.5
-        action [Hide('dream_test'), Call('lookaround', 'dream_test', pos+200)]
+        action [Hide('dream_test'), Call('lookaround', 'dream_test', 'dreamland', pos+200)]
     # if not pos <= gui.width:
     textbutton "Go right":
         xalign 0.8 yalign 0.5
         # xanchor 1 yanchor 0.5
-        action [Hide('dream_test'), Call('lookaround', 'dream_test', pos-200)]
+        action [Hide('dream_test'), Call('lookaround', 'dream_test', 'dreamland', pos-200)]

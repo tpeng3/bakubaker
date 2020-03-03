@@ -65,16 +65,16 @@ screen dream_test2(pos=0):
     $ print a
     $ print pos
 
-    if pos >= 0:
-        textbutton "Go left":
-            xalign 1 yalign 0.5
-            # xanchor 0 yanchor 0.5
-            action [Hide(screenName), Call('lookaround', screenName, bg, pos+200)]
-    if pos <= gui.width:
-        textbutton "Go right":
-            xalign 0.8 yalign 0.5
-            # xanchor 1 yanchor 0.5
-            action [Hide(screenName), Call('lookaround', screenName, bg, pos-200)]
+    # if pos >= 0:
+    textbutton "Go left":
+        xalign 1 yalign 0.5
+        # xanchor 0 yanchor 0.5
+        action [Hide(screenName), Call('lookaround', screenName, bg, pos+200)]
+    # if pos <= gui.width:
+    textbutton "Go right":
+        xalign 0.8 yalign 0.5
+        # xanchor 1 yanchor 0.5
+        action [Hide(screenName), Call('lookaround', screenName, bg, pos-200)]
 
 
 screen dream_actions(actions={}, mx, my):
