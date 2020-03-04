@@ -123,8 +123,12 @@ screen say(who, what):
 
     ## If there's a side image, display it above the text. Do not display on the
     ## phone variant - there's no room.
-    if not renpy.variant("small"):
-        add SideImage() xalign 0.0 yalign 1.0
+    # if not renpy.variant("small"):
+    #     add SideImage() xalign 0.90 yalign -0.05
+    if who == 'Remerie':
+        add SideImage() xalign 0.90 yalign -0.05
+    if who == 'Somnia':
+        add SideImage() xalign 0.90 yalign -0.05
 
 # ### OLD VERSION V
 # screen say(who, what):
@@ -709,7 +713,7 @@ screen file_slots(title):
                     textbutton "[page]" action FilePage(page)
 
                 textbutton _(">") action FilePageNext(min(page+1,8))
-            
+
             ## This version allows access to more pages than are listed as buttons
             ## as there is no hard limit defined.
             # hbox:
@@ -857,7 +861,7 @@ screen preferences():
 
                     style_prefix "check"
                     label _("Toggle")
-                
+
                     #Toggle Screenshake
                     textbutton "Screenshake" action ToggleField(persistent,"screenshake",true_value=True,false_value=False)
 
@@ -879,7 +883,7 @@ screen preferences():
 
                     ## This shows Ren'Py's built-in accessibility menu. This can also be displayed by pressing "A" on the keyboard when playing on a PC. As this option can break the way the game is displayed and also does not support translation as of the latest Ren'Py build, you may want to hide the option.
                     # textbutton _("More Options...") action Show("_accessibility")
-            
+
             null height (4 * gui.pref_spacing)
 
             ## Set Textbox Opacity
@@ -1634,7 +1638,7 @@ init python:
 
     # Backgrounds for the BG Gallery
     g_bg.button("room")
-    g_bg.unlock_image("room") 
+    g_bg.unlock_image("room")
 
     g_bg.button("office")
     g_bg.image("future_office")
@@ -2055,7 +2059,7 @@ screen credits():
             # text "Lorem Ipsum"
 
             null height 200
-            
+
             text "Art" size 100
             null height 50
 
@@ -2063,12 +2067,12 @@ screen credits():
 
             null height 50
 
-            text "Uncle Mugen" 
+            text "Uncle Mugen"
 
             null height 200
 
             text "Soundtrack" size 100
-            null height 50 
+            null height 50
 
             text "Eric Matyas"
 
@@ -2094,9 +2098,9 @@ screen credits():
                 xalign 0.5
                 spacing 200
 
-                text "minute" 
+                text "minute"
 
-                text "npckc" 
+                text "npckc"
 
             null height 200
 
@@ -2107,7 +2111,7 @@ screen credits():
             # null height 200
 
             # text "Voiceover" size 100
-            # null height 50 
+            # null height 50
 
             # hbox:
             #     xalign 0.5
@@ -2177,7 +2181,7 @@ style backercredits_text:
 ## Code Source: https://lemmasoft.renai.us/forums/viewtopic.php?t=39859
 ## Official Documentation of function: https://www.renpy.org/doc/html/other.html#renpy.count_dialogue_blocks
 
-# This creates a percentage based on how much of the game the player has seen. 
+# This creates a percentage based on how much of the game the player has seen.
 init python:
 
     numblocks = renpy.count_dialogue_blocks()
@@ -2192,7 +2196,7 @@ init python:
 default readtotal = 0
 
 screen results():
-    
+
     zorder 200
 
     vbox:
@@ -2325,8 +2329,3 @@ style slider_pref_vbox:
 style slider_pref_slider:
     variant "small"
     xsize 900
-
-
-
-
-

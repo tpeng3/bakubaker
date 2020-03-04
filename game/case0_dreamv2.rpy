@@ -22,7 +22,7 @@ label kirby_talk:
         $ inventory.add(kirby)
         "Hi Kirby!"
         "Kirby doesn't respond because they're a sticker."
-        r neutral "We have ways of making you talk..."
+        dreamRem neutral "We have ways of making you talk..."
     else:
         "It's just another day for Kirby in Dreamland..."
     jump dream_start2

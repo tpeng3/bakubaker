@@ -1,26 +1,57 @@
 # Time to BREAK EVERYTHING
 
+init python:
+    config.side_image_only_not_showing = False
+
 # Characters ------------------------------------------------------------------
 # TODO def vn section character (TWEWY) // def dream section character (Ghost Trick profile)
-define s = Character (None,
+define s = Character (None, # Name is baked into textbox bubble
+# Somnia
             color="48475a",
             window_background="gui/textboxSomnia.png",
-            what_xalign = 0.5,
-            what_textalign = 0.5
+            what_xalign = 0.50,
+            what_yalign = 0.50,
+            what_textalign = 0.50
             )
-define r = Character (None,
-            image = "remy",
+define dreamSom = Character ("Somnia",
+            image = "somnia",
+            color="ffcf89",
+            window_background="gui/textboxTest.png",
+            what_xalign = 0.50,
+            what_textalign = 0.50,
+            window_yalign = 0.025,
+            window_xalign = 0.50
+            )
+define r = Character (None, # Name is baked into textbox bubble
+# Remerie
             color="ffcf89",
             window_background="gui/textboxRem.png",
             what_xalign = 0.50,
+            what_yalign = 0.50,
             what_textalign = 0.50,
-            window_yalign = 0.10,
+            )
+define dreamRem = Character ("Remerie",
+            image = "remy",
+            color="ffcf89",
+            window_background="gui/textboxTest.png",
+            what_xalign = 0.50,
+            what_textalign = 0.50,
+            window_yalign = 0.025,
             window_xalign = 0.50
             )
 define u = Character (None,
             window_background="gui/textboxTest.png",
             what_xalign = 0.5,
             what_textalign = 0.5
+            )
+define dr = Character (None,
+            image = None,
+            color="ffcf89",
+            window_background="gui/textboxTest.png",
+            what_xalign = 0.50,
+            what_textalign = 0.50,
+            window_yalign = 0.025,
+            window_xalign = 0.50
             )
 # Positions -------------------------------------------------------------------
 transform right:
@@ -33,27 +64,37 @@ transform left:
 # -----------------------------------------------------------------------------
 # Crop (x, y, width, height)
 image somnia:
-    LiveCrop ((0,0,500,500), "images/sprites/somnia.png")
+    Crop ((0,0,500,500), "images/sprites/somnia.png")
     zoom 2.0
+image somnia neutral = "images/sprites/somnia.png"
+image side somnia neutral:
+    Crop ((100,50,300,300), "somnia neutral")
+    zoom 1.2
+image somnia spider = "images/sprites/somnia spider.png"
+image side somnia spider:
+    Crop ((100,50,300,300), "somnia spider")
+    zoom 1.2
 
 image remy:
-    LiveCrop ((0,0,500,500), "images/sprites/remerie.png")
+    Crop ((0,0,500,500), "images/sprites/remerie.png")
     zoom 2.0
+image remy neutral = "images/sprites/remerie.png"
 image side remy neutral:
-    LiveCrop ((-1100,100,1920,500), "images/sprites/remerie.png")
-    zoom 1.25
-# image side remy grump:
-#     LiveCrop ((-1100,100,1920,500), "images/sprites/remerie grump.png")
-#     zoom 1.25
+    Crop ((100,50,300,300), "remy neutral")
+    zoom 1.2
+image remy grump = "images/sprites/remerie grump.png"
+image side remy grump:
+    Crop ((100,50,300,300), "remy grump")
+    zoom 1.2
 
 # -----------------------------------------------------------------------------
 
-
 label cynthia:
 
+    scene sugarspace
     show somnia at right
     show remy at left
-    u "Two characters are enjoying the void."
+    u "Two characters are enjoying Sugar Space."
 
     s "Remerie's grumpy as ever...!"
     r "Hey!!!"
@@ -61,13 +102,17 @@ label cynthia:
     r "Please don't call me that."
 
     show pika
-    s "Oh lord... he comin."
-    r "A big good boy."
+    s "Let's jump into the dream!"
 
-    scene future office
+    scene black with dissolve
+    show pika
+    dr "They're now in the void."
+    dreamRem neutral "Pikachu is an Electric-type Pokémon introduced in Generation I. It evolves from Pichu when leveled up with high friendship and evolves into Raichu when exposed to a Thunder Stone."
+    dreamSom neutral "I didn't know you were a fan of Pokemon, Rem!!"
+    dreamRem grump "S-shush..."
+    dreamSom spider "Hehehe..."
 
-    u "Kirby is the titular protagonist of the Kirby series of video games owned by Nintendo and HAL Laboratory. As one of Nintendo's most famous and familiar icons..."
-
-    u "Kirby's round appearance and ability to copy his foes' powers has made him a well-known figure in video games, consistently ranked as one of the most iconic video game characters."
+    "Going to Dreamland..."
+    jump tina
 
 return
