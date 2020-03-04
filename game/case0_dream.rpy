@@ -4,6 +4,8 @@ label tina:
             jump tina1
         "version 2 (hover tooltip, multiple actions options)":
             jump tina2
+        "Hell's Kitchen":
+            jump tina3
 
 label tina1:
     $ inventory = Inventory()
