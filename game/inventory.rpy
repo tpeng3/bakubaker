@@ -26,8 +26,10 @@ init -1 python:
                 self.items.remove(item)
                 self.undo.append(item)
         def undo(self, item):
-            if self.undo:
-                self.items.append(self.undo.pop())
+            if len(self.undo) != 0:
+                print("hi")
+                item = self.undo.pop()
+                self.add(item)
         def select(self, item):
             self.selitem = item
 
@@ -100,44 +102,44 @@ init python:
             "tension": 999
         })
     dream_flour = Item("Dream Flour", image = "/images/items/item_kirby.png",
-        tooltip="", 
+        tooltip="Dream Flour +30 wonder, -20 spirit", 
         flavors={
             "wonder": 30,
-            "spooky": 5,
-            "spirit": 10,
-            "tension": 5
+            "spooky": 0,
+            "spirit": -20,
+            "tension": 0
         })
     nightmare_jelly = Item("Nightmare Jelly", image = "/images/items/item_kirby.png",
-        tooltip="", 
+        tooltip="Nightmare Jelly +40 spooky", 
         flavors={
-            "wonder": 30,
-            "spooky": 5,
-            "spirit": 10,
-            "tension": 5
+            "wonder": 0,
+            "spooky": 40,
+            "spirit": 0,
+            "tension": 0
         })
     spooky_jam = Item("Spooky Jam", image = "/images/items/item_kirby.png",
-        tooltip="", 
+        tooltip="Spooky Jam +30 spooky, +10 wonder", 
         flavors={
-            "wonder": 30,
-            "spooky": 5,
-            "spirit": 10,
-            "tension": 5
+            "wonder": 10,
+            "spooky": 30,
+            "spirit": 0,
+            "tension": 0
         })
     galaxy_milk = Item("Galaxy Milk", image = "/images/items/item_kirby.png",
-        tooltip="", 
+        tooltip="Galaxy Milk +10 spirit, -5 tension", 
         flavors={
-            "wonder": 30,
-            "spooky": 5,
+            "wonder": 0,
+            "spooky": 0,
             "spirit": 10,
-            "tension": 5
+            "tension": -5
         })
     haunted_whip = Item("Haunted Whip", image = "/images/items/item_kirby.png",
-        tooltip="", 
+        tooltip="Haunted Whip +20 spooky, +20 tension", 
         flavors={
-            "wonder": 30,
-            "spooky": 5,
-            "spirit": 10,
-            "tension": 5
+            "wonder": 0,
+            "spooky": 20,
+            "spirit": 0,
+            "tension": 20
         })
     
     
