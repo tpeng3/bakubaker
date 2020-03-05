@@ -9,6 +9,7 @@ init -1 python:
         def __init__(self, name, image="", tooltip="", flavors={}):
             self.name = name # name of item
             self.image = image # image url
+            self.amount = 0 # item amount
             self.tooltip = tooltip # tooltip desc
             self.flavors = flavors # {flavor: amount}
             # flavors are temporary names, to be decided later 
@@ -19,8 +20,9 @@ init -1 python:
             self.selitem = None
             self.undo = []
         def add(self, item):
-            if item not in self.items: # we don't want duplicates... or do we?
+            if item not in self.items:
                 self.items.append(item)
+                
         def use(self, item):
             if item in self.items:
                 self.items.remove(item)
@@ -43,10 +45,24 @@ init -1 python:
             }
         def update(self, item):
             for flavor in item.flavors:
-                if flavor in self.flavors:
-                    self.flavors[flavor] += item.flavors[flavor]
-                else:
-                    self.flavors[flavor] = item.flavors[flavor]
+                self.flavors[flavor] += item.flavors[flavor]
+        def smash(self, skill): # "super smash" move
+            # skill: {"cost": {"flavor":amount}, "boost": {"flavor":amount}}
+            for flavor in skill.cost:
+                cost = skill.cost[flavor]
+                if cost < 1: # if cost is a percentage
+                    transmute = self.flavors[flavor] * cost
+                    self.flavors[flavor] -= transmute
+                else: # else just subtract the cost
+                    self.flavors[flavor] -= cost
+            for flavor in skill.boost:
+                boost = skill.boost[flavor]
+                if boost == 0: # if boost is a 1:1 ratio conversion
+                    self.flavors[flavor] += transmute
+                if boost < 1: # if boost is a percentage
+                    self.flavors[flavor] += self.flavors[flavor] * boost
+                else: # else just add the cost
+                    self.flavors[flavor] += boost
         def result(self, goal, zest): #goal is a {}, zest is a string with the focused attr
             for flavor in goal:
                 if self.flavors[flavor] < goal[flavor]:

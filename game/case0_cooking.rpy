@@ -47,6 +47,7 @@ screen cooking_inventory(goal, zest):
         xalign 0.1 yalign 0.6
         action [Function(cook_status.update, item), Function(inventory.use, item)]
 
+    # TODO: undo button is broken (I also want it to shortcut undo with right click)
     textbutton "Undo":
         xalign 0.1 yalign 0.65
         action [Function(inventory.undo, item)]
