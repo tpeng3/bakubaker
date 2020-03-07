@@ -5,7 +5,7 @@ label tina2:
     $ bg = "dreamland"
     scene expression bg:
         xalign 0.5
-    "I don't have anything here yet... but I will..."
+    "This version of dream has multiple interactions menu"
     show screen dream_test2()
     jump dream_start2
 

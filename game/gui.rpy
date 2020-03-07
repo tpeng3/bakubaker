@@ -11,8 +11,6 @@ init offset = -2
 init python:
     gui.init(1920, 1080)
 
-
-
 ################################################################################
 ## GUI Configuration Variables
 ################################################################################
@@ -140,6 +138,12 @@ define gui.dialogue_width = 950
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.dialogue_text_xalign = 0.0
 
+## Mouse
+define config.mouse = {
+    "default" : [("gui/mouse_default.png", 0, 0)],
+    "somnia" : [("gui/mouse_somnia.png", 0, 0)],
+    "remerie" : [("gui/mouse_remerie.png", 0, 0)],
+    }
 
 ## Buttons #####################################################################
 ##

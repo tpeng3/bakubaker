@@ -23,6 +23,19 @@ init -1 python:
         def view(self):
             self.viewed = True
 
+# --------------------------------------------------------------------------
+# CUSTOMIZE INVESTIGATION SCREEN
+# --------------------------------------------------------------------------
+
+screen investigation():
+    # inventory button
+    imagebutton:
+        idle "gui/button/button_thoughts.png"
+        hover im.MatrixColor("gui/button/button_thoughts.png", im.matrix.desaturate() * im.matrix.tint(0.9, 0.9, 1.0))
+        xalign 1.0 yalign 0
+        action [ToggleScreen('inventory')]
+
+
 #--------------------------------------------------------------------------
 # PROBE OBJECTS FOR TEST KITCHEN
 #--------------------------------------------------------------------------
