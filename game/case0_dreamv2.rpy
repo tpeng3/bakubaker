@@ -13,7 +13,7 @@ label dream_start2:
     if finished:
         "OK I think I have a good idea of what to make."
         "Time to head back to the kitchen!"
-        return
+        jump tina3
     window hide
     $ renpy.pause(hard=True)
 
