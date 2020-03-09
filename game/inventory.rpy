@@ -18,20 +18,24 @@ init -1 python:
         def __init__(self):
             self.items = []
             self.selitem = None
-            self.undo = []
+            self.trash = []
         def add(self, item):
             if item not in self.items:
                 self.items.append(item)
-                
         def use(self, item):
             if item in self.items:
                 self.items.remove(item)
-                self.undo.append(item)
-        def undo(self, item):
-            if len(self.undo) != 0:
-                print("hi")
-                item = self.undo.pop()
+                self.trash.append(item)
+                self.selitem = None
+        def undo(self):
+            if len(self.trash) > 0:
+                item = self.trash.pop()
                 self.add(item)
+                return item
+            return None
+        def reset(self):
+            while len(self.trash) > 0:
+                self.undo()
         def select(self, item):
             self.selitem = item
 
@@ -44,8 +48,20 @@ init -1 python:
                 "wonder": 0
             }
         def update(self, item):
-            for flavor in item.flavors:
-                self.flavors[flavor] += item.flavors[flavor]
+            if item:
+                for flavor in item.flavors:
+                    self.flavors[flavor] += item.flavors[flavor]
+        def undo(self, item):
+            if item:
+                for flavor in item.flavors:
+                    self.flavors[flavor] -= item.flavors[flavor]
+        def reset(self):
+            self.flavors = {
+                "spooky": 0,
+                "tension": 0,
+                "spirit": 0,
+                "wonder": 0
+            }
         def smash(self, skill): # "super smash" move
             # skill: {"cost": {"flavor":amount}, "boost": {"flavor":amount}}
             for flavor in skill.cost:
@@ -156,6 +172,15 @@ init python:
             "spooky": 20,
             "spirit": 0,
             "tension": 20
+        })
+
+    c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
+        tooltip="A tasty strawberry +20 spooky, +20 tension", 
+        flavors={
+            "wonder": 30,
+            "spooky": 10,
+            "spirit": 20,
+            "tension": 0
         })
     
     

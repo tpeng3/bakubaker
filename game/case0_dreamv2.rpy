@@ -1,11 +1,19 @@
+label tina:
+    menu:
+        "Dream investigation":
+            jump dream_case1
+        "Hell's Kitchen":
+            jump tina3
+
 label tina2:
     $ inventory = Inventory()
     $ finished = False
     # have to initialize scene bg as an expression for lookaround to work later
-    $ bg = "dreamland"
+    $ bg = "wonderland"
     scene expression bg:
         xalign 0.5
     "This version of dream has multiple interactions menu"
+    show screen investigation()
     show screen dream_test2()
     jump dream_start2
 
@@ -35,7 +43,7 @@ screen dream_test2(pos=0):
     zorder -10
     $ mx, my = renpy.get_mouse_pos()
     $ screenName = 'dream_test2'
-    $ bg = "dreamland"
+    $ bg = "wonderland"
 
     # kirby
     imagebutton:
@@ -52,14 +60,6 @@ screen dream_test2(pos=0):
             xalign 0.2 ypos 0.2 #tmp
 
 
-    # inventory button
-    # technically we can (or should?) put this on a seperate screen
-    imagebutton:
-        idle "gui/button/button_thoughts.png"
-        hover im.MatrixColor("gui/button/button_thoughts.png", im.matrix.desaturate() * im.matrix.tint(0.9, 0.9, 1.0))
-        xalign 1.0 yalign 0
-        action [ToggleScreen('inventory')]
-
     # right now bg panning is updated by pos but we can also do align %, it's a matter of preference
     # TODO: calculate background position to hide the arrows accordingly
     $ a = renpy.get_image_bounds(bg)
@@ -70,12 +70,12 @@ screen dream_test2(pos=0):
     textbutton "Go left":
         xalign 1 yalign 0.5
         # xanchor 0 yanchor 0.5
-        action [Hide(screenName), Call('lookaround', screenName, bg, pos+200)]
+        action [Hide(screenName), Call('lookaround', screenName, bg, pos+500)]
     # if pos <= gui.width:
     textbutton "Go right":
         xalign 0.8 yalign 0.5
         # xanchor 1 yanchor 0.5
-        action [Hide(screenName), Call('lookaround', screenName, bg, pos-200)]
+        action [Hide(screenName), Call('lookaround', screenName, bg, pos-500)]
 
 
 screen dream_actions(actions={}, mx, my):

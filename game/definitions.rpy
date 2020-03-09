@@ -14,11 +14,22 @@ init -1:
     # image eileen_face_surprised = "images/sprites/eileen_face_surprised.png"
     # image eileen_face_upset = "images/sprites/eileen_face_upset.png"
     # image eileen_headband = "images/sprites/eileen_headband.png"
+
+## UI:
+    image goLeft = "gui/button/goleft.png"
+    image goLeftHov = "gui/button/goleftHov.png"
+    image goRight = "gui/button/goright.png"
+    image goRightHov = "gui/button/gorightHov.png"
+    image icon_somnia = "gui/mouse_somnia.png"
+    image icon_remerie = "gui/mouse_remerie.png"
+
 ## BGs:
     # image future_office = "images/BG/future_office.jpg"
     # image room = "images/BG/room.jpg"
     # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
     image dreamland = "images/BG/bg_dreamland.jpg" 
+    image wonderland = "images/BG/bg_wonderland.png" 
+
 ## CGs:
     # image cg_locked = "images/CG/cg_locked.jpg"
 

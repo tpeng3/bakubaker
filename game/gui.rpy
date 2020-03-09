@@ -141,9 +141,11 @@ define gui.dialogue_text_xalign = 0.0
 ## Mouse
 define config.mouse = {
     "default" : [("gui/mouse_default.png", 0, 0)],
-    "somnia" : [("gui/mouse_somnia.png", 0, 0)],
-    "remerie" : [("gui/mouse_remerie.png", 0, 0)],
+    "hover" : [("gui/mouse_hover.png", 0, 0)]
     }
+
+## Layers
+define config.layers = ['investigation', 'master', 'transient', 'screens', 'overlay' ]
 
 ## Buttons #####################################################################
 ##
