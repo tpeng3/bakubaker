@@ -22,6 +22,16 @@ init -1:
     image goRightHov = "gui/button/gorightHov.png"
     image icon_somnia = "gui/mouse_somnia.png"
     image icon_remerie = "gui/mouse_remerie.png"
+    image goCook = "gui/button/button_cookbook.png"
+    image goCookHov = "gui/button/button_cookbook2.png"
+    image goDream = "gui/button/button_dream.png"
+    image goDreamHov = "gui/button/button_dream2.png"
+    image goEat = "gui/button/button_cook.png"
+    image goEatHov = "gui/button/button_cook2.png"
+    image selBorder = "gui/selected.png"
+
+
+
 
 ## BGs:
     # image future_office = "images/BG/future_office.jpg"
@@ -29,6 +39,7 @@ init -1:
     # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
     image dreamland = "images/BG/bg_dreamland.jpg" 
     image wonderland = "images/BG/bg_wonderland.png" 
+    image cookbook = "images/BG/bg_cookbook.png"
 
 ## CGs:
     # image cg_locked = "images/CG/cg_locked.jpg"

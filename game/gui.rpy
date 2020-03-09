@@ -18,6 +18,9 @@ define gui.width = 1920
 define gui.height = 1080
 
 
+## TEMP text colors
+# define style.temp_button_text.color = "#000"
+
 ## Colors ######################################################################
 ##
 ## The colors of text in the interface.

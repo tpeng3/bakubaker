@@ -1,14 +1,14 @@
 label tina3:
     # tmp shortcut to get all the items if you didn't get them from the dream
-    scene black
+    scene cookbook
     $ inventory = Inventory()
     call inventory_stock
-        
     "Welcome to Hell's Kitchen..."
     "Quick tutorial: you got a bunch of ingredients, and the goal is to add it together and reach the numbers in the middle."
     "Bonus points if you get the STARRED* attribute to 100!"
-    $ goal = {"wonder": 10, "spooky": 40, "tension": 20, "spirit": 20}
-    $ cook_status = CookStatus()
+    $ goal = {"wonder": 10, "spooky": 40, "spirit": 20}
+    $ smashReq = [dream_flour, galaxy_milk, c_strawberry]
+    $ cook_status = CookStatus(smashReq=smashReq)
     show screen cooking_inventory(goal=goal, zest="wonder")
     jump cooking_start
 
@@ -40,60 +40,64 @@ screen cooking_inventory(goal, zest):
     zorder 2
     modal True
 
-    #TODO: add better positions for the inventory, after UI is decided
-    $x = 0
-    hbox:
-        for item in inventory.items:
-            imagebutton:
-                idle item.image
-                xalign 0+x
-                action [Function(inventory.select, item)]
-                tooltip item
-            $ x += 1
-
-    if inventory.selitem:
-        text "Selected Item: {}".format(inventory.selitem.name):
-            xalign 0.1 yalign 0.55
-
-    textbutton "Add Ingredient":
-        xalign 0.1 yalign 0.6
-        action [Function(cook_status.update, inventory.selitem), Function(inventory.use, inventory.selitem)]
-
-    # TODO: I also want it to shortcut undo with right click)
-    # textbutton "Undo":
-    #     xalign 0.1 yalign 0.65
-    #     action [Function(cook_status.undo(inventory.undo()))]
+    imagebutton:
+        idle "goDream"
+        hover "goDreamHov"
+        mouse "hover"
+        focus_mask True
+        xalign 0 yalign 0
+        action [Jump("dream_start1")]
 
     textbutton "Reset":
         xalign 0.1 yalign 0.7
+        # text_style "temp_button_text"
         action [Function(cook_status.reset), Function(inventory.reset)]
 
-    textbutton "Done":
-        xalign 0.1 yalign 0.75
+    imagebutton:
+        idle "goEat"
+        hover "goEatHov"
+        mouse "hover"
+        focus_mask True
+        xalign 0.74 yalign 0.85
         action [Jump("cooking_done")]
 
-    textbutton "Return to Dream":
-        xalign 0.1 yalign 0.80
-        action [Jump("dream_start1")]
-
-    # this is if we want to select any items to focus, otherwise we don't need this code
-    # if inventory.selitem is not None:
-    #     text "sel item is" + inventory.selitem.name ypos 520
+    #TODO: add better positions for the inventory, after UI is decided
+    $x = 420
+    $y = 140
+    for i, item in enumerate(inventory.items):
+        if i % 3 == 0:
+            $ x = 420
+            $ y += 140
+        # for now border is a seperate image but change later
+        imagebutton:
+            idle item.image
+            xpos x ypos y
+            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
+            tooltip item
+        if item in inventory.selected:
+            add "selBorder":
+                xpos x-6 ypos y-6
+        $ x += 160
 
     $ tooltip = GetTooltip()
     if tooltip:
-        text "[tooltip.name]":
-            xalign 0.8 yalign 0.0 #tmp
-        text "[tooltip.tooltip]":
-            xalign 0.8 yalign 0.1 #tmp
+        fixed xmaximum 500:
+            text "[tooltip.name]":
+                xpos 600 ypos 710 #tmp
+                xalign 0.5
+                color "#000"
+            text "[tooltip.tooltip]":
+                xpos 600 ypos 760 #tmp
+                xalign 0.5
+                color "#000"
 
     # desired stats
     $ y = 0
     for flavor in goal:
         bar value StaticValue(cook_status.flavors[flavor], 100):
-            xalign 0.6 yalign 0.45+y
+            xalign 0.75 ypos 110+y
             xmaximum 400
-            ymaximum 20
+            ymaximum 4
         # if flavor == zest:
         #     text flavor color '#facade':
         #         xalign 0.6+x yalign 0.45
@@ -101,5 +105,13 @@ screen cooking_inventory(goal, zest):
         #     text flavor:
         #         xalign 0.6+x yalign 0.45
         text "{}/{}".format(cook_status.flavors[flavor], goal[flavor]):
-            xalign 0.5 yalign 0.45+y
-        $ y += 0.1
+            xalign 0.75 ypos 110+y
+        $ y += 60
+
+    # combo
+    bar value StaticValue(cook_status.combo, 4):
+        xalign 0.2 ypos 80
+        xmaximum 400
+        ymaximum 4
+    text "Combo: {}/{}".format(cook_status.combo, 4):
+        xalign 0.2 ypos 80
