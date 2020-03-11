@@ -30,9 +30,6 @@ init -1:
     image goEatHov = "gui/button/button_cook2.png"
     image selBorder = "gui/selected.png"
 
-
-
-
 ## BGs:
     # image future_office = "images/BG/future_office.jpg"
     # image room = "images/BG/room.jpg"

@@ -1,35 +1,41 @@
 label dream_case1:
-    $ interaction = [t_kirby, t_rabbit, t_clocktower, t_strawberry, t_client]
     $ inventory = Inventory()
+    $ itr_list = [t_kirby, t_rabbit, t_clocktower, t_strawberry, t_client] # starting interactions
+    $ interactions = Interactions(itr_list)
+    $ page_width = 1680 # width of a "page" to scroll
+    $ unlocked_pages = 2 # default is 0 but set to 2 for testing purposes
     $ finished = False
     # have to initialize scene bg as an expression for lookaround to work later
     $ bg = "wonderland"
     scene expression bg:
         xpos 0
     "Case 1 (tutorial) dream"
-    show screen investigation()
-    show screen dream_wonderland()
+    show screen dream()
     jump dream_start1
 
 label dream_start1:
-    if finished:
-        "OK I think I have a good idea of what to make."
-        "Time to head back to the kitchen!"
-        jump tina3
+    # if finished:
+    #     "OK I think I have a good idea of what to make."
+    #     "Time to head back to the kitchen!"
+    #     jump tina3
     window hide
     $ renpy.pause(hard=True)
+
+label unlock_kitchen:
+    show screen goCook()
+    jump dream_start1
 
 label rabbit:
     "I'm late! I'm late!"
     dreamRem neutral "I wonder what's the hurry..."
     jump dream_start1
 
-label client:
+label client_talk:
     "*Mumble mumble...*"
     dreamSom neutral "There they are!"
     "*NYOOMS*"
-    $ interaction = [t_kirby, t_rabbit, t_clocktower, t_strawberry]
-    hide rabbitOne with fade
+    $ interactions.complete([t_client])
+    hide expression t_client.image with Dissolve(0.8)
     dreamSom "Oh noooooooooo"
     jump dream_start1
 
@@ -54,6 +60,7 @@ label clocktower_enter:
 
 label strawberry_look:
     dreamSom "That's a huge strawberry..."
+    $ interactions.update(t_strawberry.enable("strawberry_eat"))
     jump dream_start1
 
 label strawberry_eat:
@@ -63,65 +70,39 @@ label strawberry_eat:
         "Strawberry added to inventory."
     else:
         dreamRem "I wonder what we can make with this strawberry..."
-    jump dream_start1
+    jump unlock_kitchen
 
-
-screen dream_wonderland(pos=0):
-    zorder -10
-    # TODO: look up if we should use tags to organize screens
-    $ mx, my = renpy.get_mouse_pos()
-    $ screenName = 'dream_wonderland'
-    $ bg = "wonderland"
-
-    # a part of my brain is screaming that I shouldn't make images with such large transparent pixels
-    # this is my version of duct tape code, we can split interactions by "pages" afterwards if needed
-    for i in interaction:
-        imagebutton:
-            idle i.image
-            background
-            # hover i.hover if we still want to do hover outlines
-            xpos 3406+pos # calculate better positions later
-            tooltip i
-            focus_mask True
-            mouse "hover"
-            action [Show('dream_actions', actions=i.actions, mx=int(mx), my=int(my))]
-
-    # image tooltip
-    $ tooltip = GetTooltip()
-    if tooltip:
-        # image "[tooltip.icon]":
-        #     xalign 0.48 ypos 0.8
-        #     xanchor 1.0
-        text "[tooltip.name]":
-            xalign 0.5 ypos 0.8 #tmp
-            xanchor 0.0
-
-
-    # right now bg panning is updated by pos but we can also do align %, it's a matter of preference
-    # TODO: calculate background position to hide the arrows accordingly
-    # right now, I only did some manual calculations
-    if pos < 0:
-        imagebutton:
-            idle "goLeft"
-            hover "goLeftHov"
-            mouse "hover"
-            xalign 0.0 yalign 0.5
-            action [Hide(screenName), Call('lookaround', screenName, bg, pos+1660)]
-    if pos > -3320: # bg_wonderland width - 1660
-        imagebutton:
-            idle "goRight"
-            hover "goRightHov"
-            xalign 1.0 yalign 0.5
-            action [Hide(screenName), Call('lookaround', screenName, bg, pos-1660)]
-
-
-
-# doesn't work
-# screen focus_dialogue:
-#     modal True
-#     zorder 100
-
-#     frame:
-#         area (50,50, 10, 10)
-#         background Solid("#000c")
-#         $ print "test"
+    
+#--------------------------------------------------------------------------
+# THOUGHT OBJECTS TO INVESTIGATE IN THE DREAM
+#--------------------------------------------------------------------------
+init python:
+    t_kirby = Interactables("Kirby", "images/interactables/kirby.png", page=0,
+        actions = [
+            {"name": "Talk to Kirby", "label": "kirby_talk"},
+            {"name": "Steal his Shortcake", "label": "kirby_steal"}
+        ]
+    )
+    t_client = Interactables("Mumbling Client", "images/interactables/case1/rabbitOne.png", page=0,
+        actions = [
+            {"name": "Talk to Rabbit", "label": "client_talk"}
+        ]
+    )
+    t_clocktower = Interactables("Clocktower", "images/interactables/case1/clocktower.png", page=2,
+        actions = [
+            {"name": "Look at Time", "label": "clocktower_time"},
+            {"name": "Move the Hands", "label": "clocktower_hands"},
+            {"name": "Enter the Tower", "label": "clocktower_enter"}
+        ]
+    )
+    t_rabbit = Interactables("Rabbit", "images/interactables/case1/rabbit.png", page=2,
+        actions = [
+            {"name": "Talk to Rabbit", "label": "rabbit"}
+        ]
+    )
+    t_strawberry = Interactables("Strawberry", "images/interactables/case1/strawberry.png", page=2,
+        actions = [
+            {"name": "Look at Strawberry", "label": "strawberry_look"},
+            {"name": "Eat Strawberry", "label": "strawberry_eat", "condition": False}
+        ]
+    )

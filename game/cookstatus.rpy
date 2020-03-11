@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------
-# INITIALIZE THOUGHT INVENTORY
+# INITIALIZE COOKING INVENTORY
 #--------------------------------------------------------------------------
 init -1 python:
     sel_xpos = None
@@ -12,6 +12,9 @@ init -1 python:
             self.tooltip = tooltip # tooltip desc
             self.flavors = flavors # {flavor: amount}
             # flavors are temporary names, to be decided later 
+        
+        def __repr__(self): # for printing
+            return str(self.name)
 
     class Inventory(store.object):
         def __init__(self):
@@ -26,17 +29,6 @@ init -1 python:
                 self.selected.append(item)
             else:
                 self.selected.remove(item)
-        # def use(self, item):
-        #     if item in self.items:
-        #         self.items.remove(item)
-        #         self.trash.append(item)
-        #         self.selitem = None
-        # def undo(self):
-        #     if len(self.trash) > 0:
-        #         item = self.trash.pop()
-        #         self.add(item)
-        #         return item
-        #     return None
         def reset(self):
             for item in self.selected:
                 self.toggleSelect(item)
@@ -49,7 +41,7 @@ init -1 python:
                 "wonder": 0
             }
             self.combo = 0
-            self.smashReq = smashReq # [] list of ideal dish ingredients NAMES
+            self.smashReq = smashReq # [] list of ideal dish ingredients
             self.smash = False
         def update(self, item):
             if item in inventory.selected: # referencing inventory here feels like... bad practice... bUT HEY IT WORKS
@@ -63,10 +55,6 @@ init -1 python:
                 for flavor in item.flavors:
                     self.flavors[flavor] -= item.flavors[flavor]
                 self.combo = 0
-        # def undo(self, item):
-        #     if item:
-        #         for flavor in item.flavors:
-        #             self.flavors[flavor] -= item.flavors[flavor]
         def reset(self):
             self.flavors = {
                 "spooky": 0,
@@ -102,91 +90,85 @@ init -1 python:
 
 
 #--------------------------------------------------------------------------
-# CUSTOMIZE THOUGHT INVENTORY SCREEN
+# COOKING INVENTORY SCREEN
 #--------------------------------------------------------------------------
-screen inventory():
+# Required: cook_status - I need to figure out how to save states between investigation/cooking
+screen cooking(goal=[], zest=""):
     zorder 2
     modal True
-    frame:
-        pass
+
+    imagebutton: # go back to dream mode
+        idle "goDream"
+        hover "goDreamHov"
+        mouse "hover"
+        focus_mask True
+        xalign 0 yalign 0
+        action [Hide('cooking'), Jump("dream_case1")]
+
+    textbutton "Reset":
+        xalign 0.1 yalign 0.7
+        # text_style "temp_button_text"
+        action [Function(cook_status.reset), Function(inventory.reset)]
 
     imagebutton:
-        idle "gui/button/button_back.png"
-        hover im.MatrixColor("gui/button/button_back.png", im.matrix.desaturate() * im.matrix.tint(0.9, 0.9, 1.0))
-        xalign 1.0 yalign 0
-        action [ToggleScreen('inventory')]
-
+        idle "goEat"
+        hover "goEatHov"
+        mouse "hover"
+        focus_mask True
+        xalign 0.74 yalign 0.85
+        action [Jump("cooking_done")]
 
     #TODO: add better positions for the inventory, after UI is decided
-    hbox:
-        for item in inventory.items:
-            imagebutton:
-                idle item.image
-                action [Function(inventory.select, item)]
-                tooltip item.tooltip
-
-    # this is if we want to select any items to focus, otherwise we don't need this code
-    if inventory.selitem is not None:
-        text "sel item is" + inventory.selitem.name ypos 520
+    $x = 420
+    $y = 140
+    for i, item in enumerate(inventory.items):
+        if i % 3 == 0:
+            $ x = 420
+            $ y += 140
+        # for now border is a seperate image but change later
+        imagebutton:
+            idle item.image
+            xpos x ypos y
+            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
+            tooltip item
+        if item in inventory.selected:
+            add "selBorder":
+                xpos x-6 ypos y-6
+        $ x += 160
 
     $ tooltip = GetTooltip()
     if tooltip:
-        text "[tooltip]":
-            xalign 0.5 yalign 0.5 #tmp
+        fixed xmaximum 500:
+            text "[tooltip.name]":
+                xpos 600 ypos 710 #tmp
+                xalign 0.5
+                color "#000"
+            text "[tooltip.tooltip]":
+                xpos 600 ypos 760 #tmp
+                xalign 0.5
+                color "#000"
 
-#--------------------------------------------------------------------------
-# DEFINE INGREDIENTS
-#--------------------------------------------------------------------------
-init python:
-    kirby = Item("Kirby with Shortcake", image = "/images/items/item_kirby.png",
-        tooltip="Free him...",
-        flavors={
-            "wonder": 999,
-            "spirit": 999,
-            "spooky": 999
-        })
-    dream_flour = Item("Dream Flour", image = "/images/items/item_kirby.png",
-        tooltip="Dream Flour +30 wonder, -20 spirit", 
-        flavors={
-            "wonder": 30,
-            "spirit": -20,
-            "spooky": 0
-        })
-    nightmare_jelly = Item("Nightmare Jelly", image = "/images/items/item_kirby.png",
-        tooltip="Nightmare Jelly +40 spooky", 
-        flavors={
-            "wonder": 0,
-            "spirit": 0,
-            "spooky": 40
-        })
-    spooky_jam = Item("Spooky Jam", image = "/images/items/item_kirby.png",
-        tooltip="Spooky Jam +30 spooky, +10 wonder", 
-        flavors={
-            "wonder": 10,
-            "spirit": 0,
-            "spooky": 30
-        })
-    galaxy_milk = Item("Galaxy Milk", image = "/images/items/item_kirby.png",
-        tooltip="Galaxy Milk +10 spirit, -5 spooky", 
-        flavors={
-            "wonder": 0,
-            "spirit": 10,
-            "spooky": -5
-        })
-    haunted_whip = Item("Haunted Whip", image = "/images/items/item_kirby.png",
-        tooltip="Haunted Whip +20 spooky", 
-        flavors={
-            "wonder": 0,
-            "spirit": 0,
-            "spooky": 20
-        })
+    # desired stats
+    $ y = 0
+    for flavor in goal:
+        bar value StaticValue(cook_status.flavors[flavor], 100):
+            xalign 0.75 ypos 110+y
+            xmaximum 400
+            ymaximum 4
+        # if flavor == zest:
+        #     text flavor color '#facade':
+        #         xalign 0.6+x yalign 0.45
+        # else:
+        #     text flavor:
+        #         xalign 0.6+x yalign 0.45
+        text "{}/{}".format(cook_status.flavors[flavor], goal[flavor]):
+            xalign 0.75 ypos 110+y
+        $ y += 60
 
-    c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder", 
-        flavors={
-            "wonder": 30,
-            "spirit": 20,
-            "spooky": 0
-        })
-    
-    
+    # combo
+    bar value StaticValue(cook_status.combo, 4):
+        xalign 0.2 ypos 80
+        xmaximum 400
+        ymaximum 4
+    text "Combo: {}/{}".format(cook_status.combo, 4):
+        xalign 0.2 ypos 80
