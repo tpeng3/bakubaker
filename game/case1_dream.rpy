@@ -7,6 +7,7 @@ label dream_case1:
     scene expression bg:
         xpos 0
     "Case 1 (tutorial) dream"
+    $ interaction = [t_kirby, t_rabbit, t_clocktower, t_strawberry]
     show screen investigation()
     show screen dream_wonderland()
     jump dream_start1
@@ -21,6 +22,7 @@ label dream_start1:
 
 label rabbit:
     "I'm late! I'm late!"
+    $ interaction.pop()
     dreamRem neutral "I wonder what's the hurry..."
     jump dream_start1
 
@@ -72,6 +74,7 @@ screen dream_wonderland(pos=0):
     $ mx, my = renpy.get_mouse_pos()
     $ screenName = 'dream_wonderland'
     $ bg = "wonderland"
+    
 
     # a part of my brain is screaming that I shouldn't make images with such large transparent pixels
     # this is my version of duct tape code, we can split interactions by "pages" afterwards if needed
