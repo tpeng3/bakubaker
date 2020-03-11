@@ -5,7 +5,7 @@ label lookaround(screenName, bg, pos):
     $ renpy.show_screen(screenName, pos)
     $ renpy.pause(hard=True)
 
-    
+
 # ignore below code, this is if we want to give multiple options for each interaction
 # --------------------------------------------------------------------------
 # INITIALIZE INVESTIGATION CHOICES
@@ -60,28 +60,32 @@ screen dream_actions(actions={}, mx, my):
 # THOUGHT OBJECTS TO INVESTIGATE IN THE DREAM
 #--------------------------------------------------------------------------
 init python:
-    t_kirby = Probe("Kirby", "images/BG/bg_dreamland_kirby.png", icon="icon_somnia",
+    t_kirby = Probe("Kirby", "kirby", icon="icon_somnia",
         actions = {
             "Talk to Kirby": "kirby_talk",
             "Steal his Shortcake": "kirby_steal"
         }
     )
-    t_clocktower = Probe("Clocktower", "images/BG/dream1/clocktower.png", icon="icon_remerie",
+    t_clocktower = Probe("Clocktower", "clocktower", icon="icon_remerie",
         actions = {
             "Look at Time": "clocktower_time",
             "Move the Hands": "clocktower_hands",
             "Enter the Tower": "clocktower_enter"
         }
     )
-    t_rabbit = Probe("Rabbit", "images/BG/dream1/rabbit.png", icon="icon_somnia",
+    t_rabbit = Probe("Rabbit", "rabbit", icon="icon_somnia",
         actions = {
             "Talk to Rabbit": "rabbit"
         }
     )
-    t_strawberry = Probe("Strawberry", "images/BG/dream1/strawberry.png", icon="icon_somnia",
+    t_client = Probe("Mumbling Client", "client", icon="icon_somnia",
+        actions = {
+            "Talk to Rabbit": "client"
+        }
+    )
+    t_strawberry = Probe("Strawberry", "strawberry", icon="icon_somnia",
         actions = {
             "Look at Strawberry": "strawberry_look",
             "Eat Strawberry": "strawberry_eat"
         }
     )
-

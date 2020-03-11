@@ -1,4 +1,5 @@
 label dream_case1:
+    $ interaction = [t_kirby, t_rabbit, t_clocktower, t_strawberry, t_client]
     $ inventory = Inventory()
     $ finished = False
     # have to initialize scene bg as an expression for lookaround to work later
@@ -21,6 +22,15 @@ label dream_start1:
 label rabbit:
     "I'm late! I'm late!"
     dreamRem neutral "I wonder what's the hurry..."
+    jump dream_start1
+
+label client:
+    "*Mumble mumble...*"
+    dreamSom neutral "There they are!"
+    "*NYOOMS*"
+    $ interaction = [t_kirby, t_rabbit, t_clocktower, t_strawberry]
+    hide rabbitOne with fade
+    dreamSom "Oh noooooooooo"
     jump dream_start1
 
 label clocktower_time:
@@ -62,7 +72,6 @@ screen dream_wonderland(pos=0):
     $ mx, my = renpy.get_mouse_pos()
     $ screenName = 'dream_wonderland'
     $ bg = "wonderland"
-    $ interaction = [t_kirby, t_rabbit, t_clocktower, t_strawberry]
 
     # a part of my brain is screaming that I shouldn't make images with such large transparent pixels
     # this is my version of duct tape code, we can split interactions by "pages" afterwards if needed
