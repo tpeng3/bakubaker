@@ -1,39 +1,32 @@
-label tina3:
+label cook_case1:
     # tmp shortcut to get all the items if you didn't get them from the dream
-    scene cookbook
     $ inventory = Inventory()
     call inventory_stock
-    "Welcome to Hell's Kitchen..."
-    "Quick tutorial: you got a bunch of ingredients, and the goal is to add it together and reach the numbers in the middle."
-    "Bonus points if you get the STARRED* attribute to 100!"
+    # "Welcome to Hell's Kitchen..."
+    # "Quick tutorial: you got a bunch of ingredients, and the goal is to add it together and reach the numbers in the middle."
+    # "Bonus points if you get the STARRED* attribute to 100!"
     $ goal = {"wonder": 10, "spooky": 40, "spirit": 20}
-    $ smashReq = [dream_flour, galaxy_milk, c_strawberry]
-    $ cook_status = CookStatus(smashReq=smashReq)
-    show screen cooking()
+    $ smashReq = [dream_flour, galaxy_milk, c_strawberry, nightmare_jelly]
+    $ zest = "wonder"
+    $ cook_status = CookStatus(smashReq=smashReq, goal=goal, zest=zest)
+    show screen cooking(dish="omelette")
     jump cooking_start
 
-# label kitchen: # temp label for switching screens
-#     $print "im tired"
-#     $ goal = {"wonder": 10, "spooky": 40, "spirit": 20}
-#     $ smashReq = [dream_flour, galaxy_milk, c_strawberry]
-#     $ cook_status = CookStatus(smashReq=smashReq)
-#     show screen cooking(goal=goal, zest="wonder")
-#     jump cooking_start
-
-label cooking_start:
-    window hide
-    $ renpy.pause(hard=True)
-
-label cooking_done:
-    $ result = cook_status.result(goal, zest="wonder")
+label cook_case1_done(result):
     if result == -1:
         "Failed cooking, try again"
         jump tina3
     elif result == 0:
-        "You made a thing! But it's only passing."
+        "You made a thing! But it's only passing AM I USING aaaaCACHE."
+        jump listen
     elif result == 1:
         "Yayyyy you made a really good thing!! Congrats!!"
-    return
+        $ renpy.MainMenu(confirm=False)
+
+# OK THIS IS BROKEN, gonna have to debug another day...
+label listen:
+    "listen I just want to go back to the main menu why is it not progression"
+    $ renpy.MainMenu(confirm=False)
 
 label inventory_stock:
     python:
@@ -57,7 +50,7 @@ init python:
         tooltip="Dream Flour +30 wonder, -20 spirit", 
         flavors={
             "wonder": 30,
-            "spirit": -20,
+            "spirit": 20,
             "spooky": 0
         })
     nightmare_jelly = Item("Nightmare Jelly", image = "/images/items/item_kirby.png",
@@ -79,7 +72,7 @@ init python:
         flavors={
             "wonder": 0,
             "spirit": 10,
-            "spooky": -5
+            "spooky": 5
         })
     haunted_whip = Item("Haunted Whip", image = "/images/items/item_kirby.png",
         tooltip="Haunted Whip +20 spooky", 

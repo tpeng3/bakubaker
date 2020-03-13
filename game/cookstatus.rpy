@@ -1,10 +1,12 @@
+# generic labels for cooking
+label cooking_start:
+    window hide
+    $ renpy.pause(hard=True)
+
 #--------------------------------------------------------------------------
 # INITIALIZE COOKING INVENTORY
 #--------------------------------------------------------------------------
 init -1 python:
-    sel_xpos = None
-    sel_ypos = None
-
     class Item(store.object):
         def __init__(self, name, image="", tooltip="", flavors={}):
             self.name = name # name of item
@@ -20,7 +22,6 @@ init -1 python:
         def __init__(self):
             self.items = []
             self.selected = []
-            # self.trash = []
         def add(self, item):
             if item not in self.items:
                 self.items.append(item)
@@ -34,7 +35,7 @@ init -1 python:
                 self.toggleSelect(item)
 
     class CookStatus(store.object):
-        def __init__(self, smashReq):
+        def __init__(self, smashReq, goal, zest):
             self.flavors = {
                 "spooky": 0,
                 "spirit": 0,
@@ -42,6 +43,8 @@ init -1 python:
             }
             self.combo = 0
             self.smashReq = smashReq # [] list of ideal dish ingredients
+            self.goal = goal
+            self.zest = zest
             self.smash = False
         def update(self, item):
             if item in inventory.selected: # referencing inventory here feels like... bad practice... bUT HEY IT WORKS
@@ -62,29 +65,14 @@ init -1 python:
                 "wonder": 0
             }
             self.combo = 0
-        def smash(self, skill): # "super smash" move
-            # skill: {"cost": {"flavor":amount}, "boost": {"flavor":amount}}
-            for flavor in skill.cost:
-                cost = skill.cost[flavor]
-                if cost < 1: # if cost is a percentage
-                    transmute = self.flavors[flavor] * cost
-                    self.flavors[flavor] -= transmute
-                else: # else just subtract the cost
-                    self.flavors[flavor] -= cost
-            for flavor in skill.boost:
-                boost = skill.boost[flavor]
-                if boost == 0: # if boost is a 1:1 ratio conversion
-                    self.flavors[flavor] += transmute
-                if boost < 1: # if boost is a percentage
-                    self.flavors[flavor] += self.flavors[flavor] * boost
-                else: # else just add the cost
-                    self.flavors[flavor] += boost
+        def smashSkill(self, flavor): # simplified my code because what I had before was... overkill to get the job done _(:''3 save for another day
+            self.flavors[flavor] = 999
             self.smash = True
-        def result(self, goal, zest): #goal is a {}, zest is a string with the focused attr
-            for flavor in goal:
+        def result(self): #goal is a {}, zest is a string with the focused attr
+            for flavor in self.goal:
                 if self.flavors[flavor] < goal[flavor]:
                     return -1 # did not meet requirements
-            if self.smash and self.flavors[zest] > 100: # perfect score!
+            if self.smash and self.flavors[self.zest] > 100: # perfect score!
                 return 1
             return 0 # ordinary score
 
@@ -92,10 +80,11 @@ init -1 python:
 #--------------------------------------------------------------------------
 # COOKING INVENTORY SCREEN
 #--------------------------------------------------------------------------
-# Required: cook_status - I need to figure out how to save states between investigation/cooking
-screen cooking(goal=[], zest=""):
-    zorder 2
+# Required: inventory, goal, zest
+screen cooking(dish):
+    zorder -10
     modal True
+    add "images/BG/bg_cookbook.png" 
 
     imagebutton: # go back to dream mode
         idle "goDream"
@@ -103,7 +92,7 @@ screen cooking(goal=[], zest=""):
         mouse "hover"
         focus_mask True
         xalign 0 yalign 0
-        action [Hide('cooking'), Jump("dream_case1")]
+        action [Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
 
     textbutton "Reset":
         xalign 0.1 yalign 0.7
@@ -116,7 +105,7 @@ screen cooking(goal=[], zest=""):
         mouse "hover"
         focus_mask True
         xalign 0.74 yalign 0.85
-        action [Jump("cooking_done")]
+        action [Call("cook_"+case+"_done", result=cook_status.result())]
 
     #TODO: add better positions for the inventory, after UI is decided
     $x = 420
@@ -148,19 +137,13 @@ screen cooking(goal=[], zest=""):
                 xalign 0.5
                 color "#000"
 
-    # desired stats
+    # desired stats, TODO: change the bars after UI is done
     $ y = 0
     for flavor in goal:
         bar value StaticValue(cook_status.flavors[flavor], 100):
             xalign 0.75 ypos 110+y
             xmaximum 400
             ymaximum 4
-        # if flavor == zest:
-        #     text flavor color '#facade':
-        #         xalign 0.6+x yalign 0.45
-        # else:
-        #     text flavor:
-        #         xalign 0.6+x yalign 0.45
         text "{}/{}".format(cook_status.flavors[flavor], goal[flavor]):
             xalign 0.75 ypos 110+y
         $ y += 60
@@ -172,3 +155,19 @@ screen cooking(goal=[], zest=""):
         ymaximum 4
     text "Combo: {}/{}".format(cook_status.combo, 4):
         xalign 0.2 ypos 80
+
+    if cook_status.result() == 0:
+        add dish:
+            xalign 0.7 yalign 0.62
+            xanchor 0.5 yanchor 0.5
+    elif cook_status.result() == 1:
+        add dish+"Best":
+            xalign 0.7 yalign 0.62
+            xanchor 0.5 yanchor 0.5
+
+    if set(inventory.selected) == set(cook_status.smashReq) and cook_status.combo == len(cook_status.smashReq) and cook_status.smash == False:
+        imagebutton:
+            idle "images/interactables/kirby.png"
+            hover "images/interactables/kirby2.png"
+            # action [Jump("smash_"+case), Function(cook_status.smashSkill, zest)] use a jump label when we want to throw in atls
+            action [Function(cook_status.smashSkill, zest)]

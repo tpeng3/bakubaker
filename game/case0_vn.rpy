@@ -24,6 +24,6 @@ label cynthia:
     dreamSom spider "Hehehe..."
 
     "Going to Dreamland..."
-    jump tina
+    jump dream_case1
 
 return

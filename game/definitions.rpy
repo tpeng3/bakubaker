@@ -14,6 +14,8 @@ init -1:
     # image eileen_face_surprised = "images/sprites/eileen_face_surprised.png"
     # image eileen_face_upset = "images/sprites/eileen_face_upset.png"
     # image eileen_headband = "images/sprites/eileen_headband.png"
+    image omelette = "images/items/dish_omelette.png"
+    image omeletteBest = "images/items/dish_omelette2.png"
 
 ## UI:
     image goLeft = "gui/button/goleft.png"
@@ -35,7 +37,9 @@ init -1:
     # image room = "images/BG/room.jpg"
     # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
     image dreamland = "images/BG/bg_dreamland.jpg" 
-    image wonderland = "images/BG/bg_wonderland.png" 
+    image wonderland = "images/BG/bg_wonderland.png"
+    image wonderland2 = "images/BG/bg_wonderland_v2.png" 
+
     image cookbook = "images/BG/bg_cookbook.png"
 
 ## CGs:
