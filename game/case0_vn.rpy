@@ -2,28 +2,37 @@
 # -----------------------------------------------------------------------------
 label cynthia:
 
-    scene sugarspace
-    show somnia at right
+    """
+    On a day like any other, we begin our story in the quiet corner of X, a modest and cosy bakery.
+
+    The aroma of baked goods fills the store and the alleys, warming anyone who has the pleasure to stop by.
+
+    Should any sleepy lives follow their nose into the bakery, two busy folks await them with open arms.
+    """
+
+    scene storefront
+
+    show somnia
+    s "Time to open up shop!"
+    s "What the-"
+    show somnia at right with ease
     show remy at left
-    "Two characters are enjoying Sugar Space."
+    r "Is that person dead?"
 
-    s "Remerie's grumpy as ever...!"
-    r "Hey!!!"
-    s "Remy... rat chef..."
-    r "Please don't call me that."
+    show client1
+    bun "I-I'm alive..."
+    bun "But I'm having HELLA trouble sleeping please help"
+    s "Let's hit the dream room!"
 
-    show pika
-    s "Let's jump into the dream!"
+    scene dreamoffice with fade
+    show remy at left
+    show somnia at right
+    show client1
+    bun "Wow!"
+    s "You're feeling veryyyy sleepy..."
+    "Somnia used HYPNOSIS"
 
-    scene black with dissolve
-    show pika
-    dr "They're now in the void."
-    dreamRem neutral "Pikachu is an Electric-type Pokémon introduced in Generation I. It evolves from Pichu when leveled up with high friendship and evolves into Raichu when exposed to a Thunder Stone."
-    dreamSom neutral "I didn't know you were a fan of Pokemon, Rem!!"
-    dreamRem grump "S-shush..."
-    dreamSom spider "Hehehe..."
-
-    "Going to Dreamland..."
+    scene black with fade
     jump tina
 
 return

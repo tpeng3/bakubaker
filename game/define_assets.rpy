@@ -1,67 +1,47 @@
 # Case 0 assets ---------------------------------------------------------------
-image kriby = "images/BG/bg_dreamland_kirby.png"
-image clocktower = "images/BG/dream1/clocktower.png"
-image rabbit = "images/BG/dream1/rabbit.png"
-image client = "images/BG/dream1/rabbitOne.png"
-image strawberry = "images/BG/dream1/strawberry.png"
+image storefront = "images/BG/bg_storefront.png"
+image dreamoffice = "images/BG/bg_dreamoffice.png"
+image wonderland = "images/BG/bg_wonderland.png"
+
+image client1:
+    Crop ((0,0,800,900), "images/sprites/client1.png")
 
 # Definitions
 # Characters ------------------------------------------------------------------
-define s = Character ("Somnia", # Name is baked into textbox bubble
-# Somnia
+define s = Character ("Somnia",
             color="48475a",
             what_color="854d56",
-            window_background="gui/textbox.png",
-            # what_xalign = 0.50,
-            # what_yalign = 0.50,
-            # what_textalign = 0.50
             )
-define dreamSom = Character ("Somnia", # Dream Somnia
-            image = "somnia",
+define r = Character ("Remerie",
             color="ffcf89",
             what_color="854d56",
-            window_background="gui/textbox.png",
-            what_xalign = 0.50,
-            what_textalign = 0.50,
-            window_yalign = 0.025,
-            window_xalign = 0.50
-            )
-define r = Character ("Remerie", # Name is baked into textbox bubble
-# Remerie
-            color="ffcf89",
-            what_color="854d56",
-            window_background="gui/textbox.png",
-            # what_xalign = 0.50,
-            # what_yalign = 0.50,
-            # what_textalign = 0.50,
-            )
-define dreamRem = Character ("Remerie", # Dream Remerie
-            image = "remy",
-            color="ffcf89",
-            what_color="854d56",
-            window_background="gui/textbox.png",
-            what_xalign = 0.50,
-            what_textalign = 0.50,
-            window_yalign = 0.025,
-            window_xalign = 0.50
             )
 define dr = Character (None, # Dream narration
             color="ffcf89",
             what_color="854d56",
             window_background="gui/textbox.png",
-            what_xalign = 0.50,
-            what_textalign = 0.50,
             window_yalign = 0.025,
             window_xalign = 0.50
             )
+define dreamSom = Character ("Somnia", kind = dr, # Dream Somnia
+            image = "somnia"
+            )
+define dreamRem = Character ("Remerie", kind = dr, # Dream Remerie
+            image = "remy"
+            )
+# Clients ---------------------------------------------------------------------
+define bun = Character ("Bunny",
+            what_color="854d56",
+            )
+
 # Positions -------------------------------------------------------------------
 # So the bakus are positioned comfortably in their respective sides
-transform right:
-    yalign 1.0
-    xalign -0.20
 transform left:
     yalign 1.0
-    xalign 1.20
+    xalign -0.15
+transform right:
+    yalign 1.0
+    xalign 1.13
 
 # Images and side images ------------------------------------------------------
 # Crop (x, y, width, height)
