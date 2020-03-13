@@ -13,20 +13,18 @@ label cook_case1:
     jump cooking_start
 
 label cook_case1_done(result):
+    show screen focus_dialogue
     if result == -1:
         "Failed cooking, try again"
-        jump tina3
+        $ inventory.reset()
+        $ cook_status.reset()
+        jump cooking_start
     elif result == 0:
-        "You made a thing! But it's only passing AM I USING aaaaCACHE."
-        jump listen
+        "You made a thing! But it's only passing."
+        $ MainMenu(confirm=False)
     elif result == 1:
         "Yayyyy you made a really good thing!! Congrats!!"
-        $ renpy.MainMenu(confirm=False)
-
-# OK THIS IS BROKEN, gonna have to debug another day...
-label listen:
-    "listen I just want to go back to the main menu why is it not progression"
-    $ renpy.MainMenu(confirm=False)
+        $ MainMenu(confirm=False)
 
 label inventory_stock:
     python:

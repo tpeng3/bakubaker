@@ -1,5 +1,6 @@
 # generic labels for cooking
 label cooking_start:
+    hide screen focus_dialogue
     window hide
     $ renpy.pause(hard=True)
 
@@ -31,8 +32,7 @@ init -1 python:
             else:
                 self.selected.remove(item)
         def reset(self):
-            for item in self.selected:
-                self.toggleSelect(item)
+            self.selected = []
 
     class CookStatus(store.object):
         def __init__(self, smashReq, goal, zest):
@@ -83,7 +83,6 @@ init -1 python:
 # Required: inventory, goal, zest
 screen cooking(dish):
     zorder -10
-    modal True
     add "images/BG/bg_cookbook.png" 
 
     imagebutton: # go back to dream mode
@@ -95,8 +94,8 @@ screen cooking(dish):
         action [Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
 
     textbutton "Reset":
-        xalign 0.1 yalign 0.7
-        # text_style "temp_button_text"
+        xalign 0.8 yalign 0.1
+        mouse "hover"
         action [Function(cook_status.reset), Function(inventory.reset)]
 
     imagebutton:
@@ -118,6 +117,7 @@ screen cooking(dish):
         imagebutton:
             idle item.image
             xpos x ypos y
+            mouse "hover"
             action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
             tooltip item
         if item in inventory.selected:
