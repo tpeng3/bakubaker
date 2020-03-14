@@ -16,7 +16,7 @@ label cynthia:
     s "Time to open up shop!"
     s "What the-"
     show somnia at right with ease
-    show remy at left
+    show remi at left
     r "Is that person dead?"
 
     show client1
@@ -25,12 +25,16 @@ label cynthia:
     s "Let's hit the dream room!"
 
     scene dreamoffice with fade
-    show remy at left
+    show remi at left
     show somnia at right
     show client1
     bun "Wow!"
     s "You're feeling veryyyy sleepy..."
-    "Somnia used HYPNOSIS"
+    scene black
+
+    dreamSom neutral "Somnia used DARK VOID"
+    dr "The CLIENT fell asleep!"
+    dreamRem neutral "Remerie used DREAM EATER"
 
     scene black with fade
     jump dream_case1
