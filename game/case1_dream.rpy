@@ -6,19 +6,19 @@ label tina:
             jump cook_case1
 
 label dream_case1:
-    $ page_width = 1720 # width of a "page" to scroll
-    $ current_page = 0 # current focused page
-    $ unlocked_pages = 2 # default is 0 but set to 2 for testing purposes
-    $ finished = True # default is false, but true for testing
-    $ inventory = Inventory()
-    $ itr_list = [t_client, t_clocktower, t_strawberry] # starting interactions
-    $ interactions = Interactions(itr_list)
+    python:
+        case = "case1" # move this variable to be initialized in the vn portion later
+        bg = "wonderland2" # background image
+        page_width = 1720 # screen page width
+        total_pages = 3 # total pages in investigation
+        unlocked_pages = 2 # default is 0 but set to 2 for testing purposes
+        inventory = Inventory()
+        itr_list = [t_client, t_clocktower, t_strawberry] # starting interactions
+        interactions = Interactions(itr_list)
 
-    # have to initialize scene bg as an expression for lookaround to work later
-    $ bg = "wonderland2"
-    $ case = "case1" # move this variable to be initialized in the vn portion later
-    scene expression bg:
-        xpos 0
+        finished = True # default is false, but true for testing
+
+    scene black
     "Case 1 (tutorial) dream"
     show screen dream()
     jump dream_start

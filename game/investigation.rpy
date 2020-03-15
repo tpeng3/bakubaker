@@ -14,12 +14,11 @@ label disable_pause(next_label):
     show screen focus_dialogue # hacky way to disable imagebuttons while dialogue is happening
     jump expression next_label
 
-# 'function' for updating background panning
-label lookaround():
-    scene expression bg with MoveTransition(1.8, time_warp=quad_time_warp):
-        xpos 0 xoffset current_page*-page_width
-    $ renpy.show_screen('dream')
-    $ renpy.pause(hard=True)
+transform panning(pstart, pend):
+    yalign 0.5
+    xanchor 0.0
+    xpos pstart
+    quad 1.8 xpos pend
 
 
 # --------------------------------------------------------------------------
@@ -51,10 +50,6 @@ init -1 python:
                     action['condition'] = False
             return self
 
-    # ease function for panning, god my braincell is terrible at linear algebra though
-    def quad_time_warp(x):
-      return -2.0 * x**3 + 3.0 * x**2
-
     class Interactions(store.object):
         def __init__(self, itr_list=[]):
             self.list = itr_list
@@ -71,7 +66,6 @@ init -1 python:
                 if itr.name == interactable.name:
                     self.list[i] = interactable
 
-
 # --------------------------------------------------------------------------
 # CUSTOMIZE INVESTIGATION SCREEN
 # --------------------------------------------------------------------------
@@ -85,24 +79,30 @@ screen goCook():
         mouse "hover"
         action [Hide('dream', transition=Dissolve(.8)), Hide('goCook'), Jump("cook_"+case)]
 
-# Required: interactions, bg, page_width, current_page, unlocked_pages
+# Related Global Variables: bg, total_pages, page_width, interactions, unlocked_pages
 screen dream():
+    default fixedposprev = 0
+    default fixedposend = 0
+    default current_page = 0
     zorder -10
     $ mx, my = renpy.get_mouse_pos()
 
-    # populate interactables
-    for i in interactions.list:
-        $ actionable = [action for action in i.actions if action.get('condition', True)]
-        imagebutton:
-            idle i.image
-            background
-            xpos (i.page * page_width) + (current_page * -page_width)
-            tooltip i
-            focus_mask True
-            mouse "hover"
-            action [If(len(actionable) == 1,
-                true = [Call("disable_pause", next_label=actionable[0]['label'])], # if there's only one action, jump immediately to label
-                false = Show('dream_actions', actions=actionable, mx=int(mx), my=int(my)))]
+    fixed:
+        at panning(fixedposprev, fixedposend)
+        xsize page_width * total_pages
+        add bg
+        # populate interactables
+        for i in interactions.list:
+            $ actionable = [action for action in i.actions if action.get('condition', True)]
+            imagebutton:
+                idle i.image
+                xpos (i.page * page_width)
+                tooltip i
+                focus_mask True
+                mouse "hover"
+                action [If(len(actionable) == 1,
+                    true = [Call("disable_pause", next_label=actionable[0]['label'])], # if there's only one action, jump immediately to label
+                    false = Show('dream_actions', actions=actionable, mx=int(mx), my=int(my)))]
 
     # hover tooltip
     $ tooltip = GetTooltip()
@@ -118,13 +118,17 @@ screen dream():
             hover "goLeftHov"
             mouse "hover"
             xalign 0.02 yalign 0.5
-            action [Hide('dream'), SetVariable("current_page", current_page-1), Call('lookaround')]
+            action [SetScreenVariable("fixedposprev", -current_page*page_width),
+                    SetScreenVariable("fixedposend", (-current_page*page_width)+page_width),
+                    SetScreenVariable("current_page", current_page-1)]
     if current_page < unlocked_pages:
         imagebutton:
             idle "goRight"
             hover "goRightHov"
             xalign 0.98 yalign 0.5
-            action [Hide('dream'), SetVariable("current_page", current_page+1), Call('lookaround')]
+            action [SetScreenVariable("fixedposprev", -current_page*page_width),
+                    SetScreenVariable("fixedposend", (-current_page*page_width)-page_width),
+                    SetScreenVariable("current_page", current_page+1)]
 
 screen focus_dialogue:
     zorder 0
@@ -132,7 +136,6 @@ screen focus_dialogue:
     imagebutton:
         idle Solid("#0000")
         action renpy.curry(renpy.end_interaction)(True)
-
 
 screen dream_actions(actions={}, mx, my):
     # for cancelling/hiding dream_actions if you click away from the menu
