@@ -1,4 +1,4 @@
-label cook_case1:
+label case0_cook:
     # tmp shortcut to get all the items if you didn't get them from the dream
     $ inventory = Inventory()
     call inventory_stock
@@ -12,7 +12,7 @@ label cook_case1:
     show screen cooking(dish="omelette")
     jump cooking_start
 
-label cook_case1_done(result):
+label case0_cook_done(result):
     show screen focus_dialogue
     if result == -1:
         "Failed cooking, try again"

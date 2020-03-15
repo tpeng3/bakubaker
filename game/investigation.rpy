@@ -26,18 +26,15 @@ transform panning(pstart, pend):
 # --------------------------------------------------------------------------
 init -1 python:
     class Interactables(store.object):
-        def __init__(self, name, image, page=0, actions={}):
+        def __init__(self, name, image, page=0, actions={}, state=""):
             self.name = name # description of the action
             self.image = image # image url
             self.page = page # page on where the object gets placed
             self.actions = actions # dict of possible actions {actionName: jumpLabel)
-            self.viewed = False
+            self.state = state # some sort of custom state needed for specific interactables
 
         def __repr__(self): # for printing
             return str({"name": self.name, "actions": self.actions})
-
-        def view(self): # do we still need this...? Hm...
-            self.viewed = True 
 
         def enable(self, label): 
             for action in self.actions:
@@ -48,6 +45,9 @@ init -1 python:
             for action in self.actions:
                 if action['label'] == label and "condition" in action:
                     action['condition'] = False
+            return self
+        def updateState(self, state):
+            self.state = state
             return self
 
     class Interactions(store.object):
@@ -61,7 +61,7 @@ init -1 python:
             for i in finished:
                 if i in self.list:
                     self.list.remove(i)
-        def update(self, interactable):
+        def update(self, interactable): # update an interactable in the interactions list
             for i, itr in enumerate(self.list):
                 if itr.name == interactable.name:
                     self.list[i] = interactable
