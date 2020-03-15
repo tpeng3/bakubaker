@@ -2,6 +2,12 @@
 ## Intended as a way to quickly grab file names to use in accessibility.rpy, screens.rpy, and captiontool.rpy
 ## Remember to add commas to the end of each listed item
 ## As of RenPy7, basic images do not have to be defined (LayeredImages still need to be set up)
+
+python early hide:
+    @renpy.atl_warper
+    def quad(t): # custom ease function for panning
+      return -2.0 * t**3 + 3.0 * t**2
+
 init -1:
     $ redefine_resources = False
     ## When you add, delete or rename an image or music resource, change redefine_resources to True and launch the project
