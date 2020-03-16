@@ -1,8 +1,17 @@
 # Time to BREAK EVERYTHING
+# Ultimate lab for bullshit
 # -----------------------------------------------------------------------------
 label cynthia:
 
-    """
+    menu:
+        "Case 1":
+            jump case1vn
+        "Ultimate Lab":
+            jump lab
+
+label lab:
+
+    dr """
     On a day like any other, we begin our story in the quiet corner of X, a modest and cosy bakery.
 
     The aroma of baked goods fills the store and the alleys, warming anyone who has the pleasure to stop by.
