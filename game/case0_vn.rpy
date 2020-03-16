@@ -1,6 +1,7 @@
 # Time to BREAK EVERYTHING
 # -----------------------------------------------------------------------------
 label cynthia:
+    $ case = "case1"
 
     """
     On a day like any other, we begin our story in the quiet corner of X, a modest and cosy bakery.
@@ -33,6 +34,6 @@ label cynthia:
     "Somnia used HYPNOSIS"
 
     scene black with fade
-    jump dream_case1
+    jump expression case+"_dream"
 
 return
