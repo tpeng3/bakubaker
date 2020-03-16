@@ -22,6 +22,15 @@ init -1:
     # image eileen_headband = "images/sprites/eileen_headband.png"
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
+    
+    # Case 0 assets ---------------------------------------------------------------
+    image storefront = "images/BG/bg_storefront.png"
+    image dreamoffice = "images/BG/bg_dreamoffice.png"
+    image wonderland = "images/BG/bg_wonderland_v2.png"
+
+    image marchie:
+        Crop ((0,0,800,900), "images/sprites/client1.png")
+
 
 ## UI:
     image goLeft = "gui/button/goleft.png"

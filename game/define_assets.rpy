@@ -1,20 +1,34 @@
-# Case 0 assets ---------------------------------------------------------------
-image storefront = "images/BG/bg_storefront.png"
-image dreamoffice = "images/BG/bg_dreamoffice.png"
-image wonderland = "images/BG/bg_wonderland_v2.png"
-
-image marchie:
-    Crop ((0,0,800,900), "images/sprites/client1.png")
+#--------------------------------------------------------------------------
+# DEFINE CHARACTER VOICES
+#--------------------------------------------------------------------------
+init python:
+    def s_beep(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/sfx/voice_som.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="bleeps",fadeout=1.0)
+    def r_beep(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/sfx/voice_rem.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="bleeps", fadeout=1.0)
+    def m_beep(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/sfx/voice_marchie.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="bleeps", fadeout=1.0)
 
 # Definitions
 # Characters ------------------------------------------------------------------
 define s = Character ("Somnia",
             color="48475a",
             what_color="854d56",
+            callback=s_beep
             )
 define r = Character ("Remerie",
             color="ffcf89",
             what_color="854d56",
+            callback=r_beep
             )
 define dr = Character (None, # Dream narration
             color="ffcf89",
@@ -25,16 +39,19 @@ define dr = Character (None, # Dream narration
             window_xalign = 0.50
             )
 define dreamSom = Character ("Somnia", kind = dr, # Dream Somnia
-            image = "somnia"
+            image = "somnia",
+            callback = s_beep
             )
 define dreamRem = Character ("Remerie", kind = dr, # Dream Remerie
-            image = "remi"
+            image = "remi",
+            callback = r_beep
             )
 # Clients ---------------------------------------------------------------------
 define u = Character ("???", color="fff", what_color="854d56") # Unknown
 define ml = Character ("Marcella Lapin",
             color="48475a",
             what_color="854d56",
+            callback = m_beep
             )
 
 # Positions -------------------------------------------------------------------

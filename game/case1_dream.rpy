@@ -11,15 +11,15 @@ label case1_dream:
         bg = "wonderland2" # background image
         page_width = 1720 # screen page width
         total_pages = 3 # total pages in investigation
-        unlocked_pages = 2 # default is 0 but set to 2 for testing purposes
         inventory = Inventory()
         # itr_list = [t_client, t_clocktower, t_strawberry] # starting interactions, it should actually be blank for case1
         interactions = Interactions()
-
-        finished = True # default is false, but true for testing
+        
+        unlocked_pages = 0 # default is 0
+        finished = False # default is false, but true for testing
     scene black
     show screen dream()
-
+    window hide
     dreamSom "Woah…!"
     dreamRem "Geez, it's a mess in here."
     dreamSom "Our client must really have a hard time arranging their thoughts..."
@@ -27,8 +27,8 @@ label case1_dream:
     dreamRem "Don’t think I didn’t catch you this morning rearranging our already labeled pastry display!"
     dreamSom "Aww, but it looks better when it’s arranged by jam color!"
     dreamRem "*Sigh* Anyways, we need to find our client. Where are they?"
-    show expression t_marcella_start.image with Dissolve(0.8)
     $ interactions.unlock([t_marcella_start])
+    show expression t_marcella_start.image with Dissolve(0.8)
     # [# Client fades into appearance on the first screen]
     # # Client "Oh no, I’m late. I’m late! I have to hurry!"
     # # Client "This assignment is due... and I have to fill out the report for... oh, I need to pick up the..."
