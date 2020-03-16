@@ -1,9 +1,18 @@
 # Time to BREAK EVERYTHING
+# Ultimate lab for bullshit
 # -----------------------------------------------------------------------------
 label cynthia:
     $ case = "case1"
 
-    """
+    menu:
+        "Case 1":
+            jump case1vn
+        "Ultimate Lab":
+            jump lab
+
+label lab:
+
+    dr """
     On a day like any other, we begin our story in the quiet corner of X, a modest and cosy bakery.
 
     The aroma of baked goods fills the store and the alleys, warming anyone who has the pleasure to stop by.
@@ -17,7 +26,7 @@ label cynthia:
     s "Time to open up shop!"
     s "What the-"
     show somnia at right with ease
-    show remy at left
+    show remi at left
     r "Is that person dead?"
 
     show client1
@@ -26,12 +35,16 @@ label cynthia:
     s "Let's hit the dream room!"
 
     scene dreamoffice with fade
-    show remy at left
+    show remi at left
     show somnia at right
     show client1
     bun "Wow!"
     s "You're feeling veryyyy sleepy..."
-    "Somnia used HYPNOSIS"
+    scene black
+
+    dreamSom neutral "Somnia used DARK VOID"
+    dr "The CLIENT fell asleep!"
+    dreamRem neutral "Remerie used DREAM EATER"
 
     scene black with fade
     jump expression case+"_dream"
