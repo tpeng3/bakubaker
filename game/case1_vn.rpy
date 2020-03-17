@@ -1,6 +1,6 @@
 # Case 1
 # ------------------------------------------------------------------------
-label case1vn:
+label case1_vn:
 
     dr """
     On a fresh, early morning day like any other, we begin the story in the quiet corner of {ii}name{/ii}, a modest and cosy bakery.
@@ -141,20 +141,20 @@ label case1vn:
     The smoke swirled lazily up into the air, and the two, cooks just a moment ago, now began their work as dream eaters.
     """
 
-    scene wonderland with dissolve
+    jump expression case+"_dream"
 
-    dreamSom neutral "Woah…!"
-    dreamRem neutral "I've got you. Watch your step, it's a mess in here."
-    dreamSom "Our client must really have a hard time arranging their thoughts..."
-    dreamRem "Sounds like someone I know."
-    dreamRem "Don’t think I didn’t catch you this morning rearranging our already labeled pastry display!"
-    dreamSom "Aww, but it looks better when it’s arranged by jam color!"
-    dreamRem "*Sigh* Anyways, we need to find our client. Where are they?"
-    # [Client fades into appearance on the first screen]
-    ml "Oh no, I’m late. I’m late! I have to hurry!"
-    ml "This assignment is due... and I have to fill out the report for... oh, I need to pick up the..."
-    dreamSom "Oh, there they are, practically up to their nose in paperwork!"
-    dreamRem "The client can’t see us in their dream, but let’s tail them."
+    # dreamSom neutral "Woah…!"
+    # dreamRem neutral "I've got you. Watch your step, it's a mess in here."
+    # dreamSom "Our client must really have a hard time arranging their thoughts..."
+    # dreamRem "Sounds like someone I know."
+    # dreamRem "Don’t think I didn’t catch you this morning rearranging our already labeled pastry display!"
+    # dreamSom "Aww, but it looks better when it’s arranged by jam color!"
+    # dreamRem "*Sigh* Anyways, we need to find our client. Where are they?"
+    # # [Client fades into appearance on the first screen]
+    # ml "Oh no, I’m late. I’m late! I have to hurry!"
+    # ml "This assignment is due... and I have to fill out the report for... oh, I need to pick up the..."
+    # dreamSom "Oh, there they are, practically up to their nose in paperwork!"
+    # dreamRem "The client can’t see us in their dream, but let’s tail them."
 
 
     # [Rabbit client is still on the first screen, player should learn to click on them.]

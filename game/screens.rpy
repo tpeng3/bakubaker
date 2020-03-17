@@ -118,7 +118,15 @@ screen say(who, what):
                 text who id "who"
                 background Transform(style.namebox.background, alpha=persistent.say_window_alpha)
 
-        text what id "what" kerning persistent.say_dialogue_kerning font persistent.pref_text_font size persistent.pref_text_size line_spacing persistent.pref_text_spacing color persistent.pref_text_color
+        text what:
+            id "what"
+            kerning persistent.say_dialogue_kerning
+            font persistent.pref_text_font
+            size persistent.pref_text_size
+            line_spacing persistent.pref_text_spacing
+            color persistent.pref_text_color
+            # outlines [ (absolute(2), "#B47B88", absolute(0), absolute(0)) ]
+
         ### IMPORTANT: We adjust the kerning, color, font, and size inline here!
 
     ## If there's a side image, display it above the text. Do not display on the

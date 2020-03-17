@@ -6,7 +6,7 @@ label cynthia:
 
     menu:
         "Case 1":
-            jump case1vn
+            jump case1_vn
         "Ultimate Lab":
             jump lab
 

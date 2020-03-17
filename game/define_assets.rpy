@@ -4,7 +4,7 @@
 init python:
     def s_beep(event, **kwargs):
         if event == "show":
-            renpy.music.play("audio/sfx/voice_som.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
+            renpy.music.play("audio/sfx/voice_som2.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="bleeps",fadeout=1.0)
     def r_beep(event, **kwargs):
@@ -92,3 +92,12 @@ init python:
                 (renpy.TEXT_TAG, "/i")
                 ]
     config.custom_text_tags["ii"] = interesting
+
+    def smallText(tag, argument, contents):
+        size = 18
+        return [
+                (renpy.TEXT_TAG, "size={}".format(size)),
+                ] + contents + [
+                (renpy.TEXT_TAG, "/size"),
+                ]
+    config.custom_text_tags["ss"] = smallText

@@ -26,6 +26,9 @@ init -1 python:
         def add(self, item):
             if item not in self.items:
                 self.items.append(item)
+        def drop(self, item):
+            if item in self.items:
+                self.items.remove(item)
         def toggleSelect(self, item):
             if item not in self.selected:
                 self.selected.append(item)

@@ -26,15 +26,21 @@ transform panning(pstart, pend):
 # --------------------------------------------------------------------------
 init -1 python:
     class Interactables(store.object):
-        def __init__(self, name, image, page=0, actions={}, state=""):
+        def __init__(self, name, key, image, page=0, actions={}, state=""):
             self.name = name # description of the action
+            self.key = key # name of the interactable since name isn't unique enough
             self.image = image # image url
             self.page = page # page on where the object gets placed
             self.actions = actions # dict of possible actions {actionName: jumpLabel)
             self.state = state # some sort of custom state needed for specific interactables
+            self.viewed = False
 
         def __repr__(self): # for printing
             return str({"name": self.name, "actions": self.actions})
+
+        def view(self):
+            self.viewed = True
+            return self
 
         def enable(self, label): 
             for action in self.actions:
@@ -59,11 +65,10 @@ init -1 python:
                     self.list.append(i)
         def complete(self, finished): # finished is a list of interactions to be removed
             for i in finished:
-                if i in self.list:
-                    self.list.remove(i)
+                self.list = [itr for itr in self.list if not (itr.key == i.key)]
         def update(self, interactable): # update an interactable in the interactions list
             for i, itr in enumerate(self.list):
-                if itr.name == interactable.name:
+                if itr.key == interactable.key:
                     self.list[i] = interactable
 
 # --------------------------------------------------------------------------
@@ -83,7 +88,6 @@ screen goCook():
 screen dream():
     default fixedposprev = 0
     default fixedposend = 0
-    default current_page = 0
     zorder -10
     $ mx, my = renpy.get_mouse_pos()
 
@@ -120,7 +124,7 @@ screen dream():
             xalign 0.02 yalign 0.5
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
                     SetScreenVariable("fixedposend", (-current_page*page_width)+page_width),
-                    SetScreenVariable("current_page", current_page-1)]
+                    SetVariable("current_page", current_page-1)]
     if current_page < unlocked_pages:
         imagebutton:
             idle "goRight"
@@ -128,7 +132,7 @@ screen dream():
             xalign 0.98 yalign 0.5
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
                     SetScreenVariable("fixedposend", (-current_page*page_width)-page_width),
-                    SetScreenVariable("current_page", current_page+1)]
+                    SetVariable("current_page", current_page+1)]
 
 screen focus_dialogue:
     zorder 0
@@ -136,7 +140,8 @@ screen focus_dialogue:
     imagebutton:
         idle Solid("#0000")
         action renpy.curry(renpy.end_interaction)(True)
-
+    key "K_SPACE" action renpy.curry(renpy.end_interaction)(True)
+ 
 screen dream_actions(actions={}, mx, my):
     # for cancelling/hiding dream_actions if you click away from the menu
     imagebutton:

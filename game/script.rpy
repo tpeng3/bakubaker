@@ -111,13 +111,22 @@ label splashscreen:
 ## The game starts here.
 label start:
     menu:
-        "Accessibility Tutorial":
-            jump accessibility
-        "Tina's room for prototyping mechanics":
+        "Case1":
+            jump cases
+        "Tina's Secret Basement":
             jump tina
         "Cynthia's ULTIMATE LAB":
             jump cynthia
 
+label cases:
+    $ case = "case1"
+    menu:
+        "Start at vn (beginning)":
+            jump case1_vn
+        "Start at dream":
+            jump case1_dream
+        "Start at cooking":
+            jump case1_cook
 
 label accessibility:
     # Show a background. This uses a placeholder by default, but you can
