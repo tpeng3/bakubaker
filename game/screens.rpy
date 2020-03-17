@@ -134,9 +134,9 @@ screen say(who, what):
     # if not renpy.variant("small"):
     #     add SideImage() xalign 0.90 yalign -0.05
     if who == 'Remerie':
-        add SideImage() xalign 0.90 yalign -0.05
+        add SideImage() xalign 0.90 yalign 0
     if who == 'Somnia':
-        add SideImage() xalign 0.90 yalign -0.05
+        add SideImage() xalign 0.90 yalign 0
 
 # ### OLD VERSION V
 # screen say(who, what):
@@ -842,6 +842,8 @@ screen preferences():
                     textbutton "{font=DejaVuSans.ttf}DejaVuSans{/font}" action [changeFont("DejaVuSans.ttf"),SelectedIf(persistent.pref_text_font == "DejaVuSans.ttf")]
 
                     textbutton "{font=gui/fonts/NotoSans-Regular.ttf}NotoSans{/font}" action [changeFont("gui/fonts/NotoSans-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/NotoSans-Regular.ttf")]
+
+                    textbutton "{font=gui/fonts/NotoSans-Regular.ttf}BellotaText{/font}" action [changeFont("gui/fonts/BellotaText-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/BellotaText-Regular.ttf")]
 
                     textbutton "{font=gui/fonts/OpenDyslexic-Regular.otf}OpenDyslexic{/font}" action [changeFont("gui/fonts/OpenDyslexic-Regular.otf"),SelectedIf(persistent.pref_text_font == "gui/fonts/OpenDyslexic-Regular.otf")]
 

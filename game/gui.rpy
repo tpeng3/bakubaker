@@ -52,7 +52,7 @@ define gui.hover_muted_color = '#005b7a'
 
 ## The colors used for dialogue and menu choice text.
 define gui.text_color = persistent.pref_text_color
-define gui.interface_text_color = '#ffffff'
+define gui.interface_text_color = '#af5e7e'
 
 ## Fonts and Font Sizes ########################################################
 
@@ -60,10 +60,10 @@ define gui.interface_text_color = '#ffffff'
 define gui.text_font = persistent.pref_text_font
 
 ## The font used for character names.
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "gui/fonts/BellotaText-Regular.ttf" # NOTE Feel free to change this whenever
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "gui/fonts/NotoSans-Regular.ttf"
 
 ## The size of normal dialogue text.
 define gui.text_size = persistent.pref_text_size
@@ -107,7 +107,7 @@ define gui.textbox_yalign = 0.95
 ## The placement of the speaking character's name, relative to the textbox.
 ## These can be a whole number of pixels from the left or top, or 0.5 to center.
 define gui.name_xpos = 445
-define gui.name_ypos = 15
+define gui.name_ypos = 0
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
@@ -120,18 +120,18 @@ define gui.namebox_height = None
 
 ## The borders of the box containing the character's name, in left, top, right,
 ## bottom order.
-define gui.namebox_borders = Borders(5, 5, 5, 5)
+define gui.namebox_borders = Borders(70, 5, 70, 5, 0, -5, 0, -5)
 
 ## If True, the background of the namebox will be tiled, if False, the
 ## background if the namebox will be scaled.
-define gui.namebox_tile = False
+define gui.namebox_tile = True
 
 
 ## The placement of dialogue relative to the textbox. These can be a whole
 ## number of pixels relative to the left or top side of the textbox, or 0.5 to
 ## center.
-define gui.dialogue_xpos = 500
-define gui.dialogue_ypos = 90
+define gui.dialogue_xpos = 550
+define gui.dialogue_ypos = 115
 
 ## The maximum width of dialogue text, in pixels.
 define gui.dialogue_width = 850
@@ -291,10 +291,10 @@ define gui.main_menu_text_xalign = 1.0
 ## components when an overlay or window is not present.
 
 ## Generic frames.
-define gui.frame_borders = Borders(6, 6, 6, 6)
+define gui.frame_borders = Borders(10, 10, 10, 10)
 
 ## The frame that is used as part of the confirm screen.
-define gui.confirm_frame_borders = Borders(60, 60, 60, 60)
+define gui.confirm_frame_borders = Borders(70, 60, 60, 70)
 
 ## The frame that is used as part of the skip screen.
 define gui.skip_frame_borders = Borders(24, 8, 75, 8)
@@ -303,7 +303,7 @@ define gui.skip_frame_borders = Borders(24, 8, 75, 8)
 define gui.notify_frame_borders = Borders(24, 8, 60, 8)
 
 ## Should frame backgrounds be tiled?
-define gui.frame_tile = False
+define gui.frame_tile = True
 
 
 ## Bars, Scrollbars, and Sliders ###############################################

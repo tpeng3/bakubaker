@@ -1,52 +1,38 @@
 # Time to BREAK EVERYTHING
 # Ultimate lab for bullshit
 # -----------------------------------------------------------------------------
+init:
+    define flash = Fade(.10, 0.0, .20, color="f8dfd2")
+
 label cynthia:
-    $ case = "case1"
 
     menu:
-        "Case 1":
+        "Case 1 VN":
             jump case1_vn
         "Ultimate Lab":
             jump lab
 
 label lab:
-
-    dr """
-    On a day like any other, we begin our story in the quiet corner of X, a modest and cosy bakery.
-
-    The aroma of baked goods fills the store and the alleys, warming anyone who has the pleasure to stop by.
-
-    Should any sleepy lives follow their nose into the bakery, two busy folks await them with open arms.
-    """
-
+    window auto
     scene storefront
 
-    show somnia
-    s "Time to open up shop!"
-    s "What the-"
-    show somnia at right with ease
-    show remi at left
-    r "Is that person dead?"
+    dr """
+    I wonder what Cynthia is going to break this time...
+    """
 
-    show client1
-    bun "I-I'm alive..."
-    bun "But I'm having HELLA trouble sleeping please help"
-    s "Let's hit the dream room!"
+    u "Testing: how much text I can shove in the dream box and how side images be lookin'."
 
-    scene dreamoffice with fade
-    show remi at left
-    show somnia at right
-    show client1
-    bun "Wow!"
-    s "You're feeling veryyyy sleepy..."
-    scene black
+    dreamSom gr "Callie is a part of the Squid Sisters pop idol duo and a former host of Inkopolis News, along with her cousin Marie. Her signature color is magenta. {ii}Staaay fresh!{/ii} {ss}That's her catchphrase!{/ss}"
 
-    dreamSom neutral "Somnia used DARK VOID"
-    dr "The CLIENT fell asleep!"
-    dreamRem neutral "Remerie used DREAM EATER"
+    dreamRem fl "Marie is a part of the Squid Sisters pop idol duo and a host of Inkopolis News, alongside her cousin Callie. Her signature color is lime green. {ss}Please don't make me say the catchphrase...{/ss}"
 
-    scene black with fade
-    jump expression case+"_dream"
+    dreamSom sh "Oh Remi, don't be so shy! You have nothing to be ashamed about for loving the Squid Sisters!"
+    dreamSom ex "Woomy!" with flash
+
+    dreamRem sh "...??!" with hpunch
+    dreamRem fl "{ss}(Th-that was really cute...){/ss}"
+
+    u "Looks like we're done here! Check out the other shenanigans."
+    jump start
 
 return

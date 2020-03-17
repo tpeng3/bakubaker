@@ -123,6 +123,12 @@ init python:
             "large" : 35,
             "line_spacing" : 0,
             },
+            
+        "gui/fonts/BellotaText-Regular.ttf" : {
+            "regular" : 31,
+            "large" : 35,
+            "line_spacing" : 0,
+            },
 
         # DejaVuSans.ttf is the default font that ships with Ren'Py, so this is the only one
         # that won't be in the gui/fonts/ directory.
@@ -132,7 +138,7 @@ init python:
             "line_spacing" : 0,
             }#,
 
-        # # This is a template for adding a different font option to the game, where 
+        # # This is a template for adding a different font option to the game, where
         # # [font.ttf] is the name of your file.
         # "gui/fonts/[font.ttf]" : {
         #     "regular" : 32,
