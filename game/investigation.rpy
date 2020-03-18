@@ -89,7 +89,6 @@ screen dream():
     default fixedposprev = 0
     default fixedposend = 0
     zorder -10
-    $ mx, my = renpy.get_mouse_pos()
 
     fixed:
         at panning(fixedposprev, fixedposend)
@@ -106,7 +105,7 @@ screen dream():
                 mouse "hover"
                 action [If(len(actionable) == 1,
                     true = [Call("disable_pause", next_label=actionable[0]['label'])], # if there's only one action, jump immediately to label
-                    false = Show('dream_actions', actions=actionable, mx=int(mx), my=int(my)))]
+                    false = Show('dream_actions', actions=actionable, mousepos=renpy.get_mouse_pos()))]
 
     # hover tooltip
     $ tooltip = GetTooltip()
@@ -142,12 +141,12 @@ screen focus_dialogue:
         action renpy.curry(renpy.end_interaction)(True)
     key "K_SPACE" action renpy.curry(renpy.end_interaction)(True)
  
-screen dream_actions(actions={}, mx, my):
+screen dream_actions(actions={}, mousepos):
     # for cancelling/hiding dream_actions if you click away from the menu
     imagebutton:
         idle Solid("#0000")
         action Hide('dream_actions')
-
+    $ mx, my = mousepos
     if mx > 1700:
         $malign = 1.0
     else:
