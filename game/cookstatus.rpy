@@ -9,12 +9,11 @@ label cooking_start:
 #--------------------------------------------------------------------------
 init -1 python:
     class Item(store.object):
-        def __init__(self, name, image="", tooltip="", flavors={}):
+        def __init__(self, name, image="", tooltip="", flavor=0):
             self.name = name # name of item
             self.image = image # image url
             self.tooltip = tooltip # tooltip desc
-            self.flavors = flavors # {flavor: amount}
-            # flavors are temporary names, to be decided later 
+            self.flavor = flavor # {flavor: amount}
         
         def __repr__(self): # for printing
             return str(self.name)
@@ -39,43 +38,45 @@ init -1 python:
 
     class CookStatus(store.object):
         def __init__(self, smashReq, goal, zest):
-            self.flavors = {
-                "spooky": 0,
-                "spirit": 0,
-                "wonder": 0
-            }
+            self.flavor = 0
             self.combo = 0
             self.smashReq = smashReq # [] list of ideal dish ingredients
             self.goal = goal
             self.zest = zest
             self.smash = False
-        def update(self, item):
-            if item in inventory.selected: # referencing inventory here feels like... bad practice... bUT HEY IT WORKS
-                for flavor in item.flavors:
-                    self.flavors[flavor] += item.flavors[flavor]
-                if item in self.smashReq:
-                    self.combo += 1
-                else:
-                    self.combo = 0
+        def update(self, item, selected):
+            total = 0
+            if len(selected) > 0:
+                for i in selected:
+                    total += i.flavor
+                self.flavor = total/len(selected)
             else:
-                for flavor in item.flavors:
-                    self.flavors[flavor] -= item.flavors[flavor]
+                self.flavor = 0
+            if item in selected and item in self.smashReq:
+                self.combo += 1
+            else:
                 self.combo = 0
+        # def update(self, item):
+        #     if item in inventory.selected: # referencing inventory here feels like... bad practice... bUT HEY IT WORKS
+        #         self.flavor += item.flavor
+        #         if item in self.smashReq:
+        #             self.combo += 1
+        #         else:
+        #             self.combo = 0
+        #     else:
+        #         self.flavor -= item.flavor
+        #         self.combo = 0
         def reset(self):
-            self.flavors = {
-                "spooky": 0,
-                "spirit": 0,
-                "wonder": 0
-            }
+            self.flavor = 0
             self.combo = 0
         def smashSkill(self, flavor): # simplified my code because what I had before was... overkill to get the job done _(:''3 save for another day
-            self.flavors[flavor] = 999
+            self.flavor = self.goal
             self.smash = True
         def result(self): #goal is a {}, zest is a string with the focused attr
-            for flavor in self.goal:
-                if self.flavors[flavor] < goal[flavor]:
+            result = abs(self.goal - self.flavor)
+            if result >= 20:
                     return -1 # did not meet requirements
-            if self.smash and self.flavors[self.zest] > 100: # perfect score!
+            if self.smash: # perfect score!
                 return 1
             return 0 # ordinary score
 
@@ -86,7 +87,9 @@ init -1 python:
 # Required: inventory, goal, zest
 screen cooking(dish):
     zorder -10
-    add "images/BG/bg_cookbook.png" 
+    add "cookbook"
+    add "cookbook2":
+        xalign 0.5 yalign 0.5
 
     imagebutton: # go back to dream mode
         idle "goDream"
@@ -107,7 +110,7 @@ screen cooking(dish):
         mouse "hover"
         focus_mask True
         xalign 0.74 yalign 0.85
-        action [Call("cook_"+case+"_done", result=cook_status.result())]
+        action [Call(case+"_cook_done", result=cook_status.result())]
 
     #TODO: add better positions for the inventory, after UI is decided
     $x = 420
@@ -121,7 +124,7 @@ screen cooking(dish):
             idle item.image
             xpos x ypos y
             mouse "hover"
-            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
+            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item, inventory.selected)]
             tooltip item
         if item in inventory.selected:
             add "selBorder":
@@ -141,23 +144,16 @@ screen cooking(dish):
                 color "#000"
 
     # desired stats, TODO: change the bars after UI is done
-    $ y = 0
-    for flavor in goal:
-        bar value StaticValue(cook_status.flavors[flavor], 100):
-            xalign 0.75 ypos 110+y
-            xmaximum 400
-            ymaximum 4
-        text "{}/{}".format(cook_status.flavors[flavor], goal[flavor]):
-            xalign 0.75 ypos 110+y
-        $ y += 60
-
-    # combo
-    bar value StaticValue(cook_status.combo, 4):
-        xalign 0.2 ypos 80
+    bar value AnimatedValue(cook_status.flavor, 100):
+        xalign 0.75 ypos 110
         xmaximum 400
         ymaximum 4
-    text "Combo: {}/{}".format(cook_status.combo, 4):
-        xalign 0.2 ypos 80
+    text "{}/{}".format(cook_status.flavor, goal):
+        xalign 0.75 ypos 110
+
+    # combo
+    text "Combo: {}".format(cook_status.combo):
+        xalign 0.6 ypos 200
 
     if cook_status.result() == 0:
         add dish:

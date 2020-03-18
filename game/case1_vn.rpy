@@ -171,6 +171,7 @@ label case1_vn:
 
     jump expression case+"_dream"
 
+label case1_vn_end(result=0):
     scene dreamoffice
     show somnia at right
     show remi at left
@@ -208,29 +209,29 @@ label case1_vn:
     show somnia at right
     show remi at left
     ml "Oh, this is delicious!"
-    # if cooking is perfect:
-    ml "It reminds me of when I first came here and had sleep consulting with, um… what's their name again…?"
-    # r and s pitch in with the mentor's name in excitement
-    ml "Y-yeah! This dish really takes me back…"
-    s "Can you tell us how you two met?"
-    ml  "Well it’s been a while ago now… The years have passed in a blink of an eye…"
-    ml "This is a bit of a personal story but well…"
-    ml "F-Five years ago, my family was going through a rough time… It was hard for our parents to be home, what with their odd jobs keeping them busy."
-    ml "So I was given the responsibility of taking care of my younger siblings. But to be honest, it was pretty overwhelming."
-    ml "I wasn’t even that many years older, but suddenly they were looking to me to take care of them and asking me to take them to places."
-    ml "What could I do? I couldn't turn my back on my family…"
-# TODO MENTOR NAME // BAKERY NAME
-    ml "The stress of it all led to a lot of sleepless nights. And that’s when I happened to stumble across this bakery and meet {ii}mentor{/ii}."
-    ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}bakery{/ii}."
-    ml "When I woke up, I was inside the store, with a warm omelette and a comforting smile waiting for me."
-    ml "It was difficult, balancing my responsibilities, but I felt a… a duty to take care of my siblings."
-    ml "She really listened to my worries. I was able to work hard and continue to support my siblings thanks to her advice."
-    ml "Thinking back at it now, she did mention before she had picked up two kids of her own. I guess that must be the two of you."
-    ml "We certainly did have our fair share of caretaking stories… {ii}mentor{/ii} treasured you two the same I feel for my siblings."
-    ml "She was a lovely soul. I hope she comes back soon, for your sake."
-    r "Do you think you could share more of your stories with us sometime?"
-    s "Yes, please…! We love and miss her a great deal!"
-    ml "I would love to hear your stories of {ii}mentor{/ii} as well. I’ll try to become a regular when I have some time."
+    if result == 1:
+        ml "It reminds me of when I first came here and had sleep consulting with, um… what's their name again…?"
+        # r and s pitch in with the mentor's name in excitement
+        ml "Y-yeah! This dish really takes me back…"
+        s "Can you tell us how you two met?"
+        ml  "Well it’s been a while ago now… The years have passed in a blink of an eye…"
+        ml "This is a bit of a personal story but well…"
+        ml "F-Five years ago, my family was going through a rough time… It was hard for our parents to be home, what with their odd jobs keeping them busy."
+        ml "So I was given the responsibility of taking care of my younger siblings. But to be honest, it was pretty overwhelming."
+        ml "I wasn’t even that many years older, but suddenly they were looking to me to take care of them and asking me to take them to places."
+        ml "What could I do? I couldn't turn my back on my family…"
+    # TODO MENTOR NAME // BAKERY NAME
+        ml "The stress of it all led to a lot of sleepless nights. And that’s when I happened to stumble across this bakery and meet {ii}mentor{/ii}."
+        ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}bakery{/ii}."
+        ml "When I woke up, I was inside the store, with a warm omelette and a comforting smile waiting for me."
+        ml "It was difficult, balancing my responsibilities, but I felt a… a duty to take care of my siblings."
+        ml "She really listened to my worries. I was able to work hard and continue to support my siblings thanks to her advice."
+        ml "Thinking back at it now, she did mention before she had picked up two kids of her own. I guess that must be the two of you."
+        ml "We certainly did have our fair share of caretaking stories… {ii}mentor{/ii} treasured you two the same I feel for my siblings."
+        ml "She was a lovely soul. I hope she comes back soon, for your sake."
+        r "Do you think you could share more of your stories with us sometime?"
+        s "Yes, please…! We love and miss her a great deal!"
+        ml "I would love to hear your stories of {ii}mentor{/ii} as well. I’ll try to become a regular when I have some time."
     ml "You know when I took that nap earlier, I actually had a wonderful dream."
     ml "I don’t remember much of it now, but there were bits and pieces…"
     # Marchie checks the time
@@ -293,3 +294,4 @@ label case1_vn:
 
     With that hope in their hearts, the two open up shop and await their old friend with open arms.
     """
+    return

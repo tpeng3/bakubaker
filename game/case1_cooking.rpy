@@ -5,8 +5,8 @@ label case1_cook:
     # "Welcome to Hell's Kitchen..."
     # "Quick tutorial: you got a bunch of ingredients, and the goal is to add it together and reach the numbers in the middle."
     # "Bonus points if you get the STARRED* attribute to 100!"
-    $ goal = {"wonder": 10, "spooky": 40, "spirit": 20}
-    $ smashReq = [dream_flour, galaxy_milk, c_strawberry, nightmare_jelly]
+    $ goal = 69
+    $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
     $ zest = "wonder"
     $ cook_status = CookStatus(smashReq=smashReq, goal=goal, zest=zest)
     show screen cooking(dish="omelette")
@@ -21,13 +21,14 @@ label case1_cook_done(result):
         jump cooking_start
     elif result == 0:
         "You made a thing! But it's only passing."
-        $ MainMenu(confirm=False)
     elif result == 1:
         "Yayyyy you made a really good thing!! Congrats!!"
-        $ MainMenu(confirm=False)
+    hide screen cooking with Dissolve(0.8)
+    hide screen focus_dialogue
+    call case1_vn_end(result)
 
 label inventory_stock:
     python:
-        for i in [c_strawberry, dream_flour, nightmare_jelly, spooky_jam, galaxy_milk, haunted_whip]:
+        for i in [c_strawberry, c_bunnyapples, c_herbs, c_medicine, c_clockegg]:
             inventory.add(i)
     return

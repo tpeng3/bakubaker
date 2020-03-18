@@ -186,12 +186,9 @@ image remi th:
 image side remi th:
     Crop ((150,0,700,513), "remi th")
     zoom 0.6
-# <<<<<<< Updated upstream
 
 init python:
 # -----------------------------------------------------------------------------
-# Outlines if we want em?
-    # gui.dialogue_text_outlines = [ (1, "#af5e7e", 0, 0) ]
 # Text tag to remind myself of the miscellany thats missing proper names
     def interesting(tag, argument, contents):
         color = "#d14970"
@@ -212,8 +209,7 @@ init python:
                 (renpy.TEXT_TAG, "/size"),
                 ]
     config.custom_text_tags["ss"] = smallText
-# =======
-# >>>>>>> Stashed changes
+
 # Shake -------------------------------------------------------------
 init:
     python:
@@ -267,6 +263,5 @@ init:
                           **properties)
 
         Shake = renpy.curry(_Shake)
-    #
 init:
     $ sshake = Shake((0, 0, 0, 0), 0.5, dist=10)

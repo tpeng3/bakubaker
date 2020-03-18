@@ -78,8 +78,7 @@ init python:
         actions = [
             {"name": "Talk to Bunny", "label": "bunny5_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny5_give", "condition": False},
-            {"name": "Ask for Help", "label": "bunny5_help1", "condition": False},
-            {"name": "Ask for Help", "label": "bunny5_help2", "condition": False},
+            {"name": "Ask for Help", "label": "bunny5_help", "condition": False},
             {"name": "Chat with Bunny", "label": "bunny5_chat", "condition": False},
             {"name": "Ask for the Time", "label": "bunny5_time", "condition": False}
         ],
@@ -127,7 +126,7 @@ init python:
             {"name": "Talk to Marcella", "label": "marcella_talk_end", "condition": True},
         ]
     )
-    t_clockface1 = Interactables("Clock", "clockface1", "images/interactables/case1/clock1.png", page=0,
+    t_clockface1 = Interactables("Clock", "clockface1", "images/interactables/case1/clockface1.png", page=0,
         actions = [
             {"name": "Inspect the Clock", "label": "clock1_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock1_up", "condition": False},
@@ -137,7 +136,7 @@ init python:
         ],
         state = "up"
     )
-    t_clockface2 = Interactables("Clock", "clockface1", "images/interactables/case1/clock2.png", page=1,
+    t_clockface2 = Interactables("Clock", "clockface2", "images/interactables/case1/clockface2.png", page=1,
         actions = [
             {"name": "Inspect the Clock", "label": "clock2_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock2_up", "condition": False},
@@ -147,7 +146,7 @@ init python:
         ],
         state = "down"
     )
-    t_clockface3 = Interactables("Clock", "clockface1", "images/interactables/case1/clock3.png", page=2,
+    t_clockface3 = Interactables("Clock", "clockface3", "images/interactables/case1/clockface3.png", page=2,
         actions = [
             {"name": "Inspect the Clock", "label": "clock3_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock3_up", "condition": False},
@@ -157,7 +156,7 @@ init python:
         ],
         state = "right"
     )
-    t_clockface4 = Interactables("Clock", "clockface1", "images/interactables/case1/clock3.png", page=2,
+    t_clockface4 = Interactables("Clock", "clockface4", "images/interactables/case1/clockface4.png", page=2,
         actions = [
             {"name": "Inspect the Clock", "label": "clock4_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock4_up", "condition": False},
@@ -175,47 +174,22 @@ init python:
 init python:
     kirby = Item("Kirby with Shortcake", image = "/images/items/item_kirby.png",
         tooltip="Free him...",
-        flavors={
-            "wonder": 999,
-            "spirit": 999,
-            "spooky": 999
-        })
+        flavor=999)
     c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder", 
-        flavors={
-            "wonder": 30,
-            "spirit": 20,
-            "spooky": 0
-        })
+        flavor=80)
     c_bunnyapples = Item("Bunny Apples", image = "/images/items/item_strawberry.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder", 
-        flavors={
-            "wonder": 30,
-            "spirit": 20,
-            "spooky": 0
-        })
-    
+        flavor=60)
     c_herbs = Item("Fine Herbs", image = "/images/items/item_strawberry.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder", 
-        flavors={
-            "wonder": 30,
-            "spirit": 20,
-            "spooky": 0
-        })
+        flavor=80)
     c_medicine = Item("Cherry Ooze", image = "/images/items/item_strawberry.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder", 
-        flavors={
-            "wonder": 30,
-            "spirit": 20,
-            "spooky": 0
-        })
+        flavor=1)
     c_clockegg = Item("Clockface Egg", image = "/images/items/item_strawberry.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder", 
-        flavors={
-            "wonder": 30,
-            "spirit": 20,
-            "spooky": 0
-        })
+        flavor=20)
     c_bluebook = Item("Blue Book") # temporary variables because it's easier to keep track when they're in the inventory
     c_redbook = Item("Red Book")
 

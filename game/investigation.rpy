@@ -82,7 +82,7 @@ screen goCook():
         xalign 1.0 yalign 0
         focus_mask True
         mouse "hover"
-        action [Hide('dream', transition=Dissolve(.8)), Hide('goCook'), Jump("cook_"+case)]
+        action [Hide('dream', transition=Dissolve(.8)), Hide('goCook'), Jump(case+"_cook")]
 
 # Related Global Variables: bg, total_pages, page_width, interactions, unlocked_pages
 screen dream():
@@ -148,11 +148,16 @@ screen dream_actions(actions={}, mx, my):
         idle Solid("#0000")
         action Hide('dream_actions')
 
+    if mx > 1700:
+        $malign = 1.0
+    else:
+        $malign = 0.0
+
     $ ystart = 0
     for action in actions:
         textbutton action['name']:
             xpos mx ypos my+ystart
-            xalign 0 yalign 0.5
+            xalign malign yalign 0.5
             mouse "hover"
             action [Hide('dream_actions'), Show('focus_dialogue'), Call(action['label'])]
         $ystart += 40

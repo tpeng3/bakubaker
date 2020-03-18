@@ -61,9 +61,9 @@ label bunnies_talk_som:
     $ interactions.complete([t_bunnysquad])
     hide expression t_bunnysquad.image with Dissolve(0.8)
    # [Get ingredient: bunny-cut apples]
-    "As the bunnies left, a bundle of clouds manifested itself along the path of the two intrepid dream eaters. A shape that came out to be..."
+    dr "As the bunnies left, a bundle of clouds manifested itself along the path of the two intrepid dream eaters. A shape that came out to be..."
     # [Dream apple close up shot?]
-    "...A selection of apple slices, daintily cut in the shape of bunnies."
+    dr "...A selection of apple slices, daintily cut in the shape of bunnies."
     $ inventory.add(c_bunnyapples)
     dreamRem "Our first ingredient is freshly cut apples?"
     dreamSom "Oooh, I wonder if we get to bake a pie with this!"
@@ -85,7 +85,7 @@ label bunnies_talk_rem:
 label strawberry_look:
     dreamRem "The moon looks awfully peculiar… Is that a strawberry?!"
     dreamSom "Could it be? An ingredient? Let's extract it!"
-    "RRRemerie watched as dreamSom reached out her hand and carefully plucked the strawberry out of the night sky."
+    dr "Remerie watched as dreamSom reached out her hand and carefully plucked the strawberry out of the night sky."
     # [Get Creamy Strawberry!]
     $ inventory.add(c_strawberry)
     $ interactions.complete([t_strawberry])
@@ -223,15 +223,18 @@ label bunny1_time:
 
 # Energetic Bunny (the sick one)
 label bunny2_talk:
-    "Wheee! Wheeeee!"
-    dreamSom "That little one is going to get hurt, jumping around like that…!"
-    dreamRem "I'm sure she knows what she's doing."
-    "Whee- OUCH!"
-    dreamRem "OW! Watch it!"
-    dreamSom "Oh, sweetie, slow down and please be careful!"
-    "I'm fine! Hehe, wheee!"
-    dreamRem "Kids, theses days..."
-    dreamSom "Now now~"
+    if not t_bunny2.state:
+        "Wheee! Wheeeee!"
+        dreamSom "That little one is going to get hurt, jumping around like that…!"
+        dreamRem "I'm sure she knows what she's doing."
+        "Whee- OUCH!"
+        dreamRem "OW! Watch it!"
+        dreamSom "Oh, sweetie, slow down and please be careful!"
+        "I'm fine! Hehe, wheee!"
+        dreamRem "Kids, theses days..."
+        dreamSom "Now now~"
+    else:
+        "I feel kinda sleeping now after the medicine."
     jump dream_start
 label bunny2_give:
     dreamSom "Little Whitney? I heard someone's not feeling good and needs to take her medicine."
@@ -329,7 +332,7 @@ label bunny5_talk:
 label bunny5_give:
     "C-cherry medicine…?! Oh no thank you, I'm glad I'm not the sick one this time."
     jump dream_start
-label bunny5_help1:
+label bunny5_help:
     if t_bunny5.state == -1:
         "Oh before that, can I ask for a favor as well?"
         dreamSom "Sure sweetie, what is it?"
@@ -341,12 +344,12 @@ label bunny5_help1:
         dreamRem "Well I guess it's the thought that counts."
         $ interactions.unlock([t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7])
         $ interactions.update(t_bunny5.updateState(7))
-    if t_bunny5.state == 0:
+    elif t_bunny5.state == 0:
         "yay! ok I'll help"
         $ interactions.update(t_bunny5.disable("bunny5_help"))
         $ interactions.update(t_debris.updateState(t_debris.state - 1))
-    if t_bunny5.state > 0:
-        "There still [t_bunny5.state] of flowers left to be painted."
+    elif t_bunny5.state > 0:
+        "There's still [t_bunny5.state] of flowers left to be painted."
     jump dream_start
 label bunny5_chat:
     "what's up"
@@ -398,8 +401,8 @@ label march_continue:
     ml "Urgh and I still have to remember to go there… and pick up that… and call the…"
     dreamRem "There's {b}more{/b} tasks to do?!"
     dreamSom "Remi, look!"
-    "To the dismay of the investigative duo, the oppressive atmosphere of debris returned."
-    "Undoing all the progress made, the two dream eaters paused to gather their bearings as they became overwhelmed, once more, in the clutter."
+    dr "To the dismay of the investigative duo, the oppressive atmosphere of debris returned."
+    dr "Undoing all the progress made, the two dream eaters paused to gather their bearings as they became overwhelmed, once more, in the clutter."
     dreamRem "All our hard work…!"
     dreamRem "What could we be doing wrong?"
     dreamSom "Even in the planner, the pages are just getting filled up with more and more scribbles."
@@ -412,8 +415,9 @@ label march_continue:
     dreamSom "Let's go Remi, we mustn't leave them!"
     $ interactions.unlock([t_marcella_end])
     $ unlocked_pages = 2
+    jump dream_start
 
-label marcella_talk_end1:
+label marcella_talk_end:
     if not t_marcella_end.viewed:
         ml "I-- I can't keep up with this anymore…"
         ml "My list keeps growing and growing… but the little ones! They're all depending on me!"
@@ -542,7 +546,7 @@ label clock3_right:
 
 # second clock on last page
 label clock4_inspect:
-    if !clockface4.viewed:
+    if not t_clockface4.viewed:
         dreamRem "There's also no numbers on this clock. And the minute hand is stuck."
         dreamSom "Maybe we need to get all the clock's time to match up..."
         dreamRem "How can we do that if we can't move the minute hand?"
@@ -592,5 +596,6 @@ label check_clocks:
             inventory.add(c_clockegg)
             finished = True
             interactions.complete([t_clockface1, t_clockface2, t_clockface3, t_clockface4]) 
+    "what is going on"
     jump dream_start
 
