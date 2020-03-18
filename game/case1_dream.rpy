@@ -91,24 +91,22 @@ label strawberry_look:
     $ interactions.complete([t_strawberry])
     jump dream_start
 
-label marcella_talk_mid1:
-    ml "And I have to find my report… and buy the medicine for little Whitney... Oooh and this whole place has been a mess!"
-    dreamRem "Marcella sure has a lot on their plate."
-    dreamSom "Then perhaps we can help them out!"
-    dreamSom "Let's see… they're looking for their report… trying to give medicine to their little sister… Oh! And they want to clean up this entire area!"
-    dreamRem "That last task sounds like a bit of a handful…"
-    dreamSom "Oh come on Remi, it'll be fun! After all ~♪, spoonful of sugar-"
-    dreamRem "...Helps the medicine go down, I know. It's your favorite song. Let's just get to work."
-    $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5])
-    $ interactions.update(t_marcella_mid.enable("marcella_talk_mid2"))
-    $ interactions.update(t_marcella_mid.disable("marcella_talk_mid1"))
-    jump dream_start
-
-label marcella_talk_mid2:
-    ml "And I have to do this… and don't forget that… Oh and I need to…"
-    dreamRem "Looks like Marcella's frozen in their thoughts."
-    dreamSom "Let's see… they're looking for their report… trying to give medicine to their little sister… Oh! And they want to clean up this entire area!"
-    dreamRem "Hah... Let's get to work."
+label marcella_talk_mid:
+    if not t_marcella_mid.viewed:
+        ml "And I have to find my report… and buy the medicine for little Whitney... Oooh and this whole place has been a mess!"
+        dreamRem "Marcella sure has a lot on their plate."
+        dreamSom "Then perhaps we can help them out!"
+        dreamSom "Let's see… they're looking for their report… trying to give medicine to their little sister… Oh! And they want to clean up this entire area!"
+        dreamRem "That last task sounds like a bit of a handful…"
+        dreamSom "Oh come on Remi, it'll be fun! After all ~♪, spoonful of sugar-"
+        dreamRem "...Helps the medicine go down, I know. It's your favorite song. Let's just get to work."
+        $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5])
+        $ interactions.update(t_marcella_mid.view())
+    else:
+        ml "And I have to do this… and don't forget that… Oh and I need to…"
+        dreamRem "Looks like Marcella's frozen in their thoughts."
+        dreamSom "Let's see… they're looking for their report… trying to give medicine to their little sister… Oh! And they want to clean up this entire area!"
+        dreamRem "Hah... Let's get to work."
     jump dream_start
 
 label pile_inspect:
@@ -413,6 +411,7 @@ label march_continue:
     hide expression t_marcella_mid.image with Dissolve(0.8)
     dreamRem "Ack! There they go again…!"
     dreamSom "Let's go Remi, we mustn't leave them!"
+    $ interactions.complete([t_debris])
     $ interactions.unlock([t_marcella_end])
     $ unlocked_pages = 2
     jump dream_start
@@ -447,6 +446,16 @@ label marcella_talk_end:
         python:
             interactions.unlock([t_clockface1, t_clockface2, t_clockface3, t_clockface4])
             interactions.update(t_marcella_end.view())
+            interactions.update(t_bunny1.enable("bunny1_time"))
+            interactions.update(t_bunny2.enable("bunny2_time"))
+            interactions.update(t_bunny3.enable("bunny3_time"))
+            interactions.update(t_bunny4.enable("bunny4_time"))
+            interactions.update(t_bunny5.enable("bunny5_time"))
+            interactions.update(t_bunny1.disable("bunny1_talk"))
+            interactions.update(t_bunny2.disable("bunny2_talk"))
+            interactions.update(t_bunny3.disable("bunny3_talk"))
+            interactions.update(t_bunny4.disable("bunny4_talk"))
+            interactions.update(t_bunny5.disable("bunny5_talk"))
     else:
         "Marcella seems to be unconscious as of the moment."
     jump dream_start
@@ -596,6 +605,16 @@ label check_clocks:
             inventory.add(c_clockegg)
             finished = True
             interactions.complete([t_clockface1, t_clockface2, t_clockface3, t_clockface4]) 
+            interactions.update(t_bunny1.enable("bunny1_chat"))
+            interactions.update(t_bunny2.enable("bunny2_chat"))
+            interactions.update(t_bunny3.enable("bunny3_chat"))
+            interactions.update(t_bunny4.enable("bunny4_chat"))
+            interactions.update(t_bunny5.enable("bunny5_chat"))
+            interactions.update(t_bunny1.disable("bunny1_time"))
+            interactions.update(t_bunny2.disable("bunny2_time"))
+            interactions.update(t_bunny3.disable("bunny3_time"))
+            interactions.update(t_bunny4.disable("bunny4_time"))
+            interactions.update(t_bunny5.disable("bunny5_time"))
     "what is going on"
     jump dream_start
 

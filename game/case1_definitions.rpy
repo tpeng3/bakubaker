@@ -23,8 +23,7 @@ init python:
     # PART TWO 
     t_marcella_mid = Interactables("Marcella Lapin", "marcella_mid", "images/interactables/case1/rabbitOne.png", page=1,
         actions = [
-            {"name": "Talk to Marcella", "label": "marcella_talk_mid1", "condition": True},
-            {"name": "Talk to Marcella", "label": "marcella_talk_mid2", "condition": False},
+            {"name": "Talk to Marcella", "label": "marcella_talk_mid"},
         ]
     )
     t_medicine = Interactables("Bottle of Medicine", "medicine", "images/interactables/case1/medicine.png", page=1,
