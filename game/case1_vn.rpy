@@ -5,15 +5,13 @@ label case1_vn:
 
     scene black with dissolve
     dr """
-    When the curtain of the night lifts, a sleepy town is nudged awake by the gentle glow of morning.
+    When the curtain of the night lifts, a certain sleepy town is awaken by the gentle glow of morning.
 
-    As the townsfolk go about their day, the patchwork quilt of the prior night's myriad dreams slowly dissolves...
+    The patchwork quilt of the prior night's myriad dreams is kicked off, and the townsfolk go about their day.
 
-    But, alas. They are troubled souls... tired souls...
+    But, alas... When night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
 
-    When night falls again, the townsfolk's struggles are laid bare once more.
-
-    In a quiet corner of the town lies a certain, peculiar café, {ii}cafe name{/ii}.
+    Meanwhile, in a quiet corner of the town lies a peculiar café, {ii}cafe name{/ii}.
 
     Warm dishes and a cozy atmosphere greets anyone who has the pleasure to stop by, but beyond that is an even deeper desire to heal what ails the subconscious.
 
