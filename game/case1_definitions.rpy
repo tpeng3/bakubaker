@@ -20,7 +20,7 @@ init python:
         ]
     )
 
-    # PART TWO 
+    # PART TWO
     t_marcella_mid = Interactables("Marcella Lapin", "marcella_mid", "images/interactables/case1/rabbitOne.png", page=1,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_mid"},
@@ -166,7 +166,7 @@ init python:
         state = "left"
     )
 
-    
+
 #--------------------------------------------------------------------------
 # CASE 1 INGREDIENTS
 #--------------------------------------------------------------------------
@@ -175,22 +175,19 @@ init python:
         tooltip="Free him...",
         flavor=999)
     c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder", 
+        tooltip="A tasty strawberry +20 spooky, +30 wonder",
         flavor=80)
-    c_bunnyapples = Item("Bunny Apples", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder", 
+    c_bunnyapples = Item("Bunny Apples", image = "/images/items/item_apple.png",
+        tooltip="A tasty strawberry +20 spooky, +30 wonder",
         flavor=60)
-    c_herbs = Item("Fine Herbs", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder", 
+    c_herbs = Item("Fine Herbs", image = "/images/items/item_herbs.png",
+        tooltip="A tasty strawberry +20 spooky, +30 wonder",
         flavor=80)
-    c_medicine = Item("Cherry Ooze", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder", 
+    c_medicine = Item("Cherry Ooze", image = "/images/items/item_ooze.png",
+        tooltip="A tasty strawberry +20 spooky, +30 wonder",
         flavor=1)
-    c_clockegg = Item("Clockface Egg", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder", 
+    c_clockegg = Item("Clockface Egg", image = "/images/items/item_egg.png",
+        tooltip="A tasty strawberry +20 spooky, +30 wonder",
         flavor=20)
     c_bluebook = Item("Blue Book") # temporary variables because it's easier to keep track when they're in the inventory
     c_redbook = Item("Red Book")
-
-    
-    

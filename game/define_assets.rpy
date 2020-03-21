@@ -18,17 +18,18 @@ init python:
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="bleeps", fadeout=1.0)
 
-# Definitions
 # Characters ------------------------------------------------------------------
 define s = Character ("Somnia",
+            # image = "somnia",
             color="48475a",
             what_color="854d56",
-            callback = s_beep
+            callback = s_beep,
             )
 define sth = Character (kind = s,
             what_prefix='(', what_suffix=')', what_italic=True
             )
 define r = Character ("Remerie",
+            # image = "remi",
             color="e18b81",
             what_color="854d56",
             callback = r_beep
@@ -56,14 +57,12 @@ define dreamRem = Character ("Remerie", kind = dr, # Dream Remerie
             )
 # Clients ---------------------------------------------------------------------
 define u = Character ("???", color="434952", what_color="854d56") # Unknown
-define uml = Character ("???", kind = u, # Before Marcella intro
-            callback = m_beep
-            )
 define ml = Character ("Marcella Lapin",
             color="6f8f4d",
             what_color="854d56",
             callback = m_beep
             )
+define uml = Character ("???", kind = ml) # Before Marcella intro)
 
 # Positions -------------------------------------------------------------------
 # So the bakus are positioned comfortably in their respective sides
@@ -78,8 +77,16 @@ transform right:
 # Crop (x, y, width, height)
 # There HAS TO BE A BETTER WAY... but I guess I only have to define them once anyway :wtflmao:
 image somnia:
-    Crop ((0,0,800,1050), "images/sprites/somnia_neutral.png")
-    zoom 0.85
+    ConditionSwitch(
+    "_last_say_who == 's'", "images/sprites/somnia_neutral.png",
+    "not _last_say_who == 's'", im.MatrixColor("images/sprites/somnia_neutral.png", im.matrix.saturation(0.5) * im.matrix.brightness(-0.2)))
+image remi:
+    ConditionSwitch(
+    "_last_say_who == 'r'", "images/sprites/remerie_neutral.png",
+    "not _last_say_who == 'r'", im.MatrixColor("images/sprites/remerie_neutral.png", im.matrix.saturation(0.5) * im.matrix.brightness(-0.2)))
+# image somnia:
+    # Crop ((0,0,800,1050), "images/sprites/somnia_neutral.png")
+    # zoom 0.85
 image somnia neutral:
     Crop ((0,0,800,1050), "images/sprites/somnia_neutral.png")
     zoom 0.85
@@ -129,9 +136,9 @@ image side somnia th:
     Crop ((150,0,700,513), "somnia th")
     zoom 0.6
 
-image remi:
-    Crop ((0,0,800,1050), "images/sprites/remerie_neutral.png")
-    zoom 0.85
+# image remi:
+#     Crop ((0,0,800,1050), "images/sprites/remerie_neutral.png")
+#     zoom 0.85
 image remi neutral:
     Crop ((0,0,800,1050), "images/sprites/remerie_neutral.png")
     zoom 0.85
@@ -190,6 +197,8 @@ image side remi th:
 init python:
 # -----------------------------------------------------------------------------
 # Text tag to remind myself of the miscellany thats missing proper names
+# If we want text outlines
+    # gui.dialogue_text_outlines = [ (1, "#141414", 0, 0) ]
     def interesting(tag, argument, contents):
         color = "#d14970"
         return [
@@ -209,7 +218,6 @@ init python:
                 (renpy.TEXT_TAG, "/size"),
                 ]
     config.custom_text_tags["ss"] = smallText
-
 # Shake -------------------------------------------------------------
 init:
     python:

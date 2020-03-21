@@ -13,22 +13,30 @@ label cynthia:
             jump lab
 
 label lab:
-    window auto
-    scene storefront
+    scene dreamoffice
 
     dr """
     I wonder what Cynthia is going to break this time...
     """
 
-    u "Testing: how much text I can shove in the dream box and how side images be lookin'."
+    show somnia at right
+    s "Test!"
+    show remi at left
+    r "Test???"
+    s "Remi is hiding in the shadows..."
+    r "..."
 
-    dreamSom gr "Callie is a part of the Squid Sisters pop idol duo and a former host of Inkopolis News, along with her cousin Marie. Her signature color is magenta. {ii}Staaay fresh!{/ii} {ss}That's her catchphrase!{/ss}"
+    # NOTE Dimming not applied to different expression sprites
+    show somnia ex
+    s "Test!!!!!!!"
+    show remi sh
+    r "Test?!"
+    s "Callie is a part of the Squid Sisters pop idol duo and a former host of Inkopolis News, along with her cousin Marie. Her signature color is magenta. {ii}Staaay fresh!{/ii} {ss}That's her catchphrase!{/ss}"
+    r "Marie is a part of the Squid Sisters pop idol duo and a host of Inkopolis News, alongside her cousin Callie. Her signature color is lime green. {ss}Please don't make me say the catchphrase...{/ss}"
 
-    dreamRem fl "Marie is a part of the Squid Sisters pop idol duo and a host of Inkopolis News, alongside her cousin Callie. Her signature color is lime green. {ss}Please don't make me say the catchphrase...{/ss}"
-
+    # NOTE Checking how the dreambox + side image looks
     dreamSom sh "Oh Remi, don't be so shy! You have nothing to be ashamed about for loving the Squid Sisters!"
     dreamSom ex "Woomy!" with flash
-
     dreamRem sh "...??!" with hpunch
     dreamRem fl "{ss}(Th-that was really cute...){/ss}"
 
