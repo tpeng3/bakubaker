@@ -16,4 +16,8 @@ label tina:
     s "What's with that sad look? Eat up and enjoy!"
     r "I... I will. Thanks for the meal. Mmrph."
     r "Mm... Soft, warm eggs wrapped in a delicate fold and perfectly sweetened."
+    dreamSom sh "Oh Remi, don't be so shy! You have nothing to be ashamed about for loving the Squid Sisters!"
+    dreamSom ex "Woomy!" with flash
+    dreamRem sh "...??!" with hpunch
+    dreamRem fl "{ss}(Th-that was really cute...){/ss}"
     return

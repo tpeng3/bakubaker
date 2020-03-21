@@ -166,7 +166,6 @@ init python:
         state = "left"
     )
 
-
 #--------------------------------------------------------------------------
 # CASE 1 INGREDIENTS
 #--------------------------------------------------------------------------
@@ -176,18 +175,18 @@ init python:
         flavor=999)
     c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder",
-        flavor=80)
+        flavor=10)
     c_bunnyapples = Item("Bunny Apples", image = "/images/items/item_apple.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder",
-        flavor=60)
+        flavor=10)
     c_herbs = Item("Fine Herbs", image = "/images/items/item_herbs.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder",
-        flavor=80)
+        flavor=20)
     c_medicine = Item("Cherry Ooze", image = "/images/items/item_ooze.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder",
-        flavor=1)
+        flavor=-20)
     c_clockegg = Item("Clockface Egg", image = "/images/items/item_egg.png",
         tooltip="A tasty strawberry +20 spooky, +30 wonder",
-        flavor=20)
+        flavor=40)
     c_bluebook = Item("Blue Book") # temporary variables because it's easier to keep track when they're in the inventory
     c_redbook = Item("Red Book")

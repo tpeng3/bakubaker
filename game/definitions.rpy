@@ -19,19 +19,11 @@ init -1:
     # image eileen_face_neutral = "images/sprites/eileen_face_neutral.png"
     # image eileen_face_surprised = "images/sprites/eileen_face_surprised.png"
     # image eileen_face_upset = "images/sprites/eileen_face_upset.png"
-    # image eileen_headband = "images/sprites/eileen_headband.png"
-    image somnia_neutral = "images/sprites/somnia_neutral.png"
-    image somnia_bigshock = "images/sprites/somnia_bigshock.png"
-        # "delighted": "images/sprites/somnia_delighted.png",
-        # "disappointed": "images/sprites/somnia_disappointed.png",
-        # "excited": "images/sprites/somnia_excited.png"
-
-
 
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
     
-    # Case 0 assets ---------------------------------------------------------------
+    # Case 1 assets ---------------------------------------------------------------
     image storefront = "images/BG/bg_storefront.png"
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
@@ -59,8 +51,6 @@ init -1:
     # image future_office = "images/BG/future_office.jpg"
     # image room = "images/BG/room.jpg"
     # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
-    image dreamland = "images/BG/bg_dreamland.jpg" 
-    image wonderland = "images/BG/bg_wonderland.png"
     image wonderland2 = "images/BG/bg_wonderland_v2.png" 
 
     image cookbook = "images/BG/bg_cookbook.png"

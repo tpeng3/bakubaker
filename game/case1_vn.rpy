@@ -2,6 +2,9 @@
 # ------------------------------------------------------------------------
 label case1_vn:
     $ case = "case1"
+    $ somnia_name = "???"
+    $ remerie_name = "Remerie"
+    $ marcella_name = "???"
 
     scene black with dissolve
     dr """
@@ -19,50 +22,52 @@ label case1_vn:
     """
 
     scene storefront with dissolve
-    show somnia gr
-    u "Hm hmm... Spoonful of sugar~... ♫"
-    u "… in a most delightful way~!"
+    s "Hm hmm... Spoonful of sugar~... ♫"
+    s "… in a most delightful way~!"
     "Ding!"
+    $ somexpr = "gr"
     show somnia
-    u "{ii}Rem~er~ie~! ♫{/ii}"
-    show somnia ex
-    u "Take a look! The tarts are done!"
-    show somnia ex at right with ease
-    show remi th at left
+    s "{ii}Rem~er~ie~! ♫{/ii}"
+    $ somexpr = "ex"
+    s "Take a look! The tarts are done!"
+    show somnia at right with ease
+    $ remexpr = "th"
+    show remi at left
     r "... In a minute."
-    show somnia
-    u "I’ll go ahead and set some on the display. Would you like to taste one?"
-    show remi si
+    s "I’ll go ahead and set some on the display. Would you like to taste one?"
+    $ remexpr = "si"
     r "Later, please. I- {w=0.5}{nw}"
-    show somnia de
-    show remi bsh
+    $ somexpr = "de"
+    $ remexpr = "sh"
     r "Mmrph!" with sshake
-    show remi pe
+    $ remexpr = "pe"
     r "Mmrrph! Mmrhh nmrph!" with sshake
-    show somnia
-    u "How is it?"
+    $ somexpr = "ne"
+    s "How is it?"
     r "{ii}Somnia{/ii}! That's hot!"
     r "I can grab my own, you know?"
-    show somnia th
+    $ somnia_name = "Somnia"
+    $ somexpr = "th"
     s "Do you think maybe I used too much jam?"
-    show remi th
+    $ remexpr = "th"
     r "... No, it was good. The sweet jam you used was less watery this time, so the tart crust held together well."
-    show somnia
+    $ somexpr = "ne"
     s "I see. I'm glad they turned out better this time!"
-    show somnia de
+    $ somexpr = "de"
     s "I can always count on your sharp palate for tasting, {i}Remi{/i}~!"
-    show remi fl
+    $ remexpr = "fl"
     r "Well, o-of course...!"
-    rth "I can’t say no to Somnia’s desserts!"
-    show remi
+    # rth "I can’t say no to Somnia’s desserts!"
+    $ remexpr = "ne"
     r "If you’re all done baking, we ought to open up shop."
     show somnia
     s "Sure! I’ll go flip the sign outside."
     hide remi with easeoutleft
-    show somnia gr at center with ease
+    $ somexpr = "gr"
+    show somnia at center with ease
     s "Hmm hm~... ♫"
     s "Hm~... A merry tune to toot-"
-    show somnia bsh
+    $ somexpr = "sh"
     s "AH!" with sshake
     r "What’s wrong?"
 
@@ -74,10 +79,10 @@ label case1_vn:
     s "T-there’s a person fallen over on the pavement outside!"
     s "Oh dear, are you okay?"
     r "We can’t have bodies blocking the door for potential customers."
-    uml "Hrn..."
+    ml "Hrn..."
     r "Are they... dea-"
-    uml "... I-I’m alive..."
-    uml "Snrk... *snore...*"
+    ml "... I-I’m alive..."
+    ml "Snrk... *snore...*"
     r "... We should bring them in. It won't do us any good having someone lying on the floor in front of our store."
 
     scene black with dissolve
@@ -88,24 +93,24 @@ label case1_vn:
     show somnia at right
     # client sprite slowly rises from below
     show marchie with easeinbottom
-    u "So sorry...! A thousand apologies for the concern... *yawn*"
+    ml "So sorry...! A thousand apologies for the concern... *yawn*"
     r "They were napping?!"
 # TODO cafe name lol
-    uml "Um... Let’s see… Would you happen to know a café around here called {ii}cafe name{/ii}?"
+    ml "Um... Let’s see… Would you happen to know a café around here called {ii}cafe name{/ii}?"
     "..."
     s "Welcome!"
     r "... Welcome."
     s "We’re technically not open yet, but is there anything we can get started for you?"
-    uml "Oh... yes! I heard rumors that the shop recently opened again."
-    uml "It’s been, what, five years? It’s been so long, I can hardly contain my... *yawn* ...excitement..."
+    ml "Oh... yes! I heard rumors that the shop recently opened again."
+    ml "It’s been, what, five years? It’s been so long, I can hardly contain my... *yawn* ...excitement..."
     # s "Five years... what would they happen to know?"
-    uml "Let’s see, now... I’ll have... this cherry tart and the..."
-    uml "...{ii}Egg pudding pasta with strawberry chives.{/ii}"
+    ml "Let’s see, now... I’ll have... this cherry tart and the..."
+    ml "...{ii}Egg pudding pasta with strawberry chives.{/ii}"
     # Somnia and Remerie both perk up with a !
-    uml "T-that’s the special menu item of the day, right?"
+    ml "T-that’s the special menu item of the day, right?"
     s "Yes, you are correct."
     r "Would you like your order for here or to go?"
-    uml "For... here."
+    ml "For... here."
     r "Alright. Luckily there's still a half hour before the store opens proper so we have time to fulfill your request."
 # NOTE change sir to something else?
     s "Kindly please follow us to the back~!"
@@ -121,16 +126,17 @@ label case1_vn:
     It was time to begin.
     """
 
-    uml "This place...!"
-    uml "Wow, it looks much more different than what I remember."
+    ml "This place...!"
+    ml "Wow, it looks much more different than what I remember."
     r "Welcome to the {ii}Dream Service{/ii}. Here, we specialize in investigating strange sleep patterns and behavior."
     r "Tell us, what ails you?"
-    uml "Um... Well, first, I would like to ask if {ii}Madam{/ii} was... present?"
+    ml "Um... Well, first, I would like to ask if {ii}Madam{/ii} was... present?"
     s "... Oh! Um..."
     s "Unfortunately, she is currently away. We are her apprentices who’ll be taking care of the store while she's gone."
     r "I'm Remerie, dreams specialist."
     s "And I'm the connoisseur of nightmares, Somnia!"
-    uml "It's a pleasure to meet you two. I'm {ii}Marcella Lapin{/ii}."
+    ml "It's a pleasure to meet you two. I'm {ii}Marcella Lapin{/ii}."
+    $ marcella_name = "Marcella Lapin"
     ml "I wasn't aware she left behind apprentices, but..."
     ml "*yawn* That’s fine. If possible, I would like you two to help me as she once did."
 
@@ -183,8 +189,8 @@ label case1_vn:
 
 label case1_vn_end(result=0):
     scene dreamoffice
-    show somnia at right
-    show remi at left
+    show somnia at left
+    show remi at right
     s "The omelette came out great!"
     r "Not my best work considering how much I was scrambling back there, but I admit, it does look enticing..."
     s "Why don't you have it?"

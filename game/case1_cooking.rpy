@@ -7,8 +7,7 @@ label case1_cook:
     # "Bonus points if you get the STARRED* attribute to 100!"
     $ goal = 69
     $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
-    $ zest = "wonder"
-    $ cook_status = CookStatus(smashReq=smashReq, goal=goal, zest=zest)
+    $ cook_status = CookStatus(smashReq=smashReq, goal=goal)
     show screen cooking(dish="omelette")
     jump cooking_start
 
