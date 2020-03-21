@@ -103,23 +103,19 @@ init python:
 
     def display_somnia(st, at):
         somexpr = getattr(store, "somexpr", "ne")
-        im = "images/sprites/somnia_{}.png".format(somnia_map[somexpr])
-        if _last_say_who == "s":
-            d = Image(im)
-        else:
-            d = im.MatrixColor(Image(im), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
-        d = Crop((0,0,800,1050), d)
+        img = Image("images/sprites/somnia_{}.png".format(somnia_map[somexpr]))
+        if not _last_say_who == "s":
+            img = im.MatrixColor(Image(img), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        d = Crop((0,0,800,1050), img)
         d = Transform(d, zoom=0.85)
         return d, None
 
     def display_remerie(st, at):
         remexpr = getattr(store, "remexpr", "ne")
-        im = "images/sprites/remerie_{}.png".format(remerie_map[remexpr])
-        if _last_say_who == "r":
-            d = Image(im)
-        else:
-            d = im.MatrixColor(Image(im), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
-        d = Crop((0,0,800,1050), d)
+        img = Image("images/sprites/remerie_{}.png".format(remerie_map[remexpr]))
+        if not _last_say_who == "r":
+            img = im.MatrixColor(Image(img), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        d = Crop((0,0,800,1050), img)
         d = Transform(d, zoom=0.85)
         return d, None
 
