@@ -5,10 +5,6 @@
     # - b-b-b-bugs..
     # - current bug where screen naturally drifts left upon loading
 
-label tina:
-    "tina basement is empty right now... (come back later)"
-    return
-
 label case1_dream:
     python:
         bg = "wonderland2" # background image

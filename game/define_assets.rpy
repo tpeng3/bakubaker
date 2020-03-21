@@ -20,7 +20,7 @@ init python:
 
 # Characters ------------------------------------------------------------------
 define s = Character ("Somnia",
-            # image = "somnia",
+            image = "somnia",
             color="48475a",
             what_color="854d56",
             callback = s_beep,
@@ -76,65 +76,104 @@ transform right:
 # Images and side images ------------------------------------------------------
 # Crop (x, y, width, height)
 # There HAS TO BE A BETTER WAY... but I guess I only have to define them once anyway :wtflmao:
-image somnia:
-    ConditionSwitch(
-    "_last_say_who == 's'", "images/sprites/somnia_neutral.png",
-    "not _last_say_who == 's'", im.MatrixColor("images/sprites/somnia_neutral.png", im.matrix.saturation(0.5) * im.matrix.brightness(-0.2)))
-image remi:
-    ConditionSwitch(
-    "_last_say_who == 'r'", "images/sprites/remerie_neutral.png",
-    "not _last_say_who == 'r'", im.MatrixColor("images/sprites/remerie_neutral.png", im.matrix.saturation(0.5) * im.matrix.brightness(-0.2)))
-# image somnia:
-    # Crop ((0,0,800,1050), "images/sprites/somnia_neutral.png")
-    # zoom 0.85
-image somnia neutral:
-    Crop ((0,0,800,1050), "images/sprites/somnia_neutral.png")
-    zoom 0.85
-image side somnia neutral:
-    Crop ((150,0,700,513), "somnia neutral")
-    zoom 0.6
-image somnia bsh:
-    Crop ((0,0,800,1050), "images/sprites/somnia_bigshock.png")
-    zoom 0.85
-image side somnia bsh:
-    Crop ((150,0,700,513), "somnia bsh")
-    zoom 0.6
-image somnia de:
-    Crop ((0,0,800,1050), "images/sprites/somnia_delighted.png")
-    zoom 0.85
-image side somnia e:
-    Crop ((150,0,700,513), "somnia e")
-    zoom 0.6
-image somnia di:
-    Crop ((0,0,800,1050), "images/sprites/somnia_disappointed.png")
-    zoom 0.85
-image side somnia di:
-    Crop ((150,0,700,513), "somnia di")
-    zoom 0.6
-image somnia ex:
-    Crop ((0,0,800,1050), "images/sprites/somnia_excited.png")
-    zoom 0.85
-image side somnia ex:
-    Crop ((150,0,700,513), "somnia ex")
-    zoom 0.6
-image somnia gr:
-    Crop ((0,0,800,1050), "images/sprites/somnia_grin.png")
-    zoom 0.85
-image side somnia gr:
-    Crop ((150,0,700,513), "somnia gr")
-    zoom 0.6
-image somnia sh:
-    Crop ((0,0,800,1050), "images/sprites/somnia_shock.png")
-    zoom 0.85
-image side somnia sh:
-    Crop ((150,0,700,513), "somnia sh")
-    zoom 0.6
-image somnia th:
-    Crop ((0,0,800,1050), "images/sprites/somnia_think.png")
-    zoom 0.85
-image side somnia th:
-    Crop ((150,0,700,513), "somnia th")
-    zoom 0.6
+
+init python:
+    # shorcuts to expression names if you need them, also a handy reference for available expressions
+    somnia_map = {
+        "ne": "neutral",
+        "de": "delighted",
+        "di": "disappoint",
+        "ex": "excited",
+        "gr": "grin",
+        "sh": "shock",
+        "bi": "bigshock",
+        "th": "think"
+    }
+    remerie_map = {
+        "ne": "neutral",
+        "de": "dedicate",
+        "fl": "flushed",
+        "gr": "grin",
+        "pe": "peeved",
+        "sh": "shock",
+        "bi": "bigshock",
+        "sh": "sigh",
+        "th": "think"
+    }
+
+    def display_somnia(st, at):
+        somexpr = getattr(store, "somexpr", "ne")
+        im = "images/sprites/somnia_{}.png".format(somnia_map[somexpr])
+        if _last_say_who == "s":
+            d = Image(im)
+        else:
+            d = im.MatrixColor(Image(im), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        d = Crop((0,0,800,1050), d)
+        d = Transform(d, zoom=0.85)
+        return d, None
+
+    def display_remerie(st, at):
+        remexpr = getattr(store, "remexpr", "ne")
+        im = "images/sprites/remerie_{}.png".format(remerie_map[remexpr])
+        if _last_say_who == "r":
+            d = Image(im)
+        else:
+            d = im.MatrixColor(Image(im), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        d = Crop((0,0,800,1050), d)
+        d = Transform(d, zoom=0.85)
+        return d, None
+
+    def define_side_remerie(): # define side images for rem
+        for rem in remerie_map:
+            d = Crop ((150,0,700,513), "images/sprites/somnia_{}.png".format(remerie_map[rem]))
+            d = Transform(d, zoom=0.6)
+            renpy.image(("side", rem), d)
+
+image somnia = DynamicDisplayable(display_somnia)
+image remerie = DynamicDisplayable(display_remerie)
+
+# for loop for the side images since they don't need to be dynamic but heck no I'm not initiating images 50 times
+
+
+# image side somnia bsh:
+#     Crop ((150,0,700,513), "somnia bsh")
+#     zoom 0.6
+# image somnia de:
+#     Crop ((0,0,800,1050), "images/sprites/somnia_delighted.png")
+#     zoom 0.85
+# image side somnia e:
+#     Crop ((150,0,700,513), "somnia e")
+#     zoom 0.6
+# image somnia di:
+#     Crop ((0,0,800,1050), "images/sprites/somnia_disappointed.png")
+#     zoom 0.85
+# image side somnia di:
+#     Crop ((150,0,700,513), "somnia di")
+#     zoom 0.6
+# image somnia ex:
+#     Crop ((0,0,800,1050), "images/sprites/somnia_excited.png")
+#     zoom 0.85
+# image side somnia ex:
+#     Crop ((150,0,700,513), "somnia ex")
+#     zoom 0.6
+# image somnia gr:
+#     Crop ((0,0,800,1050), "images/sprites/somnia_grin.png")
+#     zoom 0.85
+# image side somnia gr:
+#     Crop ((150,0,700,513), "somnia gr")
+#     zoom 0.6
+# image somnia sh:
+#     Crop ((0,0,800,1050), "images/sprites/somnia_shock.png")
+#     zoom 0.85
+# image side somnia sh:
+#     Crop ((150,0,700,513), "somnia sh")
+#     zoom 0.6
+# image somnia th:
+#     Crop ((0,0,800,1050), "images/sprites/somnia_think.png")
+#     zoom 0.85
+# image side somnia th:
+#     Crop ((150,0,700,513), "somnia th")
+#     zoom 0.6
 
 # image remi:
 #     Crop ((0,0,800,1050), "images/sprites/remerie_neutral.png")

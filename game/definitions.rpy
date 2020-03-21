@@ -20,6 +20,14 @@ init -1:
     # image eileen_face_surprised = "images/sprites/eileen_face_surprised.png"
     # image eileen_face_upset = "images/sprites/eileen_face_upset.png"
     # image eileen_headband = "images/sprites/eileen_headband.png"
+    image somnia_neutral = "images/sprites/somnia_neutral.png"
+    image somnia_bigshock = "images/sprites/somnia_bigshock.png"
+        # "delighted": "images/sprites/somnia_delighted.png",
+        # "disappointed": "images/sprites/somnia_disappointed.png",
+        # "excited": "images/sprites/somnia_excited.png"
+
+
+
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
     
