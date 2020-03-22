@@ -8,17 +8,15 @@ label case1_vn:
 
     scene black with dissolve
     dr """
-    When the curtain of the night lifts, a certain sleepy town is awaken by the gentle glow of morning.
+    When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
 
     The patchwork quilt of the prior night's myriad dreams is kicked off, and the townsfolk go about their day.
 
-    But, alas... When night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
+    But, alas... Once night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
 
-    Meanwhile, in a quiet corner of the town lies a peculiar café, {ii}cafe name{/ii}.
+    Luckily, in a quiet corner of the town lies {ii}cafe name{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
 
-    Warm dishes and a cozy atmosphere greets anyone who has the pleasure to stop by, but beyond that is an even deeper desire to heal what ails the subconscious.
-
-    Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, two busy cooks will await them with open arms.
+    Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, they'll find two busy cooks awaiting with open arms.
     """
 
     scene storefront with dissolve
@@ -34,6 +32,7 @@ label case1_vn:
     $ remexpr = "th"
     show remi at left
     r "... In a minute."
+    $ somexpr = "ne"
     s "I’ll go ahead and set some on the display. Would you like to taste one?"
     $ remexpr = "si"
     r "Later, please. I- {w=0.5}{nw}"
@@ -67,7 +66,7 @@ label case1_vn:
     show somnia at center with ease
     s "Hmm hm~... ♫"
     s "Hm~... A merry tune to toot-"
-    $ somexpr = "sh"
+    $ somexpr = "bi"
     s "AH!" with sshake
     r "What’s wrong?"
 
@@ -89,17 +88,24 @@ label case1_vn:
     with Pause (1.0)
     scene storefront with dissolve
 
+    $ somexpr = "ne"
     show remi at left
     show somnia at right
     # client sprite slowly rises from below
-    show marchie with easeinbottom
+    $ marexpr = "ya"
+    show marcella with easeinbottom
     ml "So sorry...! A thousand apologies for the concern... *yawn*"
+    $ remexpr = "sh"
     r "They were napping?!"
 # TODO cafe name lol
+    $ marexpr = "ne"
+    $ remexpr = "ne"
     ml "Um... Let’s see… Would you happen to know a café around here called {ii}cafe name{/ii}?"
     "..."
+    $ somexpr = "gr"
     s "Welcome!"
     r "... Welcome."
+    $ somexpr = "ne"
     s "We’re technically not open yet, but is there anything we can get started for you?"
     ml "Oh... yes! I heard rumors that the shop recently opened again."
     ml "It’s been, what, five years? It’s been so long, I can hardly contain my... *yawn* ...excitement..."
@@ -112,7 +118,6 @@ label case1_vn:
     r "Would you like your order for here or to go?"
     ml "For... here."
     r "Alright. Luckily there's still a half hour before the store opens proper so we have time to fulfill your request."
-# NOTE change sir to something else?
     s "Kindly please follow us to the back~!"
 
     scene dreamoffice

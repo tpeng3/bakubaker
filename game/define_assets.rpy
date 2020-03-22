@@ -57,6 +57,7 @@ define dreamRem = Character ("Remerie", kind = dr, # Dream Remerie
 define u = Character ("???", color="434952", what_color="854d56") # Unknown
 define ml = DynamicCharacter ("marcella_name",
             color="6f8f4d",
+            image = "marcella",
             what_color="854d56",
             callback = m_beep
             )
@@ -74,7 +75,7 @@ transform right:
 # Images and side images ------------------------------------------------------
 # Crop (x, y, width, height)
 # There HAS TO BE A BETTER WAY... but I guess I only have to define them once anyway :wtflmao:
-# I GOT YOU CYNTHIA!!! 
+# I GOT YOU CYNTHIA!!!
 
 init python:
     # shorcuts to expression names if you need them, also a handy reference for available expressions
@@ -99,6 +100,14 @@ init python:
         "si": "sigh",
         "th": "think"
     }
+    marcella_map = {
+        "ne": "neutral",
+        "ya": "yawn",
+        "wo": "worry",
+        "aw": "awake",
+        "la": "laugh",
+        "th": "think"
+        }
 
     def display_somnia(st, at):
         somexpr = getattr(store, "somexpr", "ne")
@@ -118,6 +127,15 @@ init python:
         d = Transform(d, zoom=0.85)
         return d, None
 
+    def display_marcella(st, at):
+        marexpr = getattr(store, "marexpr", "ne")
+        img = Image("images/sprites/marcella_{}.png".format(marcella_map[marexpr]))
+        if not _last_say_who == "ml":
+            img = im.MatrixColor(Image(img), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        d = Crop((0,0,900,1050), img)
+        d = Transform(d, zoom=0.85)
+        return d, None
+
     # dream side images
     def define_side_somnia():
         for som in somnia_map:
@@ -133,9 +151,10 @@ init python:
 
     define_side_somnia()
     define_side_remerie()
-    
+
 image somnia = DynamicDisplayable(display_somnia)
 image remi = DynamicDisplayable(display_remerie)
+image marcella = DynamicDisplayable(display_marcella)
 
 init python:
 # -----------------------------------------------------------------------------
