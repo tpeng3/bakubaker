@@ -14,34 +14,37 @@ label case1_vn:
 
     But, alas... When night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
 
-    Meanwhile, in a quiet corner of the town lies a peculiar café, {ii}cafe name{/ii}.
+    Meanwhile, in a quiet corner of the town lies a peculiar café, {ii}Café Nemo{/ii}.
 
-    Warm dishes and a cozy atmosphere greets anyone who has the pleasure to stop by, but beyond that is an even deeper desire to heal what ails the subconscious.
+    Warm dishes and a cozy atmosphere greets anyone who has the pleasure to stop by, but beyond that is an even deeper desire to heal what ails the subconscious."""
 
-    Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, two busy cooks will await them with open arms.
-    """
+    play music storefront
+
+    dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, two busy cooks will await them with open arms."
 
     scene storefront with dissolve
     s "Hm hmm... Spoonful of sugar~... ♫"
     s "… in a most delightful way~!"
     "Ding!"
     $ somexpr = "gr"
-    show somnia
+    show somnia with dissolve
     s "{ii}Rem~er~ie~! ♫{/ii}"
     $ somexpr = "ex"
     s "Take a look! The tarts are done!"
     show somnia at right with ease
     $ remexpr = "th"
-    show remi at left
+    show remi at left with dissolve
     r "... In a minute."
     s "I’ll go ahead and set some on the display. Would you like to taste one?"
     $ remexpr = "si"
     r "Later, please. I- {w=0.5}{nw}"
     $ somexpr = "de"
+    show somnia at center with ease
     $ remexpr = "sh"
-    r "Mmrph!" with sshake
+    r "Mmrph! {w=0.5}{nw}" with sshake
     $ remexpr = "pe"
     r "Mmrrph! Mmrhh nmrph!" with sshake
+    show somnia at right with ease
     $ somexpr = "ne"
     s "How is it?"
     r "{ii}Somnia{/ii}! That's hot!"
@@ -57,7 +60,10 @@ label case1_vn:
     s "I can always count on your sharp palate for tasting, {i}Remi{/i}~!"
     $ remexpr = "fl"
     r "Well, o-of course...!"
-    # rth "I can’t say no to Somnia’s desserts!"
+    r "Regardless, you should know better than to handle tarts that are too hot to touch!"
+    $ remexpr = "si"
+    r "*Sigh*"
+    r "{i}(Despite that, I can’t say no to Somnia’s desserts!){/i}"
     $ remexpr = "ne"
     r "If you’re all done baking, we ought to open up shop."
     show somnia
@@ -68,54 +74,95 @@ label case1_vn:
     s "Hmm hm~... ♫"
     s "Hm~... A merry tune to toot-"
     $ somexpr = "sh"
+    stop music
     s "AH!" with sshake
     r "What’s wrong?"
 
-# NOTE Cynthia vn shenanigans bookmark
-    scene black with flash
-    u "Cynthia's only gotten {ii}this{/ii} far in adding all the images n stuff! The following will cont awkwardly. Proceed with caution."
-
-    # Client is passed out on the floor in front of the store
+    $ somexpr = "bi"
     s "T-there’s a person fallen over on the pavement outside!"
+    $ somexpr = "sh"
     s "Oh dear, are you okay?"
+    show somnia at right with ease
+    $ remexpr = "pe"
+    show remi at left with dissolve
     r "We can’t have bodies blocking the door for potential customers."
     ml "Hrn..."
+    $ remexpr = "bi"
     r "Are they... dea-"
     ml "... I-I’m alive..."
-    ml "Snrk... *snore...*"
+    ml "Snrk... {i}*snore...*{/i}" with sshake
+    play music weird
+    $ remexpr = "si"
+    r "......"
+    $ somexpr = "th"
+    s "......"
+    $ remexpr = "ne"
     r "... We should bring them in. It won't do us any good having someone lying on the floor in front of our store."
 
     scene black with dissolve
     with Pause (1.0)
-    scene storefront with dissolve
 
+    $ somexpr = "ne"
+    $ remexpr = "ne"
+    scene storefront with dissolve
     show remi at left
     show somnia at right
-    # client sprite slowly rises from below
-    show marchie with easeinbottom
-    ml "So sorry...! A thousand apologies for the concern... *yawn*"
-    r "They were napping?!"
-# TODO cafe name lol
-    ml "Um... Let’s see… Would you happen to know a café around here called {ii}cafe name{/ii}?"
-    "..."
-    s "Welcome!"
-    r "... Welcome."
-    s "We’re technically not open yet, but is there anything we can get started for you?"
-    ml "Oh... yes! I heard rumors that the shop recently opened again."
-    ml "It’s been, what, five years? It’s been so long, I can hardly contain my... *yawn* ...excitement..."
-    # s "Five years... what would they happen to know?"
-    ml "Let’s see, now... I’ll have... this cherry tart and the..."
-    ml "...{ii}Egg pudding pasta with strawberry chives.{/ii}"
-    # Somnia and Remerie both perk up with a !
-    ml "T-that’s the special menu item of the day, right?"
-    s "Yes, you are correct."
-    r "Would you like your order for here or to go?"
-    ml "For... here."
-    r "Alright. Luckily there's still a half hour before the store opens proper so we have time to fulfill your request."
-# NOTE change sir to something else?
-    s "Kindly please follow us to the back~!"
+    with dissolve
+    show mar with easeinbottom
 
-    scene dreamoffice
+    ml "So sorry...! A thousand apologies for the concern..."
+    $ marexpr = "ya"
+    extend "{cps=10}*yaaaaawn*" with sshake
+    $ remexpr = "sh"
+    r "(They were napping?!)"
+    $ somexpr = "sh"
+    s "(Were they... sleeping on the pavement outside...?)"
+    $ marexpr = "ne"
+    ml "Um... Let’s see… Would you happen to know a café around here called {ii}Café Nemo{/ii}?"
+    u "..."
+    $ somexpr = "de"
+    s "Welcome!"
+    $ remexpr = "ne"
+    r "... Welcome."
+    $ somexpr = "ne"
+    s "We’re technically not open for the day yet, but since you're here, is there anything we can get started for you?"
+    ml "Oh... yes! I heard rumors that the café recently reopened for business again."
+    $ marexpr = "ya"
+    ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {cps=10}*yawn* ...excitement...{/cps}"
+    $ somexpr = "th"
+    s "(Five years... what would they happen to know?)"
+    $ marexpr = "ne"
+    ml "Let’s see, now... I’ll have... this cherry tart and the..."
+    $ remexpr = "sh"
+    $ somexpr = "bi"
+    ml "...{ii}Egg pudding pasta with strawberry chives.{/ii}" with flash
+    ml "T-that’s the special menu item of the day, right?"
+    $ somexpr = "gr"
+    s "Yes, you are correct."
+    $ remexpr = "th"
+    r "Would you like your order for here or to go?"
+    $ marexpr = "th"
+    ml "For... here."
+    $ remexpr = "ne"
+    r "Alright. Luckily there's still a half hour before the store opens proper so we have time to fulfill your request."
+    $ somexpr = "ex"
+    s "Kindly please follow us to the back~!"
+    hide somnia with easeoutright
+    hide remi with easeoutleft
+    hide mar with dissolve
+
+    stop music fadeout (2.0)
+
+    show storefront:
+        xalign 0.5 yalign 0.5
+        pause 0.5
+        linear 3 zoom 2 truecenter
+    pause(2.0)
+    scene black with dissolve
+    pause(2.0)
+    play music dreamoffice
+    scene dreamoffice with dissolve
+
     dr """
     Beyond the café's inconspicious backdoor and past the checkered tiles of the kitchen was a curious room, simultaneously deep and light, unfamiliar yet intimate.
 
@@ -126,20 +173,45 @@ label case1_vn:
     It was time to begin.
     """
 
+    $ remexpr = "ne"
+    $ somexpr = "ne"
+
+    show mar at center with dissolve
+    show remi at left
+    show somnia at right
+    with dissolve
+    $ marexpr = "ya"
     ml "This place...!"
+    $ marexpr = "th"
     ml "Wow, it looks much more different than what I remember."
+    $ remexpr = "de"
     r "Welcome to the {ii}Dream Service{/ii}. Here, we specialize in investigating strange sleep patterns and behavior."
+    $ remexpr = "ne"
     r "Tell us, what ails you?"
-    ml "Um... Well, first, I would like to ask if {ii}Madam{/ii} was... present?"
-    s "... Oh! Um..."
+    $ marexpr = "wo"
+    ml "Um... Well, first, I would like to ask if {ii}Madam Nemo{/ii} was... present?"
+    $ remexpr = "sh"
+    $ somexpr = "sh"
+    s "... Oh! {w=0.5}{nw}"
+    $ somexpr = "di"
+    extend "Um..."
+    $ somexpr = "th"
     s "Unfortunately, she is currently away. We are her apprentices who’ll be taking care of the store while she's gone."
+    $ remexpr = "gr"
     r "I'm Remerie, dreams specialist."
+    $ somexpr = "gr"
     s "And I'm the connoisseur of nightmares, Somnia!"
+    $ marexpr = "th"
     ml "It's a pleasure to meet you two. I'm {ii}Marcella Lapin{/ii}."
     $ marcella_name = "Marcella Lapin"
+    $ marexpr = "ne"
     ml "I wasn't aware she left behind apprentices, but..."
+    $ marexpr = "ya"
     ml "*yawn* That’s fine. If possible, I would like you two to help me as she once did."
 
+    $ marexpr = "ne"
+    $ remexpr = "ne"
+    $ somexpr = "ne"
     ml "You see, I’ve been having problems sleeping the past several nights."
 
     ml """
@@ -156,53 +228,100 @@ label case1_vn:
     Sleeping pills, music, exercise and such have done nothing in my favor...
 
     I’m a very busy person, see. I have a lot on my plate... But...
-
-    I-I don’t know what will become of me at this rate…!
     """
 
+    $ marexpr = "wo"
+    ml "I-I don’t know what will become of me at this rate…!"
+    $ somexpr = "sh"
     s "Oh dear. That sounds like a strong case of insomnia."
+    $ somexpr = "th"
     s "I wonder... could it be a nightmare? Something vexing pulling at the heartstrings?"
+    $ somexpr = "ex"
     s "Dreams made by a dreamless client... My, I wonder how they'll taste!"
+    $ marexpr = "ne"
     ml "What was that?"
     # s (Maybe a nightmare or @#$%…!)
+    $ remexpr = "si"
     r "Don't mind her. For now, we'll get our investigation started."
     # s(I hope it’s a gruesome dream. Those are absolutely scrumptious!)
+    $ remexpr = "ne"
+    $ somexpr = "ne"
     r "Marcella, I’m going to need you to lie on this bed."
+    $ marexpr = "ya"
     ml "A bed... I'm afraid I won't be able to fall asleep in it..."
+    $ remexpr = "gr"
+    $ marexpr = "th"
     r "Don’t worry, we have ways of making you sleep."
+    $ somexpr = "gr"
+    $ marexpr = "ne"
     s "If you would please, relax. I’ll be lighting some incense now~!"
-    s "When we count to three, you shall fall into a deep sleep..."
-    "1… 2… 3…"
+    $ remexpr = "ne"
+    $ somexpr = "ne"
 
-    scene black with dissolve
     dr """
     Somnia carefully lit an incense stick, blew it, and placed it in a ceramic holder.
 
     The insomniac was skeptical to believe incense would work this time, but with nothing left to lose, they closed their eyes nonetheless.
+    """
 
-    The aromatic wisps that rolled out shimmered lazily against the glint of the office's few lamps, and seemed to be made of a dream itself.
+    s "When we count to three, you shall fall into a deep sleep..."
+    show black with dissolve:
+        linear 2 alpha 0.15
+    u "1..."
+    show black:
+        linear 2 alpha 0.40
+    extend "2..."
+    show black:
+        linear 2 alpha 0.80
+    extend "3......"
+    show black:
+        linear 2 alpha 1.0
+    extend "..."
+
+    scene black with dissolve
+    pause (2.0)
+
+    stop music fadeout (5.0)
+    dr """The aromatic wisps that rolled out shimmered lazily against the glint of the office's few lamps, and seemed to be made of a dream itself.
 
 	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as dream eaters.
     """
+    pause (2.0)
 
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):
+    stop music fadeout (2.0)
     scene dreamoffice
-    show somnia at left
-    show remi at right
+    with dissolve
+    show somnia at right
+    show remi at left
+    with dissolve
+    play music dreamoffice
+    $ somexpr = "de"
     s "The omelette came out great!"
+    $ remexpr = "si"
     r "Not my best work considering how much I was scrambling back there, but I admit, it does look enticing..."
+    $ somexpr = "ne"
     s "Why don't you have it?"
-    r "...!"
+    $ remexpr = "bi"
+    r "...!" with flash
+    $ somexpr = "de"
     s "We both know dreams are harder to come by than nightmares, so please... Help yourself!"
+    $ remexpr = "fl"
     r "I... Thank you, Somnia."
+    $ somexpr = "gr"
     s "What's with that sad look? Eat up and enjoy!"
+    $ remexpr = "gr"
     r "I... I will. Thanks for the meal. Mmrph."
+    $ remexpr = "th"
     r "Mm... Soft, warm eggs wrapped in a delicate fold and perfectly sweetened."
+    $ remexpr = "gr"
     r "The freshly cut fruit serves as a crisp, light flavor in contrast to the richness of the eggs."
     r "This is sure to brighten up anyone’s morning, especially if they had a tiring night before."
+    $ remexpr = "th"
     r "I hope with this, we were able to eat away some of Marcella’s worries."
+    $ somexpr = "gr"
     s "Hehe~... I hope so too!"
 
     dr """
@@ -213,24 +332,36 @@ label case1_vn_end(result=0):
     Slowly, Marcella rose from the bed as the incense fizzled out to a small ember.
     """
 
-    show marchie
-    ml "*yaaaawn...*"
+    $ marexpr = "ya"
+    show mar with dissolve
+    ml "*Yaaaawn...*" with sshake
+    $ somexpr = "gr"
     s "Good morning! How are you feeling after that little nap?"
-    ml "Um... Hungry..."
+    $ marexpr = "ne"
+    ml "Um..."
+    $ marexpr = "th"
+    ml "Hungry..."
+    $ somexpr = "de"
     s "You're in luck! We've prepared a dish specially for you."
+    $ somexpr = "ne"
     s "If you would please follow me back out to the front..."
 
-    scene storefront
-    show marchie
+    scene storefront with dissolve
 
+    show mar
     show somnia at right
     show remi at left
+    $ marexpr = "aw"
     ml "Oh, this is delicious!"
     if result == 1:
+        $ marexpr = "th"
         ml "It reminds me of when I first came here and had sleep consulting with, um... what's her name again...?"
-        # r and s pitch in with the mentor's name in excitement
+        s "Ms. Nemo!!"
+        r "Ms. Nemo."
+        $ marexpr = "aw"
         ml "Y-yeah! This dish really takes me back..."
         s "Can you tell us how you two met?"
+        $ marexpr = "la"
         ml "Well, it’s been a while ago now. The years have flown by in a blink of an eye..."
         ml "This is a bit of a personal story but, well..."
         ml "F-Five years ago, my family was going through a rough time. It was hard for our parents to be home, what with their odd jobs keeping them busy."

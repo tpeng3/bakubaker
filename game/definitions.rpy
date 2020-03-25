@@ -22,7 +22,7 @@ init -1:
 
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
-    
+
     # Case 1 assets ---------------------------------------------------------------
     image storefront = "images/BG/bg_storefront.png"
     image dreamoffice = "images/BG/bg_dreamoffice.png"
@@ -51,7 +51,7 @@ init -1:
     # image future_office = "images/BG/future_office.jpg"
     # image room = "images/BG/room.jpg"
     # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
-    image wonderland2 = "images/BG/bg_wonderland_v2.png" 
+    image wonderland2 = "images/BG/bg_wonderland_v2.png"
 
     image cookbook = "images/BG/bg_cookbook.png"
     image cookbook2 = "images/BG/test_cookbook.png"
@@ -65,6 +65,13 @@ init -1:
     # Future-Business_v001 = "audio/music/Future-Business_v001.mp3"
     # Sculpture-Garden_Looping = "audio/music/Sculpture-Garden_Looping.mp3"
     # The-Concrete-Bakes_Looping = "audio/music/The-Concrete-Bakes_Looping.mp3"
+    define audio.storefront = "audio/music/MusMus-BGM-092.mp3"
+    define audio.dreamoffice = "audio/music/gozennijinofunsui.mp3"
+    define audio.weird = "audio/music/Thick_Irony.mp3"
+    define audio.dream1 = "audio/music/MusMus-BGM-089.mp3"
+    # define audio.dream2 = "audio/music/-"
+    define audio.cooking1 = "audio/music/Netherland.mp3"
+    define audio.cooking2 = "audio/music/Vibe_Drive.mp3"
 
 ## Music Caption:
     # Careless-Summer_Looping: _("")
@@ -77,6 +84,7 @@ init -1:
     # Chest-Drawer_Open = "audio/sfx/Chest-Drawer_Open.mp3"
     # Edge-of-Ocean = "audio/sfx/Edge-of-Ocean.mp3"
     # Interior-Door_Close = "audio/sfx/Interior-Door_Close.mp3"
+    define audio.rimshot = "audio/sfx/rimshot.ogg"
 
 ## SFX Caption:
     # Chest-Drawer_Close: _("")
@@ -98,7 +106,7 @@ init -1 python:
 
         with open(renpy.loader.transfn('definitions.rpy'), 'wb') as f:
             f.write('## This is a resource name loader that will import the names of files from certain folders\n## Intended as a way to quickly grab file names to use in accessibility.rpy, screens.rpy, and captiontool.rpy\n## Remember to add commas to the end of each listed item\n## As of RenPy7, basic images do not have to be defined (LayeredImages still need to be set up)\r\ninit -1:\r\n    $ redefine_resources = False\n    ## When you add, delete or rename an image or music resource, change redefine_resources to True and launch the project\r\n\r\n')
-            
+
             f.write('## Sprites:\r\n')
             for file in renpy.list_files():
                 if file.startswith('images/sprites') and (file.endswith('.png') or file.endswith('.webp')):
@@ -119,7 +127,7 @@ init -1 python:
                     name = file.replace('images/CG/','').replace('/', ' ').replace('.png','').replace('.webp','').replace('.jpg','')
                     img_str = 'image ' + name + ' = "' + file + '"'
                     f.write('    # ' + img_str + '\r\n')
-            
+
             f.write('\r\n## Music:\r\n# init -2 python:\r\n')
             for file in renpy.list_files():
                 if file.startswith('audio/music/') and (file.endswith('.ogg') or file.endswith('.wav') or file.endswith('.mp3')):
@@ -149,7 +157,7 @@ init -1 python:
                     f.write('    # ' + name + ': _("")' + '\r\n')
             f.write('\r\n')
         f.closed
-        
+
         with open(renpy.loader.transfn('definitions.rpy'), 'ab') as f:
             f.write(s)
         f.closed

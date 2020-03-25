@@ -1,4 +1,5 @@
 label case1_cook:
+    play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
     $ inventory = Inventory()
     call inventory_stock
@@ -19,9 +20,11 @@ label case1_cook_done(result):
         $ cook_status.reset()
         jump cooking_start
     elif result == 0:
-        "You made a thing! But it's only passing."
+        s "Pretty good! Could use some more zing and pep, though."
+        r "This looks serviceable."
     elif result == 1:
-        "Yayyyy you made a really good thing!! Congrats!!"
+        s "Ah, such a dreamy looking dish! I almost don't want to eat it..."
+        r "Not bad at all. Next time I'll be expecting more."
     hide screen cooking with Dissolve(0.8)
     hide screen focus_dialogue
     call case1_vn_end(result)
