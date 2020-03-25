@@ -113,6 +113,8 @@ init python:
     }
     marcella_map = {
         "ne": "neutral",
+        "fr": "frown",
+        "gr": "grin",
         "aw": "awake",
         "la": "laugh",
         "th": "think",

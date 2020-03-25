@@ -6,7 +6,7 @@
     # - current bug where screen naturally drifts left upon loading
 
 label case1_dream:
-
+    show screen focus_dialogue
     $ bun_name = "Dream bunnies"
 
     python:
@@ -39,6 +39,7 @@ label case1_dream:
     dreamSom sh "My, there's Marcella, practically up to their nose in paperwork!"
     dreamRem ne "The client can't see us in their dream, but let's tail them."
     jump dream_start
+    hide screen focus_dialogue
 
 
 label marcella_talk_start:

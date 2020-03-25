@@ -118,14 +118,15 @@ label case1_vn:
     $ somexpr = "sh"
     s "(Were they... sleeping on the pavement outside...?)"
     $ marexpr = "ne"
+    $ remexpr = "ne"
     ml "Um... Let’s see… Would you happen to know a café around here called {ii}Café Nemo{/ii}?"
     u "..."
     $ somexpr = "de"
     s "Welcome!"
-    $ remexpr = "ne"
     r "... Welcome."
     $ somexpr = "ne"
     s "We’re technically not open for the day yet, but since you're here, is there anything we can get started for you?"
+    $ marexpr = "gr"
     ml "Oh... yes! I heard rumors that the café recently reopened for business again."
     $ marexpr = "ya"
     ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {cps=10}*yawn* ...excitement...{/cps}"
@@ -136,8 +137,10 @@ label case1_vn:
     $ remexpr = "sh"
     $ somexpr = "bi"
     ml "...{ii}Egg pudding pasta with strawberry chives.{/ii}" with flash
+    $ marexpr = "fr"
     ml "T-that’s the special menu item of the day, right?"
     $ somexpr = "gr"
+    $ remexpr = "ne"
     s "Yes, you are correct."
     $ remexpr = "th"
     r "Would you like your order for here or to go?"
@@ -180,7 +183,7 @@ label case1_vn:
     show remi at left
     show somnia at right
     with dissolve
-    $ marexpr = "ya"
+    $ marexpr = "gr"
     ml "This place...!"
     $ marexpr = "th"
     ml "Wow, it looks much more different than what I remember."
@@ -188,20 +191,21 @@ label case1_vn:
     r "Welcome to the {ii}Dream Service{/ii}. Here, we specialize in investigating strange sleep patterns and behavior."
     $ remexpr = "ne"
     r "Tell us, what ails you?"
-    $ marexpr = "wo"
+    $ marexpr = "fr"
     ml "Um... Well, first, I would like to ask if {ii}Madam Nemo{/ii} was... present?"
     $ remexpr = "sh"
     $ somexpr = "sh"
     s "... Oh! {w=0.5}{nw}"
     $ somexpr = "di"
     extend "Um..."
+    $ marexpr = "ne"
     $ somexpr = "th"
     s "Unfortunately, she is currently away. We are her apprentices who’ll be taking care of the store while she's gone."
     $ remexpr = "gr"
     r "I'm Remerie, dreams specialist."
     $ somexpr = "gr"
     s "And I'm the connoisseur of nightmares, Somnia!"
-    $ marexpr = "th"
+    $ marexpr = "gr"
     ml "It's a pleasure to meet you two. I'm {ii}Marcella Lapin{/ii}."
     $ marcella_name = "Marcella Lapin"
     $ marexpr = "ne"
@@ -213,22 +217,16 @@ label case1_vn:
     $ remexpr = "ne"
     $ somexpr = "ne"
     ml "You see, I’ve been having problems sleeping the past several nights."
-
-    ml """
-    I would come home exhausted from work, climb into bed...
-
-    ... Only to endlessly toss and turn until morning comes, unable to catch even a wink of shut-eye!
-
-    It was fine at first... I’ve pulled all-nighters before, but it has now been two weeks…
-
-    I don’t think my body can keep up with my brain anymore.
-
-    It’s been absolutely exhausting to do anything... or get anywhere... *yawn* I just want to sleep…
-
-    Sleeping pills, music, exercise and such have done nothing in my favor...
-
-    I’m a very busy person, see. I have a lot on my plate... But...
-    """
+    ml "I would come home exhausted from work, climb into bed..."
+    $ marexpr = "fr"
+    ml "... Only to endlessly toss and turn until morning comes, unable to catch even a wink of shut-eye!"
+    ml "It was fine at first... I’ve pulled all-nighters before, but it has now been two weeks…"
+    ml "I don’t think my body can keep up with my brain anymore."
+    $ marexpr = "ya"
+    ml "It’s been absolutely exhausting to do anything... or get anywhere... *yawn* I just want to sleep…"
+    $ marexpr = "ne"
+    ml "Sleeping pills, music, exercise and such have done nothing in my favor..."
+    ml "I’m a very busy person, see. I have a lot on my plate... But..."
 
     $ marexpr = "wo"
     ml "I-I don’t know what will become of me at this rate…!"
@@ -247,10 +245,9 @@ label case1_vn:
     $ remexpr = "ne"
     $ somexpr = "ne"
     r "Marcella, I’m going to need you to lie on this bed."
-    $ marexpr = "ya"
+    $ marexpr = "fr"
     ml "A bed... I'm afraid I won't be able to fall asleep in it..."
     $ remexpr = "gr"
-    $ marexpr = "th"
     r "Don’t worry, we have ways of making you sleep."
     $ somexpr = "gr"
     $ marexpr = "ne"
