@@ -174,19 +174,19 @@ init python:
         tooltip="Free him...",
         flavor=999)
     c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder",
+        tooltip="A lovely red strawberry showing off it's ripeness. The cross-section looks like a heart! {ii}+10 flavor{/ii}",
         flavor=10)
     c_bunnyapples = Item("Bunny Apples", image = "/images/items/item_apple.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder",
+        tooltip="Crisp apple slices cut in the shape of bunnies! Simply too cute to eat! {ii}+20 spooky{/ii}",
         flavor=10)
     c_herbs = Item("Fine Herbs", image = "/images/items/item_herbs.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder",
+        tooltip="Delicately aromatic herbs that will add a light layer of woodsy flavor to any dish. {ii}+20 spooky{/ii}",
         flavor=20)
     c_medicine = Item("Cherry Ooze", image = "/images/items/item_ooze.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder",
+        tooltip="It says \'Cherry' on the label, but the bitter smell says otherwise...  {ii}+20 spooky{/ii}",
         flavor=-20)
     c_clockegg = Item("Clockface Egg", image = "/images/items/item_egg.png",
-        tooltip="A tasty strawberry +20 spooky, +30 wonder",
+        tooltip="Eggs finely decorated with a thin gold paint and what look to be clock hands. {ii}+20 spooky{/ii}",
         flavor=40)
     c_bluebook = Item("Blue Book") # temporary variables because it's easier to keep track when they're in the inventory
     c_redbook = Item("Red Book")

@@ -22,7 +22,7 @@ init -1:
 
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
-    
+
     # Case 1 assets ---------------------------------------------------------------
     image storefront = "images/BG/bg_storefront.png"
     image dreamoffice = "images/BG/bg_dreamoffice.png"
@@ -65,6 +65,13 @@ init -1:
     # Future-Business_v001 = "audio/music/Future-Business_v001.mp3"
     # Sculpture-Garden_Looping = "audio/music/Sculpture-Garden_Looping.mp3"
     # The-Concrete-Bakes_Looping = "audio/music/The-Concrete-Bakes_Looping.mp3"
+    define audio.storefront = "audio/music/MusMus-BGM-092.mp3"
+    define audio.dreamoffice = "audio/music/gozennijinofunsui.mp3"
+    define audio.weird = "audio/music/Thick_Irony.mp3"
+    define audio.dream1 = "audio/music/MusMus-BGM-089.mp3"
+    # define audio.dream2 = "audio/music/-"
+    define audio.cooking1 = "audio/music/Netherland.mp3"
+    define audio.cooking2 = "audio/music/Vibe_Drive.mp3"
 
 ## Music Caption:
     # Careless-Summer_Looping: _("")
@@ -77,6 +84,7 @@ init -1:
     # Chest-Drawer_Open = "audio/sfx/Chest-Drawer_Open.mp3"
     # Edge-of-Ocean = "audio/sfx/Edge-of-Ocean.mp3"
     # Interior-Door_Close = "audio/sfx/Interior-Door_Close.mp3"
+    define audio.rimshot = "audio/sfx/rimshot.ogg"
 
 ## SFX Caption:
     # Chest-Drawer_Close: _("")

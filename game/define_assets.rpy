@@ -54,15 +54,27 @@ define dreamRem = Character ("Remerie", kind = dr, # Dream Remerie
             callback = r_beep
             )
 # Clients ---------------------------------------------------------------------
-define u = Character ("???", color="434952", what_color="854d56") # Unknown
+define u = Character (None, color="434952", what_color="854d56")
 define ml = DynamicCharacter ("marcella_name",
+            image = "mar",
             color="6f8f4d",
             image = "marcella",
             what_color="854d56",
             callback = m_beep
             )
-define uml = Character ("???", kind = ml) # Before Marcella intro)
-
+define dreamMar = Character ("Dream Marcella", kind = dr,
+            color="6f8f4d",
+            image = "mar",
+            callback = m_beep
+            )
+define bun = DynamicCharacter ("bun_name",
+            color="361a99",
+            what_color="fff",
+            window_background="gui/dreambox.png",
+            what_text_align = 0.50,
+            window_yalign = 0.025,
+            window_xalign = 0.50
+            )
 # Positions -------------------------------------------------------------------
 # So the bakus are positioned comfortably in their respective sides
 transform left:
@@ -102,12 +114,12 @@ init python:
     }
     marcella_map = {
         "ne": "neutral",
-        "ya": "yawn",
-        "wo": "worry",
         "aw": "awake",
         "la": "laugh",
-        "th": "think"
-        }
+        "th": "think",
+        "wo": "worry",
+        "ya": "yawn",
+    }
 
     def display_somnia(st, at):
         somexpr = getattr(store, "somexpr", "ne")
@@ -154,7 +166,7 @@ init python:
 
 image somnia = DynamicDisplayable(display_somnia)
 image remi = DynamicDisplayable(display_remerie)
-image marcella = DynamicDisplayable(display_marcella)
+image mar = DynamicDisplayable(display_marcella)
 
 init python:
 # -----------------------------------------------------------------------------
