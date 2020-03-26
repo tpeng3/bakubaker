@@ -8,19 +8,17 @@ label case1_vn:
 
     scene black with dissolve
     dr """
-    When the curtain of the night lifts, a certain sleepy town is awaken by the gentle glow of morning.
+    When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
 
     The patchwork quilt of the prior night's myriad dreams is kicked off, and the townsfolk go about their day.
 
-    But, alas... When night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
+    But, alas... Once night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
 
-    Meanwhile, in a quiet corner of the town lies a peculiar café, {ii}Café Nemo{/ii}.
-
-    Warm dishes and a cozy atmosphere greets anyone who has the pleasure to stop by, but beyond that is an even deeper desire to heal what ails the subconscious."""
-
+    Luckily, in a quiet corner of the town lies {ii}cafe name{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
+    """
     play music storefront
 
-    dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, two busy cooks will await them with open arms."
+    dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, they'll find two busy cooks awaiting with open arms."
 
     scene storefront with dissolve
     s "Hm hmm... Spoonful of sugar~... ♫"
@@ -35,6 +33,7 @@ label case1_vn:
     $ remexpr = "th"
     show remi at left with dissolve
     r "... In a minute."
+    $ somexpr = "ne"
     s "I’ll go ahead and set some on the display. Would you like to taste one?"
     $ remexpr = "si"
     r "Later, please. I- {w=0.5}{nw}"
@@ -73,12 +72,10 @@ label case1_vn:
     show somnia at center with ease
     s "Hmm hm~... ♫"
     s "Hm~... A merry tune to toot-"
-    $ somexpr = "sh"
+    $ somexpr = "bi"
     stop music
     s "AH!" with sshake
     r "What’s wrong?"
-
-    $ somexpr = "bi"
     s "T-there’s a person fallen over on the pavement outside!"
     $ somexpr = "sh"
     s "Oh dear, are you okay?"

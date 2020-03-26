@@ -28,8 +28,8 @@ init -1:
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
 
-    image marchie:
-        Crop ((0,0,800,900), "images/sprites/client1.png")
+    # image marchie:
+    #     Crop ((0,0,800,900), "images/sprites/client1.png")
 
 
 ## UI:
