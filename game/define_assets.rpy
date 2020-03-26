@@ -58,7 +58,6 @@ define u = Character (None, color="434952", what_color="854d56")
 define ml = DynamicCharacter ("marcella_name",
             image = "mar",
             color="6f8f4d",
-            image = "marcella",
             what_color="854d56",
             callback = m_beep
             )
