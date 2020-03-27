@@ -8,7 +8,7 @@ init python:
             {"name": "Talk to Marcella", "label": "marcella_talk_start"}
         ]
     )
-    t_bunnysquad = Interactables("Fluffle of Bunnies", "bunnysquad", "images/interactables/case1/bunny2.png", page=0,
+    t_bunnysquad = Interactables("Fluffle of Bunnies", "bunnysquad", "images/interactables/case1/fluffle.png", page=0,
         actions = [
             {"name": "Talk with Bunnies (Somnia)", "label": "bunnies_talk_som"},
             {"name": "Talk with Bunnies (Remerie)", "label": "bunnies_talk_rem"}
@@ -21,7 +21,7 @@ init python:
     )
 
     # PART TWO
-    t_marcella_mid = Interactables("Marcella Lapin", "marcella_mid", "images/interactables/case1/rabbitOne.png", page=1,
+    t_marcella_mid = Interactables("Marcella Lapin", "marcella_mid", "images/interactables/case1/rabbitTwo.png", page=1,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_mid"},
         ]
@@ -31,7 +31,7 @@ init python:
             {"name": "Find Medicine", "label": "medicine_find"}
         ]
     )
-    t_debris = Interactables("Mounds of Papers", "debris", "images/interactables/case1/clocktower.png", page=1,
+    t_debris = Interactables("Mounds of Papers", "debris", "images/interactables/case1/debris1.png", page=1,
         actions = [
             {"name": "Inspect Pile", "label": "pile_inspect"}
         ]
@@ -120,7 +120,7 @@ init python:
     )
 
     # PART THREE
-    t_marcella_end = Interactables("Marcella Lapin", "marcella_end", "images/interactables/case1/rabbitOne.png", page=2,
+    t_marcella_end = Interactables("Marcella Lapin", "marcella_end", "images/interactables/case1/rabbitThree.png", page=2,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_end", "condition": True},
         ]

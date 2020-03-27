@@ -10,7 +10,7 @@ label case1_dream:
     $ bun_name = "Dream bunnies"
 
     python:
-        bg = "images/BG/bg_wonderland_WIP.png" # background image
+        bg = "images/BG/bg_wonderland.png" # background image
         page_width = 1720 # screen page width
         total_pages = 3 # total pages in investigation
         inventory = Inventory()
@@ -169,15 +169,15 @@ label report_find:
 label bunny1_talk:
     $ bun_name = "Quiet bunny"
     if not t_bunny1.state:
-        dreamRem "Hey."
+        dreamRem ne "Hey."
         bun "..."
-        dreamRem "..."
-        dreamRem "Can they not hear me?"
-        dreamSom "They look like they're occupied in trying to find something..."
+        dreamRem si "..."
+        dreamRem pe "Can they not hear me?"
+        dreamSom sh "They look like they're occupied in trying to find something..."
         bun "I can't find my favorite book..."
-        dreamRem "A blue book, huh."
+        dreamRem th "A blue book, huh."
         if c_bluebook in inventory.items:
-            dreamRem "Well, we found this book in that pile of papers over there earlier. Are you Maddie?"
+            dreamRem th "Well, we found this book in that pile of papers over there earlier. Are you Maddie?"
             bun "Oh! Oh, yes!"
             $ bun_name = "Maddie"
             bun "Yay! You saved the day!"
@@ -335,7 +335,9 @@ label bunny4_give:
     jump dream_start
 label bunny4_help:
     $ bun_name = "Studious bunny"
-    bun "Why yes, I'd love to help if that would be okay!"
+    dreamSom gr "Hello there! Would you mind helping us clean up these papers for your big sis Marchie?"
+    bun "Why yes, I'd love to help!"
+    bun "Marchie already has a lot on their plate, so this is the least I could do!"
     python:
         interactions.update(t_bunny4.disable("bunny4_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
@@ -350,7 +352,9 @@ label bunny4_time:
 # Clumsy Bunny, needs talk and chat text
 label bunny5_talk:
     $ bun_name = "Clumsy bunny"
-    bun "aaaa flavor text"
+    bun "I have my paint but..."
+    bun "Where to start?"
+    dreamRem ne "Looks like this one's a little preoccupied with talking to themselves."
     jump dream_start
 label bunny5_give:
     $ bun_name = "Clumsy bunny"
@@ -359,11 +363,13 @@ label bunny5_give:
 label bunny5_help:
     $ bun_name = "Clumsy bunny"
     if t_bunny5.state == -1:
+        dreamSom ne "Hi! Would you mind helping us clean this place up for your big sis?"
         bun "Oh, before that, can I ask for a favor as well?"
         dreamSom ne "Sure sweetie, what is it?"
         bun "You see, I wanted to give big sis Marchie a gift for all that she's done for us."
         bun "Big sis Marchie's favorite color is red! But all the flowers here are white...!"
-        bun "I brought some paint earlier, could you help me color seven flowers?"
+        bun "I brought some paint earlier, but I'm not sure where to start..."
+        bun "Could you help me {ii}color seven flowers?{/ii}"
         dreamSom gr "What a lovely idea! We'll be sure to do that."
         dreamRem th "Painting... the flowers?"
         dreamRem si "Well, I guess it's the thought that counts."
@@ -378,7 +384,8 @@ label bunny5_help:
     jump dream_start
 label bunny5_chat:
     $ bun_name = "Clumsy bunny"
-    bun "what's up"
+    bun "I'd paint the flower myself but last time I painted anything, I spilled the whole bucket all over the floor!"
+    bun "Big sis Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
     jump dream_start
 label bunny5_time:
     $ bun_name = "Clumsy bunny"
@@ -460,7 +467,7 @@ label marcella_talk_end:
         bun "Big sib, can we go to the park? {ss}No, I want to go to the movies!{/ss}"
         dreamMar "Resting now means I'll be wasting my time!"
         bun "Big sib Marchie is the oldest, so they can do everything!"
-        dreamMar "I HAVE to keep going!!!"
+        dreamMar "I HAVE to keep going!!!" with sshake
         # [# Client collapses in dream?!]
         dreamSom di "Oh, dearie. So the issue with cleaning wasn't the problem after all."
         dreamRem th "Yes, it seems much deeper than that."
@@ -633,7 +640,6 @@ label check_clocks:
         extend "fast."
         play sound rimshot
         dreamSom ex "Hehe..."
-        # rimshot noise?!
         dreamRem gr "Hah, hah. But you're right. And I have just the recipe for this dream."
         dreamSom de "Ooh, I'm so excited! Let us be off to the Wishing Kitchen!"
         python:
