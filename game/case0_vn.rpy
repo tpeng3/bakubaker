@@ -4,6 +4,19 @@
 init:
     define flash = Fade(.10, 0.0, .20, color="f8dfd2")
 
+image starry = "images/BG/starry.png"
+image book = "images/BG/test_cookbook.png"
+
+
+
+label booktest:
+    show starry:
+        xpos 0
+        linear 40.0 xpan 360 ypan 360
+        repeat
+    show book:
+        zoom 0.50
+
 label cynthia:
 
     menu:
@@ -18,6 +31,8 @@ label lab:
     dr """
     I wonder what Cynthia is going to break this time...
     """
+
+    call booktest
 
     show somnia at right
     s "Test!"
