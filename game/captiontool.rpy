@@ -57,18 +57,18 @@ init python:
 
 # This is where you define the names for the music files you will be using in the game. It is recommended to define the main menu BGM as well.
     # example = "audio/examplefile.ogg"
-    business = "audio/music/Future-Business_v001.mp3"
-    concrete = "audio/music/The-Concrete-Bakes_Looping.mp3"
-    garden = "audio/music/Sculpture-Garden_Looping.mp3"
-    summer = "audio/music/Careless-Summer_Looping.mp3"
+    # business = "audio/music/Future-Business_v001.mp3"
+    # concrete = "audio/music/The-Concrete-Bakes_Looping.mp3"
+    # garden = "audio/music/Sculpture-Garden_Looping.mp3"
+    # summer = "audio/music/Careless-Summer_Looping.mp3"
 
 # This is where you define the music captions for each music file you will be using in the game. Please make sure the names of the music defined above match the ones used for the captions below.
     music_list = {
     # example: _("Example text here"),
-    business : _("Future Business"),
-    concrete : _("The Concrete Bakes"),
-    garden : _("Sculpture Garden"),
-    summer : _("Careless Summer")
+    # business : _("Future Business"),
+    # concrete : _("The Concrete Bakes"),
+    # garden : _("Sculpture Garden"),
+    # summer : _("Careless Summer")
     }
 
 # This is the sound command. It functions the same way as "play sound" normally does. You can change the fadein, fadeout and loop values when you invoke the command. If you do not change the values, the default values are 0.0 fadein, 0.0 fadeout, and no loop. If you change the values below, that will change the default values for every time you invoke the command.

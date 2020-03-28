@@ -1701,10 +1701,10 @@ init python:
     mr = MusicRoom(fadeout=1.0)
 
     # Add music files.
-    mr.add("audio/music/Careless-Summer_Looping.mp3", always_unlocked=True)
-    mr.add("audio/music/Future-Business_v001.mp3")
-    mr.add("audio/music/Sculpture-Garden_Looping.mp3")
-    mr.add("audio/music/The-Concrete-Bakes_Looping.mp3")
+    # mr.add("audio/music/Careless-Summer_Looping.mp3", always_unlocked=True)
+    # mr.add("audio/music/Future-Business_v001.mp3")
+    # mr.add("audio/music/Sculpture-Garden_Looping.mp3")
+    # mr.add("audio/music/The-Concrete-Bakes_Looping.mp3")
 
 ## Extras Navigation screen ############################################################
 ##
@@ -1861,10 +1861,10 @@ screen music_gallery():
             yalign 0.5
 
             # The buttons that play each track.
-            textbutton "The Concrete Brakes" action mr.Play("audio/music/The-Concrete-Bakes_Looping.mp3")
-            textbutton "Sculpture Garden" action mr.Play("audio/music/Sculpture-Garden_Looping.mp3")
-            textbutton "Future Business" action mr.Play("audio/music/Future-Business_v001.mp3")
-            textbutton "Careless Summer" action mr.Play("audio/music/Careless-Summer_Looping.mp3")
+            # textbutton "The Concrete Brakes" action mr.Play("audio/music/The-Concrete-Bakes_Looping.mp3")
+            # textbutton "Sculpture Garden" action mr.Play("audio/music/Sculpture-Garden_Looping.mp3")
+            # textbutton "Future Business" action mr.Play("audio/music/Future-Business_v001.mp3")
+            # textbutton "Careless Summer" action mr.Play("audio/music/Careless-Summer_Looping.mp3")
 
             null height 20
 
