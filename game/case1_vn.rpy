@@ -60,6 +60,7 @@ label case1_vn:
     $ remexpr = "fl"
     r "Well, o-of course...!"
     r "Regardless, you should know better than to handle tarts that are too hot to touch!"
+    $ somexpr = "ne"
     $ remexpr = "si"
     r "*Sigh*"
     r "{i}(Despite that, I can’t say no to Somnia’s desserts!){/i}"

@@ -19,8 +19,8 @@ init python:
 # Characters ------------------------------------------------------------------
 define s = DynamicCharacter ("somnia_name",
             image = "somnia",
-            color="48475a",
-            what_color="854d56",
+            color="2D2D3E",
+            what_color="7A445B",
             callback = s_beep,
             )
 define sth = Character (kind = s,
@@ -28,51 +28,54 @@ define sth = Character (kind = s,
             )
 define r = DynamicCharacter ("remerie_name",
             image = "remi",
-            color="e18b81",
-            what_color="854d56",
+            color="2D2D3E",
+            what_color="7A445B",
             callback = r_beep
             )
 define rth = Character (kind = r,
             what_prefix='(', what_suffix=')', what_italic=True
             )
-define dr = Character (None, # Dream narration
+define dr = Character (None, # Narration
             color="ffcf89",
-            what_color="fff",
-            window_background="gui/dreambox.png",
+            what_color="EDD9C8",
+            window_background="gui/textbox_dream.png",
             what_text_align = 0.50,
             window_yalign = 0.025,
             window_xalign = 0.50
             )
-define dreamSom = Character ("Somnia", kind = dr, # Dream Somnia
-            color="48475a",
+define dt = Character (None, # Dream speech
+            color="ffcf89",
+            what_color="EDD9C8",
+            window_background="gui/textbox_dreamtalk.png",
+            window_yalign = 0.025,
+            window_xalign = 0.50
+            )
+define dreamSom = Character ("Somnia", kind = dt, # Dream Somnia
+            color="2D2D3E",
             image = "dreamSom",
             callback = s_beep
             )
-define dreamRem = Character ("Remerie", kind = dr, # Dream Remerie
-            color="e18b81",
+define dreamRem = Character ("Remerie", kind = dt, # Dream Remerie
+            color="2D2D3E",
             image = "dreamRem",
             callback = r_beep
             )
 # Clients ---------------------------------------------------------------------
-define u = Character (None, color="434952", what_color="854d56")
+define u = Character (None, color="2D2D3E", what_color="7A445B")
 define ml = DynamicCharacter ("marcella_name",
             image = "mar",
-            color="6f8f4d",
-            what_color="854d56",
+            color="2D2D3E",
+            what_color="7A445B",
             callback = m_beep
             )
-define dreamMar = Character ("Dream Marcella", kind = dr,
-            color="6f8f4d",
+define dreamMar = Character ("Dream Marcella", kind = dt,
+            color="2D2D3E",
             image = "mar",
             callback = m_beep
             )
-define bun = DynamicCharacter ("bun_name",
-            color="361a99",
+define bun = DynamicCharacter ("bun_name", kind = dr,
+            color="2D2D3E",
             what_color="fff",
-            window_background="gui/dreambox.png",
-            what_text_align = 0.50,
-            window_yalign = 0.025,
-            window_xalign = 0.50
             )
 # Positions -------------------------------------------------------------------
 # So the bakus are positioned comfortably in their respective sides
@@ -152,13 +155,13 @@ init python:
     # dream side images
     def define_side_somnia():
         for som in somnia_map:
-            d = Crop ((150,0,700,513), "images/sprites/somnia_{}.png".format(somnia_map[som]))
+            d = Crop ((150,0,800,513), "images/sprites/somnia_{}.png".format(somnia_map[som]))
             d = Transform(d, zoom=0.6)
             renpy.image(("side", "dreamSom", som), d)
 
     def define_side_remerie():
         for rem in remerie_map:
-            d = Crop ((150,0,700,513), "images/sprites/remerie_{}.png".format(remerie_map[rem]))
+            d = Crop ((150,0,800,513), "images/sprites/remerie_{}.png".format(remerie_map[rem]))
             d = Transform(d, zoom=0.6)
             renpy.image(("side", "dreamRem", rem), d)
 
