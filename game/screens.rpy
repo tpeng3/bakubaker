@@ -296,15 +296,15 @@ screen quick_menu():
 
             ## https://www.renpy.org/doc/html/self_voicing.html#creator-concerns
             # imagebutton auto "foo.png" action None() alt "foo"
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+            # textbutton _("Back") action Rollback()
+            textbutton _("Log") action ShowMenu('history')
+            # textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
-            textbutton "Editing Mode" action ToggleScreen("renedit_overlay")
+            # textbutton _("Q.Save") action QuickSave()
+            # textbutton _("Q.Load") action QuickLoad()
+            textbutton _("Menu") action ShowMenu('preferences')
+            # textbutton "Editing Mode" action ToggleScreen("renedit_overlay")
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.

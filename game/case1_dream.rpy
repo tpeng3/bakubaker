@@ -91,9 +91,9 @@ label strawberry_look:
     dreamSom th "Could it be? An ingredient? Let's extract it!"
     dr "Squinting up against the moonlight, Somnia reached and placed her hand against the night sky, pinching the distant moon between her fingers."
     dr "Like a manipulation of perspective, or a magic trick, one pluck was all it took for Somnia to retrieve the strawberry."
-    # [Get Creamy Strawberry!]
     $ inventory.add(c_strawberry)
     $ interactions.complete([t_strawberry])
+    dr "You got a {ii}Creamy Strawberry!{/ii}"
     jump dream_start
 
 label marcella_talk_mid:
@@ -140,6 +140,7 @@ label pile_inspect:
 
 label medicine_find:
     dreamSom sh "This looks to be the medicine we have to give to Marcella's sister! The label says \"Drink Me\"."
+    dr "You got the {ii}Cherry Medicine!{/ii}"
     dreamRem th "The question is just which of these siblings need a dose."
     dreamSom gr "I guess we'll just have to go around and ask!"
     dreamRem pe "... I'll let you do the talking."
@@ -161,6 +162,12 @@ label report_find:
     dreamRem "I can't even read the handwriting!"
     dreamRem th "I guess even in a dream, our client doesn't feel very organized with their life."
     dreamSom ne "Let's return the planner to Marcella after we finish the other tasks."
+    dreamSom sh "Hm?"
+    dreamSom "Something fell out of the pages..."
+    dreamRem th "Looks like a family photo..."
+    dreamRem "Marcella is surrounded by their five younger siblings."
+    dreamSom gr "Isn't that just the sweetest thing!"
+    dr "You got some {ii}Fine Herbs!{/ii}"
     $ inventory.add(c_redbook)
     $ inventory.drop(c_bluebook)
     jump dream_start
@@ -632,6 +639,8 @@ label check_clocks:
         dr "Finally settling on one time, the clock hands began to move in sync, once more."
         dr "The gentle ticking of each second echoing in unison was simply... harmonious."
         dreamSom sh "Remi, take a look! All the clocks are moving again."
+        dreamSom th "Oh, and what's this? Another ingredient..."
+        dr "You got some {ii}Clockwork Eggs!{/ii}"
         dreamRem gr "That's a relief. My hunch was right after all."
         dreamRem th "So Marcella had a warped perception of time, which fueled their pressure to keep working at the cost of their sleep."
         dreamSom de "Time flies when you're having fun~!"
@@ -640,7 +649,9 @@ label check_clocks:
         extend "fast."
         play sound rimshot
         dreamSom ex "Hehe..."
-        dreamRem gr "Hah, hah. But you're right. And I have just the recipe for this dream."
+        dreamRem gr "Hah, hah. But you're right. It seems a brief respite from their busy life is in order."
+        dreamRem th "And I have just the dish for this dream."
+        dreamRem "Yes, with the Clockwork Eggs as the centerpiece, I believe we have the necessary ingredients for a proper morning dish."
         dreamSom de "Ooh, I'm so excited! Let us be off to the Wishing Kitchen!"
         python:
             inventory.add(c_clockegg)
