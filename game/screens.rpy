@@ -118,6 +118,14 @@ screen say(who, what):
                 text who id "who"
                 background Transform(style.namebox.background, alpha=persistent.say_window_alpha)
 
+        # text what:
+        #     id "shadow"
+        #     kerning persistent.say_dialogue_kerning
+        #     font persistent.pref_text_font
+        #     size persistent.pref_text_size + 1
+        #     line_spacing persistent.pref_text_spacing
+        #     color '#000'
+
         text what:
             id "what"
             kerning persistent.say_dialogue_kerning

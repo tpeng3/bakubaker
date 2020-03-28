@@ -118,6 +118,7 @@ label case1_vn:
     $ marexpr = "ne"
     $ remexpr = "ne"
     ml "Um... Let’s see… Would you happen to know a café around here called {ii}Café Nemo{/ii}?"
+    $ _last_say_who = "None"
     u "..."
     $ somexpr = "de"
     s "Welcome!"

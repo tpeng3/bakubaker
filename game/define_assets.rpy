@@ -41,7 +41,10 @@ define dr = Character (None, # Narration
             window_background="gui/textbox_dream.png",
             what_text_align = 0.50,
             window_yalign = 0.025,
-            window_xalign = 0.50
+            window_xalign = 0.50,
+            what_outlines = [
+             (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+             (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)]
             )
 define dt = Character (None, # Dream speech
             color="ffcf89",
@@ -128,8 +131,8 @@ init python:
     def display_somnia(st, at):
         somexpr = getattr(store, "somexpr", "ne")
         img = Image("images/sprites/somnia_{}.png".format(somnia_map[somexpr]))
-        if not _last_say_who == "s":
-            img = im.MatrixColor(Image(img), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        if not _last_say_who == "u" and not _last_say_who == "s":
+            img = im.MatrixColor(Image(img), im.matrix.saturation(0.45) * im.matrix.brightness(-0.1))
         d = Crop((0,0,800,1050), img)
         d = Transform(d, zoom=0.85)
         return d, None
@@ -137,8 +140,8 @@ init python:
     def display_remerie(st, at):
         remexpr = getattr(store, "remexpr", "ne")
         img = Image("images/sprites/remerie_{}.png".format(remerie_map[remexpr]))
-        if not _last_say_who == "r":
-            img = im.MatrixColor(Image(img), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+        if not _last_say_who == "u" and not _last_say_who == "r":
+            img = im.MatrixColor(Image(img), im.matrix.saturation(0.45) * im.matrix.brightness(-0.1))
         d = Crop((0,0,800,1050), img)
         d = Transform(d, zoom=0.85)
         return d, None
@@ -147,7 +150,7 @@ init python:
         marexpr = getattr(store, "marexpr", "ne")
         img = Image("images/sprites/marcella_{}.png".format(marcella_map[marexpr]))
         if not _last_say_who == "ml":
-            img = im.MatrixColor(Image(img), im.matrix.saturation(0.5) * im.matrix.brightness(-0.2))
+            img = im.MatrixColor(Image(img), im.matrix.saturation(0.45) * im.matrix.brightness(-0.1))
         d = Crop((0,0,900,1050), img)
         d = Transform(d, zoom=0.85)
         return d, None
@@ -176,7 +179,7 @@ init python:
 # -----------------------------------------------------------------------------
 # Text tag to remind myself of the miscellany thats missing proper names
 # If we want text outlines
-    # gui.dialogue_text_outlines = [ (1, "#141414", 0, 0) ]
+    # drdialogue_text_outlines = [ (1, "#141414", 0, 0) ]
     def interesting(tag, argument, contents):
         color = "#d14970"
         return [

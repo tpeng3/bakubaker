@@ -113,6 +113,10 @@ screen dream():
         text "[tooltip.name]":
             xalign 0.5 ypos 0.8 #tmp
             xanchor 0.0
+            outlines [
+                (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+                (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
+            ]
 
     # background panning
     if current_page > 0:
@@ -159,4 +163,8 @@ screen dream_actions(actions={}, mousepos):
             xalign malign yalign 0.5
             mouse "hover"
             action [Hide('dream_actions'), Show('focus_dialogue'), Call(action['label'])]
+            # outlines [
+            #     (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+            #     (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
+            # ]
         $ystart += 40
