@@ -118,6 +118,14 @@ screen say(who, what):
                 text who id "who"
                 background Transform(style.namebox.background, alpha=persistent.say_window_alpha)
 
+        # text what:
+        #     id "shadow"
+        #     kerning persistent.say_dialogue_kerning
+        #     font persistent.pref_text_font
+        #     size persistent.pref_text_size + 1
+        #     line_spacing persistent.pref_text_spacing
+        #     color '#000'
+
         text what:
             id "what"
             kerning persistent.say_dialogue_kerning
@@ -175,7 +183,7 @@ style window:
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox_test.png", xalign=0.5, yalign=1.0)
+    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
 
 style namebox:
     xpos gui.name_xpos
@@ -1693,10 +1701,10 @@ init python:
     mr = MusicRoom(fadeout=1.0)
 
     # Add music files.
-    mr.add("audio/music/Careless-Summer_Looping.mp3", always_unlocked=True)
-    mr.add("audio/music/Future-Business_v001.mp3")
-    mr.add("audio/music/Sculpture-Garden_Looping.mp3")
-    mr.add("audio/music/The-Concrete-Bakes_Looping.mp3")
+    # mr.add("audio/music/Careless-Summer_Looping.mp3", always_unlocked=True)
+    # mr.add("audio/music/Future-Business_v001.mp3")
+    # mr.add("audio/music/Sculpture-Garden_Looping.mp3")
+    # mr.add("audio/music/The-Concrete-Bakes_Looping.mp3")
 
 ## Extras Navigation screen ############################################################
 ##
@@ -1853,10 +1861,10 @@ screen music_gallery():
             yalign 0.5
 
             # The buttons that play each track.
-            textbutton "The Concrete Brakes" action mr.Play("audio/music/The-Concrete-Bakes_Looping.mp3")
-            textbutton "Sculpture Garden" action mr.Play("audio/music/Sculpture-Garden_Looping.mp3")
-            textbutton "Future Business" action mr.Play("audio/music/Future-Business_v001.mp3")
-            textbutton "Careless Summer" action mr.Play("audio/music/Careless-Summer_Looping.mp3")
+            # textbutton "The Concrete Brakes" action mr.Play("audio/music/The-Concrete-Bakes_Looping.mp3")
+            # textbutton "Sculpture Garden" action mr.Play("audio/music/Sculpture-Garden_Looping.mp3")
+            # textbutton "Future Business" action mr.Play("audio/music/Future-Business_v001.mp3")
+            # textbutton "Careless Summer" action mr.Play("audio/music/Careless-Summer_Looping.mp3")
 
             null height 20
 
