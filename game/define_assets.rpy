@@ -51,17 +51,20 @@ define dt = Character (None, # Dream speech
             what_color="EDD9C8",
             window_background="gui/textbox_dreamtalk.png",
             window_yalign = 0.025,
-            window_xalign = 0.50
+            window_xalign = 0.50,
+            text_align = 0.0
             )
 define dreamSom = Character ("Somnia", kind = dt, # Dream Somnia
             color="2D2D3E",
             image = "dreamSom",
-            callback = s_beep
+            callback = s_beep,
+            what_xsize = 660
             )
 define dreamRem = Character ("Remerie", kind = dt, # Dream Remerie
             color="2D2D3E",
             image = "dreamRem",
-            callback = r_beep
+            callback = r_beep,
+            what_xsize = 660
             )
 # Clients ---------------------------------------------------------------------
 define u = Character (None, color="2D2D3E", what_color="7A445B")
@@ -158,14 +161,14 @@ init python:
     # dream side images
     def define_side_somnia():
         for som in somnia_map:
-            d = Crop ((150,0,800,513), "images/sprites/somnia_{}.png".format(somnia_map[som]))
-            d = Transform(d, zoom=0.6)
+            d = Crop ((150,0,800,474), "images/sprites/somnia_{}.png".format(somnia_map[som]))
+            d = Transform(d, zoom=0.65)
             renpy.image(("side", "dreamSom", som), d)
 
     def define_side_remerie():
         for rem in remerie_map:
-            d = Crop ((150,0,800,513), "images/sprites/remerie_{}.png".format(remerie_map[rem]))
-            d = Transform(d, zoom=0.6)
+            d = Crop ((150,0,800,474), "images/sprites/remerie_{}.png".format(remerie_map[rem]))
+            d = Transform(d, zoom=0.65)
             renpy.image(("side", "dreamRem", rem), d)
 
     define_side_somnia()
@@ -184,10 +187,14 @@ init python:
         color = "#d14970"
         return [
                 (renpy.TEXT_TAG, "color={}".format(color)),
-                (renpy.TEXT_TAG, "i"),
+                (renpy.TEXT_TAG, "b"),
+                (renpy.TEXT_TAG, "k={}".format(-1.2))
+                # (renpy.TEXT_TAG, "outlinecolor={}".format(color)),
                 ] + contents + [
-                (renpy.TEXT_TAG, "/color"),
-                (renpy.TEXT_TAG, "/i")
+                # (renpy.TEXT_TAG, "/outlinecolor"),
+                (renpy.TEXT_TAG, "/k"),
+                (renpy.TEXT_TAG, "/b"),
+                (renpy.TEXT_TAG, "/color")
                 ]
     config.custom_text_tags["ii"] = interesting
 
@@ -199,6 +206,11 @@ init python:
                 (renpy.TEXT_TAG, "/size"),
                 ]
     config.custom_text_tags["ss"] = smallText
+
+    def musicNote(tag, argument):
+        musicnote = Image("gui/musicnote.png")
+        return [(renpy.TEXT_DISPLAYABLE, musicnote)]
+    config.self_closing_custom_text_tags["mn"] = musicNote
 # Shake -------------------------------------------------------------
     import math
     class Shaker(object):

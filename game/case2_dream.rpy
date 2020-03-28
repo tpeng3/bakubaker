@@ -94,7 +94,7 @@ label case2_dream:
 #         dreamSom gr "Perhaps we can help them out!"
 #         dreamSom th "Let's see... They're looking for a report, trying to get medicine to one of the siblings... Oh! And they want to clean up this entire area!"
 #         dreamRem pe "That last task sounds like a bit of a handful..."
-#         dreamSom gr "Oh, come on Remi! It'll be fun! After all~... ♪ A spoonful of sugar-"
+#         dreamSom gr "Oh, come on Remi! It'll be fun! After all~... {mn} A spoonful of sugar-"
 #         dreamRem si "Helps the medicine go down, I know. It's your favorite song. Let's just get to work."
 #         $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5])
 #         $ interactions.update(t_marcella_mid.view())
@@ -248,7 +248,7 @@ label case2_dream:
 #     dreamSom de "See? That's a good girl! I hope you feel better soon."
 #     bun "Thanks, lady!"
 #     dreamRem gr "... Let me guess, you added some sugar."
-#     dreamSom de "Hmmm hm~ ♫"
+#     dreamSom de "Hmmm hm~ {mn}"
 #     python:
 #         interactions.update(t_bunny1.disable("bunny1_give"))
 #         interactions.update(t_bunny2.disable("bunny2_give"))

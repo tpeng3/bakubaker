@@ -10,6 +10,12 @@ transform focus_effect: # brighten ingredient on focus, tho we can do other effe
     on hover:
         linear 0.2 additive 0.1
 
+transform diagonal:
+    xpos 0 ypos 0
+    linear 40.0 xpan -360 ypan -360
+    xpan 0 ypan 0
+    repeat
+
 transform dish_appear:
     alpha 0.0
     parallel:
@@ -100,7 +106,9 @@ init -1 python:
 # Required: inventory, goal
 screen cooking(dish):
     zorder -10
-    add "cookbook"
+    add "starry":
+        at diagonal
+    # add "cookbook"
     add "cookbook2":
         xalign 0.5 yalign 0.5
 

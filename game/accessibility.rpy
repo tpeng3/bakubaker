@@ -73,7 +73,7 @@ default persistent.audio_cues = True
 default persistent.screenshake = True
 
 ##Default alpha of the say window. Append to your say screen.
-default persistent.say_window_alpha = 0.75
+default persistent.say_window_alpha = 0.9
 
 #Used to determine what size font to use when changing font/size.
 default persistent.pref_text_scale = "regular"

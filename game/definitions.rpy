@@ -13,24 +13,19 @@ init -1:
     ## When you add, delete or rename an image or music resource, change redefine_resources to True and launch the project
 
 ## Sprites:
-    # image eileen_base = "images/sprites/eileen_base.png"
-    # image eileen_face_angry = "images/sprites/eileen_face_angry.png"
-    # image eileen_face_happy = "images/sprites/eileen_face_happy.png"
-    # image eileen_face_neutral = "images/sprites/eileen_face_neutral.png"
-    # image eileen_face_surprised = "images/sprites/eileen_face_surprised.png"
-    # image eileen_face_upset = "images/sprites/eileen_face_upset.png"
+    image strawberry = Transform("/images/items/GET_strawberry.png")
+    image apple = Transform("/images/items/GET_apple.png")
+    image herbs = Transform("/images/items/GET_herbs.png")
+    image ooze = Transform("/images/items/GET_ooze.png")
+    image egg = Transform("/images/items/GET_egg.png")
 
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
 
-    # Case 1 assets ---------------------------------------------------------------
+## BG:
     image storefront = "images/BG/bg_storefront.png"
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
-
-    # image marchie:
-    #     Crop ((0,0,800,900), "images/sprites/client1.png")
-
 
 ## UI:
     image goLeft = "gui/button/goleft.png"
@@ -46,13 +41,12 @@ init -1:
     image goEat = "gui/button/button_cook.png"
     image goEatHov = "gui/button/button_cook2.png"
     image selBorder = "gui/selected.png"
+    image itrFrame = "gui/frame_interactable.png"
+    image ingFrame = "gui/frame_ingredient.png"
 
 ## BGs:
-    # image future_office = "images/BG/future_office.jpg"
-    # image room = "images/BG/room.jpg"
-    # image sort_of_beautiful_beach_day = "images/BG/sort_of_beautiful_beach_day.jpg"
     image wonderland2 = "images/BG/bg_wonderland_v2.png"
-
+    image starry = "images/BG/starry.png"
     image cookbook = "images/BG/bg_cookbook.png"
     image cookbook2 = "images/BG/test_cookbook.png"
 

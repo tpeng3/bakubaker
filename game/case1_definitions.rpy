@@ -10,8 +10,8 @@ init python:
     )
     t_bunnysquad = Interactables("Fluffle of Bunnies", "bunnysquad", "images/interactables/case1/fluffle.png", page=0,
         actions = [
-            {"name": "Talk with Bunnies (Somnia)", "label": "bunnies_talk_som"},
-            {"name": "Talk with Bunnies (Remerie)", "label": "bunnies_talk_rem"}
+            {"name": "Talk (Somnia)", "label": "bunnies_talk_som"},
+            {"name": "Talk (Remerie)", "label": "bunnies_talk_rem"}
         ]
     )
     t_strawberry = Interactables("Giant Strawberry", "strawberry", "images/interactables/case1/strawberry.png", page=0,

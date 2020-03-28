@@ -7,6 +7,7 @@ label case1_vn:
     $ marcella_name = "???"
 
     scene black with dissolve
+    # add nighttime sfx (like soft wind)
     dr """
     When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
 
@@ -14,19 +15,19 @@ label case1_vn:
 
     But, alas... Once night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
 
-    Luckily, in a quiet corner of the town lies {ii}cafe name{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
+    Luckily, in a quiet corner of the town lies {ii}Cafe Nemo{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
     """
-    play music storefront
-
     dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, they'll find two busy cooks awaiting with open arms."
-
+    pause 1.0
+    play music storefront
+    pause 2.0
     scene storefront with dissolve
-    s "Hm hmm... Spoonful of sugar~... ♫"
+    s "Hm hmm... Spoonful of sugar~... {mn}"
     s "… in a most delightful way~!"
     "Ding!"
     $ somexpr = "gr"
     show somnia with dissolve
-    s "{ii}Rem~er~ie~! ♫{/ii}"
+    s "{ii}Rem~{w=.1}er~{w=.1}ie~! {mn}{/ii}"
     $ somexpr = "ex"
     s "Take a look! The tarts are done!"
     show somnia at right with ease
@@ -71,7 +72,7 @@ label case1_vn:
     hide remi with easeoutleft
     $ somexpr = "gr"
     show somnia at center with ease
-    s "Hmm hm~... ♫"
+    s "Hmm hm~... {mn}"
     s "Hm~... A merry tune to toot-"
     $ somexpr = "bi"
     stop music
@@ -149,20 +150,25 @@ label case1_vn:
     r "Alright. Luckily there's still a half hour before the store opens proper so we have time to fulfill your request."
     $ somexpr = "ex"
     s "Kindly please follow us to the back~!"
+    stop music fadeout (2.0)
     hide somnia with easeoutright
     hide remi with easeoutleft
     hide mar with dissolve
-
-    stop music fadeout (2.0)
+    pause(1.0)
 
     show storefront:
         xalign 0.5 yalign 0.5
+        alpha 1.0
         pause 0.5
-        linear 3 zoom 2 truecenter
-    pause(2.0)
+        parallel:
+            linear 3.0 zoom 2 truecenter
+        parallel:
+            linear 3.0 alpha 0.0
+    pause(1.0)
     scene black with dissolve
+    pause (1.0)
+    play music dreamoffice fadein(2.0)
     pause(2.0)
-    play music dreamoffice
     scene dreamoffice with dissolve
 
     dr """
@@ -263,27 +269,25 @@ label case1_vn:
     s "When we count to three, you shall fall into a deep sleep..."
     show black with dissolve:
         linear 2 alpha 0.15
-    u "1..."
+    u "1...{w=0.5}{nw}"
     show black:
         linear 2 alpha 0.40
-    extend "2..."
+    extend "{w=1.0}2...{w=0.5}{nw}"
     show black:
         linear 2 alpha 0.80
-    extend "3......"
+    extend "{w=1.0}3......{w=0.5}{nw}"
     show black:
-        linear 2 alpha 1.0
-    extend "..."
-
+        linear 2.0 alpha 1.0
+    extend "{w=1.0}...{w=0.5}{nw}"
     scene black with dissolve
     pause (2.0)
 
     stop music fadeout (5.0)
     dr """The aromatic wisps that rolled out shimmered lazily against the glint of the office's few lamps, and seemed to be made of a dream itself.
 
-	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as dream eaters.
+	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as {ii}dream eaters{/ii}.
     """
     pause (2.0)
-
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):

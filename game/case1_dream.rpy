@@ -14,14 +14,15 @@ label case1_dream:
         page_width = 1720 # screen page width
         total_pages = 3 # total pages in investigation
         inventory = Inventory()
-        interactions = Interactions()
+        itr_list = [t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7]
+        interactions = Interactions(itr_list)
 
         unlocked_pages = 0 # default is 0
         current_page = 0 # start at 0
         finished = False # default is false, but true for testing
     scene black
-    show screen dream()
-    window hide
+    show screen dream() with Dissolve(2.0)
+    pause(1.0)
 # NOTE SFX: something falling, sfx for Somnia tripping
     dreamSom sh "W-whoa...!" with sshake
     dreamRem ne "I got you. Watch your step, it's a mess in here."
@@ -31,13 +32,14 @@ label case1_dream:
     dreamRem pe "Don't think I didn't catch you this morning rearranging our already labeled pastry display!"
     dreamSom gr "Aww, but it looks better when it's arranged by jam color!" with flash
     dreamRem si "*sigh* Anyway, we need to find our client. Where are they?"
-    play music dream1
     $ interactions.unlock([t_marcella_start])
+    # play appear sfx
     show expression t_marcella_start.image with Dissolve(0.8)
     dreamMar "Oh no, I'm late. I'm late! I have to hurry!"
     dreamMar "This assignment is due... and I have to fill out the report for... Oh, I need to pick up the..."
     dreamSom sh "My, there's Marcella, practically up to their nose in paperwork!"
     dreamRem ne "The client can't see us in their dream, but let's tail them."
+    play music dream1 fadein(0.4)
     jump dream_start
     hide screen focus_dialogue
 
@@ -56,7 +58,8 @@ label marcella_talk_start:
     jump dream_start
 
 label bunnies_talk_som:
-    dreamSom de "Hello there, cuties! Would you mind letting us pass? We have an important mission and need to speak with our client up ahead."
+    dreamSom de "Hello there, cuties! Would you mind letting us pass?"
+    dreamSom de "We have an important mission and need to speak with our client up ahead."
     bun "Mission? {ss}Mission…!{/ss} Do you know big sib Marchie? {ss}So cool!{/ss}"
     dreamRem th "{ii}\"Marchie\"{/ii}? Could they be talking about Marcella?"
     dreamSom gr "We sure do! Your sibling asked us for help and we need to reach them. May I ask you dearies to kindly scoot over?"
@@ -64,16 +67,16 @@ label bunnies_talk_som:
     bun "We're gonna work hard too! {ss}Let's support big sib!{/ss}"
     $ interactions.complete([t_bunnysquad])
     hide expression t_bunnysquad.image with Dissolve(0.8)
-   # [Get ingredient: bunny-cut apples]
     dr "The bunnies scampered off, kicking up clouds along the two intrepid dream eaters's path in the shape of..."
-    # [Dream apple close up shot?]
+    show screen get_ingredient("apple") with Dissolve(0.8)
     dr "... a selection of apple slices. Each slice's ruby skin was daintily cut to mimic the adorable silhouette of a bunny."
-    $ inventory.add(c_bunnyapples)
+    hide screen get_ingredient
     dreamRem th "Our first ingredient is freshly cut apples?"
     dreamSom gr "Oooh, I wonder if we get to bake a pie with this!"
     dreamRem ne "We'll see exactly what we can work with once we find more ingredients."
     dreamSom gr "I'll pocket this sweet snack for now, thank you very much~!"
     $ interactions.unlock([t_strawberry, t_marcella_mid])
+    $ inventory.add(c_bunnyapples)
     $ unlocked_pages += 1
     jump dream_start
 
@@ -93,7 +96,9 @@ label strawberry_look:
     dr "Like a manipulation of perspective, or a magic trick, one pluck was all it took for Somnia to retrieve the strawberry."
     $ inventory.add(c_strawberry)
     $ interactions.complete([t_strawberry])
+    show screen get_ingredient("strawberry") with Dissolve(0.8)
     dr "You got a {ii}Creamy Strawberry!{/ii}"
+    hide screen get_ingredient
     jump dream_start
 
 label marcella_talk_mid:
@@ -101,16 +106,19 @@ label marcella_talk_mid:
         dreamMar "And I have to find my report... and buy the medicine for little Whitney... Ohhh, and this whole place is an absolute mess!"
         dreamRem sh "Marcella sure has a lot on their plate."
         dreamSom gr "Perhaps we can help them out!"
-        dreamSom th "Let's see... They're looking for a report, trying to get medicine to one of the siblings... Oh! And they want to clean up this entire area!"
+        dreamSom th "Let's see... They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
+        dreamSom gr "Oh! And they want to {ii}clean up this entire area!{/ii}"
         dreamRem pe "That last task sounds like a bit of a handful..."
-        dreamSom gr "Oh, come on Remi! It'll be fun! After all~... ♪ A spoonful of sugar-"
+        dreamSom gr "Oh, come on Remi! It'll be fun! After all~... {mn} A spoonful of sugar-"
         dreamRem si "Helps the medicine go down, I know. It's your favorite song. Let's just get to work."
         $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5])
         $ interactions.update(t_marcella_mid.view())
     else:
         dreamMar "And I have to do this... and don't forget that... Oh, and I need to..."
         dreamRem th "Looks like Marcella's frozen in their thoughts."
-        dreamSom th "Let's see... They're looking for a report, trying to get medicine to one of the siblings... Oh! And they want to clean up this entire area!"
+        dreamSom th "If I remembered correctly..."
+        dreamSom th "They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
+        dreamSom gr "Oh! And they want to {ii}clean up this entire area!{/ii}"
         dreamRem si "Hahhh... Let's get to work."
     jump dream_start
 
@@ -140,7 +148,9 @@ label pile_inspect:
 
 label medicine_find:
     dreamSom sh "This looks to be the medicine we have to give to Marcella's sister! The label says \"Drink Me\"."
+    show screen get_ingredient("ooze") with Dissolve(0.8)
     dr "You got the {ii}Cherry Medicine!{/ii}"
+    hide screen get_ingredient
     dreamRem th "The question is just which of these siblings need a dose."
     dreamSom gr "I guess we'll just have to go around and ask!"
     dreamRem pe "... I'll let you do the talking."
@@ -167,7 +177,9 @@ label report_find:
     dreamRem th "Looks like a family photo..."
     dreamRem "Marcella is surrounded by their five younger siblings."
     dreamSom gr "Isn't that just the sweetest thing!"
+    show screen get_ingredient("herbs") with Dissolve(0.8)
     dr "You got some {ii}Fine Herbs!{/ii}"
+    hide screen get_ingredient
     $ inventory.add(c_redbook)
     $ inventory.drop(c_bluebook)
     jump dream_start
@@ -264,7 +276,7 @@ label bunny2_give:
     dreamSom de "See? That's a good girl! I hope you feel better soon."
     bun "Thanks, lady!"
     dreamRem gr "... Let me guess, you added some sugar."
-    dreamSom de "Hmmm hm~ ♫"
+    dreamSom de "Hmmm hm~ {mn}"
     python:
         interactions.update(t_bunny1.disable("bunny1_give"))
         interactions.update(t_bunny2.disable("bunny2_give"))
@@ -380,14 +392,15 @@ label bunny5_help:
         dreamSom gr "What a lovely idea! We'll be sure to do that."
         dreamRem th "Painting... the flowers?"
         dreamRem si "Well, I guess it's the thought that counts."
-        $ interactions.unlock([t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7])
+        # $ interactions.unlock([t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7])
         $ interactions.update(t_bunny5.updateState(7))
+        $ interactions.update(t_bunny5.disable("bunny5_talk"))
     elif t_bunny5.state == 0:
         bun "Hmm? Sure, I can help out!"
         $ interactions.update(t_bunny5.disable("bunny5_help"))
         $ interactions.update(t_debris.updateState(t_debris.state - 1))
     elif t_bunny5.state > 0:
-        "There's still [t_bunny5.state] of the flowers left to be painted."
+        bun "There's still [t_bunny5.state] of the flowers left to be painted."
     jump dream_start
 label bunny5_chat:
     $ bun_name = "Clumsy bunny"
@@ -633,6 +646,7 @@ label clock4_right:
 
 label check_clocks:
     if t_clockface1.state == "right" and t_clockface2.state == "left" and t_clockface3.state == "up" and t_clockface4.state == "down":
+        stop music fadeout (2.0)
         # clocktower ring sfx
         dr "As the final clock struck nine, the machinery whirred to life, filling the air with the dull clanking of brass gears and spinning axles."
         dr "The various clock faces occupying the dream space seemed to react at once, winding their hands with incredible speed."
@@ -640,7 +654,9 @@ label check_clocks:
         dr "The gentle ticking of each second echoing in unison was simply... harmonious."
         dreamSom sh "Remi, take a look! All the clocks are moving again."
         dreamSom th "Oh, and what's this? Another ingredient..."
+        show screen get_ingredient("egg") with Dissolve(0.8)
         dr "You got some {ii}Clockwork Eggs!{/ii}"
+        hide screen get_ingredient
         dreamRem gr "That's a relief. My hunch was right after all."
         dreamRem th "So Marcella had a warped perception of time, which fueled their pressure to keep working at the cost of their sleep."
         dreamSom de "Time flies when you're having fun~!"
@@ -651,7 +667,8 @@ label check_clocks:
         dreamSom ex "Hehe..."
         dreamRem gr "Hah, hah. But you're right. It seems a brief respite from their busy life is in order."
         dreamRem th "And I have just the dish for this dream."
-        dreamRem "Yes, with the Clockwork Eggs as the centerpiece, I believe we have the necessary ingredients for a proper morning dish."
+        dreamRem "Now with the Clockwork Eggs as the centerpiece..."
+        dreamRem "I believe we have the necessary ingredients for a proper morning dish."
         dreamSom de "Ooh, I'm so excited! Let us be off to the Wishing Kitchen!"
         python:
             inventory.add(c_clockegg)
@@ -667,5 +684,6 @@ label check_clocks:
             interactions.update(t_bunny3.disable("bunny3_time"))
             interactions.update(t_bunny4.disable("bunny4_time"))
             interactions.update(t_bunny5.disable("bunny5_time"))
-    dr "The clock hand was moved, but nothing happened."
+    else:
+        dr "The clock hand was moved, but nothing happened."
     jump dream_start

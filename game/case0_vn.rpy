@@ -4,15 +4,11 @@
 init:
     define flash = Fade(.10, 0.0, .20, color="f8dfd2")
 
-image starry = "images/BG/starry.png"
-image book = "images/BG/test_cookbook.png"
-
-
-
 label booktest:
     show starry:
-        xpos 0
-        linear 40.0 xpan 360 ypan 360
+        xpos 0 ypos 0
+        linear 40.0 xpan 360 ypan -360
+        xpan 0 ypan 0
         repeat
     show book:
         zoom 0.50

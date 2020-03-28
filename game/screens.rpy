@@ -7,7 +7,6 @@ init offset = -1
 ################################################################################
 ## Styles
 ################################################################################
-
 style default:
     properties gui.text_properties()
     language gui.language
@@ -75,8 +74,7 @@ style vslider:
 style frame:
     padding gui.frame_borders.padding
     background Frame("gui/frame.png", gui.frame_borders, tile=gui.frame_tile)
-
-
+    
 
 ################################################################################
 ## In-game screens
@@ -133,6 +131,9 @@ screen say(who, what):
             size persistent.pref_text_size
             line_spacing persistent.pref_text_spacing
             color persistent.pref_text_color
+            outlines [
+                (0.4, '#d14970'+"11", 0, 0), (0.8, '#d14970'+"11", 0, 0),  (2, '#d14970'+"11", 0, 0),
+             ]
             # outlines [ (absolute(2), "#B47B88", absolute(0), absolute(0)) ]
 
         ### IMPORTANT: We adjust the kerning, color, font, and size inline here!
@@ -142,9 +143,9 @@ screen say(who, what):
     # if not renpy.variant("small"):
     #     add SideImage() xalign 0.90 yalign -0.05
     if who == 'Remerie':
-        add SideImage() xalign 0.90 yalign 0
+        add SideImage() xalign 0.80 yalign 0
     if who == 'Somnia':
-        add SideImage() xalign 0.90 yalign 0
+        add SideImage() xalign 0.80 yalign 0
 
 # ### OLD VERSION V
 # screen say(who, what):

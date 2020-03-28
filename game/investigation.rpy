@@ -14,13 +14,38 @@ label disable_pause(next_label):
     show screen focus_dialogue # hacky way to disable imagebuttons while dialogue is happening
     jump expression next_label
 
+style dreamacts is button:
+    xminimum 524
+    # xsize 1000
+    ysize 104
+    padding (10, 10, 10, 10)
+    background Frame("itrFrame", Borders(5, 1, 5, 1), tile=False)
+
+style dreamacts_text is button_text:
+    xalign 0.5
+    yalign 0.5
+    idle_color "#fff"
+    hover_color "#facade"
+    outlines [
+                (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+                (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
+             ]
+
 transform panning(pstart, pend):
     yalign 0.5
     xanchor 0.0
     xpos pstart
-    quad 1.8 xpos pend
+    quad 2.8 xpos pend
 
-
+transform dreamfade(delay=0):
+    alpha 0.0
+    xoffset 30
+    pause delay
+    parallel:
+        linear 0.5 alpha 1.0
+    parallel:
+        linear 0.6 xoffset 0
+    
 # --------------------------------------------------------------------------
 # INITIALIZE INVESTIGATION CHOICES
 # --------------------------------------------------------------------------
@@ -110,13 +135,25 @@ screen dream():
     # hover tooltip
     $ tooltip = GetTooltip()
     if tooltip:
-        text "[tooltip.name]":
-            xalign 0.5 ypos 0.8 #tmp
-            xanchor 0.0
-            outlines [
-                (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
-                (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
-            ]
+        # $ x, y = renpy.get_mouse_pos()
+        window:
+            xalign 0.5 yalign 0.9
+            xsize 524 ysize 104
+            text "[tooltip.name]":
+                xalign 0.5 yalign 0.5
+                outlines [
+                    (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+                    (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
+                ]
+            background Transform("itrFrame", alpha=persistent.say_window_alpha)
+
+        # text "[tooltip.name]":
+        #     xalign 0.5 ypos 0.8 #tmp
+        #     xanchor 0.0
+        #     outlines [
+        #         (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+        #         (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
+        #     ]
 
     # background panning
     if current_page > 0:
@@ -144,27 +181,41 @@ screen focus_dialogue:
         idle Solid("#0000")
         action renpy.curry(renpy.end_interaction)(True)
     key "K_SPACE" action renpy.curry(renpy.end_interaction)(True)
+
+screen get_ingredient(ingredient):
+    zorder -1
+    add "ingFrame":
+        xalign 0.5
+        yalign 0.5
+    add "[ingredient]":
+        xalign 0.5
+        yalign 0.5
  
 screen dream_actions(actions={}, mousepos):
     # for cancelling/hiding dream_actions if you click away from the menu
     imagebutton:
         idle Solid("#0000")
         action Hide('dream_actions')
+
     $ mx, my = mousepos
     if mx > 1700:
-        $malign = 1.0
-    else:
-        $malign = 0.0
+        $ mx = mx - 530
+    if my > 800:
+        $ my = my - (120 * len(actions))
 
     $ ystart = 0
-    for action in actions:
-        textbutton action['name']:
-            xpos mx ypos my+ystart
-            xalign malign yalign 0.5
-            mouse "hover"
-            action [Hide('dream_actions'), Show('focus_dialogue'), Call(action['label'])]
-            # outlines [
-            #     (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
-            #     (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
-            # ]
-        $ystart += 40
+    $ delay = 0
+
+    vbox:
+        xpos mx+10 ypos my
+        spacing 10
+
+        for action in actions:
+            button:
+                mouse "hover"
+                style "dreamacts"
+                text action['name']:
+                    style "dreamacts_text"
+                action [Hide('dream_actions'), Show('focus_dialogue'), Call(action['label'])]
+                at dreamfade(delay)
+            $delay += 0.2
