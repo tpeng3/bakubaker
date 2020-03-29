@@ -63,9 +63,11 @@ init -1:
     define audio.dreamoffice = "audio/music/gozennijinofunsui.mp3"
     define audio.weird = "audio/music/Thick_Irony.mp3"
     define audio.dream1 = "audio/music/MusMus-BGM-089.mp3"
-    # define audio.dream2 = "audio/music/-"
+    define audio.dream2 = "audio/music/r3.mp3"
     define audio.cooking1 = "audio/music/Netherland.mp3"
     define audio.cooking2 = "audio/music/Vibe_Drive.mp3"
+    define audio.storeend = "audio/music/valentine.mp3"
+
 
 ## Music Caption:
     # Careless-Summer_Looping: _("")
@@ -79,6 +81,20 @@ init -1:
     # Edge-of-Ocean = "audio/sfx/Edge-of-Ocean.mp3"
     # Interior-Door_Close = "audio/sfx/Interior-Door_Close.mp3"
     define audio.rimshot = "audio/sfx/rimshot.ogg"
+    define audio.bubble = "audio/sfx/bubble.ogg"
+    define audio.clockdong = "audio/sfx/clockdong.ogg"
+    define audio.clockring = "audio/sfx/clockring.ogg"
+    define audio.clocktick = ["<silence 0.2>", "audio/sfx/clocktick.ogg"]
+    define audio.clocktwist = "audio/sfx/clocktwist.ogg"
+    define audio.donecooking = "audio/sfx/donecooking.ogg"
+    define audio.itemget = "audio/sfx/itemget.ogg"
+    define audio.trip = "audio/sfx/trip1.ogg"
+    define audio.welcomedoor = "audio/sfx/welcomedoor.ogg"
+    define audio.windchimes = "audio/sfx/windchimes.wav"
+    define audio.tune = "audio/sfx/tune.ogg"
+    
+
+
 
 ## SFX Caption:
     # Chest-Drawer_Close: _("")

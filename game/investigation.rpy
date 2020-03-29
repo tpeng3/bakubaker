@@ -198,9 +198,9 @@ screen dream_actions(actions={}, mousepos):
         action Hide('dream_actions')
 
     $ mx, my = mousepos
-    if mx > 1700:
+    if mx > gui.width - 530:
         $ mx = mx - 530
-    if my > 800:
+    if my > gui.height - (120 * len(actions)):
         $ my = my - (120 * len(actions))
 
     $ ystart = 0

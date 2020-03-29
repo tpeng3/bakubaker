@@ -5,9 +5,15 @@ label case1_vn:
     $ somnia_name = "???"
     $ remerie_name = "Remerie"
     $ marcella_name = "???"
+    $ renpy.start_predict(
+        "images/sprites/somnia_*.png",
+        "images/sprites/remerie_*.png",
+        "images/sprites/marcella_*.png",
+        "images/sprites/bg_dreamoffice.png",
+        "images/sprites/bg_storefront.png",
+        )
 
     scene black with dissolve
-    # add nighttime sfx (like soft wind)
     dr """
     When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
 
@@ -87,7 +93,7 @@ label case1_vn:
     r "We can’t have bodies blocking the door for potential customers."
     ml "Hrn..."
     $ remexpr = "bi"
-    r "Are they... dea-"
+    r "Are they... dea-{nw}"
     ml "... I-I’m alive..."
     ml "Snrk... {i}*snore...*{/i}" with sshake
     play music weird
@@ -99,6 +105,7 @@ label case1_vn:
     r "... We should bring them in. It won't do us any good having someone lying on the floor in front of our store."
 
     scene black with dissolve
+    play sound welcomedoor
     with Pause (1.0)
 
     $ somexpr = "ne"
@@ -197,7 +204,7 @@ label case1_vn:
     $ remexpr = "ne"
     r "Tell us, what ails you?"
     $ marexpr = "fr"
-    ml "Um... Well, first, I would like to ask if {ii}Madam Nemo{/ii} was... present?"
+    ml "Um... Well, first, I would like to ask if {ii}Madam Nemo{/ii} is... present?"
     $ remexpr = "sh"
     $ somexpr = "sh"
     s "... Oh! {w=0.5}{nw}"
@@ -239,7 +246,7 @@ label case1_vn:
     s "Oh dear. That sounds like a strong case of insomnia."
     $ somexpr = "th"
     s "I wonder... could it be a nightmare? Something vexing pulling at the heartstrings?"
-    $ somexpr = "ex"
+    $ somexpr = "de"
     s "Dreams made by a dreamless client... My, I wonder how they'll taste!"
     $ marexpr = "ne"
     ml "What was that?"
@@ -288,6 +295,13 @@ label case1_vn:
 	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as {ii}dream eaters{/ii}.
     """
     pause (2.0)
+    $ renpy.stop_predict(
+        "images/sprites/somnia_*.png",
+        "images/sprites/remerie_*.png",
+        "images/sprites/marcella_*.png",
+        "images/sprites/bg_dreamoffice.png",
+        "images/sprites/bg_storefront.png",
+        )
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):
@@ -345,9 +359,11 @@ label case1_vn_end(result=0):
     s "You're in luck! We've prepared a dish specially for you."
     $ somexpr = "ne"
     s "If you would please follow me back out to the front..."
-
+    stop music fadeout 2.0
+    scene black with dissolve
+    pause (2.0)
+    play music storeend fadein 4.0
     scene storefront with dissolve
-
     show mar
     show somnia at right
     show remi at left
@@ -364,23 +380,23 @@ label case1_vn_end(result=0):
         $ marexpr = "la"
         ml "Well, it’s been a while ago now. The years have flown by in a blink of an eye..."
         ml "This is a bit of a personal story but, well..."
-        ml "F-Five years ago, my family was going through a rough time. It was hard for our parents to be home, what with their odd jobs keeping them busy."
+        ml "Five years ago, my family was going through a rough time. It was hard for our parents to be home, what with their odd jobs keeping them busy."
         ml "So I was given the responsibility of taking care of my younger siblings. But to be honest, it was pretty overwhelming."
         ml "I wasn’t even that many years older, but suddenly they were looking to me to take care of them and asking me to take them to places."
         ml "What could I do? I couldn't turn my back on my family..."
     # TODO MENTOR NAME // BAKERY NAME
-        ml "The stress of it all led to a lot of sleepless nights. And that’s when I happened to stumble across this bakery and meet {ii}mentor{/ii}."
+        ml "The stress of it all led to a lot of sleepless nights. And that’s when I happened to stumble across this bakery and meet {ii}Madam Nemo{/ii}."
         ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}bakery{/ii}."
         ml "When I woke up, I was inside the store, with a warm omelette and a comforting smile waiting for me."
         ml "It was difficult, balancing my responsibilities, but I felt a... a duty to take care of my siblings."
         ml "She really listened to my worries. I was able to work hard and continue to support my siblings thanks to her advice."
         ml "Thinking back at it now, she did mention before she had taken on two kids of her own as apprentices. I suppose that must be the two of you."
-        ml "We certainly had our fair share of caretaking stories. {ii}mentor{/ii} treasured you two the same I treasured my siblings."
+        ml "We certainly had our fair share of caretaking stories. {ii}Madam Nemo{/ii} treasured you two the same I treasured my siblings."
         ml "She was a lovely soul. I hope she comes back soon, for your sake."
         r "..."
         r "Do you think you could share more of your stories with us sometime?"
         s "Yes, please...! We love and miss her a great deal!"
-        ml "I would love to hear your stories of {ii}mentor{/ii} as well. If I ever had the time, I'd like to try dropping by more."
+        ml "I would love to hear your stories of {ii}Madam Nemo{/ii} as well. If I ever had the time, I'd like to try dropping by more."
     ml "You know, when I took that nap earlier, I actually had what felt like a most wonderful, whimsical dream."
     ml "I don’t remember much of it now, but there were bits and pieces..."
     # Marchie checks the time
@@ -444,4 +460,4 @@ label case1_vn_end(result=0):
 
     With that hope in their hearts, the two open up shop and await the return of their old friend.
     """
-    return
+    return # change this to jump to credits page for demo

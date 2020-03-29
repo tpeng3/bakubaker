@@ -13,6 +13,13 @@ label case1_cook:
     jump cooking_start
 
 label case1_cook_done(result):
+    $ renpy.stop_predict_screen("cooking")
+    $ renpy.stop_predict(
+        "images/BG/starry.png",
+        "images/BG/test_cookbook.png",
+        "images/items/item_*.png",
+        "images/items/dish_*.png",
+    )
     show screen focus_dialogue
     if result == -1:
         "Failed cooking, try again"

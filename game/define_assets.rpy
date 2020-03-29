@@ -15,6 +15,16 @@ init python:
             renpy.music.play("audio/sfx/voice_marchie.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
         elif event == "slow_done" or event == "end":
             renpy.music.stop(channel="bleeps", fadeout=1.0)
+    def dr_beep(event, **kwargs):
+        if event == "show":
+            renpy.music.play(["audio/sfx/voice_narrator.ogg", "<silence .01>"], channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="bleeps", fadeout=1.0)
+    def bun_beep(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/sfx/voice_bunnies.ogg", channel="bleeps", loop=True, fadein=0.2, fadeout=1.0)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="bleeps", fadeout=1.0)
 
 # Characters ------------------------------------------------------------------
 define s = DynamicCharacter ("somnia_name",
@@ -44,7 +54,8 @@ define dr = Character (None, # Narration
             window_xalign = 0.50,
             what_outlines = [
              (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
-             (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)]
+             (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)],
+            callback = dr_beep
             )
 define dt = Character (None, # Dream speech
             color="ffcf89",
@@ -52,7 +63,9 @@ define dt = Character (None, # Dream speech
             window_background="gui/textbox_dreamtalk.png",
             window_yalign = 0.025,
             window_xalign = 0.50,
-            text_align = 0.0
+            text_align = 0.0,
+            what_outlines = [
+             (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)]
             )
 define dreamSom = Character ("Somnia", kind = dt, # Dream Somnia
             color="2D2D3E",
@@ -82,6 +95,8 @@ define dreamMar = Character ("Dream Marcella", kind = dt,
 define bun = DynamicCharacter ("bun_name", kind = dr,
             color="2D2D3E",
             what_color="fff",
+            callback = bun_beep,
+            text_align = 0.0
             )
 # Positions -------------------------------------------------------------------
 # So the bakus are positioned comfortably in their respective sides
@@ -211,6 +226,11 @@ init python:
         musicnote = Image("gui/musicnote.png")
         return [(renpy.TEXT_DISPLAYABLE, musicnote)]
     config.self_closing_custom_text_tags["mn"] = musicNote
+
+    def whiteMusicNote(tag, argument):
+        musicnote = Image("gui/musicnote2.png")
+        return [(renpy.TEXT_DISPLAYABLE, musicnote)]
+    config.self_closing_custom_text_tags["wmn"] = whiteMusicNote
 # Shake -------------------------------------------------------------
     import math
     class Shaker(object):

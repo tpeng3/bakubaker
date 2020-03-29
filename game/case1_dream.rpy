@@ -20,17 +20,24 @@ label case1_dream:
         unlocked_pages = 0 # default is 0
         current_page = 0 # start at 0
         finished = False # default is false, but true for testing
+        renpy.start_predict_screen("dream")
+        renpy.start_predict(
+            "images/BG/bg_wonderland.png",
+            "images/interactables/case1/*.png",
+            "side dreamSom *",
+            "side dreamRem *"
+        )
     scene black
     show screen dream() with Dissolve(2.0)
     pause(1.0)
-# NOTE SFX: something falling, sfx for Somnia tripping
+    play sound trip
     dreamSom sh "W-whoa...!" with sshake
     dreamRem ne "I got you. Watch your step, it's a mess in here."
-    dreamRem ne "A dream representing the client's outward appearance..."
+    dreamRem ne "A dream would reflect a person's inner headspace."
     dreamSom th "Our client must really have a hard time arranging their thoughts, among other things..."
     dreamRem si "Sounds like someone I know."
     dreamRem pe "Don't think I didn't catch you this morning rearranging our already labeled pastry display!"
-    dreamSom gr "Aww, but it looks better when it's arranged by jam color!" with flash
+    dreamSom gr "Aww, but it looks better when it's arranged by jam color!" 
     dreamRem si "*sigh* Anyway, we need to find our client. Where are they?"
     $ interactions.unlock([t_marcella_start])
     # play appear sfx
@@ -69,6 +76,7 @@ label bunnies_talk_som:
     hide expression t_bunnysquad.image with Dissolve(0.8)
     dr "The bunnies scampered off, kicking up clouds along the two intrepid dream eaters's path in the shape of..."
     show screen get_ingredient("apple") with Dissolve(0.8)
+    play sound itemget
     dr "... a selection of apple slices. Each slice's ruby skin was daintily cut to mimic the adorable silhouette of a bunny."
     hide screen get_ingredient
     dreamRem th "Our first ingredient is freshly cut apples?"
@@ -97,6 +105,7 @@ label strawberry_look:
     $ inventory.add(c_strawberry)
     $ interactions.complete([t_strawberry])
     show screen get_ingredient("strawberry") with Dissolve(0.8)
+    play sound itemget
     dr "You got a {ii}Creamy Strawberry!{/ii}"
     hide screen get_ingredient
     jump dream_start
@@ -109,7 +118,8 @@ label marcella_talk_mid:
         dreamSom th "Let's see... They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
         dreamSom gr "Oh! And they want to {ii}clean up this entire area!{/ii}"
         dreamRem pe "That last task sounds like a bit of a handful..."
-        dreamSom gr "Oh, come on Remi! It'll be fun! After all~... {mn} A spoonful of sugar-"
+        dreamSom gr "Oh, come on Remi! It'll be fun!"
+        dreamSom gr "After all~ A spoonful of sugar...{wmn}"
         dreamRem si "Helps the medicine go down, I know. It's your favorite song. Let's just get to work."
         $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5])
         $ interactions.update(t_marcella_mid.view())
@@ -149,6 +159,7 @@ label pile_inspect:
 label medicine_find:
     dreamSom sh "This looks to be the medicine we have to give to Marcella's sister! The label says \"Drink Me\"."
     show screen get_ingredient("ooze") with Dissolve(0.8)
+    play sound itemget
     dr "You got the {ii}Cherry Medicine!{/ii}"
     hide screen get_ingredient
     dreamRem th "The question is just which of these siblings need a dose."
@@ -178,6 +189,7 @@ label report_find:
     dreamRem "Marcella is surrounded by their five younger siblings."
     dreamSom gr "Isn't that just the sweetest thing!"
     show screen get_ingredient("herbs") with Dissolve(0.8)
+    play sound itemget
     dr "You got some {ii}Fine Herbs!{/ii}"
     hide screen get_ingredient
     $ inventory.add(c_redbook)
@@ -276,7 +288,7 @@ label bunny2_give:
     dreamSom de "See? That's a good girl! I hope you feel better soon."
     bun "Thanks, lady!"
     dreamRem gr "... Let me guess, you added some sugar."
-    dreamSom de "Hmmm hm~ {mn}"
+    dreamSom de "Hmmm hm~ {wmn}"
     python:
         interactions.update(t_bunny1.disable("bunny1_give"))
         interactions.update(t_bunny2.disable("bunny2_give"))
@@ -319,7 +331,8 @@ label bunny2_time:
 # Peevish Bunny
 label bunny3_talk:
     $ bun_name = "Peevish bunny"
-    bun "Our younger sis hasn't been feeling well lately, but she's weak to the taste of medicine so she tries to lie her way out of it. How spoiled!"
+    bun "Our younger sis hasn't been feeling well lately, but she's weak to the taste of medicine so she tries to lie her way out of it."
+    bun "How spoiled!"
     jump dream_start
 label bunny3_give:
     $ bun_name = "Peevish bunny"
@@ -327,7 +340,7 @@ label bunny3_give:
     jump dream_start
 label bunny3_help:
     $ bun_name = "Peevish bunny"
-    dreamSom "Hello, could you help us move some of that big pile of papers for your dear big sis Marchie?"
+    dreamSom "Hello, could you help us move some of that big pile of papers for your dear big sib Marchie?"
     bun "Hmph... I guess if it's to help out big sib Marchie then..."
     python:
         interactions.update(t_bunny3.disable("bunny3_help"))
@@ -354,7 +367,7 @@ label bunny4_give:
     jump dream_start
 label bunny4_help:
     $ bun_name = "Studious bunny"
-    dreamSom gr "Hello there! Would you mind helping us clean up these papers for your big sis Marchie?"
+    dreamSom gr "Hello there! Would you mind helping us clean up these papers for your big sib Marchie?"
     bun "Why yes, I'd love to help!"
     bun "Marchie already has a lot on their plate, so this is the least I could do!"
     python:
@@ -382,11 +395,11 @@ label bunny5_give:
 label bunny5_help:
     $ bun_name = "Clumsy bunny"
     if t_bunny5.state == -1:
-        dreamSom ne "Hi! Would you mind helping us clean this place up for your big sis?"
+        dreamSom ne "Hi! Would you mind helping us clean this place up for your big sib?"
         bun "Oh, before that, can I ask for a favor as well?"
         dreamSom ne "Sure sweetie, what is it?"
-        bun "You see, I wanted to give big sis Marchie a gift for all that she's done for us."
-        bun "Big sis Marchie's favorite color is red! But all the flowers here are white...!"
+        bun "You see, I wanted to give big sib Marchie a gift for all that she's done for us."
+        bun "big sib Marchie's favorite color is red! But all the flowers here are white...!"
         bun "I brought some paint earlier, but I'm not sure where to start..."
         bun "Could you help me {ii}color seven flowers?{/ii}"
         dreamSom gr "What a lovely idea! We'll be sure to do that."
@@ -405,7 +418,7 @@ label bunny5_help:
 label bunny5_chat:
     $ bun_name = "Clumsy bunny"
     bun "I'd paint the flower myself but last time I painted anything, I spilled the whole bucket all over the floor!"
-    bun "Big sis Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
+    bun "big sib Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
     jump dream_start
 label bunny5_time:
     $ bun_name = "Clumsy bunny"
@@ -466,6 +479,7 @@ label march_continue:
     $ interactions.complete([t_marcella_mid])
     hide expression t_marcella_mid.image with Dissolve(0.8)
     dreamRem bi "Ack! There they go again...!"
+    stop music fadeout 5.0
     dreamSom bi "Let's go, Remi! We mustn't lose them!"
     $ interactions.complete([t_debris])
     $ interactions.unlock([t_marcella_end])
@@ -474,6 +488,7 @@ label march_continue:
 
 label marcella_talk_end:
     if not t_marcella_end.viewed:
+        play music dream2 fadein 2.0
         $ bun_name = "Rowdy bunnies"
         dreamMar "I-I... I can't keep up with this anymore."
         dreamMar "My list keeps growing and growing... but the little ones! They're all depending on me!"
@@ -530,18 +545,22 @@ label clock1_inspect:
             interactions.update(t_clockface1.enable("clock1_right"))
     jump dream_start
 label clock1_up:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}up{/b}, while the minute hand is stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("up"))
     jump check_clocks
 label clock1_down:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}down{/b}, while the minute hand is stuck also facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("down"))
     jump check_clocks
 label clock1_left:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}left{/b}, while the minute hand is stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("left"))
     jump check_clocks
 label clock1_right:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}right{/b}, while the minute hand is stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("right"))
     jump check_clocks
@@ -559,18 +578,22 @@ label clock2_inspect:
             interactions.update(t_clockface2.enable("clock2_right"))
     jump dream_start
 label clock2_up:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}up{/b}, while the minute hand is stuck also facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("up"))
     jump check_clocks
 label clock2_down:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}down{/b}, while the minute hand is stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("down"))
     jump check_clocks
 label clock2_left:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}left{/b}, while the minute hand is stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("left"))
     jump check_clocks
 label clock2_right:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}right{/b}, while the minute hand is stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("right"))
     jump check_clocks
@@ -594,18 +617,22 @@ label clock3_inspect:
         dr "The hour hand is facing {b}[t_clockface3.state]{/b}, while the minute hand is stuck facing {b}right{/b}."
     jump dream_start
 label clock3_up:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}up{/b}, while the minute hand is stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("up"))
     jump check_clocks
 label clock3_down:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}down{/b}, while the minute hand is stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("down"))
     jump check_clocks
 label clock3_left:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}left{/b}, while the minute hand is stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("left"))
     jump check_clocks
 label clock3_right:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}right{/b}, while the minute hand is stuck also facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("right"))
     jump check_clocks
@@ -628,33 +655,43 @@ label clock4_inspect:
         dr "The hour hand is facing {b}[t_clockface4.state]{/b}, while the minute hand is stuck facing {b}left{/b}."
     jump dream_start
 label clock4_up:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}up{/b}, while the minute hand is stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("up"))
     jump check_clocks
 label clock4_down:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}down{/b}, while the minute hand is stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("down"))
     jump check_clocks
 label clock4_left:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}left{/b}, while the minute hand is stuck also facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("left"))
     jump check_clocks
 label clock4_right:
+    play sound clocktwist
     dr "The hour hand has been moved to face {b}right{/b}, while the minute hand is stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("right"))
     jump check_clocks
 
 label check_clocks:
     if t_clockface1.state == "right" and t_clockface2.state == "left" and t_clockface3.state == "up" and t_clockface4.state == "down":
+        "tempO"
         stop music fadeout (2.0)
-        # clocktower ring sfx
+        pause (3.0)
+        play sound clockring
+        pause (4.0)
+        play music clocktick
         dr "As the final clock struck nine, the machinery whirred to life, filling the air with the dull clanking of brass gears and spinning axles."
         dr "The various clock faces occupying the dream space seemed to react at once, winding their hands with incredible speed."
         dr "Finally settling on one time, the clock hands began to move in sync, once more."
         dr "The gentle ticking of each second echoing in unison was simply... harmonious."
         dreamSom sh "Remi, take a look! All the clocks are moving again."
         dreamSom th "Oh, and what's this? Another ingredient..."
+        stop music fadeout 1.0
         show screen get_ingredient("egg") with Dissolve(0.8)
+        play sound itemget
         dr "You got some {ii}Clockwork Eggs!{/ii}"
         hide screen get_ingredient
         dreamRem gr "That's a relief. My hunch was right after all."
@@ -668,7 +705,7 @@ label check_clocks:
         dreamRem gr "Hah, hah. But you're right. It seems a brief respite from their busy life is in order."
         dreamRem th "And I have just the dish for this dream."
         dreamRem "Now with the Clockwork Eggs as the centerpiece..."
-        dreamRem "I believe we have the necessary ingredients for a proper morning dish."
+        dreamRem de "I believe we have the necessary ingredients for a proper morning dish."
         dreamSom de "Ooh, I'm so excited! Let us be off to the Wishing Kitchen!"
         python:
             inventory.add(c_clockegg)
@@ -684,6 +721,13 @@ label check_clocks:
             interactions.update(t_bunny3.disable("bunny3_time"))
             interactions.update(t_bunny4.disable("bunny4_time"))
             interactions.update(t_bunny5.disable("bunny5_time"))
+            renpy.start_predict_screen("cooking")
+            renpy.start_predict(
+                "images/BG/starry.png",
+                "images/BG/test_cookbook.png",
+                "images/items/item_*.png",
+                "images/items/dish_*.png",
+            )
     else:
         dr "The clock hand was moved, but nothing happened."
     jump dream_start

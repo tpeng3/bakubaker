@@ -112,6 +112,15 @@ screen cooking(dish):
     add "cookbook2":
         xalign 0.5 yalign 0.5
 
+    if renpy.has_screen("dream"):
+        $ renpy.stop_predict_screen("dream")
+        $ renpy.stop_predict(
+            "images/BG/bg_wonderland.png",
+            "images/interactables/case1/*.png",
+            "side dreamSom *",
+            "side dreamRem *"
+        )
+
     imagebutton: # go back to dream mode
         idle "goDream"
         hover "goDreamHov"
@@ -131,6 +140,7 @@ screen cooking(dish):
         mouse "hover"
         focus_mask True
         xalign 0.74 yalign 0.85
+        activate_sound "audio/sfx/donecooking.ogg"
         action [Call(case+"_cook_done", result=cook_status.result())]
 
     #TODO: add better positions for the inventory, after UI is decided
