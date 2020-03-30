@@ -29,6 +29,7 @@ init python:
 # Characters ------------------------------------------------------------------
 define s = DynamicCharacter ("somnia_name",
             image = "somnia",
+            show_namebox_background = "gui/namebox_Somnia.png",
             color="2D2D3E",
             what_color="7A445B",
             callback = s_beep,
@@ -38,6 +39,7 @@ define sth = Character (kind = s,
             )
 define r = DynamicCharacter ("remerie_name",
             image = "remi",
+            show_namebox_background = "gui/namebox_Remerie.png",
             color="2D2D3E",
             what_color="7A445B",
             callback = r_beep
@@ -49,6 +51,7 @@ define dr = Character (None, # Narration
             color="ffcf89",
             what_color="EDD9C8",
             window_background="gui/textbox_dream.png",
+            show_namebox_background = "gui/namebox_dreamx.png",
             what_text_align = 0.50,
             window_yalign = 0.025,
             window_xalign = 0.50,
@@ -61,6 +64,7 @@ define dt = Character (None, # Dream speech
             color="ffcf89",
             what_color="EDD9C8",
             window_background="gui/textbox_dreamtalk.png",
+            show_namebox_background = "gui/namebox_dream.png",
             window_yalign = 0.025,
             window_xalign = 0.50,
             text_align = 0.0,
@@ -70,25 +74,30 @@ define dt = Character (None, # Dream speech
 define dreamSom = Character ("Somnia", kind = dt, # Dream Somnia
             color="2D2D3E",
             image = "dreamSom",
+            show_namebox_background = "gui/namebox_dream.png",
             callback = s_beep,
             what_xsize = 660
             )
 define dreamRem = Character ("Remerie", kind = dt, # Dream Remerie
             color="2D2D3E",
             image = "dreamRem",
+            show_namebox_background = "gui/namebox_dream.png",
             callback = r_beep,
             what_xsize = 660
             )
 # Clients ---------------------------------------------------------------------
-define u = Character (None, color="2D2D3E", what_color="7A445B")
+define u = Character (None, color="2D2D3E", what_color="7A445B",
+            show_namebox_background = None)
 define ml = DynamicCharacter ("marcella_name",
             image = "mar",
+            show_namebox_background = "gui/namebox_marchie.png",
             color="2D2D3E",
             what_color="7A445B",
             callback = m_beep
             )
 define dreamMar = Character ("Dream Marcella", kind = dt,
             color="2D2D3E",
+            show_namebox_background = "gui/namebox_dreamx.png",
             image = "mar",
             callback = m_beep
             )
