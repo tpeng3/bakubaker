@@ -3,7 +3,15 @@
 #--------------------------------------------------------------------------
 init python:
     # PART ONE
-    t_marcella_start = Interactables("Marcella Lapin", "marcella_start", "images/interactables/case1/rabbitOne.png", page=0,
+    t_somrem_start = Interactables("Somnia & Remerie", "somrem_start", "images/interactables/case1/somrem1.png", page=0,
+        xstart=404, ystart=501,
+        actions = [
+            {"name": "Talk to SomRem", "label": "somrem_start_talk"}
+        ],
+        state = "start"
+    )
+    t_marcella_start = Interactables("Marcella Lapin", "marcella_start", "images/interactables/case1/marchie1.png", page=0,
+        xstart=1250, ystart=621,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_start"}
         ]
@@ -23,7 +31,8 @@ init python:
     )
 
     # PART TWO
-    t_marcella_mid = Interactables("Marcella Lapin", "marcella_mid", "images/interactables/case1/rabbitTwo.png", page=1,
+    t_marcella_mid = Interactables("Marcella Lapin", "marcella_mid", "images/interactables/case1/marchie2.png", page=1,
+        xstart=1062, ystart=538,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_mid"},
         ]
@@ -34,7 +43,7 @@ init python:
             {"name": "Find Medicine", "label": "medicine_find"}
         ]
     )
-    t_debris = Interactables("Mounds of Papers", "debris", "images/interactables/case1/debris1.png", page=1,
+    t_debris = Interactables("Mounds of Papers", "debris", "images/interactables/case1/debris4.png", page=1,
         xstart=999, ystart=0,
         actions = [
             {"name": "Inspect Pile", "label": "pile_inspect"}
@@ -53,6 +62,7 @@ init python:
     )
     t_bunny2 = Interactables("Energetic Bunny", "bunny2", "images/interactables/case1/bunny2.png", page=0,
         xstart=892, ystart=430,
+        #xstart=900, ystart=495, for bunny2sleep
         actions = [
             {"name": "Talk to Bunny", "label": "bunny2_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny2_give", "condition": False},
@@ -95,48 +105,55 @@ init python:
     t_flower1 = Interactables("White Rose", "flower1", "images/interactables/case1/flower1.png", page=0,
         xstart=433, ystart=355,
         actions = [
-            {"name": "Paint the Rose", "label": "flower1_paint"}
+            {"name": "Paint the Rose", "label": "flower1_paint", "condition": True}
         ]
     )
     t_flower2 = Interactables("White Rose", "flower2", "images/interactables/case1/flower2.png", page=0,
         xstart=818, ystart=974,
         actions = [
-            {"name": "Paint the Rose", "label": "flower2_paint"}
+            {"name": "Paint the Rose", "label": "flower2_paint", "condition": True}
         ]
     )
     t_flower3 = Interactables("White Rose", "flower3", "images/interactables/case1/flower3.png", page=0,
         xstart=1482, ystart=212,
         actions = [
-            {"name": "Paint the Rose", "label": "flower3_paint"}
+            {"name": "Paint the Rose", "label": "flower3_paint", "condition": True}
         ]
     )
     t_flower4 = Interactables("White Rose", "flower4", "images/interactables/case1/flower4.png", page=1,
         xstart=423, ystart=630,
         actions = [
-            {"name": "Paint the Rose", "label": "flower4_paint"}
+            {"name": "Paint the Rose", "label": "flower4_paint", "condition": True}
         ]
     )
     t_flower5 = Interactables("White Rose", "flower5", "images/interactables/case1/flower5.png", page=1,
         xstart=250, ystart=811,
         actions = [
-            {"name": "Paint the Rose", "label": "flower5_paint"}
+            {"name": "Paint the Rose", "label": "flower5_paint", "condition": True}
         ]
     )
     t_flower6 = Interactables("White Rose", "flower6", "images/interactables/case1/flower6.png", page=1,
         xstart=1497, ystart=949,
         actions = [
-            {"name": "Paint the Rose", "label": "flower6_paint"}
+            {"name": "Paint the Rose", "label": "flower6_paint", "condition": True}
         ]
     )
     t_flower7 = Interactables("White Rose", "flower7", "images/interactables/case1/flower7.png", page=1,
         xstart=1433, ystart=8,
         actions = [
-            {"name": "Paint the Rose", "label": "flower7_paint"}
+            {"name": "Paint the Rose", "label": "flower7_paint", "condition": True}
         ]
     )
 
     # PART THREE
-    t_marcella_end = Interactables("Marcella Lapin", "marcella_end", "images/interactables/case1/rabbitThree.png", page=2,
+    t_somrem_end = Interactables("Somnia & Remerie", "somrem_end", "images/interactables/case1/somrem3.png", page=2,
+        xstart=487, ystart=762,
+        actions = [
+            {"name": "Talk to SomRem", "label": "somrem_end_talk", "condition": True},
+        ]
+    )
+    t_marcella_end = Interactables("Marcella Lapin", "marcella_end", "images/interactables/case1/marchie3.png", page=2,
+        xstart=1260, ystart=94,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_end", "condition": True},
         ]
@@ -144,7 +161,8 @@ init python:
     t_clockface1 = Interactables("Clock", "clockface1", "images/interactables/case1/clockface1.png", page=0,
         xstart=543, ystart=138,
         actions = [
-            {"name": "Inspect the Clock", "label": "clock1_inspect", "condition": True},
+            {"name": "Talk about Clock", "label": "clock1_talk", "condition": True},
+            {"name": "Inspect the Clock", "label": "clock1_inspect", "condition": False},
             {"name": "Move the Hour Hand Up", "label": "clock1_up", "condition": False},
             {"name": "Move the Hour Hand Down", "label": "clock1_down", "condition": False},
             {"name": "Move the Hour Hand Left", "label": "clock1_left", "condition": False},
@@ -155,7 +173,8 @@ init python:
     t_clockface2 = Interactables("Clock", "clockface2", "images/interactables/case1/clockface2.png", page=1,
         xstart=516, ystart=186,
         actions = [
-            {"name": "Inspect the Clock", "label": "clock2_inspect", "condition": True},
+            {"name": "Talk about Clock", "label": "clock2_talk", "condition": True},
+            {"name": "Inspect the Clock", "label": "clock2_inspect", "condition": False},
             {"name": "Move the Hour Hand Up", "label": "clock2_up", "condition": False},
             {"name": "Move the Hour Hand Down", "label": "clock2_down", "condition": False},
             {"name": "Move the Hour Hand Left", "label": "clock2_left", "condition": False},
@@ -189,7 +208,6 @@ init python:
 #--------------------------------------------------------------------------
 # CASE 1 INGREDIENTS
 #--------------------------------------------------------------------------
-init python:
     kirby = Item("Kirby with Shortcake", image = "/images/items/item_kirby.png",
         tooltip="Free him...",
         flavor=999)

@@ -2,7 +2,7 @@ label case1_cook:
     play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
     $ inventory = Inventory()
-    call inventory_stock
+    call inventory_stock from _call_inventory_stock
     # "Welcome to Hell's Kitchen..."
     # "Quick tutorial: you got a bunch of ingredients, and the goal is to add it together and reach the numbers in the middle."
     # "Bonus points if you get the STARRED* attribute to 100!"
@@ -34,7 +34,7 @@ label case1_cook_done(result):
         r "Not bad at all. Next time I'll be expecting more."
     hide screen cooking with Dissolve(0.8)
     hide screen focus_dialogue
-    call case1_vn_end(result)
+    call case1_vn_end(result) from _call_case1_vn_end
 
 label inventory_stock:
     python:

@@ -26,6 +26,7 @@ init -1:
     image storefront = "images/BG/bg_storefront.png"
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
+    image black = "#000"
 
 ## UI:
     image goLeft = "gui/button/goleft.png"

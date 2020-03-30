@@ -8,24 +8,26 @@
 label case1_dream:
     show screen focus_dialogue
     $ bun_name = "Dream bunnies"
+    $ _skipping = False # disable skipping option
 
     python:
         bg = "images/BG/bg_wonderland.png" # background image
         page_width = 1720 # screen page width
         total_pages = 3 # total pages in investigation
-        inventory = Inventory()
-        itr_list = [t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7]
-        interactions = Interactions(itr_list)
-
+        inventory = Inventory() # initialize inventory
+        interactions = Interactions( # starting interactions
+            [t_somrem_start]
+        )
         unlocked_pages = 0 # default is 0
-        current_page = 0 # start at 0
         finished = False # default is false, but true for testing
         renpy.start_predict_screen("dream")
         renpy.start_predict(
             "images/BG/bg_wonderland.png",
             "images/interactables/case1/*.png",
             "side dreamSom *",
-            "side dreamRem *"
+            "side dreamRem *",
+            "gui/frame_*.png", # dream hover textboxes
+            "gui/textbox_*.png" # dream talk textboxes
         )
     scene black
     show screen dream() with Dissolve(2.0)
@@ -33,15 +35,15 @@ label case1_dream:
     play sound trip
     dreamSom sh "W-whoa...!" with sshake
     dreamRem ne "I got you. Watch your step, it's a mess in here."
-    dreamRem ne "A dream would reflect a person's inner headspace."
+    dreamRem ne "A dream would reflect a person's inner headspace, after all."
     dreamSom th "Our client must really have a hard time arranging their thoughts, among other things..."
     dreamRem si "Sounds like someone I know."
     dreamRem pe "Don't think I didn't catch you this morning rearranging our already labeled pastry display!"
     dreamSom gr "Aww, but it looks better when it's arranged by jam color!"
     dreamRem si "*sigh* Anyway, we need to find our client. Where are they?"
     $ interactions.unlock([t_marcella_start])
-    # play appear sfx
-    show expression t_marcella_start.image with Dissolve(0.8)
+    # play appear sfx?
+    pause(1.0)
     dreamMar "Oh no, I'm late. I'm late! I have to hurry!"
     dreamMar "This assignment is due... and I have to fill out the report for... Oh, I need to pick up the..."
     dreamSom sh "My, there's Marcella, practically up to their nose in paperwork!"
@@ -50,18 +52,32 @@ label case1_dream:
     jump dream_start
     hide screen focus_dialogue
 
+label somrem_start_talk:
+    if t_somrem_start.state == "start":
+        dreamSom gr "This dream... My, it's like a wonderland!"
+        dreamRem fl "Don't get lost now Soms. Here, take my hand."
+    elif t_somrem_start.state == "postMar":
+        dreamSom de "Oh~ I could just stare at those cutie bunnies all night~"
+        dreamRem th "It's a shame, but the incense will only last so long before our client wakes up."
+        dreamSom ex "Hey Remi, we should go to a petting zoo for our next date!"
+        dreamRem gr "That sounds like a good idea, but first, let's focus our on job."
+    elif t_somrem_start.state == "middle":
+        dreamRem th "TODO!!!"
+    elif t_somrem_start.state == "end":
+        dreamRem th "TODO!!!"
+    jump dream_start
 
 label marcella_talk_start:
     dreamMar "... And there's the kids' practice... I need to arrange the bouquet... Class has been cancelled but..."
     $ interactions.complete([t_marcella_start])
     hide expression t_marcella_start.image with Dissolve(0.8)
     $ interactions.unlock([t_bunnysquad])
-    show expression t_bunnysquad.image with Dissolve(0.8)
     dreamRem pe "Darn, they're too fast...!"
-    dreamRem "And what's with these {i}bunnies?!{/i}"
+    dreamRem "And what's with these {ii}bunnies?!{/ii}"
     dreamSom gr "Oooh, they are so cute!"
     dreamRem si "Now what? We can't start cooking, much less collect any ingredients in this condition."
     dreamSom ne "How about we take a look around? Maybe we can learn something from these adorable dream whip cream fluffles~..."
+    $ interactions.update(t_somrem_start.updateState("postMar"))
     jump dream_start
 
 label bunnies_talk_som:
@@ -83,7 +99,7 @@ label bunnies_talk_som:
     dreamSom gr "Oooh, I wonder if we get to bake a pie with this!"
     dreamRem ne "We'll see exactly what we can work with once we find more ingredients."
     dreamSom gr "I'll pocket this sweet snack for now, thank you very much~!"
-    $ interactions.unlock([t_strawberry, t_marcella_mid])
+    $ interactions.unlock([t_strawberry, t_clockface1, t_marcella_mid])
     $ inventory.add(c_bunnyapples)
     $ unlocked_pages += 1
     jump dream_start
@@ -99,7 +115,7 @@ label bunnies_talk_rem:
 
 label strawberry_look:
     dreamRem th "Doesn't that moon look peculiar? Those weird spots and pinkish hue... Is it a strawberry?!"
-    dreamSom th "Could it be? An ingredient? Let's extract it!"
+    dreamSom ex "Could it be? An ingredient? Let's extract it!"
     dr "Squinting up against the moonlight, Somnia reached and placed her hand against the night sky, pinching the distant moon between her fingers."
     dr "Like a manipulation of perspective, or a magic trick, one pluck was all it took for Somnia to retrieve the strawberry."
     $ inventory.add(c_strawberry)
@@ -108,6 +124,12 @@ label strawberry_look:
     play sound itemget
     dr "You got a {ii}Creamy Strawberry!{/ii}"
     hide screen get_ingredient
+    jump dream_start
+
+label clock1_talk:
+    dreamRem sh "What an odd-looking clocktower...!"
+    dreamSom sh "I wonder just how long it goes..."
+    dreamSom th "Unfortunately, the bottom of the tower is obscured by the clouds."
     jump dream_start
 
 label marcella_talk_mid:
@@ -121,8 +143,9 @@ label marcella_talk_mid:
         dreamSom gr "Oh, come on Remi! It'll be fun!"
         dreamSom gr "After all~ A spoonful of sugar...{wmn}"
         dreamRem si "Helps the medicine go down, I know. It's your favorite song. Let's just get to work."
-        $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5])
+        $ interactions.unlock([t_debris, t_medicine, t_bunny1, t_bunny2, t_bunny3, t_bunny4, t_bunny5, t_clockface2])
         $ interactions.update(t_marcella_mid.view())
+        $ interactions.update(t_somrem_start.updateState("middle"))
     else:
         dreamMar "And I have to do this... and don't forget that... Oh, and I need to..."
         dreamRem th "Looks like Marcella's frozen in their thoughts."
@@ -157,7 +180,7 @@ label pile_inspect:
     jump dream_start
 
 label medicine_find:
-    dreamSom sh "This looks to be the medicine we have to give to Marcella's sister! The label says \"Drink Me\"."
+    dreamSom sh "This must be the medicine we have to give to Marcella's sister! The label says \"Drink Me\"."
     show screen get_ingredient("ooze") with Dissolve(0.8)
     play sound itemget
     dr "You got the {ii}Cherry Medicine!{/ii}"
@@ -186,7 +209,7 @@ label report_find:
     dreamSom sh "Hm?"
     dreamSom "Something fell out of the pages..."
     dreamRem th "Looks like a family photo..."
-    dreamRem "Marcella is surrounded by their five younger siblings."
+    dreamRem "Marcella smiling while surrounded by their five younger siblings."
     dreamSom gr "Isn't that just the sweetest thing!"
     show screen get_ingredient("herbs") with Dissolve(0.8)
     play sound itemget
@@ -221,7 +244,7 @@ label bunny1_talk:
     else:
         $ bun_name = "Maddie"
         bun "Thank you again for the book!"
-        bun "Whitney has to go to bed early tonight- she needs to get her rest."
+        bun "Whitney has to go to bed early tonight since she needs to get her rest."
         bun "She would have been so sad if I couldn't read her favorite stories before bed..."
     jump dream_start
 label bunny1_give:
@@ -231,8 +254,11 @@ label bunny1_give:
 label bunny1_help:
     dreamSom ne "Hello, there! Auntie Som needs some help with cleaning, would you mind helping?"
     if not t_bunny1.state:
+        dreamRem ne "Hey."
         bun "..."
-        dreamSom th "..."
+        dreamRem si "..."
+        dreamRem pe "Can they not hear me?"
+        dreamSom sh "They look like they're occupied in trying to find something..."
         bun "I can't find my favorite book..."
         bun "It's blue and has my name on the inside."
         dreamSom "Hm... A blue book, you say..."
@@ -252,8 +278,8 @@ label bunny1_help:
         dreamSom th "Maybe we can try asking again later."
     jump dream_start
 label bunny1_chat:
-    bun "Whitney has to go to bed early tonight- she needs to get her rest."
-    bun "She would have been so sad if I couldn't read her favorite stories before bed..."
+    bun "Thanks again for the book!"
+    bun "Now I get to share my favorite bedtime stories with Whitney."
     jump dream_start
 label bunny1_time:
     bun "It's 9 o' clock! I just finished reading Whitney her favorite bedtime stories."
@@ -311,11 +337,14 @@ label bunny2_help:
         bun "Since little Whitney is sick, I can help clean up instead!"
         bun "I just finished my book, I'll be right over!"
         dreamSom de "My, how responsible! Thank you, darling~!"
-        # momentary fade effect
+        show black with Dissolve(0.8)
+        pause(1.0)
+        hide black with Dissolve(0.8)
         python:
             interactions.update(t_bunny1.disable("bunny1_help"))
             interactions.update(t_bunny2.disable("bunny2_help"))
             interactions.update(t_debris.updateState(t_debris.state - 1))
+            interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
     jump dream_start
 label bunny2_chat:
     $ bun_name = "Little Whitney"
@@ -342,9 +371,14 @@ label bunny3_help:
     $ bun_name = "Peevish bunny"
     dreamSom "Hello, could you help us move some of that big pile of papers for your dear big sib Marchie?"
     bun "Hmph... I guess if it's to help out big sib Marchie then..."
+    # show black zorder 90 with Dissolve(0.8)
+    scene black with Dissolve(0.8)
+    pause(1.0)
     python:
         interactions.update(t_bunny3.disable("bunny3_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
+        interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
+    hide black 
     jump dream_start
 label bunny3_chat:
     $ bun_name = "Peevish bunny"
@@ -373,6 +407,7 @@ label bunny4_help:
     python:
         interactions.update(t_bunny4.disable("bunny4_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
+        interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
     jump dream_start
 label bunny4_chat:
     bun "It sure is tough keeping an eye on everyone. I wonder how Marchie manages it?"
@@ -405,15 +440,18 @@ label bunny5_help:
         dreamSom gr "What a lovely idea! We'll be sure to do that."
         dreamRem th "Painting... the flowers?"
         dreamRem si "Well, I guess it's the thought that counts."
-        # $ interactions.unlock([t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7])
-        $ interactions.update(t_bunny5.updateState(7))
-        $ interactions.update(t_bunny5.disable("bunny5_talk"))
+        python:
+            interactions.unlock([t_flower1, t_flower2, t_flower3, t_flower4, t_flower5, t_flower6, t_flower7])
+            interactions.update(t_bunny5.updateState(7))
+            interactions.update(t_bunny5.disable("bunny5_talk"))
     elif t_bunny5.state == 0:
         bun "Oh, thank you, thank you! The red roses are so pretty!"
         bun "I hope big sib Marchie likes them!"
         bun "And I didn't forget your request- I can help clean up, too!"
-        $ interactions.update(t_bunny5.disable("bunny5_help"))
-        $ interactions.update(t_debris.updateState(t_debris.state - 1))
+        python:
+            interactions.update(t_bunny5.disable("bunny5_help"))
+            interactions.update(t_debris.updateState(t_debris.state - 1))
+            interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
     elif t_bunny5.state > 0:
         bun "There's still [t_bunny5.state] of the flowers left to be painted."
     jump dream_start

@@ -28,7 +28,7 @@ label lab:
     I wonder what Cynthia is going to break this time...
     """
 
-    call booktest
+    call booktest from _call_booktest
 
     show somnia at right
     s "Test!"

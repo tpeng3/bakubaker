@@ -223,10 +223,13 @@ init python:
     config.custom_text_tags["ii"] = interesting
 
     def smallText(tag, argument, contents):
-        size = 18
+        size = 20
+        alpha = 0.4
         return [
                 (renpy.TEXT_TAG, "size={}".format(size)),
+                (renpy.TEXT_TAG, "alpha={}".format(alpha)),
                 ] + contents + [
+                (renpy.TEXT_TAG, "/alpha"),
                 (renpy.TEXT_TAG, "/size"),
                 ]
     config.custom_text_tags["ss"] = smallText

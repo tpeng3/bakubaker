@@ -1,4 +1,4 @@
-# below labels are dependent on a global bg and current_page variable that is set in the beginning of each case
+# GENERIC LABELS
 label dream_start():
     if finished:
         show screen goCook()
@@ -14,9 +14,9 @@ label disable_pause(next_label):
     show screen focus_dialogue # hacky way to disable imagebuttons while dialogue is happening
     jump expression next_label
 
+# SCREEN STYLES
 style dreamacts is button:
     xminimum 524
-    # xsize 1000
     ysize 104
     padding (10, 10, 10, 10)
     background Frame("itrFrame", Borders(5, 1, 5, 1), tile=False)
@@ -31,6 +31,7 @@ style dreamacts_text is button_text:
                 (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
              ]
 
+# SCREEN TRANSFORMATIONS
 transform panning(pstart, pend):
     yalign 0.5
     xanchor 0.0
@@ -45,6 +46,10 @@ transform dreamfade(delay=0):
         linear 0.5 alpha 1.0
     parallel:
         linear 0.6 xoffset 0
+
+transform itrfade():
+    alpha 0.0
+    linear 0.8 alpha 1.0
     
 # --------------------------------------------------------------------------
 # INITIALIZE INVESTIGATION CHOICES
@@ -56,19 +61,18 @@ init -1 python:
             self.key = key # name of the interactable since name isn't unique enough
             self.image = image # image url
             self.page = page # page on where the object gets placed
-            self.xstart = xstart # exact position of image
+            self.xstart = xstart # top left corner position of image
             self.ystart = ystart
             self.actions = actions # dict of possible actions {actionName: jumpLabel)
             self.state = state # some sort of custom state needed for specific interactables
             self.viewed = False
 
-        def __repr__(self): # for printing
+        def __repr__(self): # for debug printing
             return str({"name": self.name, "actions": self.actions})
 
         def view(self):
             self.viewed = True
             return self
-
         def enable(self, label): 
             for action in self.actions:
                 if action['label'] == label and "condition" in action:
@@ -82,10 +86,18 @@ init -1 python:
         def updateState(self, state):
             self.state = state
             return self
+        def updateImage(self, image, xpos=None, ypos=None):
+            self.image = image
+            if xpos:
+                self.xstart = xpos
+            if ypos:
+                self.ystart = ypos
+            return self
 
     class Interactions(store.object):
         def __init__(self, itr_list=[]):
             self.list = itr_list
+
         def unlock(self, unlocked): # unlocked is a list of unlocked interactions
             for i in unlocked:
                 if i not in self.list:
@@ -115,6 +127,7 @@ screen goCook():
 screen dream():
     default fixedposprev = 0
     default fixedposend = 0
+    default current_page = 0
     zorder -10
 
     fixed:
@@ -124,21 +137,27 @@ screen dream():
         # populate interactables
         for i in interactions.list:
             $ actionable = [action for action in i.actions if action.get('condition', True)]
-            imagebutton:
-                idle i.image
-                xpos (i.page * page_width) + i.xstart
-                ypos i.ystart
-                tooltip i
-                focus_mask True
-                mouse "hover"
-                action [If(len(actionable) == 1,
-                    true = [Call("disable_pause", next_label=actionable[0]['label'])], # if there's only one action, jump immediately to label
-                    false = Show('dream_actions', actions=actionable, mousepos=renpy.get_mouse_pos()))]
+            if len(actionable) < 1:
+                image i.image:
+                    xpos (i.page * page_width) + i.xstart
+                    ypos i.ystart
+                    at itrfade()
+            else:
+                imagebutton:
+                    idle i.image
+                    xpos (i.page * page_width) + i.xstart
+                    ypos i.ystart
+                    tooltip i
+                    focus_mask True
+                    mouse "hover"
+                    at itrfade()
+                    action [If(len(actionable) == 1,
+                        true = [Call("disable_pause", next_label=actionable[0]['label'])], # if there's only one action, jump immediately to label
+                        false = Show('dream_actions', actions=actionable, mousepos=renpy.get_mouse_pos()))]
 
     # hover tooltip
     $ tooltip = GetTooltip()
     if tooltip:
-        # $ x, y = renpy.get_mouse_pos()
         window:
             xalign 0.5 yalign 0.9
             xsize 524 ysize 104
@@ -150,14 +169,6 @@ screen dream():
                 ]
             background Transform("itrFrame", alpha=persistent.say_window_alpha)
 
-        # text "[tooltip.name]":
-        #     xalign 0.5 ypos 0.8 #tmp
-        #     xanchor 0.0
-        #     outlines [
-        #         (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
-        #         (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
-        #     ]
-
     # background panning
     if current_page > 0:
         imagebutton:
@@ -165,17 +176,19 @@ screen dream():
             hover "goLeftHov"
             mouse "hover"
             xalign 0.02 yalign 0.5
+            at itrfade()
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
                     SetScreenVariable("fixedposend", (-current_page*page_width)+page_width),
-                    SetVariable("current_page", current_page-1)]
+                    SetScreenVariable("current_page", current_page-1)]
     if current_page < unlocked_pages:
         imagebutton:
             idle "goRight"
             hover "goRightHov"
             xalign 0.98 yalign 0.5
+            at itrfade()
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
                     SetScreenVariable("fixedposend", (-current_page*page_width)-page_width),
-                    SetVariable("current_page", current_page+1)]
+                    SetScreenVariable("current_page", current_page+1)]
 
 screen focus_dialogue:
     zorder 0
