@@ -74,7 +74,7 @@ style vslider:
 style frame:
     padding gui.frame_borders.padding
     background Frame("gui/frame.png", gui.frame_borders, tile=gui.frame_tile)
-    
+
 
 ################################################################################
 ## In-game screens
@@ -98,7 +98,7 @@ style frame:
 ## centered speaker to have the textbox shown behind it.
 define centered = Character(None, what_style="centered_text", window_style="centered_window", window_background=None)
 
-screen say(who, what):
+screen say(who, what, namebox_background):
     style_prefix "say"
 
     window:
@@ -114,7 +114,7 @@ screen say(who, what):
                 id "namebox"
                 style "namebox"
                 text who id "who"
-                background Transform(style.namebox.background, alpha=persistent.say_window_alpha)
+                background namebox_background
 
         # text what:
         #     id "shadow"
@@ -193,8 +193,9 @@ style namebox:
     ypos gui.name_ypos
     ysize gui.namebox_height
 
-    background Frame("gui/namebox_test.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
     padding gui.namebox_borders.padding
+    background Frame("gui/namebox_test.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+
 
 style say_label:
     properties gui.text_properties("name", accent=True)

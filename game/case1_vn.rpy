@@ -17,11 +17,12 @@ label case1_vn:
     dr """
     When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
 
-    The patchwork quilt of the prior night's myriad dreams is kicked off, and the townsfolk go about their day.
+    The patchwork quilt of the prior night's myriad of dreams is kicked off, and the townsfolk go about their day.
 
     But, alas... Once night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
 
-    Luckily, in a quiet corner of the town lies {ii}Cafe Nemo{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
+    Luckily, in a quiet corner of the town lies {ii}Café Nemo{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
+
     """
     dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, they'll find two busy cooks awaiting with open arms."
     pause 1.0
@@ -30,7 +31,7 @@ label case1_vn:
     scene storefront with dissolve
     s "Hm hmm... Spoonful of sugar~... {mn}"
     s "… in a most delightful way~!"
-    "Ding!"
+    u "Ding!"
     $ somexpr = "gr"
     show somnia with dissolve
     s "{ii}Rem~{w=.1}er~{w=.1}ie~! {mn}{/ii}"
@@ -67,10 +68,10 @@ label case1_vn:
     $ remexpr = "fl"
     r "Well, o-of course...!"
     r "Regardless, you should know better than to handle tarts that are too hot to touch!"
+    r "{i}(Despite that, I can’t say no to Somnia’s desserts!){/i}"
     $ somexpr = "ne"
     $ remexpr = "si"
     r "*Sigh*"
-    r "{i}(Despite that, I can’t say no to Somnia’s desserts!){/i}"
     $ remexpr = "ne"
     r "If you’re all done baking, we ought to open up shop."
     show somnia
@@ -200,7 +201,7 @@ label case1_vn:
     $ marexpr = "th"
     ml "Wow, it looks much more different than what I remember."
     $ remexpr = "de"
-    r "Welcome to the {ii}Dream Service{/ii}. Here, we specialize in investigating strange sleep patterns and behavior."
+    r "Welcome to {ii}Slumberworks{/ii}. Here, we specialize in investigating strange sleep patterns and behavior."
     $ remexpr = "ne"
     r "Tell us, what ails you?"
     $ marexpr = "fr"
@@ -213,10 +214,12 @@ label case1_vn:
     $ marexpr = "ne"
     $ somexpr = "th"
     s "Unfortunately, she is currently away. We are her apprentices who’ll be taking care of the store while she's gone."
+    $ somexpr = "ne"
+    s "However, you're in good hands! We provide this specialty service as partners."
     $ remexpr = "gr"
-    r "I'm Remerie, dreams specialist."
+    r "I'm Remerie, {ii}dreams specialist{/ii}."
     $ somexpr = "gr"
-    s "And I'm the connoisseur of nightmares, Somnia!"
+    s "And I'm the {ii}connoisseur of nightmares{/ii}, Somnia!"
     $ marexpr = "gr"
     ml "It's a pleasure to meet you two. I'm {ii}Marcella Lapin{/ii}."
     $ marcella_name = "Marcella Lapin"
@@ -289,6 +292,12 @@ label case1_vn:
     scene black with dissolve
     pause (2.0)
 
+    menu:
+        "go to dream":
+            jump expression case+"_dream"
+        "after dream":
+            jump case1_vn_end
+
     stop music fadeout (5.0)
     dr """The aromatic wisps that rolled out shimmered lazily against the glint of the office's few lamps, and seemed to be made of a dream itself.
 
@@ -327,9 +336,9 @@ label case1_vn_end(result=0):
     $ somexpr = "gr"
     s "What's with that sad look? Eat up and enjoy!"
     $ remexpr = "gr"
-    r "I... I will. Thanks for the meal. Mmrph."
+    r "I... I will. {i}Bonne nuit and bonne appetit{/i}."
     $ remexpr = "th"
-    r "Mm... Soft, warm eggs wrapped in a delicate fold and perfectly sweetened."
+    r "Mm... Soft, warm eggs wrapped in a delicate fold and perfectly seasoned."
     $ remexpr = "gr"
     r "The freshly cut fruit serves as a crisp, light flavor in contrast to the richness of the eggs."
     r "This is sure to brighten up anyone’s morning, especially if they had a tiring night before."
@@ -337,6 +346,8 @@ label case1_vn_end(result=0):
     r "I hope with this, we were able to eat away some of Marcella’s worries."
     $ somexpr = "gr"
     s "Hehe~... I hope so too!"
+
+    scene black with dissolve
 
     dr """
     The dream eater feasted on the hearty dish conjured from the client's suppressed worries and anxieties.
@@ -346,111 +357,175 @@ label case1_vn_end(result=0):
     Slowly, Marcella rose from the bed as the incense fizzled out to a small ember.
     """
 
+    scene dreamoffice with dissolve
+
     $ marexpr = "ya"
     show mar with dissolve
     ml "*Yaaaawn...*" with sshake
-    $ somexpr = "gr"
-    s "Good morning! How are you feeling after that little nap?"
+    show mar at right with ease
+    show remi at left with dissolve
+    r "You're awake. How are you feeling after your nap?"
     $ marexpr = "ne"
     ml "Um..."
     $ marexpr = "th"
     ml "Hungry..."
-    $ somexpr = "de"
-    s "You're in luck! We've prepared a dish specially for you."
-    $ somexpr = "ne"
-    s "If you would please follow me back out to the front..."
+    $ remexpr = "ne"
+    r "That's to be expected. Fortunately, we've prepared a dish specially for you."
+    r "If you would please follow me back out to the front..."
     stop music fadeout 2.0
     scene black with dissolve
     pause (2.0)
     play music storeend fadein 4.0
     scene storefront with dissolve
-    show mar
-    show somnia at right
-    show remi at left
+
+    show mar with dissolve
+    show somnia at right with easeinright
+    $ remexpr = "ne"
+    show remi at left with easeinleft
+
     $ marexpr = "aw"
-    ml "Oh, this is delicious!"
+    ml "Oh, this is delicious!" with flash
     if result == 1:
         $ marexpr = "th"
         ml "It reminds me of when I first came here and had sleep consulting with, um... what's her name again...?"
+        $ somexpr = "de"
         s "Ms. Nemo!!"
+        $ remexpr = "th"
         r "Ms. Nemo."
         $ marexpr = "aw"
         ml "Y-yeah! This dish really takes me back..."
+        $ somexpr = "th"
         s "Can you tell us how you two met?"
         $ marexpr = "la"
         ml "Well, it’s been a while ago now. The years have flown by in a blink of an eye..."
-        ml "This is a bit of a personal story but, well..."
+        $ marexpr = "th"
+        ml "This is a bit of a personal story but..."
+        $ marexpr = "fr"
+        $ somexpr = "ne"
+        $ remexpr = "ne"
         ml "Five years ago, my family was going through a rough time. It was hard for our parents to be home, what with their odd jobs keeping them busy."
         ml "So I was given the responsibility of taking care of my younger siblings. But to be honest, it was pretty overwhelming."
-        ml "I wasn’t even that many years older, but suddenly they were looking to me to take care of them and asking me to take them to places."
+        ml "I'm not that many years older than our second oldest child, but suddenly all of them were looking to me; to take care of them."
+        $ marexpr = "wo"
         ml "What could I do? I couldn't turn my back on my family..."
-    # TODO MENTOR NAME // BAKERY NAME
-        ml "The stress of it all led to a lot of sleepless nights. And that’s when I happened to stumble across this bakery and meet {ii}Madam Nemo{/ii}."
-        ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}bakery{/ii}."
+        ml "The stress of it all led to a lot of sleepless nights. I was tired, sure, but that was nothing compared to letting my siblings down."
+        ml "And that’s when I happened to stumble across this bakery and meet {ii}Madam Nemo{/ii}."
+        $ marexpr = "la"
+        ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}Café Nemo{/ii}."
+        $ marexpr = "fr"
         ml "When I woke up, I was inside the store, with a warm omelette and a comforting smile waiting for me."
         ml "It was difficult, balancing my responsibilities, but I felt a... a duty to take care of my siblings."
-        ml "She really listened to my worries. I was able to work hard and continue to support my siblings thanks to her advice."
+        ml "When she found me, she was so concerned! I didn't realize how hard I had been pushing myself until, well, my exhaustion got the best of me."
+        $ marexpr = "th"
+        ml "She told me... that if I didn't take care of myself, and no one found me, my siblings would be all alone once again." with sshake
+        $ marexpr = "la"
+        ml "She really listened to my worries and offered me some words of wisdom. I was able to work hard and continue to support my siblings thanks to her advice."
+        $ marexpr = "gr"
+        ml "I also came back regularly to help myself to her specialty omelette!"
         ml "Thinking back at it now, she did mention before she had taken on two kids of her own as apprentices. I suppose that must be the two of you."
+        ml "It's amazing how well you recaptured that flavor and nostalgia that I once felt years ago. I'm sure she would be proud."
         ml "We certainly had our fair share of caretaking stories. {ii}Madam Nemo{/ii} treasured you two the same I treasured my siblings."
         ml "She was a lovely soul. I hope she comes back soon, for your sake."
+        $ somexpr = "di"
+        s "That was a beautiful story..."
+        $ remexpr = "th"
         r "..."
+        $ remexpr = "ne"
         r "Do you think you could share more of your stories with us sometime?"
+        $ somexpr = "sh"
         s "Yes, please...! We love and miss her a great deal!"
-        ml "I would love to hear your stories of {ii}Madam Nemo{/ii} as well. If I ever had the time, I'd like to try dropping by more."
+        $ somexpr = "gr"
+        $ remexpr = "gr"
+        $ marexpr = "aw"
+        ml "I would love to hear your stories of {ii}Madam Nemo{/ii} as well. If I find the time, I'd definitely make space in my schedule for a short routine visit."
+    $ somexpr = "ne"
+    $ remexpr = "ne"
     ml "You know, when I took that nap earlier, I actually had what felt like a most wonderful, whimsical dream."
     ml "I don’t remember much of it now, but there were bits and pieces..."
-    # Marchie checks the time
+    $ marexpr = "wo"
     ml "Oh no! I'm going to be late...!"
+    $ marexpr = "th"
     ml "..."
-    ml "Ah, you know what? I think I should take a day off to rest."
-    ml "The shop can go without me for a day."
+    $ marexpr = "la"
+    ml "Ah, you know what? If today's visit has told me anything, I think it's that I should take a day off to rest."
+    ml "The flower shop can go without me for a day."
     ml "Rather than focus on trying to keep up, I honestly ought to step back and see if I can get help from my siblings with these tasks."
-    ml "Why, I even dreamed I saw them cleaning up some large piles of debris!"
-    "!!"
-    ml "But it’s true. They've grown up to be very capable... I think they might be able to help around the floral shop as well!"
+    $ marexpr = "la"
+    ml "Why, it's the silliest thing, I even dreamt of a messy tea party, and that my siblings were cleaning up the mess!"
+    $ _last_say_who = "None"
+    $ somexpr = "sh"
+    $ remexpr = "sh"
+    u "!!" with flash
+    ml "But it’s true. They've grown up to be very capable... I think they might be able to help around the house and the floral shop!"
+    $ marexpr = "aw"
     ml "Well... I must be going. Thank you so much for your services!"
-    scene black
-    # ml leaves in their usual hurried disposition but with a happier energy in the steps. They look like they have an idea of what to do next…!
+    scene black with dissolve
+    with Pause(2.0)
 
-    scene storefront
-    show somnia at right
-    show remi at left
+    scene storefront with dissolve
+    $ somexpr = "gr"
+    $ remexpr = "ne"
+    show somnia at right with easeinright
+    show remi at left with easeinleft
     s "Phew, all in a day's work! Right, Remi?"
-    r "What do you mean? Don't forget the clean-up job you put me through after your little experiment on the dish!"
-    s "Hehe~... I just wanted to impress you with a dash of whimsy!"
     s "It’s funny, Marchie reminded me a little of you- working a little too hard at times..."
     s "You ought to take a card from Marchie’s book and take it easy- have some fun now and then!"
+    $ remexpr = "si"
     r "I think you have enough fun for the both of us..."
-    s "Don't tell me you didn't have fun in that dream~! The cute bunnies? Cooking up a yummy new dream dish? It's been an awful long time since we've had a client!"
-    r "While I can't say the same about the bunnies, I do have to agree that the dream dish was quite good…"
+    $ somexpr = "ex"
+    s "Don't tell me you didn't have fun in that dream~! The cute bunnies? Cooking up a yummy new dream dish?"
+    s "It's been a dreadfully long time since we've had a client!" with flash
+    $ remexpr = "gr"
+    r "While I can't say the same about the {i}cute bunnies{/i}, I do have to agree that the dream dish was quite good…"
+    $ somexpr = "bi"
     s "Hm? Do I spy a smile turning the corners of your mouth...?"
+    $ remexpr = "bi"
     r "Wh-what?"
+    $ somexpr = "de"
     s "I do! You really liked the dish, didn't you!"
-    r "O-of course! I fixed it and made it delectable, no thanks to you!"
-    # Somnia laughs lightly but her eyes are turned downward.
+    $ remexpr = "fl"
+    r "O-of course! "
+    $ remexpr = "de"
+    extend "I fixed it and made it delectable, {w=1}{nw}" with flash
+    $ remexpr = "pe"
+    extend "no thanks to you!" with sshake
+
+    $ somexpr = "di"
     s "*sigh...*"
+    $ remexpr = "ne"
     s "It takes me back."
-    s "It's been five years since {ii}mentor{/ii} disappeared..."
+    s "It's been five years since {ii}Ms. Nemo{/ii} disappeared..."
+    $ remexpr = "th"
     r "..."
+    $ remexpr = "gr"
     r "Starting the morning with a dish like this, it reminds me of when she would prepare fruit slices before opening."
+    $ remexpr = "sh"
     s "Y-you remember something like that?"
+    $ remexpr = "ne"
     r "Of course, the way you plated the fruit slices on the client's dish... It's just like how she did it."
+    $ somexpr = "di"
     s "I... I suppose it is, isn't it."
-    rth "Does Somnia really not remember? Starting the day with small delights from our mentor only ever brightened up my day."
-    s "I'm glad it reminded you of her, if only for a little bit."
+    $ remexpr = "th"
+    r "(Does Somnia really not remember? Starting the day with small delights from our mentor only ever brightened up my day.)"
+    s "I suppose... I'm glad it reminded you of her, if only for a little bit."
+    $ remexpr = "ne"
     r "You two were close, weren't you? It's only natural you'd pick up some of her tendencies."
     s "R... Right..."
+    $ remexpr = "sh"
 
     dr """
     For the usually bubbly Somnia to fall silent... Well, it was certainly a rare sight to behold, and Remerie quickly took note.
 
     Providing comfort was far from Remerie's forte, but seeing Somnia so unusually despondent kindled a flame of determination within her.
     """
-
+    $ remexpr = "th"
     r "Somnia..."
+    $ somexpr = "sh"
     r "We agreed to watch the store and wait for her, right?"
-    r "It's our duty to keep the store as welcoming as it was before she left."
-    # would be cute if Somnia's expression changed gradually back to her neutral sprite throughout this convo
+    $ somexpr = "ne"
+    r "It's our duty to keep the store as warm and welcoming as it was before she left."
+    $ somexpr = "gr"
+    $ remexpr = "gr"
     r "I know it's hard to play the waiting game, but let's get to work... for the day she'll return."
 
     dr """
@@ -459,5 +534,9 @@ label case1_vn_end(result=0):
     Another day, another chance to see their mentor.
 
     With that hope in their hearts, the two open up shop and await the return of their old friend.
+
+    And so, Café Nemo resumes it's day to day business. Providing dreamy dishes to those whose hungers wish to be sated with delectable treats...
+
+    ...and those whose who wander in with dreams composed of worries, fears and woes will provide the same satisfaction to the {ii}dream eaters{/ii}.
     """
     return # change this to jump to credits page for demo

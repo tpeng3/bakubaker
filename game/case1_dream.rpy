@@ -37,7 +37,7 @@ label case1_dream:
     dreamSom th "Our client must really have a hard time arranging their thoughts, among other things..."
     dreamRem si "Sounds like someone I know."
     dreamRem pe "Don't think I didn't catch you this morning rearranging our already labeled pastry display!"
-    dreamSom gr "Aww, but it looks better when it's arranged by jam color!" 
+    dreamSom gr "Aww, but it looks better when it's arranged by jam color!"
     dreamRem si "*sigh* Anyway, we need to find our client. Where are they?"
     $ interactions.unlock([t_marcella_start])
     # play appear sfx
@@ -399,7 +399,7 @@ label bunny5_help:
         bun "Oh, before that, can I ask for a favor as well?"
         dreamSom ne "Sure sweetie, what is it?"
         bun "You see, I wanted to give big sib Marchie a gift for all that she's done for us."
-        bun "big sib Marchie's favorite color is red! But all the flowers here are white...!"
+        bun "Big sib Marchie's favorite color is red! But all the flowers here are white...!"
         bun "I brought some paint earlier, but I'm not sure where to start..."
         bun "Could you help me {ii}color seven flowers?{/ii}"
         dreamSom gr "What a lovely idea! We'll be sure to do that."
@@ -409,7 +409,9 @@ label bunny5_help:
         $ interactions.update(t_bunny5.updateState(7))
         $ interactions.update(t_bunny5.disable("bunny5_talk"))
     elif t_bunny5.state == 0:
-        bun "Hmm? Sure, I can help out!"
+        bun "Oh, thank you, thank you! The red roses are so pretty!"
+        bun "I hope big sib Marchie likes them!"
+        bun "And I didn't forget your request- I can help clean up, too!"
         $ interactions.update(t_bunny5.disable("bunny5_help"))
         $ interactions.update(t_debris.updateState(t_debris.state - 1))
     elif t_bunny5.state > 0:
