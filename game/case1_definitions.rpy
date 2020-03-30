@@ -9,12 +9,14 @@ init python:
         ]
     )
     t_bunnysquad = Interactables("Fluffle of Bunnies", "bunnysquad", "images/interactables/case1/fluffle.png", page=0,
+        xstart=1167, ystart=532,
         actions = [
             {"name": "Talk (Somnia)", "label": "bunnies_talk_som"},
             {"name": "Talk (Remerie)", "label": "bunnies_talk_rem"}
         ]
     )
     t_strawberry = Interactables("Giant Strawberry", "strawberry", "images/interactables/case1/strawberry.png", page=0,
+        xstart=224, ystart=7,
         actions = [
             {"name": "Look at Strawberry", "label": "strawberry_look"}
         ]
@@ -27,16 +29,19 @@ init python:
         ]
     )
     t_medicine = Interactables("Bottle of Medicine", "medicine", "images/interactables/case1/medicine.png", page=1,
+        xstart=957, ystart=253,
         actions = [
             {"name": "Find Medicine", "label": "medicine_find"}
         ]
     )
     t_debris = Interactables("Mounds of Papers", "debris", "images/interactables/case1/debris1.png", page=1,
+        xstart=999, ystart=0,
         actions = [
             {"name": "Inspect Pile", "label": "pile_inspect"}
         ]
     )
     t_bunny1 = Interactables("Quiet Bunny", "bunny1", "images/interactables/case1/bunny1.png", page=0,
+        xstart=234, ystart=807,
         actions = [
             {"name": "Talk to Bunny", "label": "bunny1_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny1_give", "condition": False},
@@ -47,6 +52,7 @@ init python:
         state = False
     )
     t_bunny2 = Interactables("Energetic Bunny", "bunny2", "images/interactables/case1/bunny2.png", page=0,
+        xstart=892, ystart=430,
         actions = [
             {"name": "Talk to Bunny", "label": "bunny2_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny2_give", "condition": False},
@@ -56,6 +62,7 @@ init python:
         ]
     )
     t_bunny3 = Interactables("Peevish Bunny", "bunny3", "images/interactables/case1/bunny3.png", page=1,
+        xstart=293, ystart=130,
         actions = [
             {"name": "Talk to Bunny", "label": "bunny3_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny3_give", "condition": False},
@@ -65,6 +72,7 @@ init python:
         ]
     )
     t_bunny4 = Interactables("Studious Bunny", "bunny4", "images/interactables/case1/bunny4.png", page=1,
+        xstart=885, ystart=399,
         actions = [
             {"name": "Talk to Bunny", "label": "bunny4_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny4_give", "condition": False},
@@ -74,6 +82,7 @@ init python:
         ]
     )
     t_bunny5 = Interactables("Clumsy Bunny", "bunny5", "images/interactables/case1/bunny5.png", page=1,
+        xstart=1223, ystart=921,
         actions = [
             {"name": "Talk to Bunny", "label": "bunny5_talk", "condition": True},
             {"name": "Give the Medicine", "label": "bunny5_give", "condition": False},
@@ -84,36 +93,43 @@ init python:
         state = -1
     )
     t_flower1 = Interactables("White Rose", "flower1", "images/interactables/case1/flower1.png", page=0,
+        xstart=433, ystart=355,
         actions = [
             {"name": "Paint the Rose", "label": "flower1_paint"}
         ]
     )
     t_flower2 = Interactables("White Rose", "flower2", "images/interactables/case1/flower2.png", page=0,
+        xstart=818, ystart=974,
         actions = [
             {"name": "Paint the Rose", "label": "flower2_paint"}
         ]
     )
     t_flower3 = Interactables("White Rose", "flower3", "images/interactables/case1/flower3.png", page=0,
+        xstart=1482, ystart=212,
         actions = [
             {"name": "Paint the Rose", "label": "flower3_paint"}
         ]
     )
     t_flower4 = Interactables("White Rose", "flower4", "images/interactables/case1/flower4.png", page=1,
+        xstart=423, ystart=630,
         actions = [
             {"name": "Paint the Rose", "label": "flower4_paint"}
         ]
     )
     t_flower5 = Interactables("White Rose", "flower5", "images/interactables/case1/flower5.png", page=1,
+        xstart=250, ystart=811,
         actions = [
             {"name": "Paint the Rose", "label": "flower5_paint"}
         ]
     )
     t_flower6 = Interactables("White Rose", "flower6", "images/interactables/case1/flower6.png", page=1,
+        xstart=1497, ystart=949,
         actions = [
             {"name": "Paint the Rose", "label": "flower6_paint"}
         ]
     )
     t_flower7 = Interactables("White Rose", "flower7", "images/interactables/case1/flower7.png", page=1,
+        xstart=1433, ystart=8,
         actions = [
             {"name": "Paint the Rose", "label": "flower7_paint"}
         ]
@@ -126,6 +142,7 @@ init python:
         ]
     )
     t_clockface1 = Interactables("Clock", "clockface1", "images/interactables/case1/clockface1.png", page=0,
+        xstart=543, ystart=138,
         actions = [
             {"name": "Inspect the Clock", "label": "clock1_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock1_up", "condition": False},
@@ -136,6 +153,7 @@ init python:
         state = "up"
     )
     t_clockface2 = Interactables("Clock", "clockface2", "images/interactables/case1/clockface2.png", page=1,
+        xstart=516, ystart=186,
         actions = [
             {"name": "Inspect the Clock", "label": "clock2_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock2_up", "condition": False},
@@ -146,6 +164,7 @@ init python:
         state = "down"
     )
     t_clockface3 = Interactables("Clock", "clockface3", "images/interactables/case1/clockface3.png", page=2,
+        xstart=340, ystart=323,
         actions = [
             {"name": "Inspect the Clock", "label": "clock3_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock3_up", "condition": False},
@@ -156,6 +175,7 @@ init python:
         state = "right"
     )
     t_clockface4 = Interactables("Clock", "clockface4", "images/interactables/case1/clockface4.png", page=2,
+        xstart=1130, ystart=613,
         actions = [
             {"name": "Inspect the Clock", "label": "clock4_inspect", "condition": True},
             {"name": "Move the Hour Hand Up", "label": "clock4_up", "condition": False},

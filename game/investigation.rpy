@@ -51,11 +51,13 @@ transform dreamfade(delay=0):
 # --------------------------------------------------------------------------
 init -1 python:
     class Interactables(store.object):
-        def __init__(self, name, key, image, page=0, actions={}, state=""):
+        def __init__(self, name, key, image, page=0, xstart=0, ystart=0, actions={}, state=""):
             self.name = name # description of the action
             self.key = key # name of the interactable since name isn't unique enough
             self.image = image # image url
             self.page = page # page on where the object gets placed
+            self.xstart = xstart # exact position of image
+            self.ystart = ystart
             self.actions = actions # dict of possible actions {actionName: jumpLabel)
             self.state = state # some sort of custom state needed for specific interactables
             self.viewed = False
@@ -124,7 +126,8 @@ screen dream():
             $ actionable = [action for action in i.actions if action.get('condition', True)]
             imagebutton:
                 idle i.image
-                xpos (i.page * page_width)
+                xpos (i.page * page_width) + i.xstart
+                ypos i.ystart
                 tooltip i
                 focus_mask True
                 mouse "hover"
