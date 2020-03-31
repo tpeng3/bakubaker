@@ -41,3 +41,28 @@ label inventory_stock:
         for i in [c_strawberry, c_bunnyapples, c_herbs, c_medicine, c_clockegg]:
             inventory.add(i)
     return
+
+label smash_case1:
+    $ somnia_name = "Somnia"
+    show cutin onlayer overlay
+    s "Fuck yeah!!!!!!!!!!!!!!!!!!!!!!!"
+    jump cooking_start
+
+image cutin:
+    anchor (0,0)
+    xpos -1.0 ypos 0
+    "images/CG/cutin.png"
+    alpha 1.0
+    ease 0.50 truecenter
+    contains:
+        "images/CG/cutin1.png"
+        pause 0.20
+        "images/CG/cutin2.png"
+        pause 0.20
+        repeat 3
+    pause 1.0
+    parallel:
+        linear 1.0 zoom 2 truecenter
+    parallel:
+        linear 1.0 alpha 0.0
+    pause 1.0

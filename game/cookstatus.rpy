@@ -34,6 +34,22 @@ transform dish_appear:
         #     linear 0.5 alpha 0.0
         linear 0.5 alpha 1.0
 
+image cooksom:
+    xpos -15 ypos 245
+    "images/interactables/cooksom.png"
+
+image cooksom_ready:
+    block:
+        xpos 0 ypos 245
+        "images/interactables/cooksom_ready1.png"
+        pause(0.2)
+        xpos 0 ypos 245
+        "images/interactables/cooksom_ready2.png"
+        pause(0.2)
+        repeat
+image letscookGO:
+    anim.Filmstrip ("gui/button/letscook_filmstrip.png", (480,139), (1,7), 0.10, loop=True)
+
 #--------------------------------------------------------------------------
 # INITIALIZE COOKING INVENTORY
 #--------------------------------------------------------------------------
@@ -44,7 +60,7 @@ init -1 python:
             self.image = image # image url
             self.tooltip = tooltip # tooltip desc
             self.flavor = flavor # flavor value
-        
+
         def __repr__(self): # for printing
             return str(self.name)
 
@@ -136,7 +152,7 @@ screen cooking(dish):
 
     imagebutton:
         idle "goEat"
-        hover "goEatHov"
+        hover "letscookGO"
         mouse "hover"
         focus_mask True
         xalign 0.74 yalign 0.85
@@ -189,18 +205,18 @@ screen cooking(dish):
 
     if cook_status.result() == 0:
         add dish:
-            xalign 0.7 yalign 0.62
+            xalign 0.68 yalign 0.55
             xanchor 0.5 yanchor 0.5
             at dish_appear
     elif cook_status.result() == 1:
         add dish+"Best":
-            xalign 0.7 yalign 0.62
+            xalign 0.68 yalign 0.55
             xanchor 0.5 yanchor 0.5
             at dish_appear
 
     if set(inventory.selected) == set(cook_status.smashReq) and cook_status.combo == len(cook_status.smashReq) and cook_status.smash == False:
         imagebutton:
-            idle "images/interactables/kirby.png"
-            hover "images/interactables/kirby2.png"
-            # action [Jump("smash_"+case), Function(cook_status.smashSkill)] use a jump label when we want to throw in atls
-            action [Function(cook_status.smashSkill)]
+            idle "cooksom"
+            hover "cooksom_ready"
+            action [Jump("smash_"+case), Function(cook_status.smashSkill)] # use a jump label when we want to throw in atls
+            # action [Function(cook_status.smashSkill)]

@@ -250,7 +250,7 @@ label case1_vn:
     $ somexpr = "th"
     s "I wonder... could it be a nightmare? Something vexing pulling at the heartstrings?"
     $ somexpr = "de"
-    s "Dreams made by a dreamless client... My, I wonder how they'll taste!"
+    s "Dreams made by a sleepless client... My, I wonder how they'll taste!"
     $ marexpr = "ne"
     ml "What was that?"
     # s (Maybe a nightmare or @#$%…!)
@@ -291,12 +291,6 @@ label case1_vn:
     extend "{w=1.0}...{w=0.5}{nw}"
     scene black with dissolve
     pause (2.0)
-
-    menu:
-        "go to dream":
-            jump expression case+"_dream"
-        "after dream":
-            jump case1_vn_end
 
     stop music fadeout (5.0)
     dr """The aromatic wisps that rolled out shimmered lazily against the glint of the office's few lamps, and seemed to be made of a dream itself.
@@ -522,11 +516,20 @@ label case1_vn_end(result=0):
     r "Somnia..."
     $ somexpr = "sh"
     r "We agreed to watch the store and wait for her, right?"
-    $ somexpr = "ne"
     r "It's our duty to keep the store as warm and welcoming as it was before she left."
-    $ somexpr = "gr"
+    $ somexpr = "ne"
     $ remexpr = "gr"
     r "I know it's hard to play the waiting game, but let's get to work... for the day she'll return."
+    $ remexpr = "de"
+    r "Until then, don't worry. You're not alone. I'll always stay by your side."
+    $ somexpr = "de"
+    s "Hehe..."
+    s "Remi, you're such a charmer~" with flash
+    $ remexpr = "fl"
+    r "A-ahem..."
+    s "Aw, you're blushing!"
+    r "Soms, please... W-we need to get the store ready." with sshake
+    s "Whatever you say, {ii}Rem~{w=.1}er~{w=.1}ie~! {mn}{/ii}"
 
     dr """
     Chattering away, the dream eaters gathered their bearings for the start of another day.
