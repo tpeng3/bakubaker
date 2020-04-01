@@ -14,6 +14,10 @@ label case1_vn:
         )
 
     scene black with dissolve
+    pause 1.0
+
+    call titlezone
+
     dr """
     When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
 
@@ -26,8 +30,14 @@ label case1_vn:
     """
     dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, they'll find two busy cooks awaiting with open arms."
     pause 1.0
-    play music storefront
-    pause 2.0
+    show outside:
+        xpos 0 ypos -1000
+        parallel:
+            xalign 0.5 yalign 1.0
+            linear 2.0 zoom 1.2
+        parallel:
+            linear 2.0 alpha 0.0
+    pause 4.0
     scene storefront with dissolve
     s "Hm hmm... Spoonful of sugar~... {mn}"
     s "… in a most delightful way~!"
@@ -276,6 +286,12 @@ label case1_vn:
     The insomniac was skeptical to believe incense would work this time, but with nothing left to lose, they closed their eyes nonetheless.
     """
 
+    menu:
+        "go to dream":
+            jump expression case+"_dream"
+        "after dream":
+            jump case1_vn_end
+
     s "When we count to three, you shall fall into a deep sleep..."
     show black with dissolve:
         linear 2 alpha 0.15
@@ -308,6 +324,7 @@ label case1_vn:
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):
+    $ result += 1
     stop music fadeout (2.0)
     scene dreamoffice
     with dissolve
