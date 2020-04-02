@@ -155,17 +155,17 @@ screen cooking(dish):
         hover "letscookGO"
         mouse "hover"
         focus_mask True
-        xalign 0.74 yalign 0.85
+        xalign 0.74 yalign 0.83
         activate_sound "audio/sfx/donecooking.ogg"
         action [Call(case+"_cook_done", result=cook_status.result())]
 
     #TODO: add better positions for the inventory, after UI is decided
-    $x = 362
-    $y = 240
+    $x = 406
+    $y = 288
     for i, item in enumerate(inventory.items):
         if i != 0 and i % 3 == 0:
-            $ x = 363
-            $ y += 160
+            $ x = 406
+            $ y += 150
         # for now border is a seperate image but change later
         imagebutton:
             idle item.image
@@ -177,7 +177,7 @@ screen cooking(dish):
         if item in inventory.selected:
             add "selBorder":
                 xpos x-6 ypos y-6
-        $ x += 176
+        $ x += 159
 
     $ tooltip = GetTooltip()
     if tooltip:
