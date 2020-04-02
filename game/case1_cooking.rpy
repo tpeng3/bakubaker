@@ -1,3 +1,22 @@
+image cutin:
+    anchor (0,0)
+    xpos -1.0 ypos 0
+    "images/CG/cutin.png"
+    alpha 1.0
+    ease 0.50 truecenter
+    contains:
+        "images/CG/cutin1.png"
+        pause 0.20
+        "images/CG/cutin2.png"
+        pause 0.20
+        repeat 3
+    pause 1.0
+    parallel:
+        linear 1.0 zoom 2 truecenter
+    parallel:
+        linear 1.0 alpha 0.0
+    pause 1.0
+
 label case1_cook:
     play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
@@ -10,6 +29,23 @@ label case1_cook:
     $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
     $ cook_status = CookStatus(smashReq=smashReq, goal=goal)
     show screen cooking(dish="omelette")
+    jump cooking_start
+
+label case1_somcook:
+    show screen focus_dialogue
+    s "helll yeaaaa"
+    jump cooking_start
+
+label case1_remcook:
+    show screen focus_dialogue
+    r "dam what are you up to now!!"
+    jump cooking_start
+
+label smash_case1:
+    $ somnia_name = "Somnia"
+    show cutin onlayer overlay
+    s "Fuck yeah!!!!!!!!!!!!!!!!!!!!!!!"
+    $ cook_status.smashSkill()
     jump cooking_start
 
 label case1_cook_done(result):
@@ -41,28 +77,3 @@ label inventory_stock:
         for i in [c_strawberry, c_bunnyapples, c_herbs, c_medicine, c_clockegg]:
             inventory.add(i)
     return
-
-label smash_case1:
-    $ somnia_name = "Somnia"
-    show cutin onlayer overlay
-    s "Fuck yeah!!!!!!!!!!!!!!!!!!!!!!!"
-    jump cooking_start
-
-image cutin:
-    anchor (0,0)
-    xpos -1.0 ypos 0
-    "images/CG/cutin.png"
-    alpha 1.0
-    ease 0.50 truecenter
-    contains:
-        "images/CG/cutin1.png"
-        pause 0.20
-        "images/CG/cutin2.png"
-        pause 0.20
-        repeat 3
-    pause 1.0
-    parallel:
-        linear 1.0 zoom 2 truecenter
-    parallel:
-        linear 1.0 alpha 0.0
-    pause 1.0

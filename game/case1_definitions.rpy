@@ -212,19 +212,19 @@ init python:
         tooltip="Free him...",
         flavor=999)
     c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
-        tooltip="A lovely red strawberry showing off it's ripeness. The cross-section looks like a heart! {ii}+10 flavor{/ii}",
+        tooltip="A lovely red strawberry showing off it's ripeness. The cross-section looks like a heart!",
         flavor=10)
     c_bunnyapples = Item("Bunny Apples", image = "/images/items/item_apple.png",
-        tooltip="Crisp apple slices cut in the shape of bunnies! Simply too cute to eat! {ii}+20 spooky{/ii}",
+        tooltip="Crisp apple slices cut in the shape of bunnies! Simply too cute to eat!",
         flavor=10)
     c_herbs = Item("Fine Herbs", image = "/images/items/item_herbs.png",
-        tooltip="Delicately aromatic herbs that will add a light layer of woodsy flavor to any dish. {ii}+20 spooky{/ii}",
+        tooltip="Delicately aromatic herbs that will add a light layer of woodsy flavor to any dish.",
         flavor=20)
     c_medicine = Item("Cherry Ooze", image = "/images/items/item_ooze.png",
-        tooltip="It says \'Cherry' on the label, but the bitter smell says otherwise...  {ii}+20 spooky{/ii}",
+        tooltip="It says \"Cherry\" on the label, but the bitter smell hints otherwise...",
         flavor=-20)
     c_clockegg = Item("Clockface Egg", image = "/images/items/item_egg.png",
-        tooltip="Eggs finely decorated with a thin gold paint and what look to be clock hands. {ii}+20 spooky{/ii}",
+        tooltip="Eggs finely decorated with a thin gold paint and what look to be clock hands.",
         flavor=40)
     c_bluebook = Item("Blue Book") # temporary variables because it's easier to keep track when they're in the inventory
     c_redbook = Item("Red Book")

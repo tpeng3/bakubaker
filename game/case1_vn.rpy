@@ -324,7 +324,7 @@ label case1_vn:
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):
-    $ result += 1
+    $ _skipping = True # disable skipping option
     stop music fadeout (2.0)
     scene dreamoffice
     with dissolve

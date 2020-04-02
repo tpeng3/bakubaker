@@ -34,19 +34,14 @@ transform dish_appear:
         #     linear 0.5 alpha 0.0
         linear 0.5 alpha 1.0
 
-image cooksom:
-    xpos -15 ypos 245
-    "images/interactables/cooksom.png"
-
 image cooksom_ready:
     block:
-        xpos 0 ypos 245
         "images/interactables/cooksom_ready1.png"
         pause(0.2)
-        xpos 0 ypos 245
         "images/interactables/cooksom_ready2.png"
         pause(0.2)
         repeat
+
 image letscookGO:
     anim.Filmstrip ("gui/button/letscook_filmstrip.png", (480,139), (1,7), 0.10, loop=True)
 
@@ -124,7 +119,6 @@ screen cooking(dish):
     zorder -10
     add "starry":
         at diagonal
-    # add "cookbook"
     add "cookbook2":
         xalign 0.5 yalign 0.5
 
@@ -154,19 +148,24 @@ screen cooking(dish):
         idle "goEat"
         hover "letscookGO"
         mouse "hover"
+        at itrfade()
         focus_mask True
         xalign 0.74 yalign 0.83
         activate_sound "audio/sfx/donecooking.ogg"
         action [Call(case+"_cook_done", result=cook_status.result())]
 
     #TODO: add better positions for the inventory, after UI is decided
-    $x = 406
-    $y = 288
+    $x = 400
+    $y = 284
     for i, item in enumerate(inventory.items):
         if i != 0 and i % 3 == 0:
-            $ x = 406
+            $ x = 400
             $ y += 150
-        # for now border is a seperate image but change later
+        
+        if item in inventory.selected: # select border
+            add "selBorder":
+                xpos x ypos y
+                # add sfx
         imagebutton:
             idle item.image
             xpos x ypos y
@@ -174,9 +173,6 @@ screen cooking(dish):
             action [Function(inventory.toggleSelect, item), Function(cook_status.update, item, inventory.selected)]
             tooltip item
             at focus_effect
-        if item in inventory.selected:
-            add "selBorder":
-                xpos x-6 ypos y-6
         $ x += 159
 
     $ tooltip = GetTooltip()
@@ -214,9 +210,22 @@ screen cooking(dish):
             xanchor 0.5 yanchor 0.5
             at dish_appear
 
+    # somnia and remerie sprites
     if set(inventory.selected) == set(cook_status.smashReq) and cook_status.combo == len(cook_status.smashReq) and cook_status.smash == False:
         imagebutton:
+            xpos 0 ypos 245
+            idle "cooksom_ready"
+            mouse "hover"
+            action [Jump("smash_"+case)] # use a jump label when we want to throw in atls
+    else:
+        imagebutton:
             idle "cooksom"
-            hover "cooksom_ready"
-            action [Jump("smash_"+case), Function(cook_status.smashSkill)] # use a jump label when we want to throw in atls
-            # action [Function(cook_status.smashSkill)]
+            xpos -15 ypos 245
+            mouse "hover"
+            action [Jump(case+"_somcook")]
+
+    imagebutton:
+        idle "cookrem"
+        xpos 1629 ypos 245
+        mouse "hover"
+        action [Jump(case+"_remcook")]

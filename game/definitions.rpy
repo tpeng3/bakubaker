@@ -19,6 +19,9 @@ init -1:
     image ooze = Transform("/images/items/GET_ooze.png")
     image egg = Transform("/images/items/GET_egg.png")
 
+    image cooksom = "images/interactables/cooksom.png"
+    image cookrem = "images/interactables/cookrem.png"
+
     image omelette = "images/items/dish_omelette.png"
     image omeletteBest = "images/items/dish_omelette2.png"
 
