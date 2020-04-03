@@ -1,10 +1,3 @@
-# TODO:
-    # - checks for debris(?)
-    # - progress check is a bit difficult rn bc I want the label to start when the player goes to the 2nd screen
-    # - update flags with view so no repeating flags
-    # - b-b-b-bugs..
-    # - current bug where screen naturally drifts left upon loading
-
 label case1_dream:
     show screen focus_dialogue
     $ bun_name = "Dream bunnies"

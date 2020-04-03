@@ -208,9 +208,6 @@ init python:
 #--------------------------------------------------------------------------
 # CASE 1 INGREDIENTS
 #--------------------------------------------------------------------------
-    kirby = Item("Kirby with Shortcake", image = "/images/items/item_kirby.png",
-        tooltip="Free him...",
-        flavor=999)
     c_strawberry = Item("Creamy Strawberry", image = "/images/items/item_strawberry.png",
         tooltip="A lovely red strawberry showing off it's ripeness. The cross-section looks like a heart!",
         flavor=10)

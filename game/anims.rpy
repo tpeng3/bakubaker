@@ -1,11 +1,13 @@
-# ATL shengigans I don't know where to PUT
+# Positions -------------------------------------------------------------------
+# So the bakus are positioned comfortably in their respective sides
+transform left:
+    yalign 1.0
+    xalign -0.10
+transform right:
+    yalign 1.0
+    xalign 1.05
 
-image logo:
-    "images/CG/logo.png"
-
-image outside:
-    "images/CG/outside.png"
-
+# ATL
 label titlezone:
     show outside with dissolve:
         xanchor 0 yanchor 0

@@ -107,20 +107,8 @@ define bun = DynamicCharacter ("bun_name", kind = dr,
             callback = bun_beep,
             text_align = 0.0
             )
-# Positions -------------------------------------------------------------------
-# So the bakus are positioned comfortably in their respective sides
-transform left:
-    yalign 1.0
-    xalign -0.10
-transform right:
-    yalign 1.0
-    xalign 1.05
 
 # Images and side images ------------------------------------------------------
-# Crop (x, y, width, height)
-# There HAS TO BE A BETTER WAY... but I guess I only have to define them once anyway :wtflmao:
-# I GOT YOU CYNTHIA!!!
-
 init python:
     # shorcuts to expression names if you need them, also a handy reference for available expressions
     somnia_map = {
@@ -202,11 +190,9 @@ image somnia = DynamicDisplayable(display_somnia)
 image remi = DynamicDisplayable(display_remerie)
 image mar = DynamicDisplayable(display_marcella)
 
+
+# Text tags -------------------------------------------------------------------
 init python:
-# -----------------------------------------------------------------------------
-# Text tag to remind myself of the miscellany thats missing proper names
-# If we want text outlines
-    # drdialogue_text_outlines = [ (1, "#141414", 0, 0) ]
     def interesting(tag, argument, contents):
         color = "#d14970"
         return [
@@ -243,7 +229,8 @@ init python:
         musicnote = Image("gui/musicnote2.png")
         return [(renpy.TEXT_DISPLAYABLE, musicnote)]
     config.self_closing_custom_text_tags["wmn"] = whiteMusicNote
-# Shake -------------------------------------------------------------
+
+# Screen Shake -------------------------------------------------------------
     import math
     class Shaker(object):
         anchors = {
@@ -295,6 +282,7 @@ init python:
 
     Shake = renpy.curry(_Shake)
 
+# Init -------------------------------------------------------------
 init:
     $ sshake = Shake((0, 0, 0, 0), 0.5, dist=10)
     $ somnia_name = "Somnia"

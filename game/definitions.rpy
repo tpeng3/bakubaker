@@ -30,6 +30,7 @@ init -1:
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
     image black = "#000"
+    
 
 ## UI:
     image goLeft = "gui/button/goleft.png"
@@ -55,7 +56,8 @@ init -1:
     image cookbook2 = "images/BG/test_cookbook.png"
 
 ## CGs:
-    # image cg_locked = "images/CG/cg_locked.jpg"
+    image logo = "images/CG/logo.png"
+    image outside = "images/CG/outside.png"
 
 ## Music:
 # init -2 python:
