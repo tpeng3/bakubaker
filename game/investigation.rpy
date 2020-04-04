@@ -24,7 +24,7 @@ style dreamacts is button:
 style dreamacts_text is button_text:
     xalign 0.5
     yalign 0.5
-    idle_color "#fff"
+    idle_color "#EDD9C8"
     hover_color "#facade"
     outlines [
                 (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),

@@ -33,6 +33,13 @@ init -1:
     
 
 ## UI:
+    image menuSplash = "gui/overlay/menu_splash.png"
+    image menuMain = "gui/overlay/menu_main.png"
+    image menuFront = "gui/overlay/menufront.png"
+    image menuBack = "gui/overlay/menuback.png"
+    image clickStart = "gui/button/clickstart.png"
+
+
     image goLeft = "gui/button/goleft.png"
     image goLeftHov = "gui/button/goleftHov.png"
     image goRight = "gui/button/goright.png"

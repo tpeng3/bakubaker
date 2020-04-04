@@ -103,7 +103,7 @@ define dreamMar = Character ("Dream Marcella", kind = dt,
             )
 define bun = DynamicCharacter ("bun_name", kind = dr,
             color="2D2D3E",
-            what_color="fff",
+            what_color="EDD9C8",
             callback = bun_beep,
             text_align = 0.0
             )
@@ -199,9 +199,7 @@ init python:
                 (renpy.TEXT_TAG, "color={}".format(color)),
                 (renpy.TEXT_TAG, "b"),
                 (renpy.TEXT_TAG, "k={}".format(-1.2))
-                # (renpy.TEXT_TAG, "outlinecolor={}".format(color)),
                 ] + contents + [
-                # (renpy.TEXT_TAG, "/outlinecolor"),
                 (renpy.TEXT_TAG, "/k"),
                 (renpy.TEXT_TAG, "/b"),
                 (renpy.TEXT_TAG, "/color")

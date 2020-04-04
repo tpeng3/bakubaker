@@ -12,7 +12,7 @@ label case1_dream:
             [t_somrem_start]
         )
         unlocked_pages = 0 # default is 0
-        finished = False # default is false, but true for testing
+        finished = False # default is false
         renpy.start_predict_screen("dream")
         renpy.start_predict(
             "images/BG/bg_wonderland.png",
@@ -69,7 +69,7 @@ label marcella_talk_start:
     dreamRem "And what's with these {ii}bunnies?!{/ii}"
     dreamSom gr "Oooh, they are so cute!"
     dreamRem si "Now what? We can't start cooking, much less collect any ingredients in this condition."
-    dreamSom ne "How about we take a look around? Maybe we can learn something from these adorable dream whip cream fluffles~..."
+    dreamSom gr "Well maybe we can learn something from these adorable dream whip cream fluffles~..."
     $ interactions.update(t_somrem_start.updateState("postMar"))
     jump dream_start
 

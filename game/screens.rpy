@@ -339,15 +339,25 @@ default show_quick_menu = True
 
 ## Splash screen ###############################################################
 screen click_start():
-    modal True
-    add "splash_menu_ani"
-    imagebutton:
-        idle "gui/button/clickstart.png"
-        hover "gui/button/clickstartHov.png" # We can do the Let's cook shiny anim here too!
+    default hidebg = False
+    default xpos = 290
+
+    add "menuSplash"
+
+    image "menuFront":
+        xalign 0.15 yalign 0.5
+        at itrfade()
+
+    image "clickStart":
         xpos 290 ypos 608 # Fix position afterward tho lol
-        focus_mask True
+        at blinking()
+
+    imagebutton:
+        idle Solid("#0000")
         activate_sound 'audio/sfx/itemget.ogg'
-        action MainMenu(confirm=False)
+        action [Jump("splash_transition")]
+
+    image "splash_menu_ani"
 
 
 ################################################################################
@@ -422,13 +432,10 @@ screen main_navi():
 
         spacing gui.navigation_spacing
         if main_menu:
-
             textbutton _("Start") action Start()
 
         else:
-
             textbutton _("Title") action MainMenu()
-
             textbutton _("Save") action ShowMenu("save")
 
         textbutton _("Load") action ShowMenu("load")
@@ -461,13 +468,12 @@ style navigation_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
-
     ## This ensures that any other menu screen is replaced.
     tag menu
-
     style_prefix "main_menu"
-
     add gui.main_menu_background
+
+    image "splash_menu_ani"
 
     ## This empty frame darkens the main menu.
     frame:
@@ -478,7 +484,6 @@ screen main_menu():
     use main_navi
 
     if gui.show_name:
-
         vbox:
             text "[config.name!t]":
                 style "main_menu_title"

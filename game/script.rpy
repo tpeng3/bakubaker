@@ -25,65 +25,47 @@ image devnotes_unlock = Text("{size=60}You've unlocked a special message. Access
 ## A portion of the game that plays at launch, before the main menu is shown.
 
 label splashscreen:
-
     scene black
 
     ## The first time the game is launched, players can set their accessibility settings.
     if not persistent.caption:
-
         menu:
-
-            dr "Do you want sound captions on? They describe music and sound effects in text.{fast}"
-
+            dr "Would you like sound captions to go along with the story? They help describe music and sound effects in text."
             "On":
-
                 $ persistent.sound_captions = True
-
             "Off":
-
                 pass
-
         menu:
-
-            dr "Do you want image captions on? They describe game visuals in text.{fast}"
+            dr "How about image captions? Game visuals will also be described in text."
             "On":
-
                 $ persistent.image_captions = True
-
             "Off":
-
                 pass
-
-        dr "These options can be changed at any time in the menu.{fast}"
-
+        dr "These options can be changed at any time in the {ii}Main Menu.{/ii}"
         ## This message will not appear in subsequent launches of the game when
         ## the following variable becomes true.
         $ persistent.caption = True
 
     ## Here begins our splashscreen animation.
-    call screen click_start with dissolve
+    pause(1.0)
+    call screen click_start with Dissolve(1.0)
 
     ## The first time the game is launched, players cannot skip the animation.
     if not persistent.seen_splash:
-
         ## No input will be detected for the set time stated.
         ## Set this to be a little longer than how long the animation takes.
         $ renpy.pause(8.5, hard=True)
-
         $ persistent.seen_splash = True
 
     ## Players can skip the animation in subsequent launches of the game.
     else:
-
         if renpy.pause(8.5):
-
             jump skip_splash
 
     scene black
     with fade
 
     label skip_splash:
-
         pass
 
     return

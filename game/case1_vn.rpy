@@ -1,3 +1,4 @@
+# ------------------------------------------------------------------------
 # Case 1
 # ------------------------------------------------------------------------
 label case1_vn:
@@ -11,7 +12,7 @@ label case1_vn:
         "images/sprites/marcella_*.png",
         "images/sprites/bg_dreamoffice.png",
         "images/sprites/bg_storefront.png",
-        )
+    )
 
     scene black with dissolve
     pause 1.0
