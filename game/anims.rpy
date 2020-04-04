@@ -28,8 +28,9 @@ label splash_transition:
         xalign 0.15 yalign 0.5
         easein_quad 2.0 xalign 0.85
     pause(2.5)
-    $ main_menu = True
-    show screen main_menu with Dissolve(1.0)
+    return
+    # $ main_menu = True
+    # show screen main_menu with Dissolve(1.0)
 
 label titlezone:
     show outside with dissolve:
