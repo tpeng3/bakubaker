@@ -371,7 +371,7 @@ label bunny3_help:
         interactions.update(t_bunny3.disable("bunny3_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
         interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
-    hide black 
+    hide black
     jump dream_start
 label bunny3_chat:
     $ bun_name = "Peevish bunny"
@@ -740,6 +740,17 @@ label check_clocks:
         dreamRem "Now with the Clockwork Eggs as the centerpiece..."
         dreamRem de "I believe we have the necessary ingredients for a proper morning dish."
         dreamSom de "Ooh, I'm so excited! Let us be off to the Wishing Kitchen!"
+        dreamSom "I'll pocket these pretty eggs for now..."
+        dreamSom sh "Ah!"
+        dreamRem bi "Somnia! A-are you okay? What's the matter?!"
+        dreamSom th "Some of these eggs... they have little stuffed bunnies in them!"
+        dreamRem si "..."
+        dreamRem "...Is that all? You really had me worried there for a second..."
+        dreamSom sh "Yes, but that means we only have {ii}two Clockwork Eggs{/ii} to cook with..."
+        dreamRem th "Only two eggs? I'll have to be cautious while I'm cooking..."
+        dreamSom ex "I have total faith in you Remi! You can do it!"
+        dreamRem gr "Heh, but of course!"
+
         python:
             inventory.add(c_clockegg)
             finished = True

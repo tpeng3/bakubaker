@@ -336,6 +336,20 @@ style quick_button_text:
 ## This allows you to hide the quickmenu during certain scenes if desired.
 default show_quick_menu = True
 
+
+## Splash screen ###############################################################
+screen click_start():
+    modal True
+    add "splash_menu_ani"
+    imagebutton:
+        idle "gui/button/clickstart.png"
+        hover "gui/button/clickstartHov.png" # We can do the Let's cook shiny anim here too!
+        xpos 290 ypos 608 # Fix position afterward tho lol
+        focus_mask True
+        activate_sound 'audio/sfx/itemget.ogg'
+        action MainMenu(confirm=False)
+
+
 ################################################################################
 ## Main and Game Menu Screens
 ################################################################################
@@ -357,11 +371,13 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Start") action Start()
+            textbutton _("Play") action Start()
 
         else:
 
             # textbutton _("History") action ShowMenu("history")
+
+            textbutton _("Title") action MainMenu()
 
             textbutton _("Save") action ShowMenu("save")
 
@@ -379,9 +395,44 @@ screen navigation():
 
             textbutton _("Extras") action ShowMenu("achievements")
 
+
+        if renpy.variant("pc"):
+
+            ## Help isn't necessary or relevant to mobile devices.
+            textbutton _("Help") action ShowMenu("help")
+
+            ## The quit button is banned on iOS and unnecessary on Android.
+            textbutton _("Quit") action Quit(confirm=not main_menu)
+
+screen main_navi():
+
+    vbox:
+        xalign 0.5
+        yalign 0.5
+        if not main_menu:
+            style_prefix "main_navi"
+        else:
+            style_prefix "main_menu"
+
+        if main_menu:
+            xpos 1400
+            xalign 0.5
+        else:
+            xpos gui.navigation_xpos
+
+        spacing gui.navigation_spacing
+        if main_menu:
+
+            textbutton _("Start") action Start()
+
         else:
 
             textbutton _("Title") action MainMenu()
+
+            textbutton _("Save") action ShowMenu("save")
+
+        textbutton _("Load") action ShowMenu("load")
+        textbutton _("About") action ShowMenu("about")
 
         if renpy.variant("pc"):
 
@@ -424,7 +475,7 @@ screen main_menu():
 
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
-    use navigation
+    use main_navi
 
     if gui.show_name:
 
@@ -446,7 +497,7 @@ style main_menu_frame:
     xsize 420
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    background "gui/overlay/menuback.png"
 
 style main_menu_vbox:
     xalign 1.0

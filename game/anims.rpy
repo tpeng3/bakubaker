@@ -27,3 +27,20 @@ label titlezone:
         ease_quad 10.0 xpos 0 ypos -1080
     $ renpy.pause(delay=3, hard=False)
     return
+
+# Main Menu --------------------------------------------------------------------
+image main_menu_ani:
+    contains:
+        "gui/main_menu.png"
+    contains:
+        anim.Filmstrip ("images/cg/poppin.png", (1920,1080), (1,3), 0.20, loop=True)
+
+# Splash screen ----------------------------------------------------------------
+image splash_menu_ani:
+    contains:
+        "gui/overlay/menu_splash.png"
+    contains:
+        xpos 210 ypos 188
+        "gui/overlay/menufront.png"
+    contains:
+        anim.Filmstrip ("images/cg/poppin.png", (1920,1080), (1,3), 0.20, loop=True)

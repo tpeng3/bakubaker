@@ -149,7 +149,7 @@ label case1_vn:
     $ marexpr = "ya"
     ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {cps=10}*yawn* ...excitement...{/cps}"
     $ somexpr = "th"
-    s "(Five years... what would they happen to know?)"
+    s "(Five years? Why, that's around the same time that... Hmm...)"
     $ marexpr = "ne"
     ml "Let’s see, now... I’ll have... this cherry tart and the..."
     $ remexpr = "sh"
