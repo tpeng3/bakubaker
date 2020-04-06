@@ -1,25 +1,8 @@
 # The script of the game goes in this file.
 
-# Set up LayeredImage Sprites
-layeredimage eileen:
-
-    always "eileen_base"
-
-    always "eileen_headband":
-        yoffset 25
-
-    group face auto:
-        attribute happy default
-
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
-
-define e = Character("Eileen", color="#f88787")
-define e_nvl = Character("Eileen", color="#f88787", kind=nvl)
-define nar_nvl = nvl_narrator
-
-image extras_unlock = Text("{size=60}You've unlocked the Extras Menu. Access it through the Main Menu.{/s}", text_align=0.5)
-image devnotes_unlock = Text("{size=60}You've unlocked a special message. Access it through the Extras Menu.{/s}", text_align=0.5)
+# Unhide extras textbutton in navigation and following two lines if we wanna add this in the future??
+# image extras_unlock = Text("{size=60}You've unlocked the Extras Menu. Access it through the Main Menu.{/s}", text_align=0.5)
+# image devnotes_unlock = Text("{size=60}You've unlocked a special message. Access it through the Extras Menu.{/s}", text_align=0.5)
 
 ## Splashscreen ############################################################
 ## A portion of the game that plays at launch, before the main menu is shown.

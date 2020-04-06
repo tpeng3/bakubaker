@@ -393,7 +393,7 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Settings") action ShowMenu("preferences")
 
         # if _in_replay:
 
@@ -401,9 +401,9 @@ screen navigation():
 
         textbutton _("About") action ShowMenu("about")
 
-        if main_menu:
-
-            textbutton _("Extras") action ShowMenu("achievements")
+        # if main_menu:
+        #
+        #     textbutton _("Extras") action ShowMenu("achievements")
 
 
         if renpy.variant("pc"):
@@ -415,6 +415,9 @@ screen navigation():
             textbutton _("Quit") action Quit(confirm=not main_menu)
 
 screen main_navi():
+
+    image "menuBack":
+        xalign 0.85 yalign 0.5
 
     vbox:
         xalign 0.5
@@ -502,8 +505,6 @@ style main_menu_version is main_menu_text
 style main_menu_frame:
     xsize 420
     yfill True
-
-    background "gui/overlay/menuback.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -857,7 +858,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("Settings"), scroll="viewport"):
 
         vbox:
 

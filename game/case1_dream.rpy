@@ -88,7 +88,7 @@ label bunnies_talk_som:
     play sound itemget
     dr "... a selection of apple slices. Each slice's ruby skin was daintily cut to mimic the adorable silhouette of a bunny."
     hide screen get_ingredient
-    dreamRem th "Our first ingredient is freshly cut apples?"
+    dreamRem th "Our {ii}first ingredient{/ii} is freshly cut apples?"
     dreamSom gr "Oooh, I wonder if we get to bake a pie with this!"
     dreamRem ne "We'll see exactly what we can work with once we find more ingredients."
     dreamSom gr "I'll pocket this sweet snack for now, thank you very much~!"
@@ -102,7 +102,7 @@ label bunnies_talk_rem:
     bun "...Move? Why? {ss}Who are you?{/ss}"
     dreamRem pe "It's not important. You guys are in the way."
     bun "...We don't wanna. {ss}Say no to strangers!{/ss}"
-    dreamRem pe "(This is why I'm no good with talking to kids...)"
+    dreamRem pe "{th}(This is why I'm no good with talking to kids...){/th}"
     dreamSom gr "Aw~, cheer up, Remi. How about I give it a go?"
     jump dream_start
 
@@ -347,7 +347,7 @@ label bunny2_time:
     $ bun_name = "Little Whitney"
     bun "Zzz..."
     dreamSom de "Aww... She's fast asleep now."
-    dreamRem th "(How do you fall asleep inside a dream?)"
+    dreamRem th "{th}(How do you fall asleep inside a dream?){/th}"
     jump dream_start
 
 # Peevish Bunny
