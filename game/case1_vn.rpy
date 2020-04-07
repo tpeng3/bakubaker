@@ -17,6 +17,12 @@ label case1_vn:
     scene black with dissolve
     pause 1.0
 
+    menu: # delete before publishing
+        "skip opening":
+            jump skipopening
+        "dont skip":
+            pass
+
     call titlezone
 
     dr """
@@ -39,10 +45,11 @@ label case1_vn:
         parallel:
             linear 2.0 alpha 0.0
     pause 4.0
+label skipopening: # delete before publishing
     scene storefront with dissolve
     s "Hm hmm... Spoonful of sugar~... {mn}"
     s "… in a most delightful way~!"
-    u "Ding!"
+    u "{i}Ding!{/i}"
     $ somexpr = "gr"
     show somnia with dissolve
     s "{ii}Rem~{w=.1}er~{w=.1}ie~! {mn}{/ii}"
@@ -69,27 +76,45 @@ label case1_vn:
     r "I can grab my own, you know?"
     $ somnia_name = "Somnia"
     $ somexpr = "th"
-    s "Do you think maybe I used too much jam?"
+    s "Do you think I used too much jam?"
     $ remexpr = "th"
-    r "... No, it was good. The sweet jam you used was less watery this time, so the tart crust held together well."
+    r "... No, the portions are well-balanced."
+    r "The jam you made this time has a better consistency, so the tart shells held together nicely."
+    r "I also noticed you took my advice on making a thicker, lighter tart shell. Good work."
     $ somexpr = "ne"
-    s "I see. I'm glad they turned out better this time!"
+    s "Aw, you flatter me! Your tips are always topnotch!"
     $ somexpr = "de"
     s "I can always count on your sharp palate for tasting, {i}Remi{/i}~!"
     $ remexpr = "fl"
     r "Well, o-of course...!"
     r "Regardless, you should know better than to handle tarts that are too hot to touch!"
-    r "{i}(Despite that, I can’t say no to Somnia’s desserts!){/i}"
+    r "{th}(Despite that, I can’t say no to Somnia’s desserts!){/th}"
     $ somexpr = "ne"
     $ remexpr = "si"
     r "*Sigh*"
-    $ remexpr = "ne"
-    r "If you’re all done baking, we ought to open up shop."
-    show somnia
-    s "Sure! I’ll go flip the sign outside."
-    hide remi with easeoutleft
+    $ somexpr = "sh"
+    s "Remi, you work too hard. Let me finish up the inventory count for you at the very least!"
+    $ remexpr = "th"
+    r "It's fine Somnia. I know you think it's a bore to count everything-{w=0.5}{nw}"
+    $ somexpr = "ne"
+    s "I won't take no for an answer, Remerie! You've been preparing the store since 5am!"
     $ somexpr = "gr"
+    s "So please, sit down, relax, and enjoy a fresh tart, made with love~"
+    s "Besides, we seem to be early on setting up shop anyway. Why don't you take a break?"
+    $ remexpr = "si"
+    r "There's no arguing is there..."
+    $ remexpr = "ne"
+    r "Here, I just have the last page to check off on."
+    $ somexpr = "de"
+    s "Yes, ma'am! {mn} Hm hmm~{mn}"
+    hide remi with easeoutleft
     show somnia at center with ease
+    $ somexpr = "sh"
+    s "Oh? There's only three things left to check."
+    $ somexpr = "gr"
+    s "Done, done and done~!{mn}"
+    s "If that's all, I'll go flip the sign outside for any early birds to arrive~"
+    $ somexpr = "gr"
     s "Hmm hm~... {mn}"
     s "Hm~... A merry tune to toot-"
     $ somexpr = "bi"
@@ -97,16 +122,16 @@ label case1_vn:
     s "AH!" with sshake
     r "What’s wrong?"
     s "T-there’s a person fallen over on the pavement outside!"
-    $ somexpr = "sh"
-    s "Oh dear, are you okay?"
     show somnia at right with ease
     $ remexpr = "pe"
     show remi at left with dissolve
     r "We can’t have bodies blocking the door for potential customers."
-    ml "Hrn..."
+    $ somexpr = "sh"
+    s "Oh dear, are they okay?"
+    ml "{th}Hrn...{/th}"
     $ remexpr = "bi"
-    r "Are they... dea-{nw}"
-    ml "... I-I’m alive..."
+    r "Are they... {ii}d-dea-{/ii}{w=0.5}{nw}"
+    ml "{th}... I-I’m alive...{/th}"
     ml "Snrk... {i}*snore...*{/i}" with sshake
     play music weird
     $ remexpr = "si"
@@ -128,13 +153,13 @@ label case1_vn:
     with dissolve
     show mar with easeinbottom
 
-    ml "So sorry...! A thousand apologies for the concern..."
+    ml "So sorry...! A thousand apologies for the concern... "
     $ marexpr = "ya"
-    extend "{cps=10}*yaaaaawn*" with sshake
+    extend "{cps=10}*yaaaaawn*." with sshake
     $ remexpr = "sh"
-    r "(They were napping?!)"
+    r "{th}(They were napping?!){/th}"
     $ somexpr = "sh"
-    s "(Were they... sleeping on the pavement outside...?)"
+    s "{th}(Were they... sleeping on the pavement outside...?){/th}"
     $ marexpr = "ne"
     $ remexpr = "ne"
     ml "Um... Let’s see… Would you happen to know a café around here called {ii}Café Nemo{/ii}?"
@@ -148,9 +173,9 @@ label case1_vn:
     $ marexpr = "gr"
     ml "Oh... yes! I heard rumors that the café recently reopened for business again."
     $ marexpr = "ya"
-    ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {cps=10}*yawn* ...excitement...{/cps}"
+    ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {cps=10}*yaaawn*{/cps} ...excitement..."
     $ somexpr = "th"
-    s "(Five years? Why, that's around the same time that... Hmm...)"
+    s "{th}(Five years? Why, that's around the same time that... Hmm...){/th}"
     $ marexpr = "ne"
     ml "Let’s see, now... I’ll have... this cherry tart and the..."
     $ remexpr = "sh"
@@ -237,7 +262,7 @@ label case1_vn:
     $ marexpr = "ne"
     ml "I wasn't aware she left behind apprentices, but..."
     $ marexpr = "ya"
-    ml "*yawn* That’s fine. If possible, I would like you two to help me as she once did."
+    ml "*Yawn* That’s fine. If possible, I would like you two to help me as she once did."
 
     $ marexpr = "ne"
     $ remexpr = "ne"
@@ -272,7 +297,7 @@ label case1_vn:
     $ somexpr = "ne"
     r "Marcella, I’m going to need you to lie on this bed."
     $ marexpr = "fr"
-    ml "A bed... I'm afraid I won't be able to fall asleep in it..."
+    ml "A bed... Despite how comfortable it might be, I'm afraid I won't be able to fall asleep in it..."
     $ remexpr = "gr"
     r "Don’t worry, we have ways of making you sleep."
     $ somexpr = "gr"
@@ -390,12 +415,13 @@ label case1_vn_end(result=0):
     play music storeend fadein 4.0
     scene storefront with dissolve
 
+    $ remexpr = "ne"
+    $ somexpr = "ne"
+    $ marexpr = "aw"
     show mar with dissolve
     show somnia at right with easeinright
-    $ remexpr = "ne"
     show remi at left with easeinleft
 
-    $ marexpr = "aw"
     ml "Oh, this is delicious!" with flash
     if result == 1:
         $ marexpr = "th"
@@ -503,7 +529,7 @@ label case1_vn_end(result=0):
     extend "no thanks to you!" with sshake
 
     $ somexpr = "di"
-    s "*sigh...*"
+    s "*Sigh...*"
     $ remexpr = "ne"
     s "It takes me back."
     s "It's been five years since {ii}Ms. Nemo{/ii} disappeared..."
@@ -518,7 +544,7 @@ label case1_vn_end(result=0):
     $ somexpr = "di"
     s "I... I suppose it is, isn't it."
     $ remexpr = "th"
-    r "(Does Somnia really not remember? Starting the day with small delights from our mentor only ever brightened up my day.)"
+    r "{th}(Does Somnia really not remember? Starting the day with small delights from our mentor only ever brightened up my day.){/th}"
     s "I suppose... I'm glad it reminded you of her, if only for a little bit."
     $ remexpr = "ne"
     r "You two were close, weren't you? It's only natural you'd pick up some of her tendencies."
@@ -549,8 +575,16 @@ label case1_vn_end(result=0):
     r "Soms, please... W-we need to get the store ready." with sshake
     s "Whatever you say, {ii}Rem~{w=.1}er~{w=.1}ie~! {mn}{/ii}"
 
+    dr "Chattering away, the dream eaters gathered their bearings for the start of another day."
+
+    show outside with dissolve:
+        xanchor 0 yanchor 0
+        xpos 0 ypos -1080
+        xalign 0.5 yalign 0.85
+        zoom 3
+        ease_quad 5 zoom 1
+
     dr """
-    Chattering away, the dream eaters gathered their bearings for the start of another day.
 
     Another day, another chance to see their mentor.
 
@@ -560,4 +594,5 @@ label case1_vn_end(result=0):
 
     ...and those whose who wander in with dreams composed of worries, fears and woes will provide the same satisfaction to the {ii}dream eaters{/ii}.
     """
+    call endscene
     return # change this to jump to credits page for demo

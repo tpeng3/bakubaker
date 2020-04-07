@@ -33,6 +33,8 @@ define s = DynamicCharacter ("somnia_name",
             color="2D2D3E",
             what_color="7A445B",
             callback = s_beep,
+            ctc = "cookCTC",
+            ctc_position = "fixed"
             )
 define sth = Character (kind = s,
             what_prefix='(', what_suffix=')', what_italic=True
@@ -42,7 +44,9 @@ define r = DynamicCharacter ("remerie_name",
             show_namebox_background = "gui/namebox_Remerie.png",
             color="2D2D3E",
             what_color="7A445B",
-            callback = r_beep
+            callback = r_beep,
+            ctc = "cookCTC",
+            ctc_position = "fixed"
             )
 define rth = Character (kind = r,
             what_prefix='(', what_suffix=')', what_italic=True
@@ -58,7 +62,9 @@ define dr = Character (None, # Narration
             what_outlines = [
              (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
              (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)],
-            callback = dr_beep
+            callback = dr_beep,
+            ctc = "narrCTC",
+            ctc_position = "fixed"
             )
 define dt = Character (None, # Dream speech
             color="ffcf89",
@@ -68,6 +74,8 @@ define dt = Character (None, # Dream speech
             window_yalign = 0.025,
             window_xalign = 0.50,
             text_align = 0.0,
+            ctc = "dreamCTC",
+            ctc_position = "fixed",
             what_outlines = [
              (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)]
             )
@@ -93,7 +101,9 @@ define ml = DynamicCharacter ("marcella_name",
             show_namebox_background = "gui/namebox_marchie.png",
             color="2D2D3E",
             what_color="7A445B",
-            callback = m_beep
+            callback = m_beep,
+            ctc = "cookCTC",
+            ctc_position = "fixed"
             )
 define dreamMar = Character ("Dream Marcella", kind = dt,
             color="2D2D3E",
@@ -205,6 +215,17 @@ init python:
                 (renpy.TEXT_TAG, "/color")
                 ]
     config.custom_text_tags["ii"] = interesting
+
+    def thoughts(tag, argument, contents):
+        alpha = 0.6
+        return [
+                (renpy.TEXT_TAG, "i"),
+                (renpy.TEXT_TAG, "alpha={}".format(alpha)),
+                ] + contents + [
+                (renpy.TEXT_TAG, "/i"),
+                (renpy.TEXT_TAG, "/alpha"),
+                ]
+    config.custom_text_tags["th"] = thoughts
 
     def smallText(tag, argument, contents):
         size = 20

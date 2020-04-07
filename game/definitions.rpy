@@ -30,22 +30,64 @@ init -1:
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
     image black = "#000"
-    
+
 
 ## UI:
     image menuSplash = "gui/overlay/menu_splash.png"
     image menuMain = "gui/overlay/menu_main.png"
     image menuFront = "gui/overlay/menufront.png"
-    image menuBack = "gui/overlay/menuback.png"
+    image menuBack:
+        contains:
+            xalign 0.85 yalign 0.5
+            anim.Filmstrip ("images/cg/menuflip.png", (564,749), (1,5), 0.10, loop=False)
     image clickStart = "gui/button/clickstart.png"
-
+    image cookCTC:
+        contains:
+            xalign 0.5 yalign 0.96
+            "gui/ctc_1.png"
+            zoom 0.7
+            linear 0.15 yalign 0.95
+            pause 0.25
+            linear 0.10 yalign 0.96
+            "gui/ctc_2.png"
+            zoom 0.7
+            xalign 0.5 yalign 0.95
+            pause 0.25
+            linear 0.15 yalign 0.96
+            repeat
+    image dreamCTC:
+        contains:
+            xalign 0.5 yalign 0.26
+            "gui/dctc_1.png"
+            zoom 0.7
+            linear 0.15 yalign 0.25
+            pause 0.25
+            linear 0.10 yalign 0.26
+            "gui/dctc_2.png"
+            zoom 0.7
+            xalign 0.5 yalign 0.25
+            pause 0.25
+            linear 0.15 yalign 0.26
+            repeat
+    image narrCTC:
+        contains:
+            xalign 0.5 yalign 0.27
+            "gui/nctc_1.png"
+            zoom 0.7
+            linear 0.15 yalign 0.26
+            pause 0.25
+            linear 0.10 yalign 0.27
+            "gui/nctc_2.png"
+            zoom 0.7
+            xalign 0.5 yalign 0.26
+            pause 0.25
+            linear 0.15 yalign 0.27
+            repeat
 
     image goLeft = "gui/button/goleft.png"
     image goLeftHov = "gui/button/goleftHov.png"
     image goRight = "gui/button/goright.png"
     image goRightHov = "gui/button/gorightHov.png"
-    image icon_somnia = "gui/mouse_somnia.png"
-    image icon_remerie = "gui/mouse_remerie.png"
     image goCook = "gui/button/button_cookbook.png"
     image goCookHov = "gui/button/button_cookbook2.png"
     image goDream = "gui/button/button_dream.png"
@@ -105,7 +147,7 @@ init -1:
     define audio.welcomedoor = "audio/sfx/welcomedoor.ogg"
     define audio.windchimes = "audio/sfx/windchimes.wav"
     define audio.tune = "audio/sfx/tune.ogg"
-    
+
 
 
 

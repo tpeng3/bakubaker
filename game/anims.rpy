@@ -23,7 +23,7 @@ label splash_transition:
     show menuSplash:
         alpha 1.0
         pause(0.5)
-        linear 1.0 alpha 0.0 
+        linear 1.0 alpha 0.0
     show menuFront:
         xalign 0.15 yalign 0.5
         easein_quad 2.0 xalign 0.85
@@ -52,10 +52,29 @@ label titlezone:
     $ renpy.pause(delay=3, hard=False)
     return
 
+label endscene:
+    show outside:
+        xanchor 0 yanchor 0
+        xpos 0 ypos -1080
+        xalign 0.5 yalign 0.85
+    show fin:
+        alpha 0.0
+        xpos 0.5 ypos 0.5
+        linear 4.0 alpha 1.0
+    show outside:
+        xanchor 0 yanchor 0
+        xpos 0 ypos -1080
+        xalign 0.5 yalign 0.85
+        ease_quad 15.0 yalign 0.0
+    $ renpy.pause(delay=20, hard=True)
+    scene black with Dissolve(1.0)
+
+image fin = Text("{size=50}{ii}u made it 2 the end!!!{/s}{/ii}")
+
 # Main Menu --------------------------------------------------------------------
 image main_menu_ani:
     contains:
-        "gui/main_menu.png"
+        "gui/overlay/main_menu.png"
     contains:
         anim.Filmstrip ("images/cg/poppin.png", (1920,1080), (1,3), 0.20, loop=True)
 
@@ -63,3 +82,5 @@ image main_menu_ani:
 image splash_menu_ani:
     contains:
         anim.Filmstrip ("images/cg/poppin.png", (1920,1080), (1,3), 0.20, loop=True)
+
+define flash = Fade(.10, 0.0, .20, color="eee6d1")
