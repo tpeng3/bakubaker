@@ -127,6 +127,11 @@ label clock1_talk:
     dreamSom th "Unfortunately, the bottom of the tower is obscured by the clouds."
     jump dream_start
 
+label clock2_talk:
+    dreamSom sh "Could this be... part of the same clocktower from earlier?"
+    dreamRem ne "With all its curves and twists, it really is a sight to behold."
+    jump dream_start
+
 label marcella_talk_mid:
     if not t_marcella_mid.viewed:
         dreamMar "And I have to find my report... and buy the medicine for little Whitney... Ohhh, and this whole place is an absolute mess!"
@@ -156,7 +161,7 @@ label marcella_talk_mid:
             if c_herbs in inventory.items and c_redbook not in inventory.items: # medicine is done but report isn't
                 dreamSom th "We were able to give Whitney her medicine, but we still need to help look for Marcella's missing {ii}report{/ii}."
             elif c_herbs not in inventory.items and c_redbook in inventory.items: # report found but no medicine
-                dreamSom th "We found Marcella's missing report, but we still need to find little Whitney and give her the {ii}medicine.}/ii}"
+                dreamSom th "We found Marcella's missing report, but we still need to find little Whitney and give her the {ii}medicine.{/ii}"
             else:
                 dreamSom th "They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
             dreamSom gr "And don't forget, we need to find a way to {ii}clean up this entire area!{/ii}"
@@ -166,8 +171,11 @@ label marcella_talk_mid:
 label pile_inspect:
     if t_debris.state == 0:
         jump march_continue
-    elif t_debris.viewed and t_debris >= 0:
+    elif t_debris.viewed and t_debris >= 2:
         dreamSom "Let's see if we can get Marcella's little siblings to help us out."
+    elif t_debris.viewed and t_debris >= 0:
+        dreamRem sh "I can't believe it. I think I see the floor to this place!"
+        dreamSom gr "The bunny siblings have been absolute sweethearts in helping us. Let's see if we can get the rest of them to pitch in~"
     else:
         dreamRem pe "Urk... The client's going to be awake by the time we clean through this mess."
         dreamSom th "How about we ask these bunnies... Marcella's little siblings, to help out?"
@@ -229,7 +237,7 @@ label report_find:
 
 # Quiet Bunny
 label bunny1_talk:
-    $ bun_name = "Quiet bunny"
+    $ bun_name = "Quiet Bunny"
     if not t_bunny1.state:
         dreamRem ne "Hey."
         bun "..."
@@ -295,7 +303,7 @@ label bunny1_time:
 
 # Energetic Bunny (the sick one)
 label bunny2_talk:
-    $ bun_name = "Energetic bunny"
+    $ bun_name = "Energetic Bunny"
     if not t_bunny2.state:
         bun "Wheee! Wheeeee!"
         dreamSom bi "That little one is going to get hurt, jumping around like that...!"
@@ -333,7 +341,7 @@ label bunny2_give:
     jump dream_start
 label bunny2_help:
     if not t_bunny2.state:
-        $ bun_name = "Energetic bunny"
+        $ bun_name = "Energetic Bunny"
         bun "Wheee! Wheee!"
         dreamSom th "It seems a bit difficult to catch this little one's attention right now."
     else:
@@ -367,16 +375,16 @@ label bunny2_time:
 
 # Peevish Bunny
 label bunny3_talk:
-    $ bun_name = "Peevish bunny"
+    $ bun_name = "Peevish Bunny"
     bun "Our younger sis hasn't been feeling well lately, but she's weak to the taste of medicine so she tries to lie her way out of it."
     bun "How spoiled!"
     jump dream_start
 label bunny3_give:
-    $ bun_name = "Peevish bunny"
+    $ bun_name = "Peevish Bunny"
     bun "Medicine? Me? I'm not the sick one! Give it to Little Whitney!"
     jump dream_start
 label bunny3_help:
-    $ bun_name = "Peevish bunny"
+    $ bun_name = "Peevish Bunny"
     dreamSom "Hello, could you help us move some of that big pile of papers for your dear big sib Marchie?"
     bun "Hmph... I guess if it's to help out big sib Marchie then..."
     python:
@@ -387,26 +395,26 @@ label bunny3_help:
     show expression t_debris.image with Dissolve(0.8)
     jump dream_start
 label bunny3_chat:
-    $ bun_name = "Peevish bunny"
+    $ bun_name = "Peevish Bunny"
     bun "What's up."
     jump dream_start
 label bunny3_time:
-    $ bun_name = "Peevish bunny"
+    $ bun_name = "Peevish Bunny"
     bun "What time is it? Well, it's obviously 9 o' clock!"
     jump dream_start
 
 # Studious Bunny
 label bunny4_talk:
-    $ bun_name = "Studious bunny"
+    $ bun_name = "Studious Bunny"
     bun "Our parents are really busy so Marchie's been taking care of us in their stead. I'm the second oldest, but recently I've been away for school."
     bun "I hope Marchie is doing alright..."
     jump dream_start
 label bunny4_give:
-    $ bun_name = "Studious bunny"
+    $ bun_name = "Studious Bunny"
     bun "Oh, are you looking for Little Whitney? She's an outgoing kid so you'd probably find her somewhere more open."
     jump dream_start
 label bunny4_help:
-    $ bun_name = "Studious bunny"
+    $ bun_name = "Studious Bunny"
     dreamSom gr "Hello there! Would you mind helping us clean up these papers for your big sib Marchie?"
     bun "Why yes, I'd love to help!"
     bun "Marchie already has a lot on their plate, so this is the least I could do!"
@@ -426,17 +434,17 @@ label bunny4_time:
 
 # Clumsy Bunny, needs talk and chat text
 label bunny5_talk:
-    $ bun_name = "Clumsy bunny"
+    $ bun_name = "Clumsy Bunny"
     bun "I have my paint but..."
     bun "Where to start?"
     dreamRem ne "Looks like this one's a little preoccupied with talking to themselves."
     jump dream_start
 label bunny5_give:
-    $ bun_name = "Clumsy bunny"
+    $ bun_name = "Clumsy Bunny"
     bun "C-cherry medicine…?! Oh, no thank you. I'm not the sick one this time, thankfully."
     jump dream_start
 label bunny5_help:
-    $ bun_name = "Clumsy bunny"
+    $ bun_name = "Clumsy Bunny"
     if t_bunny5.state == -1:
         dreamSom ne "Hi! Would you mind helping us clean this place up for your big sib?"
         bun "Oh, before that, can I ask for a favor as well?"
@@ -458,18 +466,21 @@ label bunny5_help:
         bun "And I didn't forget your request- I can help clean up, too!"
         python:
             interactions.update(t_bunny5.disable("bunny5_help"))
+            interactions.update(t_bunny5.enable("bunny5_chat"))
             interactions.update(t_debris.updateState(t_debris.state - 1))
             interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
+        # play debris cleaning sfx
+        show expression t_debris.image with Dissolve(0.8)
     elif t_bunny5.state > 0:
-        bun "There's still [t_bunny5.state] of the flowers left to be painted."
+        bun "I think there's still [t_bunny5.state] of the flowers left to be painted. Good luck!"
     jump dream_start
 label bunny5_chat:
-    $ bun_name = "Clumsy bunny"
-    bun "I'd paint the flower myself but last time I painted anything, I spilled the whole bucket all over the floor!"
+    $ bun_name = "Clumsy Bunny"
+    bun "I would've paint the flower myself but last time I painted anything, I spilled the whole bucket all over the floor!"
     bun "Big sib Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
     jump dream_start
 label bunny5_time:
-    $ bun_name = "Clumsy bunny"
+    $ bun_name = "Clumsy Bunny"
     bun "What time is it? Um... The longer needle is the minute hand so it's... 9 o' clock!"
     jump dream_start
 
@@ -538,6 +549,8 @@ label march_continue:
     dreamMar "Urgh... and I still have to remember to go there... and pick up that... and call the..."
     dreamRem bi "There's {b}more{/b} tasks to do?!"
     dreamSom bi "Remi, look!"
+    $ interactions.complete([t_debris])
+    hide expression t_debris with Dissolve(0.8)
     dr "To the dismay of the investigative duo, the oppressive atmosphere of has debris returned, undoing all the progress they had made."
     dr "The two dream eaters paused to gather their bearings as they became overwhelmed, once more, by the clutter."
     dreamRem "All our hard work!"
@@ -551,7 +564,6 @@ label march_continue:
     dreamRem bi "Ack! There they go again...!"
     stop music fadeout 5.0
     dreamSom bi "Let's go, Remi! We mustn't lose them!"
-    $ interactions.complete([t_debris])
     $ interactions.unlock([t_marcella_end])
     $ unlocked_pages = 2
     jump dream_start
