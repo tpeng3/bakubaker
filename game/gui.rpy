@@ -26,21 +26,21 @@ define gui.height = 1080
 ## The colors of text in the interface.
 
 ## An accent color used throughout the interface to label and highlight text.
-define gui.accent_color = '#0099cc'
+define gui.accent_color = '#bd6262'
 
 ## The color used for a text button when it is neither selected nor hovered.
 define gui.idle_color = '#63213c'
 
 ## The small color is used for small text, which needs to be brighter/darker to
 ## achieve the same effect.
-define gui.idle_small_color = '#f8eeca'
+define gui.idle_small_color = '#bd6262'
 
 ## The color that is used for buttons and bars that are hovered.
 define gui.hover_color = '#e5c490'
 
 ## The color used for a text button when it is selected but not focused. A
 ## button is selected if it is the current screen or preference value.
-define gui.selected_color = '#ac5075'
+define gui.selected_color = '#e0ad5c'
 
 ## The color used for a text button when it cannot be selected.
 define gui.insensitive_color = '#8888887f'
@@ -63,7 +63,7 @@ define gui.text_font = persistent.pref_text_font
 define gui.name_text_font = "gui/fonts/BellotaText-Regular.ttf" # NOTE Feel free to change this whenever
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = "gui/fonts/NotoSans-Regular.ttf"
+define gui.interface_text_font = "gui/fonts/BellotaText-Regular.ttf"
 
 ## The size of normal dialogue text.
 define gui.text_size = persistent.pref_text_size
@@ -233,7 +233,7 @@ define gui.choice_button_text_hover_color = "#ffffff"
 define gui.slot_button_width = 414
 define gui.slot_button_height = 309
 define gui.slot_button_borders = Borders(15, 15, 15, 15)
-define gui.slot_button_text_size = 21
+define gui.slot_button_text_size = 24
 define gui.slot_button_text_xalign = 0.5
 define gui.slot_button_text_idle_color = gui.idle_small_color
 define gui.slot_button_text_selected_idle_color = gui.selected_color
@@ -241,7 +241,7 @@ define gui.slot_button_text_selected_hover_color = gui.hover_color
 
 ## The width and height of thumbnails used by the save slots.
 define config.thumbnail_width = 384
-define config.thumbnail_height = 216
+define config.thumbnail_height = 200
 
 ## The number of columns and rows in the grid of save slots.
 define gui.file_slot_cols = 3
@@ -255,7 +255,7 @@ define gui.file_slot_rows = 2
 
 ## The position of the left side of the navigation buttons, relative to the left
 ## side of the screen.
-define gui.navigation_xpos = 60
+define gui.navigation_xpos = 100
 
 ## The vertical position of the skip indicator.
 define gui.skip_ypos = 15
@@ -270,7 +270,7 @@ define gui.choice_spacing = 33
 define gui.navigation_spacing = 6
 
 ## Controls the amount of spacing between preferences.
-define gui.pref_spacing = 15
+define gui.pref_spacing = 5
 
 ## Controls the amount of spacing between preference buttons.
 define gui.pref_button_spacing = 0
@@ -279,7 +279,7 @@ define gui.pref_button_spacing = 0
 define gui.page_spacing = 0
 
 ## The spacing between file slots.
-define gui.slot_spacing = 15
+define gui.slot_spacing = 5
 
 ## The position of the main menu text.
 define gui.main_menu_text_xalign = 1.0

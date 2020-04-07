@@ -30,10 +30,12 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
-    Baku baku baku baku
+    This is a test
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus sit amet luctus venenatis lectus magna fringilla. Eget arcu dictum varius duis at consectetur lorem donec. Quis blandit turpis cursus in hac habitasse. Risus nec feugiat in fermentum. Facilisis magna etiam tempor orci eu. Lorem ipsum dolor sit amet consectetur. A scelerisque purus semper eget duis at. Et malesuada fames ac turpis egestas sed tempus urna et. Eget arcu dictum varius duis at. Cursus risus at ultrices mi tempus. Ultrices gravida dictum fusce ut. Nisi scelerisque eu ultrices vitae. Pretium lectus quam id leo in. Sed libero enim sed faucibus turpis. Tortor condimentum lacinia quis vel eros.
 
     \n This Ren'Py GUI Template was put together by BáiYù with additional
-    code by {a=https://bobcgames.itch.io/}bobcgames{/a}, {a=https://twitter.com/minutekiwi}minute{/a} and {a=https://npckc.itch.io}npckc{/a}.
+    code by \n{a=https://bobcgames.itch.io/}bobcgames{/a}, {a=https://twitter.com/minutekiwi}minute{/a} and {a=https://npckc.itch.io}npckc{/a}.
     """)
 
 ## A short name for the game used for executables and directories in the built

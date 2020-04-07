@@ -668,17 +668,20 @@ screen about():
     use game_menu(_("About"), scroll="viewport"):
 
         style_prefix "about"
+        frame:
+            xmaximum 1300
+            background None
 
-        vbox:
+            vbox:
 
-            label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+                label "[config.name!t]"
+                text _("Version [config.version!t]\n")
 
-            ## gui.about is usually set in options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
+                ## gui.about is usually set in options.rpy.
+                if gui.about:
+                    text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+                text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 ## This is redefined in options.rpy to add text to the about screen.
@@ -744,7 +747,7 @@ screen file_slots(title):
             grid gui.file_slot_cols gui.file_slot_rows:
                 style_prefix "slot"
 
-                xalign 0.5
+                xalign 0.20
                 yalign 0.5
 
                 spacing gui.slot_spacing
@@ -859,169 +862,172 @@ screen preferences():
     tag menu
 
     use game_menu(_("Settings"), scroll="viewport"):
+        frame:
+            xmaximum 1350
+            left_padding 50
+            background None
+            vbox:
 
-        vbox:
+                ## Standard Preferences
+                hbox:
 
-            ## Standard Preferences
-            hbox:
+                    box_wrap True
 
-                box_wrap True
+                    if renpy.variant("pc"):
 
-                if renpy.variant("pc"):
+                        vbox:
+                            style_prefix "radio"
+                            label _("Display")
+                            textbutton _("Window") action Preference("display", "window")
+                            textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
                     vbox:
                         style_prefix "radio"
-                        label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
+                        label _("Rollback Side")
+                        textbutton _("Disable") action Preference("rollback side", "disable")
+                        textbutton _("Left") action Preference("rollback side", "left")
+                        textbutton _("Right") action Preference("rollback side", "right")
 
-                vbox:
-                    style_prefix "radio"
-                    label _("Rollback Side")
-                    textbutton _("Disable") action Preference("rollback side", "disable")
-                    textbutton _("Left") action Preference("rollback side", "left")
-                    textbutton _("Right") action Preference("rollback side", "right")
+                    vbox:
+                        style_prefix "check"
+                        label _("Skip")
+                        textbutton _("Unseen Text") action Preference("skip", "toggle")
+                        textbutton _("After Choices") action Preference("after choices", "toggle")
+                        textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
-                vbox:
-                    style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
-
-                ## Additional vboxes of type "radio_pref" or "check_pref" can be
-                ## added here, to add additional creator-defined preferences.
-
-            null height (4 * gui.pref_spacing)
-
-            ## Accessibility Preferences
-
-            hbox:
-
-                box_wrap True
-
-                ## Change Typeface
-
-                vbox:
-
-                    style_prefix "radio"
-                    label _("Typeface")
-
-                    textbutton "{font=DejaVuSans.ttf}DejaVuSans{/font}" action [changeFont("DejaVuSans.ttf"),SelectedIf(persistent.pref_text_font == "DejaVuSans.ttf")]
-
-                    textbutton "{font=gui/fonts/NotoSans-Regular.ttf}NotoSans{/font}" action [changeFont("gui/fonts/NotoSans-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/NotoSans-Regular.ttf")]
-
-                    textbutton "{font=gui/fonts/NotoSans-Regular.ttf}BellotaText{/font}" action [changeFont("gui/fonts/BellotaText-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/BellotaText-Regular.ttf")]
-
-                    textbutton "{font=gui/fonts/OpenDyslexic-Regular.otf}OpenDyslexic{/font}" action [changeFont("gui/fonts/OpenDyslexic-Regular.otf"),SelectedIf(persistent.pref_text_font == "gui/fonts/OpenDyslexic-Regular.otf")]
-
-                    ## A template for adding a different font choice. See Line 129 in
-                    ## accessibility.rpy for more details
-                    # textbutton "{font=gui/fonts/[font.ttf]}Custom Font{/font}" action [changeFont("gui/fonts/[font.ttf]"),SelectedIf(persistent.pref_text_font == "gui/fonts/[font.ttf]")]
-
-                ## Change Font Size
-
-                vbox:
-
-                    style_prefix "radio"
-                    label _("Font Size")
-
-                    textbutton "Large" action [changeScale(newScale="large"),SelectedIf(persistent.pref_text_scale == "large") ]
-                    textbutton "Regular" action [changeScale(newScale="regular"),SelectedIf(persistent.pref_text_scale == "regular") ]
-
-                    # # A template for making a new size option for text rendering
-                    # # Though, there is not much reason to add a small option...
-                    # textbutton "Small" action [changeScale(newScale="small"),SelectedIf(persistent.pref_text_scale == "small") ]
-
-                ## Toggles
-                ## You can also create SetField() buttons with on/off variables if you prefer that look.
-
-                vbox:
-
-                    style_prefix "check"
-                    label _("Toggle")
-
-                    #Toggle Screenshake
-                    textbutton "Screenshake" action ToggleField(persistent,"screenshake",true_value=True,false_value=False)
-
-                    ## Self-voicing does not work on smartphone devices, so this option only shows if the user is playing on a PC.
-                    if renpy.variant("pc"):
-
-                        textbutton _("Self-Voicing") action Preference("self voicing", "toggle")
+                    ## Additional vboxes of type "radio_pref" or "check_pref" can be
+                    ## added here, to add additional creator-defined preferences.
 
                 null height (4 * gui.pref_spacing)
 
+                ## Accessibility Preferences
+
+                hbox:
+
+                    box_wrap True
+
+                    ## Change Typeface
+
+                    vbox:
+
+                        style_prefix "radio"
+                        label _("Typeface")
+
+                        textbutton "{font=DejaVuSans.ttf}DejaVuSans{/font}" action [changeFont("DejaVuSans.ttf"),SelectedIf(persistent.pref_text_font == "DejaVuSans.ttf")]
+
+                        textbutton "{font=gui/fonts/NotoSans-Regular.ttf}NotoSans{/font}" action [changeFont("gui/fonts/NotoSans-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/NotoSans-Regular.ttf")]
+
+                        textbutton "{font=gui/fonts/BellotaText-Regular.ttf}BellotaText{/font}" action [changeFont("gui/fonts/BellotaText-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/BellotaText-Regular.ttf")]
+
+                        textbutton "{font=gui/fonts/OpenDyslexic-Regular.otf}OpenDyslexic{/font}" action [changeFont("gui/fonts/OpenDyslexic-Regular.otf"),SelectedIf(persistent.pref_text_font == "gui/fonts/OpenDyslexic-Regular.otf")]
+
+                        ## A template for adding a different font choice. See Line 129 in
+                        ## accessibility.rpy for more details
+                        # textbutton "{font=gui/fonts/[font.ttf]}Custom Font{/font}" action [changeFont("gui/fonts/[font.ttf]"),SelectedIf(persistent.pref_text_font == "gui/fonts/[font.ttf]")]
+
+                    ## Change Font Size
+
+                    vbox:
+
+                        style_prefix "radio"
+                        label _("Font Size")
+
+                        textbutton "Large" action [changeScale(newScale="large"),SelectedIf(persistent.pref_text_scale == "large") ]
+                        textbutton "Regular" action [changeScale(newScale="regular"),SelectedIf(persistent.pref_text_scale == "regular") ]
+
+                        # # A template for making a new size option for text rendering
+                        # # Though, there is not much reason to add a small option...
+                        # textbutton "Small" action [changeScale(newScale="small"),SelectedIf(persistent.pref_text_scale == "small") ]
+
+                    ## Toggles
+                    ## You can also create SetField() buttons with on/off variables if you prefer that look.
+
+                    vbox:
+
+                        style_prefix "check"
+                        label _("Toggle")
+
+                        #Toggle Screenshake
+                        textbutton "Screenshake" action ToggleField(persistent,"screenshake",true_value=True,false_value=False)
+
+                        ## Self-voicing does not work on smartphone devices, so this option only shows if the user is playing on a PC.
+                        if renpy.variant("pc"):
+
+                            textbutton _("Self-Voicing") action Preference("self voicing", "toggle")
+
+                    null height (4 * gui.pref_spacing)
+
+                    vbox:
+
+                        style_prefix "check"
+                        label _("Captions")
+
+                        textbutton "Song Titles" action ToggleField(persistent,"audio_cues",true_value=True,false_value=False)
+                        textbutton _("SFX Titles") action ToggleVariable("persistent.sound_captions")
+                        textbutton _("Image Descriptions") action ToggleVariable("persistent.image_captions")
+
+                        ## This shows Ren'Py's built-in accessibility menu. This can also be displayed by pressing "A" on the keyboard when playing on a PC. As this option can break the way the game is displayed and also does not support translation as of the latest Ren'Py build, you may want to hide the option.
+                        # textbutton _("More Options...") action Show("_accessibility")
+
+                null height (4 * gui.pref_spacing)
+
+                ## Set Textbox Opacity
                 vbox:
+                    xalign 0.5
+                    label _("Textbox Opacity")
+                    style_prefix "slider"
+                    bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.2)
 
-                    style_prefix "check"
-                    label _("Captions")
+                null height (4 * gui.pref_spacing)
 
-                    textbutton "Song Titles" action ToggleField(persistent,"audio_cues",true_value=True,false_value=False)
-                    textbutton _("SFX Titles") action ToggleVariable("persistent.sound_captions")
-                    textbutton _("Image Descriptions") action ToggleVariable("persistent.image_captions")
+                hbox:
+                    style_prefix "slider"
+                    box_wrap True
 
-                    ## This shows Ren'Py's built-in accessibility menu. This can also be displayed by pressing "A" on the keyboard when playing on a PC. As this option can break the way the game is displayed and also does not support translation as of the latest Ren'Py build, you may want to hide the option.
-                    # textbutton _("More Options...") action Show("_accessibility")
+                    vbox:
 
-            null height (4 * gui.pref_spacing)
+                        label _("Text Speed")
 
-            ## Set Textbox Opacity
-            vbox:
-                xalign 0.5
-                label _("Textbox Opacity")
-                style_prefix "slider"
-                bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.2)
+                        bar value Preference("text speed")
 
-            null height (4 * gui.pref_spacing)
+                        label _("Auto-Forward Time")
 
-            hbox:
-                style_prefix "slider"
-                box_wrap True
+                        bar value Preference("auto-forward time")
 
-                vbox:
+                    vbox:
 
-                    label _("Text Speed")
+                        if config.has_music:
+                            label _("Music Volume")
 
-                    bar value Preference("text speed")
+                            hbox:
+                                bar value Preference("music volume")
 
-                    label _("Auto-Forward Time")
+                        if config.has_sound:
 
-                    bar value Preference("auto-forward time")
+                            label _("Sound Volume")
 
-                vbox:
+                            hbox:
+                                bar value Preference("sound volume")
 
-                    if config.has_music:
-                        label _("Music Volume")
-
-                        hbox:
-                            bar value Preference("music volume")
-
-                    if config.has_sound:
-
-                        label _("Sound Volume")
-
-                        hbox:
-                            bar value Preference("sound volume")
-
-                            if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
+                                if config.sample_sound:
+                                    textbutton _("Test") action Play("sound", config.sample_sound)
 
 
-                    if config.has_voice:
-                        label _("Voice Volume")
+                        if config.has_voice:
+                            label _("Voice Volume")
 
-                        hbox:
-                            bar value Preference("voice volume")
+                            hbox:
+                                bar value Preference("voice volume")
 
-                            if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
+                                if config.sample_voice:
+                                    textbutton _("Test") action Play("voice", config.sample_voice)
 
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
+                        if config.has_music or config.has_sound or config.has_voice:
+                            null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                            textbutton _("Mute All"):
+                                action Preference("all mute", "toggle")
+                                style "mute_all_button"
 
 
 style pref_label is gui_label
@@ -1058,7 +1064,7 @@ style pref_label_text:
     yalign 1.0
 
 style pref_vbox:
-    xsize 338
+    xsize 300
 
 style radio_vbox:
     spacing gui.pref_button_spacing
@@ -1092,7 +1098,7 @@ style slider_button_text:
     properties gui.button_text_properties("slider_button")
 
 style slider_vbox:
-    xsize 675
+    xsize 500
 
 
 ## History screen ##############################################################

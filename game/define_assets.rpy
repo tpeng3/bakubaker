@@ -115,7 +115,7 @@ define bun = DynamicCharacter ("bun_name", kind = dr,
             color="2D2D3E",
             what_color="EDD9C8",
             callback = bun_beep,
-            text_align = 0.0
+            what_text_align = 0.0
             )
 
 # Images and side images ------------------------------------------------------
