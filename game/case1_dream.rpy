@@ -55,7 +55,9 @@ label somrem_start_talk:
         dreamSom ex "Hey Remi, we should go to a petting zoo for our next date!"
         dreamRem gr "That sounds like a good idea, but first, let's focus our on job."
     elif t_somrem_start.state == "middle":
-        dreamRem th "TODO!!!"
+        dreamSom th "This busybee Marcella is quite a change from the Marcella we had found earlier lying on the sidewalk." #WORDING HELP
+        dreamRem ne "They did mention that they haven't slept in several days. That can't possibly do anyone good."
+        dreamRem th "What could be the reason for their lack of sleep?"
     elif t_somrem_start.state == "end":
         dreamRem th "TODO!!!"
     jump dream_start
@@ -142,10 +144,23 @@ label marcella_talk_mid:
     else:
         dreamMar "And I have to do this... and don't forget that... Oh, and I need to..."
         dreamRem th "Looks like Marcella's frozen in their thoughts."
-        dreamSom th "If I remembered correctly..."
-        dreamSom th "They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
-        dreamSom gr "Oh! And they want to {ii}clean up this entire area!{/ii}"
-        dreamRem si "Hahhh... Let's get to work."
+        if [c_herbs, c_redbook] in inventory.items: # if first two tasks are done
+            dreamSom th "Well, we managed to finish all the tasks Marcella listed earlier."
+            if t_debris.state == 0: # progress is all done, just need to check pile
+                dreamSom de "Now what's left is to check on the pile their siblings helped us clean up!" #WORDING HELP...
+            else:
+                dreamSom ex "Now all that's left is to {ii}clean up this mess!{/ii}"
+                dreamRem si "Let's see if we can get more of those little guys to help us out."
+        else:
+            dreamSom th "If I remembered correctly..."
+            if c_herbs in inventory.items and c_redbook not in inventory.items: # medicine is done but report isn't
+                dreamSom th "We were able to give Whitney her medicine, but we still need to help look for Marcella's missing {ii}report{/ii}."
+            elif c_herbs not in inventory.items and c_redbook in inventory.items: # report found but no medicine
+                dreamSom th "We found Marcella's missing report, but we still need to find little Whitney and give her the {ii}medicine.}/ii}"
+            else:
+                dreamSom th "They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
+            dreamSom gr "And don't forget, we need to find a way to {ii}clean up this entire area!{/ii}"
+            dreamRem si "Hahhh... Let's get to work."
     jump dream_start
 
 label pile_inspect:
@@ -158,7 +173,7 @@ label pile_inspect:
         dreamSom th "How about we ask these bunnies... Marcella's little siblings, to help out?"
         dreamRem th "Well, it's definitely worth a shot."
         dreamRem sh "Hang on, there's a book in the pile of papers."
-        dreamSom sh "There's a name written inside- \"Maddie\"."
+        dreamSom sh "There's a name written inside- {ii}Maddie.{/ii}"
         dreamRem th "Do you think that's one of the bunnies' names?"
         dreamSom gr "How cute! We should hang on to it, just in case."
         python:
@@ -173,7 +188,7 @@ label pile_inspect:
     jump dream_start
 
 label medicine_find:
-    dreamSom sh "This must be the medicine we have to give to Marcella's sister! The label says \"Drink Me\"."
+    dreamSom sh "This must be the medicine we have to give to Marcella's sister! The label says {ii}\"Drink Me\".{/ii}"
     show screen get_ingredient("ooze") with Dissolve(0.8)
     play sound itemget
     dr "You got the {ii}Cherry Medicine!{/ii}"
@@ -364,14 +379,12 @@ label bunny3_help:
     $ bun_name = "Peevish bunny"
     dreamSom "Hello, could you help us move some of that big pile of papers for your dear big sib Marchie?"
     bun "Hmph... I guess if it's to help out big sib Marchie then..."
-    # show black zorder 90 with Dissolve(0.8)
-    scene black with Dissolve(0.8)
-    pause(1.0)
     python:
         interactions.update(t_bunny3.disable("bunny3_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
         interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
-    hide black
+    # play debris cleaning sfx
+    show expression t_debris.image with Dissolve(0.8)
     jump dream_start
 label bunny3_chat:
     $ bun_name = "Peevish bunny"
@@ -401,12 +414,14 @@ label bunny4_help:
         interactions.update(t_bunny4.disable("bunny4_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
         interactions.update(t_debris.updateImage("/images/interactables/case1/debris{}.png".format(t_debris.state)))
+    # play debris cleaning sfx
+    show expression t_debris.image with Dissolve(0.8)
     jump dream_start
 label bunny4_chat:
     bun "It sure is tough keeping an eye on everyone. I wonder how Marchie manages it?"
     jump dream_start
 label bunny4_time:
-    bun "It's 9 o'clock. My younger siblings should be going to bed around now."
+    bun "Oh, do you need the time? It's currently 9 o'clock. My younger siblings should be going to bed around now."
     jump dream_start
 
 # Clumsy Bunny, needs talk and chat text
@@ -451,48 +466,70 @@ label bunny5_help:
 label bunny5_chat:
     $ bun_name = "Clumsy bunny"
     bun "I'd paint the flower myself but last time I painted anything, I spilled the whole bucket all over the floor!"
-    bun "big sib Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
+    bun "Big sib Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
     jump dream_start
 label bunny5_time:
     $ bun_name = "Clumsy bunny"
-    bun "What time is it? Um... the longer needle is the minute hand so it's... 9 o' clock!"
+    bun "What time is it? Um... The longer needle is the minute hand so it's... 9 o' clock!"
     jump dream_start
 
 # magic to flower paint is that the bg will have red flowers and we'll remove the interaction when they're painted
 label flower1_paint:
-    $ interactions.complete([t_flower1])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower1.image with Dissolve(0.8)
-    jump dream_start
+    $ interactions.update(t_flower1.disable("flower1_paint"))
+    $ interactions.update(t_flower1.updateImage("/images/interactables/case1/flower1red.png"))
+    # play paint sfx
+    show expression t_flower1.image with Dissolve(0.8)
+    jump flower_check
 label flower2_paint:
-    $ interactions.complete([t_flower2])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower2.image with Dissolve(0.8)
-    jump dream_start
+    $ interactions.update(t_flower2.disable("flower2_paint"))
+    $ interactions.update(t_flower2.updateImage("/images/interactables/case1/flower2red.png"))
+    # play paint sfx
+    show expression t_flower2.image with Dissolve(0.8)
+    jump flower_check
 label flower3_paint:
-    $ interactions.complete([t_flower3])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower3.image with Dissolve(0.8)
-    jump dream_start
+    $ interactions.update(t_flower3.disable("flower3_paint"))
+    $ interactions.update(t_flower3.updateImage("/images/interactables/case1/flower3red.png"))
+    # play paint sfx
+    show expression t_flower3.image with Dissolve(0.8)
+    jump flower_check
 label flower4_paint:
-    $ interactions.complete([t_flower4])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower4.image with Dissolve(0.8)
-    jump dream_start
+    $ interactions.update(t_flower4.disable("flower4_paint"))
+    $ interactions.update(t_flower4.updateImage("/images/interactables/case1/flower4red.png"))
+    # play paint sfx
+    show expression t_flower4.image with Dissolve(0.8)
+    jump flower_check
 label flower5_paint:
-    $ interactions.complete([t_flower5])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower5.image with Dissolve(0.8)
-    jump dream_start
+    $ interactions.update(t_flower5.disable("flower5_paint"))
+    $ interactions.update(t_flower5.updateImage("/images/interactables/case1/flower5red.png"))
+    # play paint sfx
+    show expression t_flower5.image with Dissolve(0.8)
+    jump flower_check
 label flower6_paint:
-    $ interactions.complete([t_flower6])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower6.image with Dissolve(0.8)
-    jump dream_start
+    $ interactions.update(t_flower6.disable("flower6_paint"))
+    $ interactions.update(t_flower6.updateImage("/images/interactables/case1/flower6red.png"))
+    # play paint sfx
+    show expression t_flower6.image with Dissolve(0.8)
+    jump flower_check
 label flower7_paint:
-    $ interactions.complete([t_flower7])
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
-    hide expression flower7.image with Dissolve(0.8)
+    $ interactions.update(t_flower7.disable("flower7_paint"))
+    $ interactions.update(t_flower7.updateImage("/images/interactables/case1/flower7red.png"))
+    # play paint sfx
+    show expression t_flower7.image with Dissolve(0.8)
+    jump flower_check
+
+label flower_check:
+    if t_bunny5.state == 0:
+        dreamRem gr "There! That should be the last rose we needed to paint."
+        dreamSom de "Oh they're beautiful Remi!"
+        dreamRem fl "Honestly it wasn't that bad since it was like adding decorations to a dish." # I wanted to say icing on a cake but this is remi hhh rose icings... what food does it... minus cake WORDING HELP
+        dreamRem de "Now let's go check on the bunny who asked the favor."
     jump dream_start
 
 label march_continue:

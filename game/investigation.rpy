@@ -50,6 +50,7 @@ transform dreamfade(delay=0):
 transform itrfade():
     alpha 0.0
     linear 0.8 alpha 1.0
+
     
 # --------------------------------------------------------------------------
 # INITIALIZE INVESTIGATION CHOICES
@@ -163,6 +164,7 @@ screen dream():
             xsize 524 ysize 104
             text "[tooltip.name]":
                 xalign 0.5 yalign 0.5
+                color "#EDD9C8"
                 outlines [
                     (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
                     (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)

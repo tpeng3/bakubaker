@@ -47,7 +47,8 @@ init python:
         xstart=999, ystart=0,
         actions = [
             {"name": "Inspect Pile", "label": "pile_inspect"}
-        ]
+        ],
+        state = -1
     )
     t_bunny1 = Interactables("Quiet Bunny", "bunny1", "images/interactables/case1/bunny1.png", page=0,
         xstart=234, ystart=807,
