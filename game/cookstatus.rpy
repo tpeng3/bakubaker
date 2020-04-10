@@ -72,8 +72,13 @@ init -1 python:
         def update(self, item):
             if item in inventory.selected and item in self.smashReq:
                 self.combo += 1
-            else:
+            elif item in inventory.selected and item not in self.smashReq:
                 self.combo = 0
+                inventory.reset()
+            elif item not in inventory.selected:
+                if self.combo > 0:
+                    self.combo -= 1
+
         def reset(self):
             # self.flavor = 0
             self.combo = 0
@@ -140,10 +145,10 @@ screen cooking(dish):
         xalign 0 yalign 0
         action [Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
 
-    textbutton "Reset":
-        xalign 0.8 yalign 0.1
-        mouse "hover"
-        action [Function(cook_status.reset), Function(inventory.reset)]
+    # textbutton "Reset":
+    #     xalign 0.8 yalign 0.1
+    #     mouse "hover"
+    #     action [Function(cook_status.reset), Function(inventory.reset)]
 
     if cook_status.smash:
         imagebutton:
