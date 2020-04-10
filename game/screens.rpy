@@ -25,6 +25,7 @@ style gui_text:
 
 style button:
     properties gui.button_properties("button")
+    mouse "hover"
 
 style button_text is gui_text:
     properties gui.text_properties("button")
@@ -258,7 +259,7 @@ screen choice(items):
 
     vbox:
         for i in items:
-            textbutton i.caption action i.action
+            textbutton i.caption mouse "hover" action i.action
 
 
 ## When this is true, menu captions will be spoken by the narrator. When false,
@@ -329,6 +330,7 @@ style quick_button_text is button_text
 
 style quick_button:
     properties gui.button_properties("quick_button")
+    mouse "hover"
 
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
@@ -357,7 +359,22 @@ screen click_start():
         activate_sound 'audio/sfx/itemget.ogg'
         action [Jump("splash_transition")]
 
-    image "splash_menu_ani"
+    for i in range(0, 3): # grab snacks 1-3
+        image "gui/overlay/snacks{}.png".format(i+1):
+            xpos 684 ypos 12
+            at floating()
+
+    # image "gui/overlay/snacks1.png":
+    #     xpos 684 ypos 12
+    #     at floating()
+
+    # image "gui/overlay/snacks2.png":
+    #     xpos 684 ypos 12
+    #     at floating()
+
+    # image "gui/overlay/snacks3.png":
+    #     xpos 684 ypos 12
+    #     at floating()
 
 
 ################################################################################
@@ -757,6 +774,7 @@ screen file_slots(title):
                     $ slot = i + 1
 
                     button:
+                        mouse "hover"
                         action FileAction(slot)
 
                         has vbox
@@ -768,7 +786,7 @@ screen file_slots(title):
 
                         text FileSaveName(slot):
                             style "slot_name_text"
-
+                        
                         key "save_delete" action FileDelete(slot)
 
             ## Buttons to access other pages.

@@ -79,14 +79,24 @@ image main_menu_ani:
         anim.Filmstrip ("images/cg/poppin.png", (1920,1080), (1,3), 0.20, loop=True)
 
 # Splash screen ----------------------------------------------------------------
-image splash_menu_ani:
-    contains:
-        "gui/overlay/snacks1.png"
-        xpos 684 ypos 12
+transform floating():
+    choice:
+        linear 1.6 ypos 20
+        pause 0.2
+        linear 1.6 ypos 12
+    choice:
         linear 2.0 ypos 30
-        pause 0.25
-        linear 2.0 ypos 12
-        pause 0.25
-        repeat
+        pause 0.3
+        linear 2.0 ypos 45
+    choice:
+        linear 1.6 ypos 20
+        pause 0.2
+        linear 1.8 ypos 45
+    choice:
+        linear 2.0 ypos 30
+        pause 0.2
+        linear 1.6 ypos 12
+    pause 0.25
+    repeat
 
 define flash = Fade(.10, 0.0, .20, color="eee6d1")

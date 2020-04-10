@@ -18,21 +18,7 @@ transform diagonal:
 
 transform dish_appear:
     alpha 0.0
-    parallel:
-        # contains:
-        #     "gui/star.png"
-        #     linear 0.5 xoffset 30
-        #     linear 0.5 alpha 0.0
-        # contains:
-        #     "gui/star.png"
-        #     xalign 0.5
-        #     linear 0.5 xoffset -30
-        #     linear 0.5 alpha 0.0
-        # contains:
-        #     "gui/star.png"
-        #     linear 0.5 yoffset 30
-        #     linear 0.5 alpha 0.0
-        linear 0.5 alpha 1.0
+    linear 0.5 alpha 1.0
 
 image cooksom_ready:
     block:
@@ -82,29 +68,21 @@ init -1 python:
             self.flavor = 0
             self.combo = 0
             self.smashReq = smashReq # [] list of ideal dish ingredients
-            self.goal = goal
             self.smash = False
-        def update(self, item, selected):
-            if item in selected:
-                self.flavor += item.flavor
-            else:
-                checkzero = self.flavor - item.flavor
-                if checkzero <= 0:
-                    self.flavor = 0
-                else:
-                    self.flavor = checkzero
-            if item in selected and item in self.smashReq:
+        def update(self, item):
+            if item in inventory.selected and item in self.smashReq:
                 self.combo += 1
             else:
                 self.combo = 0
         def reset(self):
-            self.flavor = 0
+            # self.flavor = 0
             self.combo = 0
-        def smashSkill(self): # simplified my code because what I had before was... overkill to get the job done _(:''3 save for another day
-            self.flavor = 999
+            self.smash = False
+        def smashSkill(self):
             self.smash = True
+            self.combo = "FULL"
         def result(self):
-            if self.flavor < goal:
+            if set(inventory.selected) != set(self.smashReq):
                     return -1 # did not meet requirements
             if self.smash: # perfect score!
                 return 1
@@ -117,10 +95,6 @@ init -1 python:
 # Required: inventory, goal
 screen cooking(dish):
     zorder -10
-    add "starry":
-        at diagonal
-    add "cookbook2":
-        xalign 0.5 yalign 0.5
 
     if renpy.has_screen("dream"):
         $ renpy.stop_predict_screen("dream")
@@ -130,6 +104,33 @@ screen cooking(dish):
             "side dreamSom *",
             "side dreamRem *"
         )
+
+    add "starry":
+        at diagonal
+
+    # somnia and remerie sprites
+    if set(inventory.selected) == set(cook_status.smashReq) and cook_status.combo == len(cook_status.smashReq) and cook_status.smash == False:
+        imagebutton:
+            xpos 0 ypos 245
+            idle "cooksom_ready"
+            mouse "hover"
+            action [Jump("smash_"+case)] # use a jump label when we want to throw in atls
+    else:
+        imagebutton:
+            idle "cooksom"
+            xpos 0 ypos 245
+            mouse "hover"
+            action [Jump(case+"_somcook")]
+
+    imagebutton:
+        idle "cookrem"
+        xpos 1629 ypos 245
+        mouse "hover"
+        action [Jump(case+"_remcook")]
+
+    # cookbook
+    add "cookbook":
+        xalign 0.5 yalign 0.5
 
     imagebutton: # go back to dream mode
         idle "goDream"
@@ -144,19 +145,29 @@ screen cooking(dish):
         mouse "hover"
         action [Function(cook_status.reset), Function(inventory.reset)]
 
-    imagebutton:
-        idle "goEat"
-        hover "letscookGO"
-        mouse "hover"
-        at itrfade()
-        focus_mask True
-        xalign 0.74 yalign 0.83
-        activate_sound "audio/sfx/donecooking.ogg"
-        action [Call(case+"_cook_done", result=cook_status.result())]
+    if cook_status.smash:
+        imagebutton:
+            idle "letscookGO"
+            hover "letscookGO"
+            mouse "hover"
+            focus_mask True
+            xalign 0.74 yalign 0.83
+            activate_sound "audio/sfx/donecooking.ogg"
+            action [Call(case+"_cook_done", result=cook_status.result())]
+    else:
+        imagebutton:
+            idle "goEat"
+            hover "letscookGO"
+            mouse "hover"
+            at itrfade()
+            focus_mask True
+            xalign 0.74 yalign 0.83
+            activate_sound "audio/sfx/donecooking.ogg"
+            action [Call(case+"_cook_done", result=cook_status.result())]
 
-    #TODO: add better positions for the inventory, after UI is decided
-    $x = 400
-    $y = 284
+    # inventory positions
+    $ x = 400
+    $ y = 284
     for i, item in enumerate(inventory.items):
         if i != 0 and i % 3 == 0:
             $ x = 400
@@ -170,7 +181,7 @@ screen cooking(dish):
             idle item.image
             xpos x ypos y
             mouse "hover"
-            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item, inventory.selected)]
+            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
             tooltip item
             at focus_effect
         $ x += 159
@@ -179,53 +190,26 @@ screen cooking(dish):
     if tooltip:
         fixed xmaximum 500:
             text "[tooltip.name]":
-                xpos 600 ypos 710 #tmp
+                xpos 600 ypos 710
                 xalign 0.5
                 color "#000"
             text "[tooltip.tooltip]":
-                xpos 600 ypos 760 #tmp
+                xpos 600 ypos 760
                 xalign 0.5
                 color "#000"
 
-    # desired stats, TODO: change the bars after UI is done
-    bar value AnimatedValue(cook_status.flavor, 100):
-        xalign 0.75 ypos 110
-        xmaximum 400
-        ymaximum 4
-    text "{}/{}".format(cook_status.flavor, goal):
-        xalign 0.75 ypos 110
-
     # combo
-    text "Combo: {}".format(cook_status.combo):
-        xalign 0.6 ypos 200
+    image "gui/bar/flavorstars{}.png".format(cook_status.combo):
+        xpos 1140 ypos 238
+        at itrfade()
 
     if cook_status.result() == 0:
-        add dish:
+        image dish:
             xalign 0.68 yalign 0.55
             xanchor 0.5 yanchor 0.5
             at dish_appear
     elif cook_status.result() == 1:
-        add dish+"Best":
+        image dish+"Best":
             xalign 0.68 yalign 0.55
             xanchor 0.5 yanchor 0.5
             at dish_appear
-
-    # somnia and remerie sprites
-    if set(inventory.selected) == set(cook_status.smashReq) and cook_status.combo == len(cook_status.smashReq) and cook_status.smash == False:
-        imagebutton:
-            xpos 0 ypos 245
-            idle "cooksom_ready"
-            mouse "hover"
-            action [Jump("smash_"+case)] # use a jump label when we want to throw in atls
-    else:
-        imagebutton:
-            idle "cooksom"
-            xpos -15 ypos 245
-            mouse "hover"
-            action [Jump(case+"_somcook")]
-
-    imagebutton:
-        idle "cookrem"
-        xpos 1629 ypos 245
-        mouse "hover"
-        action [Jump(case+"_remcook")]

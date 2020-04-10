@@ -142,8 +142,8 @@ define gui.dialogue_text_xalign = 0.0
 
 ## Mouse
 define config.mouse = {
-    "default" : [("gui/mouse_default.png", 0, 0)],
-    "hover" : [("gui/mouse_hover.png", 0, 0)]
+    "default" : [("gui/mouse_default.png", 6, 1)],
+    "hover" : [("gui/mouse_hover.png", 6, 1)]
     }
 
 ## Layers
@@ -157,6 +157,8 @@ define config.layers = ['investigation', 'master', 'transient', 'screens', 'over
 ## The width and height of a button, in pixels. If None, Ren'Py computes a size.
 define gui.button_width = None
 define gui.button_height = None
+
+define gui.button_mouse = "hover"
 
 ## The borders on each side of the button, in left, top, right, bottom order.
 define gui.button_borders = Borders(6, 6, 6, 6)

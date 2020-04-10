@@ -102,7 +102,6 @@ init -1:
     image wonderland2 = "images/BG/bg_wonderland_v2.png"
     image starry = "images/BG/starry.png"
     image cookbook = "images/BG/bg_cookbook.png"
-    image cookbook2 = "images/BG/test_cookbook.png"
 
 ## CGs:
     image logo = "images/CG/logo.png"
