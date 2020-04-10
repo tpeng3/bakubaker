@@ -477,7 +477,7 @@ screen main_menu():
     add gui.main_menu_background:
         at itrfade()
 
-    image "splash_menu_ani"
+    image "main_menu_ani"
 
     ## This empty frame darkens the main menu.
     frame:
