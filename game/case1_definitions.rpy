@@ -59,7 +59,7 @@ init python:
             {"name": "Chat with Bunny", "label": "bunny1_chat", "condition": False},
             {"name": "Ask for the Time", "label": "bunny1_time", "condition": False}
         ],
-        state = False
+        state = "looking"
     )
     t_bunny2 = Interactables("Energetic Bunny", "bunny2", "images/interactables/case1/bunny2.png", page=0,
         xstart=892, ystart=430,
