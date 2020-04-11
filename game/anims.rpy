@@ -69,6 +69,15 @@ label endscene:
     $ renpy.pause(delay=20, hard=True)
     scene black with Dissolve(1.0)
 
+label intodream:
+    show enterdream:
+        xanchor 0 yanchor 0
+        xpos 0 ypos -2000
+        ease_quad 8.0 ypos 0
+    pause (8.0)
+    show cloud with dissolve
+    return
+
 image fin = Text("{size=50}{ii}u made it 2 the end!!!{/s}{/ii}")
 
 # Main Menu --------------------------------------------------------------------
@@ -76,7 +85,12 @@ image main_menu_ani:
     contains:
         "gui/overlay/main_menu.png"
     contains:
-        anim.Filmstrip ("images/cg/poppin.png", (1920,1080), (1,3), 0.20, loop=True)
+        "gui/overlay/main_cloud1.png"
+        alpha 1.0
+        linear 3.0 alpha 0.30
+        pause 0.2
+        linear 2.0 alpha 1.0
+        repeat
 
 # Splash screen ----------------------------------------------------------------
 transform floating():

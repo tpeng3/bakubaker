@@ -351,7 +351,7 @@ screen click_start():
         at itrfade()
 
     image "clickStart":
-        xpos 290 ypos 608 # Fix position afterward tho lol
+        xpos 350 ypos 625
         at blinking()
 
     imagebutton:
@@ -786,7 +786,7 @@ screen file_slots(title):
 
                         text FileSaveName(slot):
                             style "slot_name_text"
-                        
+
                         key "save_delete" action FileDelete(slot)
 
             ## Buttons to access other pages.
