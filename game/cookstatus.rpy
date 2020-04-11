@@ -64,7 +64,7 @@ init -1 python:
             self.selected = []
 
     class CookStatus(store.object):
-        def __init__(self, smashReq, goal):
+        def __init__(self, smashReq):
             self.flavor = 0
             self.combo = 0
             self.smashReq = smashReq # [] list of ideal dish ingredients

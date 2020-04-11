@@ -374,7 +374,7 @@ label case1_vn_end(result=0):
     $ somexpr = "ne"
     s "Why don't you have it?"
     $ remexpr = "bi"
-    r "...!" with flash
+    r "...!"
     $ somexpr = "de"
     s "We both know dreams are harder to come by than nightmares, so please... Help yourself!"
     $ remexpr = "fl"
@@ -382,7 +382,7 @@ label case1_vn_end(result=0):
     $ somexpr = "gr"
     s "What's with that sad look? Eat up and enjoy!"
     $ remexpr = "gr"
-    r "I... I will. {i}Bonne nuit and bonne appetit{/i}."
+    r "I... I will. {i}Bonne nuit et bon appétit{/i}."
     $ remexpr = "th"
     r "Mm... Soft, warm eggs wrapped in a delicate fold and perfectly seasoned."
     $ remexpr = "gr"

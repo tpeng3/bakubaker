@@ -56,6 +56,7 @@ label splashscreen:
 ## The game starts here.
 label start:
     $ case = "case1"
+    $ tutorial = False
     menu:
         "Start at vn (beginning)":
             jump case1_vn

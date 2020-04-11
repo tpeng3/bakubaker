@@ -20,32 +20,48 @@ image cutin:
 label case1_cook:
     play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
-    $ inventory = Inventory()
-    call inventory_stock from _call_inventory_stock
-    # "Welcome to Hell's Kitchen..."
-    # "Quick tutorial: you got a bunch of ingredients, and the goal is to add it together and reach the numbers in the middle."
-    # "Bonus points if you get the STARRED* attribute to 100!"
-    $ goal = 69
+    if not inventory:
+        $ inventory = Inventory()
+        call inventory_stock from _call_inventory_stock
     $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
-    $ cook_status = CookStatus(smashReq=smashReq, goal=goal)
-    show screen cooking(dish="omelette")
+    $ cook_status = CookStatus(smashReq=smashReq)
+    show screen cooking(dish="omelette") with Dissolve (0.8)
+    if not tutorial:
+        show screen focus_dialogue
+        pause 1.0
+        r "Alright, let's start whipping up a dream dish for us to eat."
+        r "Dream dishes are fickle so we have to make sure we use the right ingredients."
+        r "One wrong step and we'll have to start over."
+        s "This time we're a bit low on eggs, but let's do our best!"
+        $ tutorial = True
     jump cooking_start
 
 label case1_somcook:
     show screen focus_dialogue
-    s "helll yeaaaa"
+    if not cook_status.smash:
+        s "Hmm... A breakfast egg dish. What about we make some pancakes Remi?"
+    else:
+        s "It's done! Let's wrap up now."
     jump cooking_start
 
 label case1_remcook:
     show screen focus_dialogue
-    r "dam what are you up to now!!"
+    if not cook_status.smash:
+        r "We don't have any flour so let's keep it simple."
+        r "But if we want something sweet, we can add some fruit."
+    else:
+        r "Well in any case, we should clean up now."
     jump cooking_start
 
 label smash_case1:
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
-    s "Fuck yeah!!!!!!!!!!!!!!!!!!!!!!!"
     $ cook_status.smashSkill()
+    pause 3.0
+    s "Viola~ "
+    r "W-what did you do?!"
+    s "Just a bit of Somnia magic. I feel like it was missing something earlier."
+    s "In this case, a spoonful of ketchup~"
     jump cooking_start
 
 label case1_cook_done(result):
@@ -57,12 +73,7 @@ label case1_cook_done(result):
         "images/items/dish_*.png",
     )
     show screen focus_dialogue
-    if result == -1:
-        "Failed cooking, try again"
-        $ inventory.reset()
-        $ cook_status.reset()
-        jump cooking_start
-    elif result == 0:
+    if result == 0:
         s "Pretty good! Could use some more zing and pep, though."
         r "This looks serviceable."
     elif result == 1:
