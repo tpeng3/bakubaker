@@ -24,6 +24,7 @@ style dreamacts is button:
 style dreamacts_text is button_text:
     xalign 0.5
     yalign 0.5
+    font persistent.pref_text_font
     idle_color "#EDD9C8"
     hover_color "#facade"
     outlines [
@@ -51,6 +52,15 @@ transform itrfade():
     alpha 0.0
     linear 0.8 alpha 1.0
 
+transform arrowleft():
+    alpha 0.0 xalign 0.00
+    pause 2.0
+    linear 0.8 alpha 1.0 xalign 0.02
+
+transform arrowright():
+    alpha 0.0 xalign 0.995
+    pause 2.0
+    linear 0.8 alpha 1.0 xalign 0.98
     
 # --------------------------------------------------------------------------
 # INITIALIZE INVESTIGATION CHOICES
@@ -178,7 +188,7 @@ screen dream():
             hover "goLeftHov"
             mouse "hover"
             xalign 0.02 yalign 0.5
-            at itrfade()
+            at arrowleft()
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
                     SetScreenVariable("fixedposend", (-current_page*page_width)+page_width),
                     SetScreenVariable("current_page", current_page-1)]
@@ -187,7 +197,7 @@ screen dream():
             idle "goRight"
             hover "goRightHov"
             xalign 0.98 yalign 0.5
-            at itrfade()
+            at arrowright()
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
                     SetScreenVariable("fixedposend", (-current_page*page_width)-page_width),
                     SetScreenVariable("current_page", current_page+1)]

@@ -491,10 +491,9 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
     style_prefix "main_menu"
-    add gui.main_menu_background:
-        at itrfade()
 
-    image "main_menu_ani"
+    add "gui/overlay/main_menu.png" at itrfade()
+    image "gui/overlay/main_cloud1.png" at main_clouds()
 
     ## This empty frame darkens the main menu.
     frame:

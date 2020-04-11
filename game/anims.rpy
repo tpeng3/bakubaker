@@ -29,8 +29,6 @@ label splash_transition:
         easein_quad 2.0 xalign 0.85
     pause(2.5)
     return
-    # $ main_menu = True
-    # show screen main_menu with Dissolve(1.0)
 
 label titlezone:
     show outside with dissolve:
@@ -81,16 +79,12 @@ label intodream:
 image fin = Text("{size=50}{ii}u made it 2 the end!!!{/s}{/ii}")
 
 # Main Menu --------------------------------------------------------------------
-image main_menu_ani:
-    contains:
-        "gui/overlay/main_menu.png"
-    contains:
-        "gui/overlay/main_cloud1.png"
-        alpha 1.0
-        linear 3.0 alpha 0.30
-        pause 0.2
-        linear 2.0 alpha 1.0
-        repeat
+transform main_clouds():
+    alpha 1.0 
+    linear 3.0 alpha 0.30
+    pause 0.2
+    linear 2.0 alpha 1.0
+    repeat
 
 # Splash screen ----------------------------------------------------------------
 transform floating():

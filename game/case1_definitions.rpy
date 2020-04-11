@@ -154,7 +154,7 @@ init python:
         ]
     )
     t_marcella_end = Interactables("Marcella Lapin", "marcella_end", "images/interactables/case1/marchie3.png", page=2,
-        xstart=1260, ystart=94,
+        xstart=1400, ystart=94,
         actions = [
             {"name": "Talk to Marcella", "label": "marcella_talk_end", "condition": True},
         ]
