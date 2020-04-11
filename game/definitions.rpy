@@ -147,7 +147,13 @@ init -1:
     define audio.trip = "audio/sfx/trip1.ogg"
     define audio.welcomedoor = "audio/sfx/welcomedoor.ogg"
     define audio.windchimes = "audio/sfx/windchimes.wav"
-    define audio.tune = "audio/sfx/tune.ogg"
+    define audio.combo0 = "audio/sfx/combo0.ogg"
+    define audio.combo1 = "audio/sfx/combo1.ogg"
+    define audio.combo2 = "audio/sfx/combo2.ogg"
+    define audio.combo3 = "audio/sfx/combo3.ogg"
+    define audio.combo4 = "audio/sfx/combo4.ogg"
+    define audio.combo5 = "audio/sfx/comboFULL.ogg"
+    define audio.comboFULL = "audio/sfx/menuhover.ogg"
 
 
 

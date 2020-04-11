@@ -186,6 +186,8 @@ screen cooking(dish):
             idle item.image
             xpos x ypos y
             mouse "hover"
+            hover_sound "menuhover"
+            activate_sound "combo"+cook_status.combo
             action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
             tooltip item
             at focus_effect
