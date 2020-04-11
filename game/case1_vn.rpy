@@ -314,7 +314,7 @@ label skipopening: # delete before publishing
 
     menu:
         "go to dream":
-            jump expression case+"_dream"
+            pass
         "after dream":
             jump case1_vn_end
 
@@ -335,10 +335,19 @@ label skipopening: # delete before publishing
     pause (2.0)
 
     stop music fadeout (5.0)
+
+    show enterdream with dissolve:
+        xanchor 0 yanchor 0
+        xpos 0 ypos -2000
+
+
     dr """The aromatic wisps that rolled out shimmered lazily against the glint of the office's few lamps, and seemed to be made of a dream itself.
 
 	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as {ii}dream eaters{/ii}.
     """
+
+    call intodream
+
     pause (2.0)
     $ renpy.stop_predict(
         "images/sprites/somnia_*.png",
@@ -384,7 +393,7 @@ label case1_vn_end(result=0):
     $ somexpr = "gr"
     s "Hehe~... I hope so too!"
 
-    scene black with dissolve
+    scene incenseout with Dissolve(2.0)
 
     dr """
     The dream eater feasted on the hearty dish conjured from the client's suppressed worries and anxieties.
@@ -393,8 +402,9 @@ label case1_vn_end(result=0):
 
     Slowly, Marcella rose from the bed as the incense fizzled out to a small ember.
     """
+    pause (1.0)
 
-    scene dreamoffice with dissolve
+    scene dreamoffice with fade
 
     $ marexpr = "ya"
     show mar with dissolve

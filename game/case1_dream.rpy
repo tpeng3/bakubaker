@@ -22,7 +22,7 @@ label case1_dream:
             "gui/frame_*.png", # dream hover textboxes
             "gui/textbox_*.png" # dream talk textboxes
         )
-    scene black
+    scene cloud
     show screen dream() with Dissolve(2.0)
     pause(1.0)
     play sound trip

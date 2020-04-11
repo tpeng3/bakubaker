@@ -30,7 +30,7 @@ init -1:
     image dreamoffice = "images/BG/bg_dreamoffice.png"
     image wonderland = "images/BG/bg_wonderland_v2.png"
     image black = "#000"
-
+    image cloud = "#ebdcc3"
 
 ## UI:
     image menuSplash = "gui/overlay/menu_splash.png"
@@ -106,6 +106,8 @@ init -1:
 ## CGs:
     image logo = "images/CG/logo.png"
     image outside = "images/CG/outside.png"
+    image enterdream = "images/CG/incense_todream.png"
+    image incenseout = "images/CG/incense_out.png"
 
 ## Music:
 # init -2 python:
