@@ -26,16 +26,23 @@ label case1_vn:
     call titlezone
 
     dr """
-    When the curtain of the night lifts, a sleepy town is awaken by the gentle glow of morning.
+    When the curtain of the night lifts, a sleepy town wakes by the gentle glow of morning.
 
-    The patchwork quilt of the prior night's myriad of dreams is kicked off, and the townsfolk go about their day.
+    The townsfolk go about their days, shedding the patchwork quilt of a night's myriad of dreams.
 
-    But, alas... Once night falls again and the townsfolk begin dreaming, their struggles are laid bare once more.
+    However... When deep slumber closes the eyes of the townsfolk once more, the visions of night come out to play.
 
-    Luckily, in a quiet corner of the town lies {ii}Café Nemo{/ii}, a cozy café that greets anyone who visits with warm meals and a warmer atmosphere.
+    The fantasies of wondrous reverie entertain those who have nothing to worry about.
 
+    Yet, the troubled fear how their nighttime tales will unfold.
+
+    Luckily, in a quiet corner of the town lies {ii}Café Nemo{/ii}. A cozy café that greets anyone who visits with a warm meal and a warmer atmosphere.
+
+    Their dreamy dishes and a mellow milieu offer a soothing repose from troubled, busy lives.
+
+    Should any uneasy lives trail the starlit streets for the café's incandescent aromas, they'll find two cooks with open arms.
     """
-    dr "Should any sleepy lives follow the café's sweet and savory aroma down the starlight-dusted streets, they'll find two busy cooks awaiting with open arms."
+
     pause 1.0
     show outside:
         xpos 0 ypos -1000
@@ -359,6 +366,8 @@ label skipopening: # delete before publishing
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):
+    $ result += 1 # delete this before publishing
+    $ marcella_name = "Marcella Lapin" # delete this before publishing
     $ _skipping = True # disable skipping option
     stop music fadeout (2.0)
     scene dreamoffice
@@ -457,20 +466,25 @@ label case1_vn_end(result=0):
         $ marexpr = "wo"
         ml "What could I do? I couldn't turn my back on my family..."
         ml "The stress of it all led to a lot of sleepless nights. I was tired, sure, but that was nothing compared to letting my siblings down."
-        ml "And that’s when I happened to stumble across this bakery and meet {ii}Madam Nemo{/ii}."
+        ml "And that’s when I happened to stumble across this café and meet {ii}Madam Nemo{/ii}."
         $ marexpr = "la"
         ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}Café Nemo{/ii}."
         $ marexpr = "fr"
         ml "When I woke up, I was inside the store, with a warm omelette and a comforting smile waiting for me."
         ml "It was difficult, balancing my responsibilities, but I felt a... a duty to take care of my siblings."
         ml "When she found me, she was so concerned! I didn't realize how hard I had been pushing myself until, well, my exhaustion got the best of me."
-        $ marexpr = "th"
-        ml "She told me... that if I didn't take care of myself, and no one found me, my siblings would be all alone once again." with sshake
         $ marexpr = "la"
         ml "She really listened to my worries and offered me some words of wisdom. I was able to work hard and continue to support my siblings thanks to her advice."
         $ marexpr = "gr"
         ml "I also came back regularly to help myself to her specialty omelette!"
+        $ marexpr = "wo"
+        ml "B-but here I am again... Falling asleep in odd places, having my worries consume me once more..."
+        ml "I can't let this happen again. I need to find the time to take care of myself, so I can better take care of my siblings."
+        $ marexpr = "gr"
+        ml "I really can't thank you two enough for helping me with such kindness as Madam Nemo did years ago."
+        $ marexpr = "aw"
         ml "Thinking back at it now, she did mention before she had taken on two kids of her own as apprentices. I suppose that must be the two of you."
+        $ marexpr = "gr"
         ml "It's amazing how well you recaptured that flavor and nostalgia that I once felt years ago. I'm sure she would be proud."
         ml "We certainly had our fair share of caretaking stories. {ii}Madam Nemo{/ii} treasured you two the same I treasured my siblings."
         ml "She was a lovely soul. I hope she comes back soon, for your sake."
@@ -485,9 +499,12 @@ label case1_vn_end(result=0):
         $ somexpr = "gr"
         $ remexpr = "gr"
         $ marexpr = "aw"
-        ml "I would love to hear your stories of {ii}Madam Nemo{/ii} as well. If I find the time, I'd definitely make space in my schedule for a short routine visit."
+        ml "I would love to hear your stories of {ii}Madam Nemo{/ii} as well. I'll definitely make space in my schedule for a short routine visit."
+        $ marexpr = "gr"
+        ml "Perhaps I'll even bring my siblings! Little Whitney doesn't care much for cherry flavored snacks, but no one could possibly deny your delectable cherry tarts!"
     $ somexpr = "ne"
     $ remexpr = "ne"
+    $ marexpr = "th"
     ml "You know, when I took that nap earlier, I actually had what felt like a most wonderful, whimsical dream."
     ml "I don’t remember much of it now, but there were bits and pieces..."
     $ marexpr = "wo"
@@ -532,11 +549,15 @@ label case1_vn_end(result=0):
     $ somexpr = "de"
     s "I do! You really liked the dish, didn't you!"
     $ remexpr = "fl"
-    r "O-of course! "
-    $ remexpr = "de"
-    extend "I fixed it and made it delectable, {w=1}{nw}" with flash
-    $ remexpr = "pe"
-    extend "no thanks to you!" with sshake
+    r "O-of course! What's not to like about a dream dish... It's been quite some time since I've indulged in one."
+    if result == 1:
+        $ remexpr = "gr"
+        r "Your magic certainly added quite a sweet and tangy flavor that I didn't expect, but welcomed nonetheless."
+        $ somexpr = "gr"
+        s "Remi, you don't need to be so bashful about enjoying something!"
+        s "You know I'd only ever make delicious treats for you~"
+        $ remexpr = "fl"
+        r "T-thank you, Soms."
 
     $ somexpr = "di"
     s "*Sigh...*"

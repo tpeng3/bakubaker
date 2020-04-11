@@ -15,7 +15,7 @@ image cutin:
         linear 1.0 zoom 2 truecenter
     parallel:
         linear 1.0 alpha 0.0
-    pause 1.0
+    pause 2.0
 
 label case1_cook:
     play music cooking1
@@ -29,8 +29,11 @@ label case1_cook:
     if not tutorial:
         show screen focus_dialogue
         pause 1.0
-        r "Alright, let's start whipping up a dream dish for us to eat."
-        r "Dream dishes are fickle so we have to make sure we use the right ingredients."
+        r "Alright, let's begin whipping up a dream dish out of our available assets."
+        r "As we learned from Marcella's dream, {b}time{/b} seems to be at the center of their woes."
+        r "They appear to be in a state of perpectual disarray, unable to keep up with their ever-growing list of tasks."
+        s "If we can eat away the worry, perhaps they'll feel less uneasy!"
+        r "Right. Dream dishes are fickle so we have to make sure we use the right ingredients."
         r "One wrong step and we'll have to start over."
         s "This time we're a bit low on eggs, but let's do our best!"
         $ tutorial = True
@@ -60,7 +63,7 @@ label smash_case1:
     pause 3.0
     s "Viola~ "
     r "W-what did you do?!"
-    s "Just a bit of Somnia magic. I feel like it was missing something earlier."
+    s "Just a bit of {i}Somnia magic{/i}. I feel like it was missing something earlier."
     s "In this case, a spoonful of ketchup~"
     jump cooking_start
 

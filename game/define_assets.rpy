@@ -228,8 +228,8 @@ init python:
     config.custom_text_tags["th"] = thoughts
 
     def smallText(tag, argument, contents):
-        size = 20
-        alpha = 0.4
+        size = 22
+        alpha = 0.7
         return [
                 (renpy.TEXT_TAG, "size={}".format(size)),
                 (renpy.TEXT_TAG, "alpha={}".format(alpha)),
