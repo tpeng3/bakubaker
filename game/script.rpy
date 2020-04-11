@@ -64,6 +64,8 @@ label start:
             jump case1_dream
         "Start at cooking":
             jump case1_cook
+        "Start at vn (after dream)":
+            jump case1_vn_end
 
 label credits:
     # End Credits

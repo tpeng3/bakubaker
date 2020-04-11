@@ -44,6 +44,7 @@ label titlezone:
     $ renpy.pause(delay=5, hard=True)
     play music storefront
     show outside:
+        pause 5.0
         xanchor 0 yanchor 0
         xpos 0 ypos 0
         ease_quad 10.0 xpos 0 ypos -1080

@@ -177,7 +177,7 @@ screen cooking(dish):
         if i != 0 and i % 3 == 0:
             $ x = 400
             $ y += 150
-        
+
         if item in inventory.selected: # select border
             add "selBorder":
                 xpos x ypos y
@@ -195,13 +195,13 @@ screen cooking(dish):
     if tooltip:
         fixed xmaximum 500:
             text "[tooltip.name]":
-                xpos 600 ypos 710
+                xpos 600 ypos 745
                 xalign 0.5
-                color "#000"
+                color "#7c345e"
             text "[tooltip.tooltip]":
-                xpos 600 ypos 760
+                xpos 600 ypos 780
                 xalign 0.5
-                color "#000"
+                color "#483e54"
 
     # combo
     image "gui/bar/flavorstars{}.png".format(cook_status.combo):

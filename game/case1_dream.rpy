@@ -51,16 +51,20 @@ label somrem_start_talk:
         dreamRem fl "Don't get lost now Soms. Here, take my hand."
     elif t_somrem_start.state == "postMar":
         dreamSom de "Oh~ I could just stare at those cutie bunnies all night~"
+        dreamSom th "Or rather, all morning?"
         dreamRem th "It's a shame, but the incense will only last so long before our client wakes up."
         dreamSom ex "Hey Remi, we should go to a petting zoo for our next date!"
         dreamRem gr "That sounds like a good idea, but first, let's focus our on job."
     elif t_somrem_start.state == "middle":
-        dreamSom th "This busybee Marcella is quite a change from the Marcella we had found earlier lying on the sidewalk." #WORDING HELP
+        dreamSom th "This busybee dream apparation of Marcella is quite a stark contrast from the slow to start Marcella we found lying on the sidewalk earlier."
         dreamRem ne "They did mention that they haven't slept in several days. That can't possibly do anyone good."
         dreamRem th "What could be the reason for their lack of sleep?"
     elif t_somrem_start.state == "end":
-        dreamRem th "So all the clock faces are part of one spiraling clocktower."
-        dreamSom th ""
+        dreamRem th "So all the clock faces are part of one spiraling clocktower weaving in and out through the dream."
+        dreamSom th "You could say... Marcella's a time traveller."
+        play sound rimshot
+        dreamSom de "Hehe!"
+        dreamRem gr "{th}(Hahah...){/th} Ahem... now's not the right time for such joking around..."
     elif c_strawberry not in inventory:
         dreamSom "What's wrong Remi?"
         dreamRem th "I feel like there's something missing... An ingredient perhaps..."
@@ -68,7 +72,7 @@ label somrem_start_talk:
     else:
         dreamRem "TODO"
         dreamSom "aaaaaaaa"
-    
+
     jump dream_start
 
 label marcella_talk_start:
@@ -460,7 +464,7 @@ label bunny5_talk:
     if t_bunny5.state == 0:
         bun "I would've paint the flower myself but last time I painted anything, I spilled the whole bucket all over the floor!"
         bun "Big sib Marchie told me it was okay and that accidents happen, but I felt bad since they had to clean up my mess..."
-    else: 
+    else:
         bun "I have my paint but..."
         bun "Where to start?"
         dreamRem ne "Looks like this one's a little preoccupied with talking to themselves."
@@ -567,8 +571,8 @@ label flower_check:
     if t_bunny5.state == 0:
         dreamRem gr "There! That should be the last rose we needed to paint."
         dreamSom de "Oh they're beautiful Remi!"
-        dreamRem fl "Honestly it wasn't that bad since it was like adding decorations to a dish." # I wanted to say icing on a cake but this is remi hhh rose icings... what food does it... minus cake WORDING HELP
-        dreamRem de "Now let's go check on the bunny who asked the favor."
+        dreamRem fl "Honestly, it wasn't too bad- like brushing a savory glaze to vegetables."
+        dreamRem de "Let's go check on the bunny who asked the favor."
     jump dream_start
 
 label march_continue:
@@ -649,8 +653,8 @@ label marcella_talk_end:
 
 # Clock under the column on the first page
 label clock1_inspect:
-    dr "TODO DO WE WANT TO ADD FLAVOR TEXT my brain empty on words"
-    dr "The hour hand is facing {ii}[t_clockface1.state]{/ii}, while the minute hand is stuck facing {ii}down{/ii}."
+    dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
+    dr "The hour hand is facing {ii}[t_clockface1.state]{/ii}, \n while the minute hand is stuck facing {ii}down{/ii}."
     if not t_clockface1.viewed:
         python:
             interactions.update(t_clockface1.view())
@@ -661,29 +665,29 @@ label clock1_inspect:
     jump dream_start
 label clock1_up:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand is stuck facing {ii}down{/ii}."
+    dr "The hour hand has been moved to face {b}up{/b}, \n while the minute hand is stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("up"))
     jump check_clocks
 label clock1_down:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand is stuck also facing {ii}down{/ii}."
+    dr "The hour hand has been moved to face {b}down{/b}, \n while the minute hand is stuck also facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("down"))
     jump check_clocks
 label clock1_left:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand is stuck facing {ii}down{/ii}."
+    dr "The hour hand has been moved to face {b}left{/b}, \n while the minute hand is stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("left"))
     jump check_clocks
 label clock1_right:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand is stuck facing {ii}down{/ii}."
+    dr "The hour hand has been moved to face {b}right{/b}, \n while the minute hand is stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("right"))
     jump check_clocks
 
 # giant clock on second page
 label clock2_inspect:
-    dr "A large clock something something flavor text after seeing the clock drawn"
-    dr "The hour hand is facing {ii}[t_clockface2.state]{/ii}, while the minute hand is stuck facing {ii}up{/ii}."
+    dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
+    dr "The hour hand is facing {b}[t_clockface2.state]{/b}, \n while the minute hand is stuck facing {b}up{/b}."
     if not t_clockface2.viewed:
         python:
             interactions.update(t_clockface2.view())
@@ -694,22 +698,22 @@ label clock2_inspect:
     jump dream_start
 label clock2_up:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand is stuck also facing {ii}up{/ii}."
+    dr "The hour hand has been moved to face {b}up{/b}, \n while the minute hand is stuck also facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("up"))
     jump check_clocks
 label clock2_down:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand is stuck facing {ii}up{/ii}."
+    dr "The hour hand has been moved to face {b}down{/b}, \n while the minute hand is stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("down"))
     jump check_clocks
 label clock2_left:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand is stuck facing {ii}up{/ii}."
+    dr "The hour hand has been moved to face {b}left{/b}, \n while the minute hand is stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("left"))
     jump check_clocks
 label clock2_right:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand is stuck facing {ii}up{/ii}."
+    dr "The hour hand has been moved to face {b}right{/b}, \n while the minute hand is stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("right"))
     jump check_clocks
 
@@ -717,8 +721,8 @@ label clock2_right:
 label clock3_inspect:
     if not t_clockface3.viewed:
         dreamRem th "The position of this clock is different from the other one in the room."
-        dreamSom th "The numbers and ticks seems to be missing. I wonder how we can tell the time?"
-        dreamRem "Hm... the minute hand's not moving... I think it's stuck. Oh, but it looks like I can move the hour hand."
+        dreamSom th "The numbers are rough and difficult to read. How are we meant to tell the time?"
+        dreamRem "Hm. The {ii}minute hand{/ii} isn't moving. I think it's stuck. Oh, but it looks like I can move the {ii}hour hand{/ii} freely."
         dreamRem si "Nothing seems to happen when I do, though."
         dreamSom ne "Let's check the other clocks, too."
         python:
@@ -728,34 +732,34 @@ label clock3_inspect:
             interactions.update(t_clockface3.enable("clock3_left"))
             interactions.update(t_clockface3.enable("clock3_right"))
     else:
-        dr "A large clock something something flavor text after seeing the clock drawn"
-        dr "The hour hand is facing {ii}[t_clockface3.state]{/ii}, while the minute hand is stuck facing {ii}right{/ii}."
+        dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
+        dr "The hour hand is facing {b}[t_clockface3.state]{/b}, \n while the minute hand is stuck facing {b}right{/b}."
     jump dream_start
 label clock3_up:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand is stuck facing {ii}right{/ii}."
+    dr "The hour hand has been moved to face {b}up{/b}, \n while the minute hand is stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("up"))
     jump check_clocks
 label clock3_down:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand is stuck facing {ii}right{/ii}."
+    dr "The hour hand has been moved to face {b}down{/b}, \n while the minute hand is stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("down"))
     jump check_clocks
 label clock3_left:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand is stuck facing {ii}right{/ii}."
+    dr "The hour hand has been moved to face {b}left{/b}, \n while the minute hand is stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("left"))
     jump check_clocks
 label clock3_right:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand is stuck also facing {ii}right{/ii}."
+    dr "The hour hand has been moved to face {b}right{/b}, \n while the minute hand is stuck also facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("right"))
     jump check_clocks
 
 # second clock on last page
 label clock4_inspect:
     if not t_clockface4.viewed:
-        dreamRem sh "There're also no numbers on this clock. And the minute hand is stuck."
+        dreamRem sh "The numbers are obscured beyond readibility. But the {ii}minute hand{/ii} is stuck in one position just like the other clock."
         dreamSom th "Maybe we need to get all the clock's time to match up?"
         dreamRem th "How can we do that if we can't move the minute hand?"
         dreamSom ex "We'll figure it out, Remi! There has to be a way!"
@@ -766,27 +770,27 @@ label clock4_inspect:
             interactions.update(t_clockface4.enable("clock4_left"))
             interactions.update(t_clockface4.enable("clock4_right"))
     else:
-        dr "A large clock something something flavor text after seeing the clock drawn"
-        dr "The hour hand is facing {ii}[t_clockface4.state]{/ii}, while the minute hand is stuck facing {ii}left{/ii}."
+        dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
+        dr "The hour hand is facing {b}[t_clockface4.state]{/b}, \n while the minute hand is stuck facing {b}left{/b}."
     jump dream_start
 label clock4_up:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand is stuck facing {ii}left{/ii}."
+    dr "The hour hand has been moved to face {b}up{/b}, \n while the minute hand is stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("up"))
     jump check_clocks
 label clock4_down:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand is stuck facing {ii}left{/ii}."
+    dr "The hour hand has been moved to face {b}down{/b}, \n while the minute hand is stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("down"))
     jump check_clocks
 label clock4_left:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand is stuck also facing {ii}left{/ii}."
+    dr "The hour hand has been moved to face {b}left{/b}, \n while the minute hand is stuck also facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("left"))
     jump check_clocks
 label clock4_right:
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand is stuck facing {ii}left{/ii}."
+    dr "The hour hand has been moved to face {b}right{/b}, \n while the minute hand is stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("right"))
     jump check_clocks
 
