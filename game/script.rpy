@@ -68,6 +68,8 @@ label start:
             jump case1_cook
         "Start at vn (after dream)":
             jump case1_vn_end
+        "Credits":
+            show screen credits()
 
 label credits:
     # End Credits
