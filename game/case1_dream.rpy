@@ -69,9 +69,9 @@ label somrem_start_talk:
         dreamRem th "I feel like there's something missing... An ingredient perhaps..."
         dreamSom "Shall we take a look around longer then?"
     else:
-        dreamRem "TODO"
-        dreamSom "aaaaaaaa"
-
+        dreamRem "We better head over to the Wishing Kitchen soon."
+        dreamRem "Our time in Marcella's dream is limited after all."
+        dreamSom gr "This was a fun dream though wasn't it Remi~"
     jump dream_start
 
 label marcella_talk_start:

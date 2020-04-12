@@ -27,6 +27,7 @@ style button:
     properties gui.button_properties("button")
     mouse "hover"
     hover_sound "audio/sfx/menuhover.ogg"
+    activate_sound "audio/sfx/select.ogg"
 
 style button_text is gui_text:
     properties gui.text_properties("button")
@@ -260,7 +261,11 @@ screen choice(items):
 
     vbox:
         for i in items:
-            textbutton i.caption mouse "hover" hover_sound "audio/sfx/menuhover.ogg" action i.action
+            textbutton i.caption:
+                mouse "hover"
+                hover_sound "audio/sfx/menuhover.ogg"
+                activate_sound "audio/sfx/select.ogg"
+                action i.action
 
 
 ## When this is true, menu captions will be spoken by the narrator. When false,
@@ -333,6 +338,7 @@ style quick_button:
     properties gui.button_properties("quick_button")
     mouse "hover"
     hover_sound "audio/sfx/menuhover.ogg"
+    activate_sound "audio/sfx/select.ogg"
 
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
@@ -777,6 +783,7 @@ screen file_slots(title):
                     button:
                         mouse "hover"
                         hover_sound "audio/sfx/menuhover.ogg"
+                        activate_sound "audio/sfx/select.ogg"
                         action FileAction(slot)
 
                         has vbox
@@ -800,7 +807,7 @@ screen file_slots(title):
 
                 spacing gui.page_spacing
 
-                textbutton _("<") action FilePagePrevious(max(page-1,1))
+                textbutton _("<") action FilePagePrevious()
 
                 if config.has_autosave:
                     textbutton _("{#auto_page}A") action FilePage("auto")
@@ -809,10 +816,10 @@ screen file_slots(title):
                     textbutton _("{#quick_page}Q") action FilePage("quick")
 
                 ## range(1, 10) gives the numbers from 1 to 9.
-                for page in range(1, 9):
+                for page in range(1, 10):
                     textbutton "[page]" action FilePage(page)
 
-                textbutton _(">") action FilePageNext(min(page+1,8))
+                textbutton _(">") action FilePageNext()
 
             ## This version allows access to more pages than are listed as buttons
             ## as there is no hard limit defined.

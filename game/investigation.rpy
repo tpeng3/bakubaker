@@ -242,6 +242,7 @@ screen dream_actions(actions={}, mousepos):
             button:
                 mouse "hover"
                 hover_sound "audio/sfx/menuhover.ogg"
+                activate_sound "audio/sfx/select.ogg"
                 style "dreamacts"
                 text action['name']:
                     style "dreamacts_text"
