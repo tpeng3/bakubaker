@@ -78,11 +78,11 @@ label intodream:
     show cloud with dissolve
     return
 
-image fin = Text("{size=50}{ii}u made it 2 the end!!!{/s}{/ii}")
+image fin = Text("{size=50}{i}Thank you for playing!{/s}{/i}")
 
 # Main Menu --------------------------------------------------------------------
 transform main_clouds():
-    alpha 1.0 
+    alpha 1.0
     linear 3.0 alpha 0.30
     pause 0.2
     linear 2.0 alpha 1.0
@@ -110,3 +110,40 @@ transform floating():
     repeat
 
 define flash = Fade(.10, 0.0, .20, color="eee6d1")
+
+# Cookin splashes!!! -----------------------------------------------------------
+image cutin:
+    contains:
+        alpha 0.0
+        "gui/overlay/confirm.png"
+        ease 0.5 alpha 1.0
+        pause 5.0
+        ease 0.5 alpha 0.0
+    contains:
+        anchor (0.5,0.5)
+        xpos -1.0 ypos 0.5
+        "images/CG/smash.png"
+        alpha 1.0
+        ease 0.50 xpos 0.5
+        "images/CG/smash.png"
+        pause 0.20
+        linear 0.05 ypos 0.51
+        "images/CG/smash1.png"
+        linear 0.05 ypos 0.5
+        pause 0.15
+        alpha 1.0
+        linear 0.05 ypos 0.51
+        "images/CG/smash2a.png"
+        # parallel:
+        linear 0.05 ypos 0.5
+        linear 0.10 zoom 1.5 truecenter
+        "images/CG/smash2b.png"
+        linear 0.15 zoom 1
+        block:
+            "images/CG/smash2b.png"
+            pause 0.15
+            "images/CG/smash2a.png"
+            pause 0.15
+            repeat 8
+        "images/CG/smash2b.png"
+        linear 0.50 alpha 0.0

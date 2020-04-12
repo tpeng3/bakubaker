@@ -52,7 +52,7 @@ define build.name = "All-In-OneGUITemplate"
 
 define config.has_sound = True
 define config.has_music = True
-define config.has_voice = False
+define config.has_voice = True
 
 init python:
     renpy.music.register_channel("bleeps", "voice")
@@ -69,7 +69,7 @@ init python:
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-# define config.main_menu_music = concrete
+define config.main_menu_music = "audio/music/Peas_Corps.mp3"
 
 
 ## Transitions #################################################################

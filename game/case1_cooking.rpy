@@ -1,22 +1,3 @@
-image cutin:
-    anchor (0,0)
-    xpos -1.0 ypos 0
-    "images/CG/cutin.png"
-    alpha 1.0
-    ease 0.50 truecenter
-    contains:
-        "images/CG/cutin1.png"
-        pause 0.20
-        "images/CG/cutin2.png"
-        pause 0.20
-        repeat 3
-    pause 1.0
-    parallel:
-        linear 1.0 zoom 2 truecenter
-    parallel:
-        linear 1.0 alpha 0.0
-    pause 2.0
-
 label case1_cook:
     play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
@@ -59,10 +40,10 @@ label smash_case1:
     show screen focus_dialogue
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
-    pause 3.0
+    pause 4.5
     $ cook_status.smashSkill()
     play sound "audio/sfx/comboFULL.ogg"
-    s "Viola~ "
+    s "Viola~!"
     r "W-what did you do?!"
     s "Just a bit of {i}Somnia magic{/i}. I feel like it was missing something earlier."
     s "In this case, a spoonful of ketchup~"

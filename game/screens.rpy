@@ -771,7 +771,7 @@ screen file_slots(title):
             grid gui.file_slot_cols gui.file_slot_rows:
                 style_prefix "slot"
 
-                xalign 0.20
+                xalign 0.5
                 yalign 0.5
 
                 spacing gui.slot_spacing

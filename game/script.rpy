@@ -31,6 +31,7 @@ label splashscreen:
 
     ## Here begins our splashscreen animation.
     pause(1.0)
+    play music "audio/music/Peas_Corps.mp3"
     call screen click_start with Dissolve(1.0)
 
     ## The first time the game is launched, players cannot skip the animation.
@@ -68,6 +69,8 @@ label start:
             jump case1_cook
         "Start at vn (after dream)":
             jump case1_vn_end
+        "Credits":
+            show screen credits()
 
 label credits:
     # End Credits
