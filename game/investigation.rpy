@@ -132,6 +132,8 @@ screen goCook():
         xalign 1.0 yalign 0
         focus_mask True
         mouse "hover"
+        hover_sound "audio/sfx/menuhover.ogg"
+        activate_sound "audio/sfx/select.ogg"
         action [Hide('dream', transition=Dissolve(.8)), Hide('goCook'), Jump(case+"_cook")]
 
 # Related Global Variables: bg, total_pages, page_width, interactions, unlocked_pages
@@ -187,6 +189,8 @@ screen dream():
             idle "goLeft"
             hover "goLeftHov"
             mouse "hover"
+            hover_sound "audio/sfx/menuhover.ogg"
+            activate_sound "audio/sfx/select.ogg"
             xalign 0.02 yalign 0.5
             at arrowleft()
             action [SetScreenVariable("fixedposprev", -current_page*page_width),
@@ -196,6 +200,8 @@ screen dream():
         imagebutton:
             idle "goRight"
             hover "goRightHov"
+            hover_sound "audio/sfx/menuhover.ogg"
+            activate_sound "audio/sfx/select.ogg"
             xalign 0.98 yalign 0.5
             at arrowright()
             action [SetScreenVariable("fixedposprev", -current_page*page_width),

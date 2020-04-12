@@ -21,7 +21,6 @@ label case1_cook:
     play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
     if len(inventory.items) == 0:
-        $ inventory = Inventory()
         call inventory_stock from _call_inventory_stock
     $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
     $ cook_status = CookStatus(smashReq=smashReq)
@@ -57,6 +56,7 @@ label case1_remcook:
     jump cooking_start
 
 label smash_case1:
+    show screen focus_dialogue
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
     pause 3.0

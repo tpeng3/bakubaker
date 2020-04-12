@@ -151,7 +151,8 @@ init python:
         xstart=487, ystart=762,
         actions = [
             {"name": "Talk to SomRem", "label": "somrem_end_talk", "condition": True},
-        ]
+        ],
+        state = "start"
     )
     t_marcella_end = Interactables("Marcella Lapin", "marcella_end", "images/interactables/case1/marchie3.png", page=2,
         xstart=1400, ystart=94,

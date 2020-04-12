@@ -162,6 +162,7 @@ label skipopening: # delete before publishing
 
     ml "So sorry...! A thousand apologies for the concern... "
     $ marexpr = "ya"
+    play sound yawn
     extend "{cps=10}*yaaaaawn*." with sshake
     $ remexpr = "sh"
     r "{th}(They were napping?!){/th}"
@@ -180,7 +181,9 @@ label skipopening: # delete before publishing
     $ marexpr = "gr"
     ml "Oh... yes! I heard rumors that the café recently reopened for business again."
     $ marexpr = "ya"
-    ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {cps=10}*yaaawn*{/cps} ...excitement..."
+    ml "It’s been, what, {ii}five years{/ii}? It’s been so long, I can hardly contain my... {nw}"
+    play sound yawn
+    extend "{cps=10}*yaaawn*{/cps} ...excitement..."
     $ somexpr = "th"
     s "{th}(Five years? Why, that's around the same time that... Hmm...){/th}"
     $ marexpr = "ne"
@@ -269,6 +272,7 @@ label skipopening: # delete before publishing
     $ marexpr = "ne"
     ml "I wasn't aware she left behind apprentices, but..."
     $ marexpr = "ya"
+    play sound yawn
     ml "*Yawn* That’s fine. If possible, I would like you two to help me as she once did."
 
     $ marexpr = "ne"
@@ -281,7 +285,9 @@ label skipopening: # delete before publishing
     ml "It was fine at first... I’ve pulled all-nighters before, but it has now been two weeks…"
     ml "I don’t think my body can keep up with my brain anymore."
     $ marexpr = "ya"
-    ml "It’s been absolutely exhausting to do anything... or get anywhere... *yawn* I just want to sleep…"
+    ml "It’s been absolutely exhausting to do anything... or get anywhere... {nw}"
+    play sound yawn
+    extend "*yawn* I just want to sleep…"
     $ marexpr = "ne"
     ml "Sleeping pills, music, exercise and such have done nothing in my favor..."
     ml "I’m a very busy person, see. I have a lot on my plate... But..."
@@ -312,7 +318,7 @@ label skipopening: # delete before publishing
     s "If you would please, relax. I’ll be lighting some incense now~!"
     $ remexpr = "ne"
     $ somexpr = "ne"
-
+    play sound incense
     dr """
     Somnia carefully lit an incense stick, blew it, and placed it in a ceramic holder.
 
@@ -352,7 +358,6 @@ label skipopening: # delete before publishing
 
 	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as {ii}dream eaters{/ii}.
     """
-
     call intodream
 
     pause (2.0)
@@ -417,6 +422,7 @@ label case1_vn_end(result=0):
 
     $ marexpr = "ya"
     show mar with dissolve
+    play sound yawn
     ml "*Yaaaawn...*" with sshake
     show mar at right with ease
     show remi at left with dissolve

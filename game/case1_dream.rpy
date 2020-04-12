@@ -11,7 +11,6 @@ label case1_dream:
             [t_somrem_start]
         )
         unlocked_pages = 0 # default is 0
-        finished = False # default is false
         renpy.start_predict_screen("dream")
         renpy.start_predict(
             "images/BG/bg_wonderland.png",
@@ -55,7 +54,8 @@ label somrem_start_talk:
         dreamSom ex "Hey Remi, we should go to a petting zoo for our next date!"
         dreamRem gr "That sounds like a good idea, but first, let's focus our on job."
     elif t_somrem_start.state == "middle":
-        dreamSom th "This busybee dream apparation of Marcella is quite a stark contrast from the slow to start Marcella we found lying on the sidewalk earlier."
+        dreamSom th "This busybee dream apparation of Marcella is quite a stark contrast..."
+        dreamSom th "In comparison to the slow to start Marcella we found lying on the sidewalk earlier."
         dreamRem ne "They did mention that they haven't slept in several days. That can't possibly do anyone good."
         dreamRem th "What could be the reason for their lack of sleep?"
     elif t_somrem_start.state == "end":
@@ -371,9 +371,7 @@ label bunny2_help:
         bun "Since little Whitney is sick, I can help clean up instead!"
         bun "I just finished my book, I'll be right over!"
         dreamSom de "My, how responsible! Thank you, darling~!"
-        show black with Dissolve(0.8)
-        pause(1.0)
-        hide black with Dissolve(0.8)
+        play sound paper
         python:
             interactions.update(t_bunny1.updateState("done"))
             interactions.update(t_bunny1.disable("bunny1_help"))
@@ -407,6 +405,7 @@ label bunny3_help:
     $ bun_name = "Peevish Bunny"
     dreamSom "Hello, could you help us move some of that big pile of papers for your dear big sib Marchie?"
     bun "Hmph... I guess if it's to help out big sib Marchie then..."
+    play sound paper
     python:
         interactions.update(t_bunny3.disable("bunny3_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
@@ -440,6 +439,7 @@ label bunny4_help:
     dreamSom gr "Hello there! Would you mind helping us clean up these papers for your big sib Marchie?"
     bun "Why yes, I'd love to help!"
     bun "Marchie already has a lot on their plate, so this is the least I could do!"
+    play sound paper
     python:
         interactions.update(t_bunny4.disable("bunny4_help"))
         interactions.update(t_debris.updateState(t_debris.state - 1))
@@ -493,6 +493,7 @@ label bunny5_help:
         bun "Oh, thank you, thank you! The red roses are so pretty!"
         bun "I hope big sib Marchie likes them!"
         bun "And I didn't forget your request- I can help clean up, too!"
+        play sound paper
         python:
             interactions.update(t_bunny5.disable("bunny5_help"))
             interactions.update(t_bunny5.enable("bunny5_talk"))
@@ -582,6 +583,7 @@ label march_continue:
     dreamSom bi "Remi, look!"
     $ interactions.complete([t_debris])
     hide expression t_debris with Dissolve(0.8)
+    play sound paper
     dr "To the dismay of the investigative duo, the oppressive atmosphere of has debris returned, undoing all the progress they had made."
     dr "The two dream eaters paused to gather their bearings as they became overwhelmed, once more, by the clutter."
     dreamRem "All our hard work!"
@@ -595,8 +597,21 @@ label march_continue:
     dreamRem bi "Ack! There they go again...!"
     stop music fadeout 5.0
     dreamSom bi "Let's go, Remi! We mustn't lose them!"
-    $ interactions.unlock([t_marcella_end])
+    $ interactions.unlock([t_somrem_end, t_marcella_end])
     $ unlocked_pages = 2
+    jump dream_start
+
+label somrem_end_talk:
+    if t_somrem_end.state == "start":
+        dreamSom bi "There they are, Remi! On top of that tower!"
+        dreamRem bi "What could Marcella be doing up there?"
+    elif t_somrem_end.state == "postMar":
+        dreamSom di "I hope Marchie is okay..."
+        dreamRem ne "Even if this is a dream, there's no way Marcella would stay safe up there."
+        dreamRem th "If my theory is right, we should go check on all the clocks."
+    elif t_somrem_end.state == "done":
+        dreamSom "It seems like Marchie's still unconscious but their face seems to be more at peace now."
+        dreamRem de "Let's hurry and make the dish so we don't keep our client waiting."
     jump dream_start
 
 label marcella_talk_end:
@@ -631,7 +646,8 @@ label marcella_talk_end:
         python:
             interactions.unlock([t_clockface3, t_clockface4])
             interactions.update(t_marcella_end.view())
-            interactions.update(t_somrem.updateState("end"))
+            interactions.update(t_somrem_start.updateState("end"))
+            interactions.update(t_somrem_end.updateState("postMar"))
             interactions.update(t_clockface1.disable("clock1_talk"))
             interactions.update(t_clockface2.disable("clock2_talk"))
             interactions.update(t_clockface1.enable("clock1_inspect"))
@@ -795,7 +811,6 @@ label clock4_right:
 
 label check_clocks:
     if t_clockface1.state == "right" and t_clockface2.state == "left" and t_clockface3.state == "up" and t_clockface4.state == "down":
-        "tempO"
         stop music fadeout (2.0)
         pause (3.0)
         play sound clockring
@@ -840,7 +855,8 @@ label check_clocks:
             inventory.add(c_clockegg)
             finished = True
             interactions.complete([t_clockface1, t_clockface2, t_clockface3, t_clockface4])
-            interactions.update(t_somrem.updateState("done"))
+            interactions.update(t_somrem_start.updateState("done"))
+            interactions.update(t_somrem_end.updateState("done"))
             interactions.update(t_bunny1.enable("bunny1_chat"))
             interactions.update(t_bunny2.enable("bunny2_chat"))
             interactions.update(t_bunny3.enable("bunny3_chat"))

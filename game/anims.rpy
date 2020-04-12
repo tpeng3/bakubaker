@@ -74,6 +74,7 @@ label intodream:
         xpos 0 ypos -2000
         ease_quad 8.0 ypos 0
     pause (8.0)
+    play sound whoosh fadeout 1.0
     show cloud with dissolve
     return
 

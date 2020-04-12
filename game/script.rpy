@@ -57,6 +57,7 @@ label splashscreen:
 label start:
     $ case = "case1"
     $ tutorial = False
+    $ finished = False
     $ inventory = Inventory() # initialize inventory
     menu:
         "Start at vn (beginning)":

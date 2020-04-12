@@ -145,6 +145,8 @@ screen cooking(dish):
         idle "goDream"
         hover "goDreamHov"
         mouse "hover"
+        hover_sound "audio/sfx/menuhover.ogg"
+        activate_sound "audio/sfx/select.ogg"
         focus_mask True
         xalign 0 yalign 0
         action [Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
@@ -159,6 +161,7 @@ screen cooking(dish):
             idle "letscookGO"
             hover "letscookGO"
             mouse "hover"
+            hover_sound "audio/sfx/menuhover.ogg"
             focus_mask True
             xalign 0.74 yalign 0.83
             activate_sound "audio/sfx/donecooking.ogg"
@@ -168,6 +171,7 @@ screen cooking(dish):
             idle "goEat"
             hover "letscookGO"
             mouse "hover"
+            hover_sound "audio/sfx/menuhover.ogg"
             at itrfade()
             focus_mask True
             xalign 0.74 yalign 0.83

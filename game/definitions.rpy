@@ -147,8 +147,17 @@ init -1:
     define audio.trip = "audio/sfx/trip1.ogg"
     define audio.welcomedoor = "audio/sfx/welcomedoor.ogg"
     define audio.windchimes = "audio/sfx/windchimes.wav"
-    define audio.windchimes = "audio/sfx/windchimes.wav"
     define audio.paint = "audio/sfx/paint.ogg"
+    define audio.yawn = "audio/sfx/yawn.ogg"
+    define audio.incense = "audio/sfx/incense.ogg"
+    define audio.thud = "audio/sfx/thud.ogg"
+    define audio.whoosh = "audio/sfx/whoosh.ogg"
+    define audio.paper = "audio/sfx/paper.ogg"
+
+
+
+
+
 
 
 
