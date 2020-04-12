@@ -20,7 +20,7 @@ image cutin:
 label case1_cook:
     play music cooking1
     # tmp shortcut to get all the items if you didn't get them from the dream
-    if not inventory:
+    if len(inventory.items) == 0:
         $ inventory = Inventory()
         call inventory_stock from _call_inventory_stock
     $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
@@ -59,8 +59,9 @@ label case1_remcook:
 label smash_case1:
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
-    $ cook_status.smashSkill()
     pause 3.0
+    $ cook_status.smashSkill()
+    play sound "audio/sfx/comboFULL.ogg"
     s "Viola~ "
     r "W-what did you do?!"
     s "Just a bit of {i}Somnia magic{/i}. I feel like it was missing something earlier."

@@ -26,6 +26,7 @@ style gui_text:
 style button:
     properties gui.button_properties("button")
     mouse "hover"
+    hover_sound "audio/sfx/menuhover.ogg"
 
 style button_text is gui_text:
     properties gui.text_properties("button")
@@ -259,7 +260,7 @@ screen choice(items):
 
     vbox:
         for i in items:
-            textbutton i.caption mouse "hover" action i.action
+            textbutton i.caption mouse "hover" hover_sound "audio/sfx/menuhover.ogg" action i.action
 
 
 ## When this is true, menu captions will be spoken by the narrator. When false,
@@ -331,6 +332,7 @@ style quick_button_text is button_text
 style quick_button:
     properties gui.button_properties("quick_button")
     mouse "hover"
+    hover_sound "audio/sfx/menuhover.ogg"
 
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
@@ -774,6 +776,7 @@ screen file_slots(title):
 
                     button:
                         mouse "hover"
+                        hover_sound "audio/sfx/menuhover.ogg"
                         action FileAction(slot)
 
                         has vbox

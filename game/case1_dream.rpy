@@ -7,7 +7,6 @@ label case1_dream:
         bg = "images/BG/bg_wonderland.png" # background image
         page_width = 1720 # screen page width
         total_pages = 3 # total pages in investigation
-        inventory = Inventory() # initialize inventory
         interactions = Interactions( # starting interactions
             [t_somrem_start]
         )
@@ -521,49 +520,49 @@ label flower1_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower1.disable("flower1_paint"))
     $ interactions.update(t_flower1.updateImage("/images/interactables/case1/flower1red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower1.image with Dissolve(0.8)
     jump flower_check
 label flower2_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower2.disable("flower2_paint"))
     $ interactions.update(t_flower2.updateImage("/images/interactables/case1/flower2red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower2.image with Dissolve(0.8)
     jump flower_check
 label flower3_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower3.disable("flower3_paint"))
     $ interactions.update(t_flower3.updateImage("/images/interactables/case1/flower3red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower3.image with Dissolve(0.8)
     jump flower_check
 label flower4_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower4.disable("flower4_paint"))
     $ interactions.update(t_flower4.updateImage("/images/interactables/case1/flower4red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower4.image with Dissolve(0.8)
     jump flower_check
 label flower5_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower5.disable("flower5_paint"))
     $ interactions.update(t_flower5.updateImage("/images/interactables/case1/flower5red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower5.image with Dissolve(0.8)
     jump flower_check
 label flower6_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower6.disable("flower6_paint"))
     $ interactions.update(t_flower6.updateImage("/images/interactables/case1/flower6red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower6.image with Dissolve(0.8)
     jump flower_check
 label flower7_paint:
     $ interactions.update(t_bunny5.updateState(t_bunny5.state - 1))
     $ interactions.update(t_flower7.disable("flower7_paint"))
     $ interactions.update(t_flower7.updateImage("/images/interactables/case1/flower7red.png"))
-    # play paint sfx
+    play sound paint
     show expression t_flower7.image with Dissolve(0.8)
     jump flower_check
 

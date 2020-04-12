@@ -241,6 +241,7 @@ screen dream_actions(actions={}, mousepos):
         for action in actions:
             button:
                 mouse "hover"
+                hover_sound "audio/sfx/menuhover.ogg"
                 style "dreamacts"
                 text action['name']:
                     style "dreamacts_text"

@@ -4,6 +4,10 @@ label cooking_start:
     window hide
     $ renpy.pause(hard=True)
 
+label play_sound: # have to call this because sfx happens after combo is updated
+    play sound "audio/sfx/combo{}.ogg".format(cook_status.combo)
+    jump cooking_start
+
 transform focus_effect: # brighten ingredient on focus, tho we can do other effects too
     on idle:
         linear 0.2 additive 0
@@ -186,9 +190,8 @@ screen cooking(dish):
             idle item.image
             xpos x ypos y
             mouse "hover"
-            hover_sound "menuhover"
-            activate_sound "combo"+cook_status.combo
-            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item)]
+            hover_sound "audio/sfx/menuhover.ogg"
+            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item), Jump("play_sound")]
             tooltip item
             at focus_effect
         $ x += 159
