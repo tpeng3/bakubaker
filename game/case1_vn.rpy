@@ -30,7 +30,7 @@ label case1_vn:
 
     The townsfolk go about their days, shedding the patchwork quilt of a night's myriad of dreams.
 
-    However... When deep slumber closes the eyes of the townsfolk once more, the visions of night come out to play.
+    However... When the townsfolk fall in a deep slumber once more, the visions of night come out to play.
 
     The fantasies of wondrous reverie entertain those who have nothing to worry about.
 
@@ -87,9 +87,9 @@ label skipopening: # delete before publishing
     $ remexpr = "th"
     r "... No, the portions are well-balanced."
     r "The jam you made this time has a better consistency, so the tart shells held together nicely."
-    r "I also noticed you took my advice on making a thicker, lighter tart shell. Good work."
+    r "You also took my advice on making a thicker, lighter tart shell, huh... Good work."
     $ somexpr = "ne"
-    s "Aw, you flatter me! Your tips are always topnotch!"
+    s "Aw, you flatterer! Your tips are always topnotch!"
     $ somexpr = "de"
     s "I can always count on your sharp palate for tasting, {i}Remi{/i}~!"
     $ remexpr = "fl"
@@ -98,29 +98,32 @@ label skipopening: # delete before publishing
     r "{th}(Despite that, I can’t say no to Somnia’s desserts!){/th}"
     $ somexpr = "ne"
     $ remexpr = "si"
-    r "*Sigh*"
+    r "*sigh*"
     $ somexpr = "sh"
-    s "Remi, you work too hard. Let me finish up the inventory count for you at the very least!"
+
+    s "My, Remi, you've been at inventory count for quite a while. Allow me to finish it up instead while you take a breather!"
     $ remexpr = "th"
-    r "It's fine Somnia. I know you think it's a bore to count everything-{w=0.5}{nw}"
+    r "It's fine, Somnia. I know you think it's a bore to count everything-{w=0.6}{nw}"
     $ somexpr = "ne"
-    s "I won't take no for an answer, Remerie! You've been preparing the store since 5am!"
+    s "I won't take no for an answer, Remerie! You've been preparing since 5 AM!"
     $ somexpr = "gr"
-    s "So please, sit down, relax, and enjoy a fresh tart, made with love~"
-    s "Besides, we seem to be early on setting up shop anyway. Why don't you take a break?"
+    s "Besides, we seem to be early on setting up shop, anyway. There's no harm in taking breaks, is there?"
+    s "So if you would... Please sit down, relax, and enjoy a fresh tart made with love~!"
+    $ remexpr = "fl"
+    r "I... If you insist."
     $ remexpr = "si"
-    r "There's no arguing is there..."
+    r "There's no arguing, is there..."
     $ remexpr = "ne"
     r "Here, I just have the last page to check off on."
     $ somexpr = "de"
-    s "Yes, ma'am! {mn} Hm hmm~{mn}"
+    s "Yes, ma'am! Hm hmm~... {mn}"
     hide remi with easeoutleft
     show somnia at center with ease
     $ somexpr = "sh"
-    s "Oh? There's only three things left to check."
+    s "Oh? There are only three things left to check."
     $ somexpr = "gr"
-    s "Done, done and done~!{mn}"
-    s "If that's all, I'll go flip the sign outside for any early birds to arrive~"
+    s "Done, done, and done!"
+    s "If that's all, I'll go flip the sign outside for any early birds to arrive."
     $ somexpr = "gr"
     s "Hmm hm~... {mn}"
     s "Hm~... A merry tune to toot-"
@@ -163,14 +166,14 @@ label skipopening: # delete before publishing
     ml "So sorry...! A thousand apologies for the concern... "
     $ marexpr = "ya"
     play sound yawn
-    extend "{cps=10}*yaaaaawn*." with sshake
+    extend "{cps=10}*yaaaaawn...*" with sshake
     $ remexpr = "sh"
     r "{th}(They were napping?!){/th}"
     $ somexpr = "sh"
     s "{th}(Were they... sleeping on the pavement outside...?){/th}"
     $ marexpr = "ne"
     $ remexpr = "ne"
-    ml "Um... Let’s see… Would you happen to know a café around here called {ii}Café Nemo{/ii}?"
+    ml "Um... Let’s see... Would you happen to know a café around here called {ii}Café Nemo{/ii}?"
     $ _last_say_who = "None"
     u "..."
     $ somexpr = "de"
@@ -185,7 +188,7 @@ label skipopening: # delete before publishing
     play sound yawn
     extend "{cps=10}*yaaawn*{/cps} ...excitement..."
     $ somexpr = "th"
-    s "{th}(Five years? Why, that's around the same time that... Hmm...){/th}"
+    s "{th}(Five years? Why, that's around the time when {ii}she{ii}... Hmm...){/th}"
     $ marexpr = "ne"
     ml "Let’s see, now... I’ll have... this cherry tart and the..."
     $ remexpr = "sh"
@@ -251,7 +254,7 @@ label skipopening: # delete before publishing
     $ remexpr = "ne"
     r "Tell us, what ails you?"
     $ marexpr = "fr"
-    ml "Um... Well, first, I would like to ask if {ii}Madam Nemo{/ii} is... present?"
+    ml "Um... Well, first, I would like to ask if {ii}Miss Nemo{/ii} is... present?"
     $ remexpr = "sh"
     $ somexpr = "sh"
     s "... Oh! {w=0.5}{nw}"
@@ -273,7 +276,7 @@ label skipopening: # delete before publishing
     ml "I wasn't aware she left behind apprentices, but..."
     $ marexpr = "ya"
     play sound yawn
-    ml "*Yawn* That’s fine. If possible, I would like you two to help me as she once did."
+    ml "*yawn* That’s fine. If possible, I would like you two to help me as she once did."
 
     $ marexpr = "ne"
     $ remexpr = "ne"
@@ -383,13 +386,13 @@ label case1_vn_end(result=0):
     $ somexpr = "de"
     s "The omelette came out great!"
     $ remexpr = "si"
-    r "Not my best work considering how much I was scrambling back there, but I admit, it does look enticing..."
+    r "Not my best work, but I admit it does look enticing..."
     $ somexpr = "ne"
     s "Why don't you have it?"
     $ remexpr = "bi"
     r "...!"
     $ somexpr = "de"
-    s "We both know dreams are harder to come by than nightmares, so please... Help yourself!"
+    s "We both know dreams are harder to come by than nightmares, so... Help yourself!"
     $ remexpr = "fl"
     r "I... Thank you, Somnia."
     $ somexpr = "gr"
@@ -451,9 +454,9 @@ label case1_vn_end(result=0):
         $ marexpr = "th"
         ml "It reminds me of when I first came here and had sleep consulting with, um... what's her name again...?"
         $ somexpr = "de"
-        s "Ms. Nemo!!"
+        s "Miss Nemo!!"
         $ remexpr = "th"
-        r "Ms. Nemo."
+        r "Miss Nemo."
         $ marexpr = "aw"
         ml "Y-yeah! This dish really takes me back..."
         $ somexpr = "th"
@@ -461,17 +464,17 @@ label case1_vn_end(result=0):
         $ marexpr = "la"
         ml "Well, it’s been a while ago now. The years have flown by in a blink of an eye..."
         $ marexpr = "th"
-        ml "This is a bit of a personal story but..."
+        ml "This is a bit of a personal story, but..."
         $ marexpr = "fr"
         $ somexpr = "ne"
         $ remexpr = "ne"
         ml "Five years ago, my family was going through a rough time. It was hard for our parents to be home, what with their odd jobs keeping them busy."
         ml "So I was given the responsibility of taking care of my younger siblings. But to be honest, it was pretty overwhelming."
-        ml "I'm not that many years older than our second oldest child, but suddenly all of them were looking to me; to take care of them."
+        ml "I'm not that many years older than our second oldest child, but suddenly all of them were looking to me... to take care of them."
         $ marexpr = "wo"
         ml "What could I do? I couldn't turn my back on my family..."
         ml "The stress of it all led to a lot of sleepless nights. I was tired, sure, but that was nothing compared to letting my siblings down."
-        ml "And that’s when I happened to stumble across this café and meet {ii}Madam Nemo{/ii}."
+        ml "That’s when I stumbled across this café and meet {ii}Miss Nemo{/ii}."
         $ marexpr = "la"
         ml "In a similar fashion, really! There I was, stretched out on the pavement in front of {ii}Café Nemo{/ii}."
         $ marexpr = "fr"
@@ -483,15 +486,15 @@ label case1_vn_end(result=0):
         $ marexpr = "gr"
         ml "I also came back regularly to help myself to her specialty omelette!"
         $ marexpr = "wo"
-        ml "B-but here I am again... Falling asleep in odd places, having my worries consume me once more..."
+        ml "B-but... here I am again. Falling asleep in odd places, being consumed by worries once more..."
         ml "I can't let this happen again. I need to find the time to take care of myself, so I can better take care of my siblings."
         $ marexpr = "gr"
-        ml "I really can't thank you two enough for helping me with such kindness as Madam Nemo did years ago."
+        ml "I really can't thank you two enough for helping me with such kindness as Miss Nemo did years ago."
         $ marexpr = "aw"
         ml "Thinking back at it now, she did mention before she had taken on two kids of her own as apprentices. I suppose that must be the two of you."
         $ marexpr = "gr"
         ml "It's amazing how well you recaptured that flavor and nostalgia that I once felt years ago. I'm sure she would be proud."
-        ml "We certainly had our fair share of caretaking stories. {ii}Madam Nemo{/ii} treasured you two the same I treasured my siblings."
+        ml "We certainly had our fair share of caretaking stories. {ii}Miss Nemo{/ii} treasured you two the same I treasured my siblings."
         ml "She was a lovely soul. I hope she comes back soon, for your sake."
         $ somexpr = "di"
         s "That was a beautiful story..."
@@ -504,7 +507,7 @@ label case1_vn_end(result=0):
         $ somexpr = "gr"
         $ remexpr = "gr"
         $ marexpr = "aw"
-        ml "I would love to hear your stories of {ii}Madam Nemo{/ii} as well. I'll definitely make space in my schedule for a short routine visit."
+        ml "I would love to hear your stories of {ii}Miss Nemo{/ii} as well. I'll definitely make space in my schedule for a short routine visit."
         $ marexpr = "gr"
         ml "Perhaps I'll even bring my siblings! Little Whitney doesn't care much for cherry flavored snacks, but no one could possibly deny your delectable cherry tarts!"
     $ somexpr = "ne"
@@ -521,14 +524,14 @@ label case1_vn_end(result=0):
     ml "The flower shop can go without me for a day."
     ml "Rather than focus on trying to keep up, I honestly ought to step back and see if I can get help from my siblings with these tasks."
     $ marexpr = "la"
-    ml "Why, it's the silliest thing, I even dreamt of a messy tea party, and that my siblings were cleaning up the mess!"
+    ml "It's the silliest thing. I even dreamt of a messy tea party, and that my siblings were cleaning up the mess!"
     $ _last_say_who = "None"
     $ somexpr = "sh"
     $ remexpr = "sh"
     u "!!" with flash
     ml "But it’s true. They've grown up to be very capable... I think they might be able to help around the house and the floral shop!"
     $ marexpr = "aw"
-    ml "Well... I must be going. Thank you so much for your services!"
+    ml "Well, I should be going. Thank you so much for your services!"
     scene black with dissolve
     with Pause(2.0)
 
@@ -543,7 +546,7 @@ label case1_vn_end(result=0):
     $ remexpr = "si"
     r "I think you have enough fun for the both of us..."
     $ somexpr = "ex"
-    s "Don't tell me you didn't have fun in that dream~! The cute bunnies? Cooking up a yummy new dream dish?"
+    s "Don't tell me you didn't have fun in that dream! The cute bunnies? Cooking up a yummy new dream dish?"
     s "It's been a dreadfully long time since we've had a client!" with flash
     $ remexpr = "gr"
     r "While I can't say the same about the {i}cute bunnies{/i}, I do have to agree that the dream dish was quite good…"
@@ -554,21 +557,21 @@ label case1_vn_end(result=0):
     $ somexpr = "de"
     s "I do! You really liked the dish, didn't you!"
     $ remexpr = "fl"
-    r "O-of course! What's not to like about a dream dish... It's been quite some time since I've indulged in one."
+    r "O-of course! What's not to like about a dream dish? It's been quite some time since I've indulged in one."
     if result >= 1:
         $ remexpr = "gr"
         r "Your magic certainly added quite a sweet and tangy flavor that I didn't expect, but welcomed nonetheless."
         $ somexpr = "gr"
         s "Remi, you don't need to be so bashful about enjoying something!"
-        s "You know I'd only ever make delicious treats for you~"
+        s "You know I'd only ever make delicious treats for you~!"
         $ remexpr = "fl"
         r "T-thank you, Soms."
 
     $ somexpr = "di"
-    s "*Sigh...*"
+    s "*sigh...*"
     $ remexpr = "ne"
     s "It takes me back."
-    s "It's been five years since {ii}Ms. Nemo{/ii} disappeared..."
+    s "It's been five years since {ii}Miss Nemo{/ii} disappeared..."
     $ remexpr = "th"
     r "..."
     $ remexpr = "gr"
@@ -604,7 +607,7 @@ label case1_vn_end(result=0):
     r "Until then, don't worry. You're not alone. I'll always stay by your side."
     $ somexpr = "de"
     s "Hehe..."
-    s "Remi, you're such a charmer~" with flash
+    s "Remi, you're such a charmer~..." with flash
     $ remexpr = "fl"
     r "A-ahem..."
     s "Aw, you're blushing!"
@@ -626,9 +629,9 @@ label case1_vn_end(result=0):
 
     With that hope in their hearts, the two open up shop and await the return of their old friend.
 
-    And so, Café Nemo resumes it's day to day business. Providing dreamy dishes to those whose hungers wish to be sated with delectable treats...
+    And so, Café Nemo resumes its day to day business, providing dreamy dishes to those whose hungers wish to be sated with delectable treats...
 
-    ...and those whose who wander in with dreams composed of worries, fears and woes will provide the same satisfaction to the {ii}dream eaters{/ii}.
+    ...And those whose who wander in with dreams composed of worries, fears, and woes will provide the same satisfaction to the {ii}dream eaters{/ii}.
     """
     call endscene
     return # change this to jump to credits page for demo

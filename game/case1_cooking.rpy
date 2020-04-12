@@ -9,8 +9,8 @@ label case1_cook:
     if not tutorial:
         show screen focus_dialogue
         pause 1.0
-        r "Alright, let's begin whipping up a dream dish out of our available assets."
-        r "As we learned from Marcella's dream, {b}time{/b} seems to be at the center of their woes."
+        r "Alright, let's begin whipping up a dream dish out of what we got."
+        r "As we learned from Marcella's dream, {b}time{/b} seems to be the center of their woes."
         r "They appear to be in a state of perpectual disarray, unable to keep up with their ever-growing list of tasks."
         s "If we can eat away the worry, perhaps they'll feel less uneasy!"
         r "Right. Dream dishes are fickle so we have to make sure we use the right ingredients."
@@ -22,7 +22,7 @@ label case1_cook:
 label case1_somcook:
     show screen focus_dialogue
     if not cook_status.smash:
-        s "Hmm... A breakfast egg dish. What about we make some pancakes Remi?"
+        s "Hmm... A breakfast egg dish. How about we make some pancakes, Remi?"
     else:
         s "It's done! Let's wrap up now."
     jump cooking_start
@@ -33,7 +33,7 @@ label case1_remcook:
         r "We don't have any flour so let's keep it simple."
         r "But if we want something sweet, we can add some fruit."
     else:
-        r "Well in any case, we should clean up now."
+        r "Well, in any case, we should clean up now."
     jump cooking_start
 
 label smash_case1:
@@ -46,7 +46,7 @@ label smash_case1:
     s "Viola~!"
     r "W-what did you do?!"
     s "Just a bit of {i}Somnia magic{/i}. I feel like it was missing something earlier."
-    s "In this case, a spoonful of ketchup~"
+    s "In this case, a spoonful of ketchup~!"
     jump cooking_start
 
 label case1_cook_done(result):

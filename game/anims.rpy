@@ -83,9 +83,9 @@ image fin = Text("{size=50}{i}Thank you for playing!{/s}{/i}")
 # Main Menu --------------------------------------------------------------------
 transform back_clouds():
     xpos 0 ypos 0
-    linear 6.0 ypos -20
+    linear 2.0 ypos -20
     pause 0.5
-    linear 6.0 ypos 0
+    linear 2.0 ypos 0
     repeat
 
 transform main_clouds():
@@ -150,10 +150,10 @@ image cutin:
         "images/CG/smash2b.png"
         linear 0.15 zoom 1
         block:
-            "images/CG/smash2a.png" with Dissolve(0.4, alpha=True)
-            pause 0.45
-            "images/CG/smash2b.png" with Dissolve(0.4, alpha=True)
-            pause 0.45
-            repeat 4
+            "images/CG/smash2a.png" with Dissolve(0.3, alpha=True)
+            pause 0.30
+            "images/CG/smash2b.png" with Dissolve(0.3, alpha=True)
+            pause 0.30
+            repeat 2
         "images/CG/smash2b.png" with Dissolve(0.5, alpha=True)
         linear 1.0 alpha 0.0

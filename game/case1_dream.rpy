@@ -46,16 +46,16 @@ label case1_dream:
 label somrem_start_talk:
     if t_somrem_start.state == "start":
         dreamSom gr "This dream... My, it's like a wonderland!"
-        dreamRem fl "Don't get lost now Soms. Here, take my hand."
+        dreamRem fl "Don't get lost now, Soms. Here, take my hand."
     elif t_somrem_start.state == "postMar":
-        dreamSom de "Oh~ I could just stare at those cutie bunnies all night~"
+        dreamSom de "Oh~... I could just stare at those bunny cuties all night!"
         dreamSom th "Or rather, all morning?"
         dreamRem th "It's a shame, but the incense will only last so long before our client wakes up."
-        dreamSom ex "Hey Remi, we should go to a petting zoo for our next date!"
-        dreamRem gr "That sounds like a good idea, but first, let's focus our on job."
+        dreamSom ex "Hey, Remi, we should go to a petting zoo for our next date! Get all fuzzy and fluffy!"
+        dreamRem gr "That sounds like a good idea. But first, let's focus our on job."
     elif t_somrem_start.state == "middle":
-        dreamSom th "This busybee dream apparation of Marcella is quite a stark contrast..."
-        dreamSom th "In comparison to the slow to start Marcella we found lying on the sidewalk earlier."
+        dreamSom th "This dream apparation of busybee Marcella is quite a stark contrast..."
+        dreamSom th "...to the slow-to-start Marcella we found lying on the sidewalk."
         dreamRem ne "They did mention that they haven't slept in several days. That can't possibly do anyone good."
         dreamRem th "What could be the reason for their lack of sleep?"
     elif t_somrem_start.state == "end":
@@ -65,13 +65,13 @@ label somrem_start_talk:
         dreamSom de "Hehe!"
         dreamRem gr "{th}(Hahah...){/th} Ahem... now's not the right time for such joking around..."
     elif c_strawberry not in inventory:
-        dreamSom "What's wrong Remi?"
+        dreamSom "What's wrong, Remi?"
         dreamRem th "I feel like there's something missing... An ingredient perhaps..."
-        dreamSom "Shall we take a look around longer then?"
+        dreamSom "Shall we take a longer look around then?"
     else:
         dreamRem "We better head over to the Wishing Kitchen soon."
         dreamRem "Our time in Marcella's dream is limited after all."
-        dreamSom gr "This was a fun dream though wasn't it Remi~"
+        dreamSom gr "This was a fun dream though, wasn't it?"
     jump dream_start
 
 label marcella_talk_start:
@@ -134,7 +134,7 @@ label strawberry_look:
     jump dream_start
 
 label clock1_talk:
-    dreamRem sh "What an odd-looking clocktower...!"
+    dreamRem sh "What an odd-looking clocktower!"
     dreamSom sh "I wonder just how long it goes..."
     dreamSom th "Unfortunately, the bottom of the tower is obscured by the clouds."
     jump dream_start
@@ -146,7 +146,7 @@ label clock2_talk:
 
 label marcella_talk_mid:
     if not t_marcella_mid.viewed:
-        dreamMar "And I have to find my report... and buy the medicine for little Whitney... Ohhh, and this whole place is an absolute mess!"
+        dreamMar "And I have to find my report... and buy the medicine for Little Whitney... Ohhh, and this whole place is an absolute mess!"
         dreamRem sh "Marcella sure has a lot on their plate."
         dreamSom gr "Perhaps we can help them out!"
         dreamSom th "Let's see... They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
@@ -173,7 +173,7 @@ label marcella_talk_mid:
             if c_herbs in inventory.items and c_redbook not in inventory.items: # medicine is done but report isn't
                 dreamSom th "We were able to give Whitney her medicine, but we still need to help look for Marcella's missing {ii}report{/ii}."
             elif c_herbs not in inventory.items and c_redbook in inventory.items: # report found but no medicine
-                dreamSom th "We found Marcella's missing report, but we still need to find little Whitney and give her the {ii}medicine.{/ii}"
+                dreamSom th "We found Marcella's missing report, but we still need to find Little Whitney and give her the {ii}medicine.{/ii}"
             else:
                 dreamSom th "They're looking for a {ii}report{/ii}, trying to get {ii}medicine{/ii} to one of the siblings..."
             dreamSom gr "And don't forget, we need to find a way to {ii}clean up this entire area!{/ii}"
@@ -187,7 +187,7 @@ label pile_inspect:
         dreamSom "Let's see if we can get Marcella's little siblings to help us out."
     elif t_debris.viewed and t_debris.state >= 0:
         dreamRem sh "I can't believe it. I think I'm starting to see the floor to this place!"
-        dreamSom gr "The bunny siblings have been absolute sweethearts in helping us. Let's see if we can get the rest of them to pitch in~"
+        dreamSom gr "The bunny siblings have been absolute sweethearts in helping us. Let's see if we can get the rest of them to pitch in~..."
     else:
         dreamRem pe "Urk... The client's going to be awake by the time we clean through this mess."
         dreamSom th "How about we ask these bunnies... Marcella's little siblings, to help out?"
@@ -323,7 +323,7 @@ label bunny1_chat:
 label bunny2_talk:
     $ bun_name = "Energetic Bunny"
     if not t_bunny2.state:
-        bun "Wheee! Wheeeee!"
+        bun "Whee! Wheeeee!"
         dreamSom bi "That little one is going to get hurt, jumping around like that...!"
         dreamRem si "I'm sure she knows what she's doing."
         bun "Whee- OUCH!" with sshake
@@ -331,9 +331,9 @@ label bunny2_talk:
         dreamSom sh "Oh, sweetie, slow down and please be careful!"
         bun "I'm fine! Hehe, wheee!"
         dreamRem "Kids theses days..."
-        dreamSom gr "Now, now~"
+        dreamSom gr "Now, now~..."
     else:
-        bun "*Yaaaawn*"
+        bun "*yaaaawn*"
         bun "I feel kinda sleepy now after the medicine..."
     jump dream_start
 label bunny2_give:
@@ -348,7 +348,7 @@ label bunny2_give:
     dreamSom de "See? That's a good girl! I hope you feel better soon."
     bun "Thanks, lady!"
     dreamRem gr "... Let me guess, you added some sugar."
-    dreamSom de "Hmmm hm~ {wmn}"
+    dreamSom de "Hmmm hm~... {wmn}"
     python:
         interactions.update(t_bunny1.disable("bunny1_give"))
         interactions.update(t_bunny2.disable("bunny2_give"))
@@ -363,12 +363,12 @@ label bunny2_help:
         bun "Wheee! Wheee!"
         dreamSom th "It seems a bit difficult to catch this little one's attention right now."
     else:
-        dreamSom sh "We can't ask little Whitney to help! The thing she needs right now is some proper rest!"
+        dreamSom sh "We can't ask Little Whitney to help! The thing she needs right now is some proper rest!"
         $ bun_name = "Maddie"
         bun "E-excuse me...!"
         dreamRem sh "Hm? Oh, it's the bunny that wanted the blue book."
         dreamSom gr "Hi there, Maddie. What's wrong?"
-        bun "Since little Whitney is sick, I can help clean up instead!"
+        bun "Since Little Whitney is sick, I can help clean up instead!"
         bun "I just finished my book, I'll be right over!"
         dreamSom de "My, how responsible! Thank you, darling~!"
         play sound paper
@@ -388,7 +388,7 @@ label bunny2_time:
 label bunny2_chat:
     $ bun_name = "Little Whitney"
     bun "Zzz..."
-    dreamSom gr "Sleep well~"
+    dreamSom gr "Sleep well~..."
     jump dream_start
 
 # Peevish Bunny
@@ -512,7 +512,7 @@ label bunny5_chat:
     $ bun_name = "Clumsy Bunny"
     bun "Our family runs a flower shop so I've been trying to learn more about flowers."
     bun "Red roses mean love! But I heard big sib Marchie say you can also give roses to someone you respect."
-    som gr "Remi remember when you sent me 24 red roses? It was so romantic!"
+    som gr "Remi, remember when you sent me 24 red roses? It was so romantic, I still giggle thinking about it!"
     rem fl "Well, I only want the best for my partner."
     jump dream_start
 
@@ -570,7 +570,7 @@ label flower7_paint:
 label flower_check:
     if t_bunny5.state == 0:
         dreamRem gr "There! That should be the last rose we needed to paint."
-        dreamSom de "Oh they're beautiful Remi!"
+        dreamSom de "Oh they're beautiful, Remi!"
         dreamRem fl "Honestly, it wasn't too bad- like brushing a savory glaze to vegetables."
         dreamRem de "Let's go check on the bunny who asked the favor."
     jump dream_start
@@ -669,7 +669,7 @@ label marcella_talk_end:
 # Clock under the column on the first page
 label clock1_inspect:
     dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
-    dr "The hour hand is facing {ii}[t_clockface1.state]{/ii}, \n while the minute hand is stuck facing {ii}down{/ii}."
+    dr "The hour hand is facing {b}[t_clockface1.state]{/b}, \n while the minute hand is stuck facing {b}down{/b}."
     if not t_clockface1.viewed:
         python:
             interactions.update(t_clockface1.view())
@@ -839,7 +839,7 @@ label check_clocks:
         dreamRem th "And I have just the dish for this dream."
         dreamRem "Now with the Clockwork Eggs as the centerpiece..."
         dreamRem de "I believe we have the necessary ingredients for a proper morning dish."
-        dreamSom de "Ooh, I'm so excited! Let us be off to the Wishing Kitchen!"
+        dreamSom de "Oooh, I'm so excited! Let us be off to the Wishing Kitchen!"
         dreamSom "I'll pocket these pretty eggs for now..."
         dreamSom sh "Ah!"
         dreamRem bi "Somnia! A-are you okay? What's the matter?!"
@@ -848,7 +848,7 @@ label check_clocks:
         dreamRem "...Is that all? You really had me worried there for a second..."
         dreamSom sh "Yes, but that means we only have {ii}two Clockwork Eggs{/ii} to cook with..."
         dreamRem th "Only two eggs? I'll have to be cautious while I'm cooking..."
-        dreamSom ex "I have total faith in you Remi! You can do it!"
+        dreamSom ex "I have total faith in you, Remi! You can do it!"
         dreamRem gr "Heh, but of course!"
 
         python:
