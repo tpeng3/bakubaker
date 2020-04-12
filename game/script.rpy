@@ -31,6 +31,7 @@ label splashscreen:
 
     ## Here begins our splashscreen animation.
     pause(1.0)
+    play music "audio/music/Peas_Corps.mp3"
     call screen click_start with Dissolve(1.0)
 
     ## The first time the game is launched, players cannot skip the animation.

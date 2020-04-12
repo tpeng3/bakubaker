@@ -55,7 +55,7 @@ label somrem_start_talk:
         dreamSom ex "Hey Remi, we should go to a petting zoo for our next date!"
         dreamRem gr "That sounds like a good idea, but first, let's focus our on job."
     elif t_somrem_start.state == "middle":
-        dreamSom th "This busybee dream apparation of Marcella is quite a stark contrast from the slow to start Marcella we found lying on the sidewalk earlier."
+        dreamSom th "This busybee dream apparation is a stark contrast from the slow to start Marcella we found lying on the sidewalk earlier."
         dreamRem ne "They did mention that they haven't slept in several days. That can't possibly do anyone good."
         dreamRem th "What could be the reason for their lack of sleep?"
     elif t_somrem_start.state == "end":

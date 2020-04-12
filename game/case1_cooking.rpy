@@ -1,21 +1,44 @@
 image cutin:
-    anchor (0,0)
-    xpos -1.0 ypos 0
-    "images/CG/cutin.png"
-    alpha 1.0
-    ease 0.50 truecenter
     contains:
-        "images/CG/cutin1.png"
+        alpha 0.0
+        "gui/overlay/confirm.png"
+        ease 0.5 alpha 1.0
+        pause 5.0
+        ease 0.5 alpha 0.0
+    contains:
+        anchor (0.5,0.5)
+        xpos -1.0 ypos 0.5
+        "images/CG/smash.png"
+        alpha 1.0
+        ease 0.50 xpos 0.5
+        "images/CG/smash.png"
         pause 0.20
-        "images/CG/cutin2.png"
-        pause 0.20
-        repeat 3
-    pause 1.0
-    parallel:
-        linear 1.0 zoom 2 truecenter
-    parallel:
-        linear 1.0 alpha 0.0
-    pause 2.0
+        linear 0.05 ypos 0.51
+        "images/CG/smash1.png"
+        linear 0.05 ypos 0.5
+        linear 0.25 alpha 0.8
+        pause 0.15
+        alpha 1.0
+        linear 0.05 ypos 0.51
+        "images/CG/smash2a.png"
+        # parallel:
+        #     linear 0.15 zoom 1.5 truecenter
+        # parallel:
+        #     linear 0.20 alpha 0.2
+        # "images/CG/smash2b.png"
+        linear 0.05 ypos 0.5
+        zoom 1
+        linear 1.0 alpha 1.0
+        "images/CG/smash2a.png"
+        block:
+            "images/CG/smash2a.png"
+            pause 0.15
+            "images/CG/smash2b.png"
+            pause 0.15
+            repeat 6
+        "images/CG/smash2b.png"
+        linear 0.50 alpha 0.0
+    # pause 9.0
 
 label case1_cook:
     play music cooking1
@@ -59,7 +82,7 @@ label case1_remcook:
 label smash_case1:
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
-    pause 3.0
+    pause 6.0
     $ cook_status.smashSkill()
     play sound "audio/sfx/comboFULL.ogg"
     s "Viola~ "

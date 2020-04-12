@@ -13,9 +13,9 @@ label case1_vn:
         "images/sprites/bg_dreamoffice.png",
         "images/sprites/bg_storefront.png",
     )
-
+    stop music fadeout(2.0)
     scene black with dissolve
-    pause 1.0
+    pause 2.0
 
     menu: # delete before publishing
         "skip opening":

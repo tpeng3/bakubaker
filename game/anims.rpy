@@ -77,7 +77,7 @@ label intodream:
     show cloud with dissolve
     return
 
-image fin = Text("{size=50}{ii}u made it 2 the end!!!{/s}{/ii}")
+image fin = Text("{size=50}{i}Thank you for playing!{/s}{/i}")
 
 # Main Menu --------------------------------------------------------------------
 transform main_clouds():
