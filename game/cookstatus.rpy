@@ -149,6 +149,7 @@ screen cooking(dish):
         activate_sound "audio/sfx/select.ogg"
         focus_mask True
         xalign 0 yalign 0
+        at itrfade()
         action [Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
 
     # textbutton "Reset":
@@ -166,7 +167,7 @@ screen cooking(dish):
             xalign 0.74 yalign 0.83
             activate_sound "audio/sfx/donecooking.ogg"
             action [Call(case+"_cook_done", result=cook_status.result())]
-    else:
+    elif set(inventory.selected) == set(cook_status.smashReq):
         imagebutton:
             idle "goEat"
             hover "letscookGO"
@@ -190,14 +191,19 @@ screen cooking(dish):
             add "selBorder":
                 xpos x ypos y
                 # add sfx
-        imagebutton:
-            idle item.image
-            xpos x ypos y
-            mouse "hover"
-            hover_sound "audio/sfx/menuhover.ogg"
-            action [Function(inventory.toggleSelect, item), Function(cook_status.update, item), Jump("play_sound")]
-            tooltip item
-            at focus_effect
+
+        if not cook_status.smash:
+            imagebutton:
+                idle item.image
+                xpos x ypos y
+                mouse "hover"
+                hover_sound "audio/sfx/menuhover.ogg"
+                action [Function(inventory.toggleSelect, item), Function(cook_status.update, item), Jump("play_sound")]
+                tooltip item
+                at focus_effect
+        else:
+            image item.image xpos x ypos y
+
         $ x += 159
 
     $ tooltip = GetTooltip()

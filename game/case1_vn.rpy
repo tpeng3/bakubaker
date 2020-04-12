@@ -2,6 +2,7 @@
 # Case 1
 # ------------------------------------------------------------------------
 label case1_vn:
+    $ _skipping = True # enable skipping option
     $ case = "case1"
     $ somnia_name = "???"
     $ remerie_name = "Remerie"
@@ -17,11 +18,11 @@ label case1_vn:
     scene black with dissolve
     pause 2.0
 
-    menu: # delete before publishing
-        "skip opening":
-            jump skipopening
-        "dont skip":
-            pass
+    # menu: # delete before publishing
+    #     "skip opening":
+    #         jump skipopening
+    #     "dont skip":
+    #         pass
 
     call titlezone
 
@@ -188,7 +189,7 @@ label skipopening: # delete before publishing
     play sound yawn
     extend "{cps=10}*yaaawn*{/cps} ...excitement..."
     $ somexpr = "th"
-    s "{th}(Five years? Why, that's around the time when {ii}she{ii}... Hmm...){/th}"
+    s "{th}(Five years? Why, that's around the time when {ii}she{/ii}... Hmm...){/th}"
     $ marexpr = "ne"
     ml "Let’s see, now... I’ll have... this cherry tart and the..."
     $ remexpr = "sh"
@@ -328,12 +329,6 @@ label skipopening: # delete before publishing
     The insomniac was skeptical to believe incense would work this time, but with nothing left to lose, they closed their eyes nonetheless.
     """
 
-    menu:
-        "go to dream":
-            pass
-        "after dream":
-            jump case1_vn_end
-
     s "When we count to three, you shall fall into a deep sleep..."
     show black with dissolve:
         linear 2 alpha 0.15
@@ -375,7 +370,7 @@ label skipopening: # delete before publishing
 
 label case1_vn_end(result=0):
     $ marcella_name = "Marcella Lapin" # delete this before publishing
-    $ _skipping = True # disable skipping option
+    $ _skipping = True # enable skipping option
     stop music fadeout (2.0)
     scene dreamoffice
     with dissolve

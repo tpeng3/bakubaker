@@ -41,6 +41,10 @@ init -1:
             xalign 0.85 yalign 0.5
             anim.Filmstrip ("images/cg/menuflip.png", (564,749), (1,5), 0.10, loop=False)
     image clickStart = "gui/button/clickstart.png"
+    image snacks1 = "gui/overlay/snacks1.png"
+    image snacks2 = "gui/overlay/snacks2.png"
+    image snacks3 = "gui/overlay/snacks3.png"
+
     image cookCTC:
         contains:
             xalign 0.5 yalign 0.96

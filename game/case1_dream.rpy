@@ -24,6 +24,7 @@ label case1_dream:
     show screen dream() with Dissolve(2.0)
     pause(1.0)
     play sound trip
+    $ renpy.choice_for_skipping()
     dreamSom sh "W-whoa...!" with sshake
     dreamRem ne "I got you. Watch your step, it's a mess in here."
     dreamRem ne "A dream would reflect a person's inner headspace, after all."
@@ -146,6 +147,7 @@ label clock2_talk:
 
 label marcella_talk_mid:
     if not t_marcella_mid.viewed:
+        dreamRem sh "There's our client!"
         dreamMar "And I have to find my report... and buy the medicine for Little Whitney... Ohhh, and this whole place is an absolute mess!"
         dreamRem sh "Marcella sure has a lot on their plate."
         dreamSom gr "Perhaps we can help them out!"

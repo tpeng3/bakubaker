@@ -95,7 +95,9 @@ define dreamRem = Character ("Remerie", kind = dt, # Dream Remerie
             )
 # Clients ---------------------------------------------------------------------
 define u = Character (None, color="2D2D3E", what_color="7A445B",
-            show_namebox_background = None)
+            show_namebox_background = None,
+            ctc = "cookCTC",
+            ctc_position = "fixed")
 define ml = DynamicCharacter ("marcella_name",
             image = "mar",
             show_namebox_background = "gui/namebox_marchie.png",

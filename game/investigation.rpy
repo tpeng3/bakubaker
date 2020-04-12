@@ -8,6 +8,7 @@ label dream_start():
 
 label dream_return():
     show screen dream()
+    play music dream1 fadein(0.4) # not generic but for now use this tune when returning to dream
     jump dream_start
 
 label disable_pause(next_label):
@@ -134,6 +135,7 @@ screen goCook():
         mouse "hover"
         hover_sound "audio/sfx/menuhover.ogg"
         activate_sound "audio/sfx/select.ogg"
+        at itrfade()
         action [Hide('dream', transition=Dissolve(.8)), Hide('goCook'), Jump(case+"_cook")]
 
 # Related Global Variables: bg, total_pages, page_width, interactions, unlocked_pages
@@ -215,6 +217,8 @@ screen focus_dialogue:
         idle Solid("#0000")
         action renpy.curry(renpy.end_interaction)(True)
     key "K_SPACE" action renpy.curry(renpy.end_interaction)(True)
+    key "mouseup_4" action ShowMenu('history') # access log on scrollup
+
 
 screen get_ingredient(ingredient):
     zorder -1

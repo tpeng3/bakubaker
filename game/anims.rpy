@@ -18,6 +18,11 @@ transform blinking():
         linear 0.5 alpha 0.0
         repeat
 
+transform delay_fade():
+    alpha 0.0
+    pause 1.0
+    linear 0.8 alpha 1.0
+
 # ATL
 label splash_transition:
     show menuSplash:
@@ -27,7 +32,8 @@ label splash_transition:
     show menuFront:
         xalign 0.15 yalign 0.5
         easein_quad 2.0 xalign 0.85
-    pause(2.5)
+    pause(1.70)
+    $ MainMenu(confirm=False)()
     return
 
 label titlezone:
@@ -82,23 +88,31 @@ image fin = Text("{size=50}{i}Thank you for playing!{/s}{/i}")
 
 # Main Menu --------------------------------------------------------------------
 transform back_clouds():
-    xpos 0 ypos 0
-    linear 2.0 ypos -20
-    pause 0.5
-    linear 2.0 ypos 0
-    repeat
+    alpha 0.0
+    pause 1.0
+    linear 0.8 alpha 1.0
+    block:
+        xpos 0 ypos 0
+        linear 2.0 ypos -20
+        pause 0.5
+        linear 2.0 ypos 0
+        repeat
 
 transform main_clouds():
-    alpha 1.0
-    choice:
-        linear 3.0 alpha 0.30
-        pause 0.2
-        linear 2.5 alpha 1.0
-    choice:
-        linear 3.0 alpha 0.50
-        pause 0.25
-        linear 2.0 alpha 1.0
-    repeat
+    alpha 0.0
+    pause 1.0
+    linear 0.8 alpha 1.0
+    block:
+        alpha 1.0
+        choice:
+            linear 3.0 alpha 0.30
+            pause 0.2
+            linear 2.5 alpha 1.0
+        choice:
+            linear 3.0 alpha 0.50
+            pause 0.25
+            linear 2.0 alpha 1.0
+        repeat
 
 # Splash screen ----------------------------------------------------------------
 transform floating():
@@ -157,3 +171,6 @@ image cutin:
             repeat 2
         "images/CG/smash2b.png" with Dissolve(0.5, alpha=True)
         linear 1.0 alpha 0.0
+
+screen keymap_screen:
+    key "mouseup_4" action ShowMenu("history")

@@ -32,7 +32,7 @@ label splashscreen:
     ## Here begins our splashscreen animation.
     pause(1.0)
     play music "audio/music/Peas_Corps.mp3"
-    call screen click_start with Dissolve(1.0)
+    call screen click_start(skipflip=False) with Dissolve(1.0)
 
     ## The first time the game is launched, players cannot skip the animation.
     if not persistent.seen_splash:
@@ -60,17 +60,19 @@ label start:
     $ tutorial = False
     $ finished = False
     $ inventory = Inventory() # initialize inventory
-    menu:
-        "Start at vn (beginning)":
-            jump case1_vn
-        "Start at dream":
-            jump case1_dream
-        "Start at cooking":
-            jump case1_cook
-        "Start at vn (after dream)":
-            jump case1_vn_end
-        "Credits":
-            show screen credits()
+    show screen keymap_screen
+    jump case1_vn
+    # menu:
+    #     "Start at vn (beginning)":
+    #         jump case1_vn
+    #     "Start at dream":
+    #         jump case1_dream
+    #     "Start at cooking":
+    #         jump case1_cook
+    #     "Start at vn (after dream)":
+    #         jump case1_vn_end
+    #     "Credits":
+    #         show screen credits()
 
 label credits:
     # End Credits

@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Baku Baker")
+define config.name = _("Cafe in the Clouds")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -30,19 +30,13 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
-    This is a test
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus sit amet luctus venenatis lectus magna fringilla. Eget arcu dictum varius duis at consectetur lorem donec. Quis blandit turpis cursus in hac habitasse. Risus nec feugiat in fermentum. Facilisis magna etiam tempor orci eu. Lorem ipsum dolor sit amet consectetur. A scelerisque purus semper eget duis at. Et malesuada fames ac turpis egestas sed tempus urna et. Eget arcu dictum varius duis at. Cursus risus at ultrices mi tempus. Ultrices gravida dictum fusce ut. Nisi scelerisque eu ultrices vitae. Pretium lectus quam id leo in. Sed libero enim sed faucibus turpis. Tortor condimentum lacinia quis vel eros.
-
-    \n This Ren'Py GUI Template was put together by BáiYù with additional
-    code by \n{a=https://bobcgames.itch.io/}bobcgames{/a}, {a=https://twitter.com/minutekiwi}minute{/a} and {a=https://npckc.itch.io}npckc{/a}.
-    """)
+    ABOUT ABOUT ABOUT """)
 
 ## A short name for the game used for executables and directories in the built
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "All-In-OneGUITemplate"
+define build.name = "Cafe-in-the-Clouds"
 
 
 ## Sounds and music ############################################################
@@ -77,6 +71,8 @@ define config.main_menu_music = "audio/music/Peas_Corps.mp3"
 ## These variables set transitions that are used when certain events occur.
 ## Each variable should be set to a transition, or None to indicate that no
 ## transition should be used.
+
+define config.rollback_enabled = False
 
 ## Entering or exiting the game menu.
 

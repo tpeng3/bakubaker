@@ -315,7 +315,8 @@ screen quick_menu():
             # imagebutton auto "foo.png" action None() alt "foo"
             # textbutton _("Back") action Rollback()
             textbutton _("Log") action ShowMenu('history')
-            # textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+            if _skipping:
+                textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Save") action ShowMenu('save')
             # textbutton _("Q.Save") action QuickSave()
@@ -348,9 +349,12 @@ default show_quick_menu = True
 
 
 ## Splash screen ###############################################################
-screen click_start():
-    default hidebg = False
+screen click_start(skipflip):
+    default skipflip=False
+    # modal True
     default xpos = 290
+
+    $ print skipflip
 
     add "menuSplash"
 
@@ -362,27 +366,21 @@ screen click_start():
         xpos 350 ypos 625
         at blinking()
 
-    imagebutton:
-        idle Solid("#0000")
-        activate_sound 'audio/sfx/itemget.ogg'
-        action [Jump("splash_transition")]
-
     for i in range(0, 3): # grab snacks 1-3
         image "gui/overlay/snacks{}.png".format(i+1):
             xpos 684 ypos 12
             at floating()
 
-    # image "gui/overlay/snacks1.png":
-    #     xpos 684 ypos 12
-    #     at floating()
-
-    # image "gui/overlay/snacks2.png":
-    #     xpos 684 ypos 12
-    #     at floating()
-
-    # image "gui/overlay/snacks3.png":
-    #     xpos 684 ypos 12
-    #     at floating()
+    if skipflip:
+        imagebutton:
+            idle Solid("#0000")
+            action [Hide("click_start", transition=Dissolve(0.8))]
+    else:
+        imagebutton:
+            idle Solid("#0000")
+            activate_sound 'audio/sfx/itemget.ogg'
+            action [Jump("splash_transition")]
+        
 
 
 ################################################################################
@@ -395,7 +393,6 @@ screen click_start():
 ## to other menus, and to start the game.
 
 screen navigation():
-
     vbox:
         style_prefix "navigation"
 
@@ -405,7 +402,6 @@ screen navigation():
         spacing gui.navigation_spacing
 
         if main_menu:
-
             textbutton _("Play") action Start()
 
         else:
@@ -421,7 +417,6 @@ screen navigation():
         textbutton _("Settings") action ShowMenu("preferences")
 
         # if _in_replay:
-
         #     textbutton _("End Replay") action EndReplay(confirm=True)
 
         textbutton _("About") action ShowMenu("about")
@@ -432,9 +427,8 @@ screen navigation():
 
 
         if renpy.variant("pc"):
-
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            # textbutton _("Help") action ShowMenu("help")
 
             ## The quit button is banned on iOS and unnecessary on Android.
             textbutton _("Quit") action Quit(confirm=not main_menu)
@@ -442,6 +436,11 @@ screen navigation():
 screen main_navi():
     image "menuBack":
         xalign 0.85 yalign 0.5
+
+    if main_menu:
+        textbutton "Go Back": # tmp textbutton until I get an image for this
+            xpos 0 ypos 0
+            action [Show("click_start", transition=Dissolve(0.8), skipflip=True)]
 
     vbox:
         xalign 0.5
@@ -459,22 +458,21 @@ screen main_navi():
 
         spacing gui.navigation_spacing
         if main_menu:
-            textbutton _("Start") action Start()
+            textbutton _("Start") at delay_fade()  action Start()
 
         else:
-            textbutton _("Title") action MainMenu()
-            textbutton _("Save") action ShowMenu("save")
+            textbutton _("Title") at delay_fade() action MainMenu()
+            textbutton _("Save") at delay_fade() action ShowMenu("save")
 
-        textbutton _("Load") action ShowMenu("load")
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("Load") at delay_fade() action ShowMenu("load")
+        textbutton _("About") at delay_fade() action ShowMenu("about")
 
         if renpy.variant("pc"):
-
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            textbutton _("Help") at delay_fade() action ShowMenu("help")
 
             ## The quit button is banned on iOS and unnecessary on Android.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            textbutton _("Quit") at delay_fade() action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -503,13 +501,10 @@ screen main_menu():
     tag menu
     style_prefix "main_menu"
 
-    # add "gui/overlay/main_menu.png" at itrfade()
-    add "gui/overlay/main_menu.png" at itrfade()
+    add "gui/overlay/main_menu.png" at delay_fade()
     image "gui/overlay/main_cloud2.png" at back_clouds()
-    add "gui/overlay/main_kids.png" at itrfade()
-
+    add "gui/overlay/main_kids.png" at delay_fade()
     add "gui/overlay/main_cloud1.png" at main_clouds()
-    # "gui/overlay/main_cloud1.png" at main_clouds()
 
     ## This empty frame darkens the main menu.
     frame:
@@ -1157,13 +1152,12 @@ style slider_vbox:
 ## dialogue history stored in _history_list.
 ##
 ## https://www.renpy.org/doc/html/history.html
-## TODO: Hide scrollbar when there are not enough entries to scroll
 
 screen history():
-
     tag menu
-
     predict False
+
+    key "mouseup_5" action Return() # scrolldown to close history screen
 
     frame:
 
@@ -1219,44 +1213,6 @@ screen history():
                 ## default fonts.
 
         textbutton _("Return") action Return() yalign 1.1 xalign 1.0
-
-## The old version of the History screen that's attached to the game menu.
-# screen history():
-
-#     tag menu
-
-#     ## Avoid predicting this screen, as it can be very large.
-#     predict False
-
-#     use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
-
-#         style_prefix "history"
-
-#         for h in _history_list:
-
-#             window:
-
-#                 ## This lays things out properly if history_height is None.
-#                 has fixed:
-#                     yfit True
-
-#                 if h.who:
-
-#                     label h.who:
-#                         style "history_name"
-
-#                         ## Take the color of the who text from the Character, if
-#                         ## set.
-#                         if "color" in h.who_args:
-#                             text_color h.who_args["color"]
-
-#                 $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
-#                 text what
-
-#         if not _history_list:
-#             label _("The dialogue history is empty.")
-
-## This determines what tags are allowed to be displayed on the history screen.
 
 define gui.history_allow_tags = set()
 
@@ -2043,19 +1999,7 @@ screen dev_notes():
 
 
 ## Type your special message here.
-define gui.dev_notes = _p("""Hello, this is BáiYù of tofurocks here. I want to thank
-    you for downloading this Baku Baker to use in your own game. As
-    someone who has received support from the visual novel community in the past,
-    I wanted to give back something that will benefit other developers for no
-    charge neccessary. While the code provided here is almost a straight copy
-    from the official documentation, I purposely kept it very bare-bones so that
-    you can customize the GUI yourself. It can be difficult to understand screen
-    language for those who are newer to Ren'Py or aren't as savy with programming,
-    so I hope that by sharing this with others, the overall quality of all Ren'Py
-    games will improve.
-
-    Thank you for taking the time to read this, and I wish you the best on your
-    development adventures to come.""")
+define gui.dev_notes = _p("""Dev Notes message... if we want it""")
 
 ## Achievements screen ############################################################
 ##
