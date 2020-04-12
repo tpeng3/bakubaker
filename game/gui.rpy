@@ -207,7 +207,8 @@ define gui.quick_button_text_selected_color = gui.accent_color
 ## For example, you can uncomment the following line to set the width of a
 ## navigation button.
 
-# define gui.navigation_button_width = 250
+define gui.navigation_button_width = 250
+
 
 
 ## Choice Buttons ##############################################################

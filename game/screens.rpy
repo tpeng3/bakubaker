@@ -440,7 +440,6 @@ screen navigation():
             textbutton _("Quit") action Quit(confirm=not main_menu)
 
 screen main_navi():
-
     image "menuBack":
         xalign 0.85 yalign 0.5
 
@@ -483,10 +482,14 @@ style navigation_button_text is gui_button_text
 
 style navigation_button:
     size_group "navigation"
+    padding (10, 10, 10, 10)
     properties gui.button_properties("navigation_button")
 
 style navigation_button_text:
     properties gui.button_text_properties("navigation_button")
+    xalign 0.5
+    yalign 0.5
+
 
 
 ## Main Menu screen ############################################################
@@ -500,8 +503,13 @@ screen main_menu():
     tag menu
     style_prefix "main_menu"
 
+    # add "gui/overlay/main_menu.png" at itrfade()
     add "gui/overlay/main_menu.png" at itrfade()
-    image "gui/overlay/main_cloud1.png" at main_clouds()
+    image "gui/overlay/main_cloud2.png" at back_clouds()
+    add "gui/overlay/main_kids.png" at itrfade()
+
+    add "gui/overlay/main_cloud1.png" at main_clouds()
+    # "gui/overlay/main_cloud1.png" at main_clouds()
 
     ## This empty frame darkens the main menu.
     frame:
@@ -532,10 +540,10 @@ style main_menu_frame:
 
 style main_menu_vbox:
     xalign 1.0
-    xoffset -30
+    xoffset 30
     xmaximum 1200
     yalign 1.0
-    yoffset -30
+    # yoffset -30
 
 style main_menu_text:
     properties gui.text_properties("main_menu", accent=True)
@@ -545,6 +553,20 @@ style main_menu_title:
 
 style main_menu_version:
     properties gui.text_properties("version")
+
+style main_menu_button is gui_button
+style main_menu_button_text is gui_button_text
+
+style main_menu_button:
+    size_group "navigation"
+    padding (10, 10, 10, 10)
+    properties gui.button_properties("navigation_button")
+
+style main_menu_button_text:
+    properties gui.button_text_properties("navigation_button")
+    idle_color "#EDD9C8"
+    xalign 0.5
+    yalign 0.5
 
 
 ## Game Menu screen ############################################################

@@ -97,6 +97,8 @@ init -1:
     image selBorder = "gui/selected.png"
     image itrFrame = "gui/frame_interactable.png"
     image ingFrame = "gui/frame_ingredient.png"
+    image naviButton = "gui/button/navigation_idle_background.png"
+    image naviHoverButton = "gui/button/navigation_hover_background.png"
 
 ## BGs:
     image wonderland2 = "images/BG/bg_wonderland_v2.png"

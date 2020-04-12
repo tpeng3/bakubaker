@@ -371,7 +371,6 @@ label skipopening: # delete before publishing
     jump expression case+"_dream"
 
 label case1_vn_end(result=0):
-    $ result += 1 # delete this before publishing
     $ marcella_name = "Marcella Lapin" # delete this before publishing
     $ _skipping = True # disable skipping option
     stop music fadeout (2.0)
@@ -448,7 +447,7 @@ label case1_vn_end(result=0):
     show remi at left with easeinleft
 
     ml "Oh, this is delicious!" with flash
-    if result == 1:
+    if result >= 1:
         $ marexpr = "th"
         ml "It reminds me of when I first came here and had sleep consulting with, um... what's her name again...?"
         $ somexpr = "de"
@@ -556,7 +555,7 @@ label case1_vn_end(result=0):
     s "I do! You really liked the dish, didn't you!"
     $ remexpr = "fl"
     r "O-of course! What's not to like about a dream dish... It's been quite some time since I've indulged in one."
-    if result == 1:
+    if result >= 1:
         $ remexpr = "gr"
         r "Your magic certainly added quite a sweet and tangy flavor that I didn't expect, but welcomed nonetheless."
         $ somexpr = "gr"

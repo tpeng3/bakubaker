@@ -81,11 +81,23 @@ label intodream:
 image fin = Text("{size=50}{i}Thank you for playing!{/s}{/i}")
 
 # Main Menu --------------------------------------------------------------------
+transform back_clouds():
+    xpos 0 ypos 0
+    linear 6.0 ypos -20
+    pause 0.5
+    linear 6.0 ypos 0
+    repeat
+
 transform main_clouds():
     alpha 1.0
-    linear 3.0 alpha 0.30
-    pause 0.2
-    linear 2.0 alpha 1.0
+    choice:
+        linear 3.0 alpha 0.30
+        pause 0.2
+        linear 2.5 alpha 1.0
+    choice:
+        linear 3.0 alpha 0.50
+        pause 0.25
+        linear 2.0 alpha 1.0
     repeat
 
 # Splash screen ----------------------------------------------------------------
@@ -121,29 +133,27 @@ image cutin:
         ease 0.5 alpha 0.0
     contains:
         anchor (0.5,0.5)
-        xpos -1.0 ypos 0.5
+        alpha 0.2 xpos -1.0 ypos 0.5
         "images/CG/smash.png"
         alpha 1.0
-        ease 0.50 xpos 0.5
+        ease_quad 1.0 xpos 0.5
         "images/CG/smash.png"
         pause 0.20
         linear 0.05 ypos 0.51
-        "images/CG/smash1.png"
+        "images/CG/smash1.png" with Dissolve(0.3, alpha=True)
         linear 0.05 ypos 0.5
-        pause 0.15
-        alpha 1.0
+        pause 0.35
         linear 0.05 ypos 0.51
-        "images/CG/smash2a.png"
-        # parallel:
+        "images/CG/smash2a.png" with Dissolve(0.3, alpha=True)
         linear 0.05 ypos 0.5
         linear 0.10 zoom 1.5 truecenter
         "images/CG/smash2b.png"
         linear 0.15 zoom 1
         block:
-            "images/CG/smash2b.png"
-            pause 0.15
-            "images/CG/smash2a.png"
-            pause 0.15
-            repeat 8
-        "images/CG/smash2b.png"
-        linear 0.50 alpha 0.0
+            "images/CG/smash2a.png" with Dissolve(0.4, alpha=True)
+            pause 0.45
+            "images/CG/smash2b.png" with Dissolve(0.4, alpha=True)
+            pause 0.45
+            repeat 4
+        "images/CG/smash2b.png" with Dissolve(0.5, alpha=True)
+        linear 1.0 alpha 0.0

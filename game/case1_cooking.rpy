@@ -40,7 +40,7 @@ label smash_case1:
     show screen focus_dialogue
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
-    pause 4.5
+    pause 5.0
     $ cook_status.smashSkill()
     play sound "audio/sfx/comboFULL.ogg"
     s "Viola~!"
