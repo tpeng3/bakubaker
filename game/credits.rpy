@@ -109,7 +109,7 @@ screen credits_other():
         xmaximum 800
 
         $ delay = 3.0
-        for field in tina_page:
+        for field in other_page:
             text field:
                 at creditsfade(delay)
             $ delay += 0.5
@@ -117,25 +117,46 @@ screen credits_other():
 
 init python:
     cynthia_page = [
-        "{size=60}Cynthia!!!!!!{/s}",
-        "Rascally Enthusiast",
-        "Washed: hands \nStayed: inside \nDidn't do a good job with this credits screen lol the code is Not Great",
-        "Quote: Simple zest for life",
-        "{ii}Tina please god help me clean this up{/ii}"
+        "{size=60}Cynthia{/s} - A Maverick" ,
+        "{ii}Deranged Black Metal Girl Scout{/ii}",
+        "Art:",
+        " • Background art \n • Character concepts \n • Character design \n • Prop art",
+        "Programming:",
+        " • Animation \n • Visual novel section",
+        "Narrative writing",
+        "{i}\'I got myself a paperclip.\'{/i}"
     ]
 
     jay_page = [
-        "{size=60}JAY{/s}"
+        "{size=60}J{/s} - Official Idea Guy",
+        "{ii}Bonchiest Bi{/ii}",
+        "Art:",
+        " • Character design \n • Character sprites",
+        "Story concept",
+        "Story revision",
+        "UI design",
+        "{i}\'Had to explain a seven layer dip meme to Cynthia bc theyre an idiot\'{/i}"
     ]
 
     tina_page = [
-        "{size=60}Tina{/s}",
-        "A Simple Frog",
-        "Status: Probably shouldn't be staying up this late right now but the concept of time is fake.",
-        "If two guys were on the moon and one killed the other with a rock would that be fucked up or what-",
-        "{ii}OK I cleaned some parts but it's subject to change when we get these fields figured out.{/ii}"
+        "{size=60}Tina{/s} - Hacky Code Enthusiast",
+        "{ii}A Simple Frog{/ii}",
+        "Character writing",
+        "Programming:",
+        " • Animation \n • Cooking section \n • Dream section",
+        "Sound effects",
+        "\'If two guys were on the moon and one killed the other with a rock would that be fucked up or what-\'"
     ]
 
     other_page = [
         "{size=60}Resources{/s}",
+        "Open source music provided by:",
+        "{a=https://www.soundofpicture.com/}Podington Bear:{/a}",
+        " • Netherland \n • Peas Corps \n • Thick Irony",
+        "{a=http://amachamusic.chagasi.com/index.html}Amacha Music{/a}: {font=gui/fonts/MPLUS-light.ttf}午前2時の噴水{/font}",
+        "{a=http://musmus.main.jp/music.html}MusMus:{/a}",
+        " • {font=gui/fonts/MPLUS-light.ttf}なめこ大臣の策謀 \n • 朝露の小庭{/font}",
+        "{a=https://pocket-se.info/}Pocket Sound{/a}: {font=gui/fonts/MPLUS-light.ttf}やっぱりチョコは手作りね{/font}",
+        "{a=http://www.hmix.net/music_gallery/music_top.html}H/MIX Gallery{/a}: {font=gui/fonts/MPLUS-light.ttf}移動式井戸{/font}",
+
     ]

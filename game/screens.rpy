@@ -380,7 +380,7 @@ screen click_start(skipflip):
             idle Solid("#0000")
             activate_sound 'audio/sfx/itemget.ogg'
             action [Jump("splash_transition")]
-        
+
 
 
 ################################################################################
@@ -428,8 +428,10 @@ screen main_navi():
         xalign 0.85 yalign 0.5
 
     if main_menu:
-        textbutton "Go Back": # tmp textbutton until I get an image for this
-            xpos 0 ypos 0
+        imagebutton:
+            xpos 1390 ypos 780
+            idle "gui/button/goback_idle.png"
+            hover "gui/button/goback_hover.png"
             action [Show("click_start", transition=Dissolve(0.8), skipflip=True)]
 
     vbox:
