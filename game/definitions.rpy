@@ -121,6 +121,7 @@ init -1:
     # Future-Business_v001 = "audio/music/Future-Business_v001.mp3"
     # Sculpture-Garden_Looping = "audio/music/Sculpture-Garden_Looping.mp3"
     # The-Concrete-Bakes_Looping = "audio/music/The-Concrete-Bakes_Looping.mp3"
+    define audio.splashscreen = "audio/music/Peas_Corps.mp3"
     define audio.storefront = "audio/music/MusMus-BGM-092.mp3"
     define audio.dreamoffice = "audio/music/gozennijinofunsui.mp3"
     define audio.weird = "audio/music/Thick_Irony.mp3"

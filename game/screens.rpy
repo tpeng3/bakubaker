@@ -765,6 +765,7 @@ screen file_slots(title):
             ## This ensures the input will get the enter event before any of the
             ## buttons do.
             order_reverse True
+            xoffset -80 # lazy fix to move the slots
 
             ## The page name, which can be edited by clicking on a button.
             button:
@@ -785,10 +786,9 @@ screen file_slots(title):
                 xalign 0.5
                 yalign 0.5
 
-                spacing gui.slot_spacing
+                spacing gui.slot_spacing * 2
 
                 for i in range(gui.file_slot_cols * gui.file_slot_rows):
-
                     $ slot = i + 1
 
                     button:
