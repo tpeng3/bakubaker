@@ -1,4 +1,16 @@
 # CREDITS SCREEN (we made it guys!!)
+label credits_start:
+    show screen credits(pagenum=0)
+    pause(10.0)
+    show screen credits(pagenum=1)
+    pause(10.0)
+    show screen credits(pagenum=2)
+    pause(10.0)
+    show screen credits(pagenum=3)
+    pause(10.0)
+    # show screen credits(pagenum=4) a thanks for playing! screen
+    # pause(10.0)
+return
 
 # Credits styles
 style credits_style_text:
@@ -28,13 +40,11 @@ transform slideright:
     xpos -800 ypos 0 alpha 0.0 # need to change positions afterwards
     ease_quad 2.0 xpos -400 alpha 1.0
 
-screen credits():
-    default pagenum = 0
-    default page_order = ["credits_cynthia", "credits_jay", "credits_tina", "credits_other"]
-
+screen credits(pagenum=0):
     modal True
     add "images/CG/incense_in.png"
     style_prefix "credits_style"
+    $ page_order = ["credits_cynthia", "credits_jay", "credits_tina", "credits_other"]
 
     if pagenum < len(page_order)-1:
         use expression page_order[pagenum]
@@ -50,11 +60,6 @@ screen credits():
             idle Solid("#0000")
             activate_sound 'audio/sfx/itemget.ogg'
             action [Hide("creditsfade", transition=Dissolve(0.8)), MainMenu(confirm=False)]
-
-label credit_roll:
-    show screen credits() with Dissolve(2.0)
-    $ renpy.pause(delay=2, hard=False)
-
 
 screen credits_cynthia():
     image "images/CG/smash.png":
