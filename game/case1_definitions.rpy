@@ -19,8 +19,8 @@ init python:
     t_bunnysquad = Interactables("Fluffle of Bunnies", "bunnysquad", "images/interactables/case1/fluffle.png", page=0,
         xstart=1167, ystart=532,
         actions = [
-            {"name": "Talk (Somnia)", "label": "bunnies_talk_som"},
-            {"name": "Talk (Remerie)", "label": "bunnies_talk_rem"}
+            {"name": "Talk (Remerie)", "label": "bunnies_talk_rem"},
+            {"name": "Talk (Somnia)", "label": "bunnies_talk_som"}
         ]
     )
     t_strawberry = Interactables("Giant Strawberry", "strawberry", "images/interactables/case1/strawberry.png", page=0,

@@ -938,7 +938,7 @@ screen preferences():
                         style_prefix "radio"
                         label _("Typeface")
 
-                        textbutton "{font=DejaVuSans.ttf}DejaVuSans{/font}" action [changeFont("DejaVuSans.ttf"),SelectedIf(persistent.pref_text_font == "DejaVuSans.ttf")]
+                        # textbutton "{font=DejaVuSans.ttf}DejaVuSans{/font}" action [changeFont("DejaVuSans.ttf"),SelectedIf(persistent.pref_text_font == "DejaVuSans.ttf")]
                         textbutton "{font=gui/fonts/NotoSans-Regular.ttf}NotoSans{/font}" action [changeFont("gui/fonts/NotoSans-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/NotoSans-Regular.ttf")]
                         textbutton "{font=gui/fonts/BellotaText-Regular.ttf}BellotaText{/font}" action [changeFont("gui/fonts/BellotaText-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/BellotaText-Regular.ttf")]
                         textbutton "{font=gui/fonts/OpenDyslexic-Regular.otf}OpenDyslexic{/font}" action [changeFont("gui/fonts/OpenDyslexic-Regular.otf"),SelectedIf(persistent.pref_text_font == "gui/fonts/OpenDyslexic-Regular.otf")]
@@ -1118,7 +1118,6 @@ screen history():
     frame:
 
         style_prefix "history"
-
         label _("History")
 
         left_margin 200
@@ -1141,15 +1140,12 @@ screen history():
             scrollbars "vertical"
 
             for h in _history_list:
-
                 window:
-
                     ## This lays things out properly if history_height is None.
                     has fixed:
                         yfit True
 
                     if h.who:
-
                         label h.who:
                             style "history_name"
 
@@ -1162,7 +1158,6 @@ screen history():
                     text what
 
             if not _history_list:
-
                 text "The dialogue history is empty." line_spacing 10
                 ## Adding line_spacing prevents the bottom of the text
                 ## from getting cut off. Adjust when replacing the
@@ -1486,7 +1481,7 @@ style skip_text:
 style skip_triangle:
     ## We have to use a font that has the BLACK RIGHT-POINTING SMALL TRIANGLE
     ## glyph in it.
-    font "DejaVuSans.ttf"
+    font "gui/fonts/NotoSans-Regular.ttf"
 
 
 ## Notify screen ###############################################################

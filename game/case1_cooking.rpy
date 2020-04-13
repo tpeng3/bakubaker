@@ -1,5 +1,8 @@
 label case1_cook:
     play music cooking1
+    $ inventory.drop(c_bluebook) # these items aren't ingredients so drop them!!
+    $ inventory.drop(c_redbook)
+
     # tmp shortcut to get all the items if you didn't get them from the dream
     if len(inventory.items) == 0:
         call inventory_stock from _call_inventory_stock
