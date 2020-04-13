@@ -432,6 +432,7 @@ screen main_navi():
             xpos 1390 ypos 780
             idle "gui/button/goback_idle.png"
             hover "gui/button/goback_hover.png"
+            at delay_fade()
             action [Show("click_start", transition=Dissolve(0.8), skipflip=True)]
 
     vbox:

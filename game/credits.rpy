@@ -36,18 +36,20 @@ screen credits():
     add "images/CG/incense_in.png"
     style_prefix "credits_style"
 
-    use expression page_order[pagenum]
+    if pagenum < len(page_order)-1:
+        use expression page_order[pagenum]
 
-    if pagenum < len(page_order):
         imagebutton:
             idle Solid("#0000")
             activate_sound 'audio/sfx/itemget.ogg'
             action [Hide("credits_cynthia", transition=Dissolve(0.8)), SetScreenVariable("pagenum", pagenum+1)]
     else:
+        use expression page_order[pagenum]
+
         imagebutton:
             idle Solid("#0000")
             activate_sound 'audio/sfx/itemget.ogg'
-            action MainMenu()
+            action [Hide("creditsfade", transition=Dissolve(0.8)), MainMenu(confirm=False)]
 
 label credit_roll:
     show screen credits() with Dissolve(2.0)
