@@ -405,30 +405,20 @@ screen navigation():
             textbutton _("Play") action Start()
 
         else:
-
             # textbutton _("History") action ShowMenu("history")
-
-            textbutton _("Title") action MainMenu()
-
+            textbutton _("Back to Title") action MainMenu()
             textbutton _("Save") action ShowMenu("save")
 
         textbutton _("Load") action ShowMenu("load")
-
         textbutton _("Settings") action ShowMenu("preferences")
-
-        # if _in_replay:
-        #     textbutton _("End Replay") action EndReplay(confirm=True)
-
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("Credits") action ShowMenu("about")
 
         # if main_menu:
-        #
         #     textbutton _("Extras") action ShowMenu("achievements")
-
 
         if renpy.variant("pc"):
             ## Help isn't necessary or relevant to mobile devices.
-            # textbutton _("Help") action ShowMenu("help")
+            textbutton _("Help") action ShowMenu("help")
 
             ## The quit button is banned on iOS and unnecessary on Android.
             textbutton _("Quit") action Quit(confirm=not main_menu)
@@ -465,11 +455,12 @@ screen main_navi():
             textbutton _("Save") at delay_fade() action ShowMenu("save")
 
         textbutton _("Load") at delay_fade() action ShowMenu("load")
-        textbutton _("About") at delay_fade() action ShowMenu("about")
+        textbutton _("Settings") at delay_fade() action ShowMenu("preferences")
+        textbutton _("Credits") at delay_fade() action ShowMenu("about")
 
         if renpy.variant("pc"):
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") at delay_fade() action ShowMenu("help")
+            # textbutton _("Help") at delay_fade() action ShowMenu("help")
 
             ## The quit button is banned on iOS and unnecessary on Android.
             textbutton _("Quit") at delay_fade() action Quit(confirm=not main_menu)
@@ -902,7 +893,6 @@ style slot_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
 screen preferences():
-
     tag menu
 
     use game_menu(_("Settings"), scroll="viewport"):
@@ -911,14 +901,11 @@ screen preferences():
             left_padding 50
             background None
             vbox:
-
                 ## Standard Preferences
                 hbox:
-
                     box_wrap True
 
                     if renpy.variant("pc"):
-
                         vbox:
                             style_prefix "radio"
                             label _("Display")
@@ -926,43 +913,34 @@ screen preferences():
                             textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
                     vbox:
-                        style_prefix "radio"
-                        label _("Rollback Side")
-                        textbutton _("Disable") action Preference("rollback side", "disable")
-                        textbutton _("Left") action Preference("rollback side", "left")
-                        textbutton _("Right") action Preference("rollback side", "right")
-
-                    vbox:
                         style_prefix "check"
                         label _("Skip")
                         textbutton _("Unseen Text") action Preference("skip", "toggle")
-                        textbutton _("After Choices") action Preference("after choices", "toggle")
                         textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+
+                    vbox:
+                        xmaximum 400
+                        style_prefix "check"
+                        label _("Accessibility")
+                        textbutton "Allow Screenshake" action ToggleField(persistent,"screenshake",true_value=True,false_value=False)
+                        textbutton "Show Song Titles" action ToggleField(persistent,"audio_cues",true_value=True,false_value=False)
 
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be
                     ## added here, to add additional creator-defined preferences.
 
-                null height (4 * gui.pref_spacing)
-
-                ## Accessibility Preferences
+                null height (8 * gui.pref_spacing)
 
                 hbox:
-
                     box_wrap True
 
                     ## Change Typeface
-
                     vbox:
-
                         style_prefix "radio"
                         label _("Typeface")
 
                         textbutton "{font=DejaVuSans.ttf}DejaVuSans{/font}" action [changeFont("DejaVuSans.ttf"),SelectedIf(persistent.pref_text_font == "DejaVuSans.ttf")]
-
                         textbutton "{font=gui/fonts/NotoSans-Regular.ttf}NotoSans{/font}" action [changeFont("gui/fonts/NotoSans-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/NotoSans-Regular.ttf")]
-
                         textbutton "{font=gui/fonts/BellotaText-Regular.ttf}BellotaText{/font}" action [changeFont("gui/fonts/BellotaText-Regular.ttf"),SelectedIf(persistent.pref_text_font == "gui/fonts/BellotaText-Regular.ttf")]
-
                         textbutton "{font=gui/fonts/OpenDyslexic-Regular.otf}OpenDyslexic{/font}" action [changeFont("gui/fonts/OpenDyslexic-Regular.otf"),SelectedIf(persistent.pref_text_font == "gui/fonts/OpenDyslexic-Regular.otf")]
 
                         ## A template for adding a different font choice. See Line 129 in
@@ -970,9 +948,7 @@ screen preferences():
                         # textbutton "{font=gui/fonts/[font.ttf]}Custom Font{/font}" action [changeFont("gui/fonts/[font.ttf]"),SelectedIf(persistent.pref_text_font == "gui/fonts/[font.ttf]")]
 
                     ## Change Font Size
-
                     vbox:
-
                         style_prefix "radio"
                         label _("Font Size")
 
@@ -983,46 +959,26 @@ screen preferences():
                         # # Though, there is not much reason to add a small option...
                         # textbutton "Small" action [changeScale(newScale="small"),SelectedIf(persistent.pref_text_scale == "small") ]
 
+                    ## Set Textbox Opacity
+                    vbox:
+                        xalign 0.5
+                        label _("Textbox Opacity")
+                        style_prefix "slider"
+                        bar:
+                            ysize gui.slider_size
+                            base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", gui.slider_borders, tile=gui.slider_tile)
+                            thumb "gui/slider/horizontal_[prefix_]thumb.png"
+                            value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.2)
+
+                        null height (gui.pref_spacing)
+                        image "gui/frame.png":
+                            xalign 0.5
+                            alpha persistent.say_window_alpha
+
                     ## Toggles
                     ## You can also create SetField() buttons with on/off variables if you prefer that look.
 
-                    vbox:
-
-                        style_prefix "check"
-                        label _("Toggle")
-
-                        #Toggle Screenshake
-                        textbutton "Screenshake" action ToggleField(persistent,"screenshake",true_value=True,false_value=False)
-
-                        ## Self-voicing does not work on smartphone devices, so this option only shows if the user is playing on a PC.
-                        if renpy.variant("pc"):
-
-                            textbutton _("Self-Voicing") action Preference("self voicing", "toggle")
-
-                    null height (4 * gui.pref_spacing)
-
-                    vbox:
-
-                        style_prefix "check"
-                        label _("Captions")
-
-                        textbutton "Song Titles" action ToggleField(persistent,"audio_cues",true_value=True,false_value=False)
-                        textbutton _("SFX Titles") action ToggleVariable("persistent.sound_captions")
-                        textbutton _("Image Descriptions") action ToggleVariable("persistent.image_captions")
-
-                        ## This shows Ren'Py's built-in accessibility menu. This can also be displayed by pressing "A" on the keyboard when playing on a PC. As this option can break the way the game is displayed and also does not support translation as of the latest Ren'Py build, you may want to hide the option.
-                        # textbutton _("More Options...") action Show("_accessibility")
-
-                null height (4 * gui.pref_spacing)
-
-                ## Set Textbox Opacity
-                vbox:
-                    xalign 0.5
-                    label _("Textbox Opacity")
-                    style_prefix "slider"
-                    bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.2)
-
-                null height (4 * gui.pref_spacing)
+                null height (8 * gui.pref_spacing)
 
                 hbox:
                     style_prefix "slider"
@@ -1058,7 +1014,7 @@ screen preferences():
 
 
                         if config.has_voice:
-                            label _("Voice Volume")
+                            label _("Text Bleep Volume")
 
                             hbox:
                                 bar value Preference("voice volume")
@@ -1291,27 +1247,22 @@ screen help():
                 use keyboard_help
             elif device == "mouse":
                 use mouse_help
-            elif device == "gamepad":
-                use gamepad_help
+            # elif device == "gamepad": we're not supporting gamepad
+            #     use gamepad_help
 
 
 screen keyboard_help():
-
     hbox:
         label _("Enter")
-        text _("Advances dialogue and activates the interface.")
+        text _("Advances dialogue.")
 
     hbox:
         label _("Space")
-        text _("Advances dialogue without selecting choices.")
-
-    hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
+        text _("Advances dialogue.")
 
     hbox:
         label _("Escape")
-        text _("Accesses the game menu.")
+        text _("Opens up the Save Menu.")
 
     hbox:
         label _("Ctrl")
@@ -1322,47 +1273,42 @@ screen keyboard_help():
         text _("Toggles dialogue skipping.")
 
     hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
+        label _("Up Arrow")
+        text _("Opens up the dialogue Backlog.")
 
     hbox:
-        label _("Page Down")
-        text _("Rolls forward to later dialogue.")
+        label _("Down Arrow")
+        text _("Closes dialogue Backlog.")
 
     hbox:
         label "H"
-        text _("Hides the user interface.")
+        text _("Toggles viewing the dialogue textbox.")
 
     hbox:
         label "S"
         text _("Takes a screenshot.")
 
-    hbox:
-        label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
-
 
 screen mouse_help():
-
     hbox:
         label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
+        text _("Advances dialogue and interactions.")
 
     hbox:
         label _("Middle Click")
-        text _("Hides the user interface.")
+        text _("Toggles viewing the dialogue textbox.")
 
     hbox:
         label _("Right Click")
-        text _("Accesses the game menu.")
+        text _("Opens up the Save Menu.")
 
     hbox:
-        label _("Mouse Wheel Up\nClick Rollback Side")
-        text _("Rolls back to earlier dialogue.")
+        label _("Mouse Wheel Up")
+        text _("Opens up the dialogue Backlog.")
 
     hbox:
         label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
+        text _("Closes dialogue Backlog.")
 
 
 screen gamepad_help():
