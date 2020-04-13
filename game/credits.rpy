@@ -47,7 +47,7 @@ screen credits():
         imagebutton:
             idle Solid("#0000")
             activate_sound 'audio/sfx/itemget.ogg'
-            action Jump("credit_roll")
+            action MainMenu()
 
 label credit_roll:
     show screen credits() with Dissolve(2.0)
