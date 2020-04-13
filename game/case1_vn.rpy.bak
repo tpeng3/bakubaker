@@ -24,7 +24,7 @@ label case1_vn:
     #     "dont skip":
     #         pass
 
-    call titlezone from _call_titlezone
+    call titlezone
 
     dr """
     When the curtain of the night lifts, a sleepy town wakes by the gentle glow of morning.
@@ -356,7 +356,7 @@ label skipopening: # delete before publishing
 
 	As the smoke swirled up lazily into the air, the two, cooks just a moment ago, now began their work as {ii}dream eaters{/ii}.
     """
-    call intodream from _call_intodream
+    call intodream
 
     pause (2.0)
     $ renpy.stop_predict(
@@ -628,5 +628,5 @@ label case1_vn_end(result=0):
 
     ...And those whose who wander in with dreams composed of worries, fears, and woes will provide the same satisfaction to the {ii}dream eaters{/ii}.
     """
-    call endscene from _call_endscene
+    call endscene
     return # change this to jump to credits page for demo
