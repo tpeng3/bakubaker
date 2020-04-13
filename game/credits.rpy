@@ -135,14 +135,13 @@ init python:
     ]
 
     jay_page = [
-        "{size=60}J{/s} - Official Idea Guy",
-        "{ii}Bonchiest Bi{/ii}",
+        "{size=60}J{/s} - Idea {s}Gay{/s} Guy",
+        "{ii}Humble Merchant of Somrems{/ii}",
         "Art:",
-        " • Character design \n • Character sprites",
+        " • Character art \n • Character design \n • UI design",
         "Story concept",
         "Story revision",
-        "UI design",
-        "{i}\'Had to explain a seven layer dip meme to Cynthia bc theyre an idiot\'{/i}"
+        "{i}\'Pitched corny JRPG title \"Bon Appétit: Karmic Unrest\" for the BAKU acronym but alas...'{/i}"
     ]
 
     tina_page = [
