@@ -245,6 +245,7 @@ label report_find:
     play sound itemget
     dr "You got some {ii}Fine Herbs!{/ii}"
     hide screen get_ingredient
+    $ inventory.add(c_herbs)
     $ inventory.add(c_redbook)
     $ inventory.drop(c_bluebook)
     jump dream_start
