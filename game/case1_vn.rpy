@@ -3,6 +3,7 @@
 # ------------------------------------------------------------------------
 label case1_vn:
     $ _skipping = True # enable skipping option
+    $ show_quick_menu = True
     $ case = "case1"
     $ somnia_name = "???"
     $ remerie_name = "Remerie"

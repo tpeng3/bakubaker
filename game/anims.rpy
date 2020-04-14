@@ -37,6 +37,7 @@ label splash_transition:
     return
 
 label titlezone:
+    $ show_quick_menu = False
     show outside with dissolve:
         xanchor 0 yanchor 0
     show logo:
@@ -58,6 +59,8 @@ label titlezone:
     return
 
 label endscene:
+    show screen block_clicking
+    $ show_quick_menu = False
     show outside:
         xanchor 0 yanchor 0
         xpos 0 ypos -1080
@@ -71,10 +74,13 @@ label endscene:
         xpos 0 ypos -1080
         xalign 0.5 yalign 0.85
         ease_quad 15.0 yalign 0.0
+    hide screen block_clicking
     $ renpy.pause(delay=20, hard=True)
     scene black with Dissolve(1.0)
 
 label intodream:
+    show screen block_clicking
+    $ show_quick_menu = False
     show enterdream:
         xanchor 0 yanchor 0
         xpos 0 ypos -2000
@@ -82,6 +88,7 @@ label intodream:
     pause (8.0)
     play sound whoosh fadeout 1.0
     show cloud with dissolve
+    hide screen block_clicking
     return
 
 image fin = Text("{size=50}{i}Thank you for playing!{/s}{/i}")

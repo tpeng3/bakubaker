@@ -2,6 +2,7 @@ label case1_dream:
     show screen focus_dialogue
     $ bun_name = "Dream bunnies"
     $ _skipping = False # disable skipping option
+    $ show_quick_menu = True
 
     python:
         bg = "images/BG/bg_wonderland.png" # background image
