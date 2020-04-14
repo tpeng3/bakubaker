@@ -25,7 +25,7 @@ label case1_dream:
     pause(1.0)
     play sound trip
     $ renpy.choice_for_skipping()
-    dreamSom sh "W-whoa...!" with sshake
+    dreamSom sh "W-whoa...!" with shake()
     dreamRem ne "I got you. Watch your step, it's a mess in here."
     dreamRem ne "A dream would reflect a person's inner headspace, after all."
     dreamSom th "Our client must really have a hard time arranging their thoughts, among other things..."
@@ -329,8 +329,8 @@ label bunny2_talk:
         bun "Whee! Wheeeee!"
         dreamSom bi "That little one is going to get hurt, jumping around like that...!"
         dreamRem si "I'm sure she knows what she's doing."
-        bun "Whee- OUCH!" with sshake
-        dreamRem pe "OW! Watch it!" with sshake
+        bun "Whee- OUCH!" with shake()
+        dreamRem pe "OW! Watch it!" with shake()
         dreamSom sh "Oh, sweetie, slow down and please be careful!"
         bun "I'm fine! Hehe, wheee!"
         dreamRem "Kids theses days..."
@@ -627,7 +627,7 @@ label marcella_talk_end:
         bun "Big sib, can we go to the park? {ss}No, I want to go to the movies!{/ss}"
         dreamMar "Resting now means I'll be wasting my time!"
         bun "Big sib Marchie is the oldest, so they can do everything!"
-        dreamMar "I HAVE to keep going!!!" with sshake
+        dreamMar "I HAVE to keep going!!!" with shake()
         # [# Client collapses in dream?!]
         dreamSom di "Oh, dearie. So the issue with cleaning wasn't the problem after all."
         dreamRem th "Yes, it seems much deeper than that."

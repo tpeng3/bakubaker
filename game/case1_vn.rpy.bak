@@ -74,9 +74,9 @@ label skipopening: # delete before publishing
     $ somexpr = "de"
     show somnia at center with ease
     $ remexpr = "sh"
-    r "Mmrph! {w=0.5}{nw}" with sshake
+    r "Mmrph! {w=0.5}{nw}" with shake()
     $ remexpr = "pe"
-    r "Mmrrph! Mmrhh nmrph!" with sshake
+    r "Mmrrph! Mmrhh nmrph!" with shake()
     show somnia at right with ease
     $ somexpr = "ne"
     s "How is it?"
@@ -130,7 +130,7 @@ label skipopening: # delete before publishing
     s "Hm~... A merry tune to toot-"
     $ somexpr = "bi"
     stop music
-    s "AH!" with sshake
+    s "AH!" with shake()
     r "What’s wrong?"
     s "T-there’s a person fallen over on the pavement outside!"
     show somnia at right with ease
@@ -143,7 +143,7 @@ label skipopening: # delete before publishing
     $ remexpr = "bi"
     r "Are they... {ii}d-dea-{/ii}{w=0.5}{nw}"
     ml "{th}... I-I’m alive...{/th}"
-    ml "Snrk... {i}*snore...*{/i}" with sshake
+    ml "Snrk... {i}*snore...*{/i}" with shake()
     play music weird
     $ remexpr = "si"
     r "......"
@@ -167,7 +167,7 @@ label skipopening: # delete before publishing
     ml "So sorry...! A thousand apologies for the concern... "
     $ marexpr = "ya"
     play sound yawn
-    extend "{cps=10}*yaaaaawn...*" with sshake
+    extend "{cps=10}*yaaaaawn...*" with shake()
     $ remexpr = "sh"
     r "{th}(They were napping?!){/th}"
     $ somexpr = "sh"
@@ -420,7 +420,7 @@ label case1_vn_end(result=0):
     $ marexpr = "ya"
     show mar with dissolve
     play sound yawn
-    ml "*Yaaaawn...*" with sshake
+    ml "*Yaaaawn...*" with shake()
     show mar at right with ease
     show remi at left with dissolve
     r "You're awake. How are you feeling after your nap?"
@@ -606,7 +606,7 @@ label case1_vn_end(result=0):
     $ remexpr = "fl"
     r "A-ahem..."
     s "Aw, you're blushing!"
-    r "Soms, please... W-we need to get the store ready." with sshake
+    r "Soms, please... W-we need to get the store ready." with shake()
     s "Whatever you say, {ii}Rem~{w=.1}er~{w=.1}ie~! {mn}{/ii}"
 
     dr "Chattering away, the dream eaters gathered their bearings for the start of another day."
