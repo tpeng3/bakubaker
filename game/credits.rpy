@@ -95,7 +95,7 @@ screen credits_tina():
     zorder 99
     modal True
     image "images/CG/credits_t.png":
-        xoffset -100
+        xoffset -110
         yoffset -15
         at slideright
 
