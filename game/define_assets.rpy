@@ -305,6 +305,5 @@ init python:
 
 # Init -------------------------------------------------------------
 init:
-    $ sshake = Shake((0, 0, 0, 0), 0.5, dist=10)
     $ somnia_name = "Somnia"
     $ remerie_name = "Remerie"

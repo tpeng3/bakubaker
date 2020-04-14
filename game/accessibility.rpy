@@ -43,14 +43,14 @@ init python:
 
     ###Screenshake
     # Shakes the screen. To use, put
-    # $ shake()
+    # shake()
     # inline. For other uses, simply do a check inline for ATL statements, or a ConditionSwitch for shaky images.
 
     def shake():
         if persistent.screenshake:
-            renpy.with_statement(hpunch)
-        else:
-            renpy.with_statement(fade) ###OPTIONAL: Show a different effect if screenshake is turned off.
+            return Shake((0, 0, 0, 0), 0.5, dist=10)
+        # else:
+            # renpy.with_statement(fade) ###OPTIONAL: Show a different effect if screenshake is turned off.
 
 define vt = Character(None,condition="persistent.visual_text_help or _preferences.self_voicing",what_italic=True)
 

@@ -354,8 +354,6 @@ screen click_start(skipflip):
     # modal True
     default xpos = 290
 
-    $ print skipflip
-
     add "menuSplash"
 
     image "menuFront":
@@ -925,7 +923,7 @@ screen preferences():
                         style_prefix "check"
                         label _("Accessibility")
                         textbutton "Allow Screenshake" action ToggleField(persistent,"screenshake",true_value=True,false_value=False)
-                        textbutton "Show Song Titles" action ToggleField(persistent,"audio_cues",true_value=True,false_value=False)
+                        # textbutton "Show Song Titles" action ToggleField(persistent,"audio_cues",true_value=True,false_value=False)
 
                     ## Additional vboxes of type "radio_pref" or "check_pref" can be
                     ## added here, to add additional creator-defined preferences.
