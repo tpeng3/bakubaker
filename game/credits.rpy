@@ -150,7 +150,7 @@ init python:
         "Programming:",
         " • Animation \n • Visual novel section",
         "Narrative writing",
-        "{i}\"I got myself a paperclip.\"{/i}"
+        "{qq}\"I got myself a paperclip.\"{/qq}"
     ]
 
     jay_page = [
@@ -160,7 +160,7 @@ init python:
         " • Character art \n • Character design \n • UI design",
         "Story concept",
         "Story revision",
-        "{i}\"Pitched corny JRPG title \"Bon Appétit: Karmic Unrest\" for the BAKU acronym but alas...\"{/i}"
+        "{qq}\"Pitched corny JRPG title \"Bon Appétit: Karmic Unrest\" for the BAKU acronym but alas...\"{/qq}"
     ]
 
     tina_page = [
@@ -170,7 +170,7 @@ init python:
         "Programming:",
         " • Animation \n • Cooking section \n • Dream section",
         "Sound effects",
-        "{i}\"I hope you liked my clock puzzle that gave no helpful visual indicators whatsoever (I'm sorry)\"{/i}"
+        "{qq}\"I hope you liked my clock puzzle that gave no helpful visual indicators whatsoever (I'm sorry)\"{/qq}"
     ]
 
     other_page = [

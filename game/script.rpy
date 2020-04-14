@@ -11,23 +11,23 @@ label splashscreen:
     scene black
 
     ## The first time the game is launched, players can set their accessibility settings.
-    if not persistent.caption:
-        menu:
-            dr "Would you like sound captions to go along with the story? They help describe music and sound effects in text."
-            "On":
-                $ persistent.sound_captions = True
-            "Off":
-                pass
-        menu:
-            dr "How about image captions? Game visuals will also be described in text."
-            "On":
-                $ persistent.image_captions = True
-            "Off":
-                pass
-        dr "These options can be changed at any time in the {ii}Main Menu.{/ii}"
-        ## This message will not appear in subsequent launches of the game when
-        ## the following variable becomes true.
-        $ persistent.caption = True
+    # if not persistent.caption:
+    #     menu:
+    #         dr "Would you like sound captions to go along with the story? They help describe music and sound effects in text."
+    #         "On":
+    #             $ persistent.sound_captions = True
+    #         "Off":
+    #             pass
+    #     menu:
+    #         dr "How about image captions? Game visuals will also be described in text."
+    #         "On":
+    #             $ persistent.image_captions = True
+    #         "Off":
+    #             pass
+    #     dr "These options can be changed at any time in the {ii}Main Menu.{/ii}"
+    #     ## This message will not appear in subsequent launches of the game when
+    #     ## the following variable becomes true.
+    #     $ persistent.caption = True
 
     ## Here begins our splashscreen animation.
     pause(1.0)

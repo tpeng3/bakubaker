@@ -218,6 +218,17 @@ init python:
                 ]
     config.custom_text_tags["ii"] = interesting
 
+    def quote(tag, argument, contents):
+        color = "#d14970"
+        return [
+                (renpy.TEXT_TAG, "color={}".format(color)),
+                (renpy.TEXT_TAG, "i"),
+                ] + contents + [
+                (renpy.TEXT_TAG, "/i"),
+                (renpy.TEXT_TAG, "/color")
+                ]
+    config.custom_text_tags["qq"] = quote
+
     def thoughts(tag, argument, contents):
         alpha = 0.6
         return [
