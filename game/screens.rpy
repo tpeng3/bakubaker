@@ -405,7 +405,6 @@ screen navigation():
             textbutton _("Play") action Start()
 
         else:
-            # textbutton _("History") action ShowMenu("history")
             textbutton _("Back to Title") action MainMenu()
             textbutton _("Save") action ShowMenu("save")
 
@@ -479,6 +478,7 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.button_text_properties("navigation_button")
+    idle_color "#EDD9C8"
     xalign 0.5
     yalign 0.5
 
