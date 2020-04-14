@@ -129,6 +129,7 @@ label case1_vn:
     r "What’s wrong?"
     s "T-there’s a person fallen over on the pavement outside!"
     show somnia at right with ease
+    show marchiecollapse at truecenter with Dissolve(0.8)
     $ remexpr = "pe"
     show remi at left with dissolve
     r "We can’t have bodies blocking the door for potential customers."
@@ -146,7 +147,6 @@ label case1_vn:
     s "......"
     $ remexpr = "ne"
     r "... We should bring them in. It won't do us any good having someone lying on the floor in front of our store."
-
     scene black with dissolve
     play sound welcomedoor
     with Pause (1.0)

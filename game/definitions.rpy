@@ -114,6 +114,7 @@ init -1:
     image outside = "images/CG/outside.png"
     image enterdream = "images/CG/incense_todream.png"
     image incenseout = "images/CG/incense_out.png"
+    image marchiecollapse = "images/CG/marchiecollapse.png"
 
 ## Music:
 # init -2 python:

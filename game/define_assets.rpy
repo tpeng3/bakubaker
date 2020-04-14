@@ -218,8 +218,21 @@ init python:
                 ]
     config.custom_text_tags["ii"] = interesting
 
+    def title(tag, argument, contents):
+        color = "#b96784"
+        return [
+                (renpy.TEXT_TAG, "color={}".format(color)),
+                (renpy.TEXT_TAG, "b"),
+                (renpy.TEXT_TAG, "k={}".format(-1.2))
+                ] + contents + [
+                (renpy.TEXT_TAG, "/k"),
+                (renpy.TEXT_TAG, "/b"),
+                (renpy.TEXT_TAG, "/color")
+                ]
+    config.custom_text_tags["tt"] = title
+
     def quote(tag, argument, contents):
-        color = "#d14970"
+        color = "#B96784"
         return [
                 (renpy.TEXT_TAG, "color={}".format(color)),
                 (renpy.TEXT_TAG, "i"),

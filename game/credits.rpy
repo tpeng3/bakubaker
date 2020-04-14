@@ -28,7 +28,7 @@ return
 
 # Credits styles
 # style credits_style_text:
-#     idle_color "#B15B76"
+#     idle_color "#5A5160"
 #     outlines [
 #                 (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
 #                 (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
@@ -75,7 +75,7 @@ screen credits_cynthia():
         $ delay = 3.0
         for field in cynthia_page:
             text field:
-                color "#B15B76"
+                color "#5A5160"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -94,7 +94,7 @@ screen credits_jay():
         $ delay = 3.0
         for field in jay_page:
             text field:
-                color "#B15B76"
+                color "#5A5160"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -107,7 +107,7 @@ screen credits_tina():
         at slideright
 
     vbox:
-        xalign 0.8
+        xalign 0.7
         xoffset 200
         yalign 0.45
         xmaximum 700
@@ -115,7 +115,7 @@ screen credits_tina():
         $ delay = 3.0
         for field in tina_page:
             text field:
-                color "#B15B76"
+                color "#5A5160"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -135,7 +135,7 @@ screen credits_other():
         $ delay = 3.0
         for field in other_page:
             text field:
-                color "#B15B76"
+                color "#5A5160"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -161,7 +161,7 @@ screen block_clicking():
 init python:
     cynthia_page = [
         "{size=60}Cynthia{/s} - A Maverick" ,
-        "{ii}Deranged Black Metal Girl Scout{/ii}",
+        "{tt}Deranged Black Metal Girl Scout{/tt}",
         "Art:",
         " • Background art \n • Character concepts \n • Character design \n • Prop art",
         "Programming:",
@@ -172,7 +172,7 @@ init python:
 
     jay_page = [
         "{size=60}J{/s} - Idea {s}Gay{/s} Guy",
-        "{ii}Humble Merchant of Somrems{/ii}",
+        "{tt}Humble Merchant of Somrems{/tt}",
         "Art:",
         " • Character art \n • Character design \n • UI design",
         "Story concept",
@@ -182,7 +182,7 @@ init python:
 
     tina_page = [
         "{size=60}Tina{/s} - Hacky Code Enthusiast",
-        "{ii}A Simple Frog{/ii}",
+        "{tt}A Simple Frog{/tt}",
         "Character writing",
         "Programming:",
         " • Animation \n • Cooking section \n • Dream section",
