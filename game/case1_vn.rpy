@@ -19,12 +19,6 @@ label case1_vn:
     scene black with dissolve
     pause 2.0
 
-    # menu: # delete before publishing
-    #     "skip opening":
-    #         jump skipopening
-    #     "dont skip":
-    #         pass
-
     call titlezone from _call_titlezone
 
     dr """
@@ -54,7 +48,7 @@ label case1_vn:
         parallel:
             linear 2.0 alpha 0.0
     pause 4.0
-label skipopening: # delete before publishing
+    $ show_quick_menu = True
     scene storefront with dissolve
     s "Hm hmm... Spoonful of sugar~... {mn}"
     s "… in a most delightful way~!"
