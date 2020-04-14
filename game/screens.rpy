@@ -397,7 +397,7 @@ screen navigation():
         style_prefix "navigation"
 
         xpos gui.navigation_xpos
-        yalign 0.5
+        yalign 0.55
 
         spacing gui.navigation_spacing
 
@@ -886,7 +886,6 @@ style slot_button:
 
 style slot_button_text:
     properties gui.button_text_properties("slot_button")
-
 
 ## Preferences screen ##########################################################
 ##

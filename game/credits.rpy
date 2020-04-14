@@ -1,12 +1,13 @@
 # CREDITS SCREEN (we made it guys!!)
 label credits_start:
-    show screen credits(pagenum=0)
+    scene Solid("#D8CBC5")
+    show screen credits_cynthia
     pause(10.0)
-    show screen credits(pagenum=1)
+    show screen credits_jay
     pause(10.0)
-    show screen credits(pagenum=2)
+    show screen credits_tina
     pause(10.0)
-    show screen credits(pagenum=3)
+    show screen credits_other
     pause(10.0)
     # show screen credits(pagenum=4) a thanks for playing! screen
     # pause(10.0)
