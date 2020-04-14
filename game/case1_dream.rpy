@@ -365,6 +365,9 @@ label bunny2_help:
         $ bun_name = "Energetic Bunny"
         bun "Wheee! Wheee!"
         dreamSom th "It seems a bit difficult to catch this little one's attention right now."
+    elif c_herbs not in inventory.items: # if medicine but no report
+        dreamSom sh "We can't ask Little Whitney to help! The thing she needs right now is some proper rest!"
+        dreamRem th "That's true. Let's check with the other bunnies first."
     else:
         dreamSom sh "We can't ask Little Whitney to help! The thing she needs right now is some proper rest!"
         $ bun_name = "Maddie"

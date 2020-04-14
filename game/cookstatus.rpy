@@ -208,13 +208,13 @@ screen cooking(dish):
 
     $ tooltip = GetTooltip()
     if tooltip:
-        fixed xmaximum 500:
+        fixed xmaximum 500 xoffset 50:
             text "[tooltip.name]":
                 xpos 600 ypos 745
                 xalign 0.5
                 color "#7c345e"
-            text "[tooltip.tooltip]":
-                xpos 600 ypos 780
+            text "{size=24}[tooltip.tooltip]{/size}":
+                xpos 600 ypos 790
                 xalign 0.5
                 color "#483e54"
 
