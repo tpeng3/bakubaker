@@ -1,6 +1,7 @@
 # CREDITS SCREEN (we made it guys!!)
 label credits_start:
     $ show_quick_menu = False
+    show screen block_clicking
     show image "#D8CBC5"
     show screen credits_cynthia
     pause(10.0)
@@ -19,6 +20,7 @@ label credits_start:
     pause(10.0)
     hide screen credits_thanks with Dissolve(0.8)
     scene black with Dissolve(0.8)
+    hide screen block_clicking
     $ MainMenu(confirm=False)()
     return
 
@@ -140,6 +142,14 @@ screen credits_thanks():
         xalign 0.5
         xoffset 640
         at inthecenter
+
+screen block_clicking():
+    zorder 100
+    modal True
+    imagebutton:
+        idle Solid("#0000")
+        action NullAction()
+
 
 init python:
     cynthia_page = [
