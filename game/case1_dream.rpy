@@ -651,7 +651,7 @@ label marcella_talk_end:
             interactions.update(t_clockface2.enable("clock2_inspect"))
             interactions.update(t_bunny1.enable("bunny1_time"))
             interactions.update(t_bunny2.enable("bunny2_time"))
-            interactions.update(t_bunny5.updateImage("/images/interactables/case1/bunny2sleep.png"))
+            interactions.update(t_bunny2.updateImage("/images/interactables/case1/bunny2sleep.png"))
             interactions.update(t_bunny3.enable("bunny3_time"))
             interactions.update(t_bunny4.enable("bunny4_time"))
             interactions.update(t_bunny5.enable("bunny5_time"))
