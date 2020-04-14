@@ -35,6 +35,9 @@ label case1_remcook:
     if not cook_status.smash:
         r "We don't have any flour so let's keep it simple."
         r "But if we want something sweet, we can add some fruit."
+        if c_strawberry not in inventory.items:
+            r "Hm... It feels like we're missing an ingredient."
+            r "I think I want to take a look again back in the dream."
     else:
         r "Well, in any case, we should clean up now."
     jump cooking_start

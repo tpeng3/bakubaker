@@ -54,11 +54,17 @@ init -1 python:
             self.items = []
             self.selected = []
         def add(self, item):
-            if item not in self.items:
-                self.items.append(item)
+            for i in self.items:
+                if item.name == i.name:
+                    return
+            self.items.append(item)
         def drop(self, item):
-            if item in self.items:
-                self.items.remove(item)
+            toremove = -1
+            for i in self.items:
+                if item.name == i.name:
+                    toremove = i
+            if toremove != -1:
+                self.items.remove(toremove)
         def toggleSelect(self, item):
             if item not in self.selected:
                 self.selected.append(item)
@@ -84,9 +90,9 @@ init -1 python:
                     self.combo -= 1
 
         def reset(self):
-            # self.flavor = 0
             self.combo = 0
             self.smash = False
+            inventory.reset()
         def smashSkill(self):
             self.smash = True
             self.combo = "FULL"
@@ -141,16 +147,20 @@ screen cooking(dish):
     add "cookbook":
         xalign 0.5 yalign 0.5
 
-    imagebutton: # go back to dream mode
-        idle "goDream"
-        hover "goDreamHov"
-        mouse "hover"
-        hover_sound "audio/sfx/menuhover.ogg"
-        activate_sound "audio/sfx/select.ogg"
-        focus_mask True
-        xalign 0 yalign 0
-        at itrfade()
-        action [Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
+    if not cook_status.smash:
+        imagebutton: # go back to dream mode
+            idle "goDream"
+            hover "goDreamHov"
+            mouse "hover"
+            hover_sound "audio/sfx/menuhover.ogg"
+            activate_sound "audio/sfx/select.ogg"
+            focus_mask True
+            xalign 0 yalign 0
+            at itrfade()
+            action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
+    else:
+        image "goDream":
+            xalign 0 yalign 0
 
     # textbutton "Reset":
     #     xalign 0.8 yalign 0.1

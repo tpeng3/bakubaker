@@ -1112,6 +1112,8 @@ style slider_vbox:
 screen history():
     tag menu
     predict False
+    zorder 10
+    add Solid("#EBDCC3")
 
     key "mouseup_5" action Return() # scrolldown to close history screen
 
