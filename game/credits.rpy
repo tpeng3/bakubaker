@@ -4,16 +4,16 @@ label credits_start:
     show screen block_clicking
     show image "#D8CBC5"
     show screen credits_cynthia
-    pause(10.0)
+    pause(14.0)
     hide screen credits_cynthia with Dissolve(0.8)
     show screen credits_jay
-    pause(10.0)
+    pause(14.0)
     hide screen credits_jay with Dissolve(0.8)
     show screen credits_tina
-    pause(10.0)
+    pause(14.0)
     hide screen credits_tina with Dissolve(0.8)
     show screen credits_other
-    pause(10.0)
+    pause(14.0)
     hide screen credits_other with Dissolve(0.8)
     show image "#000" with Dissolve(0.8)
     show screen credits_thanks
@@ -26,17 +26,13 @@ label credits_start:
 
 return
 
-image creditsBG = "#D8CBC5"
-
 # Credits styles
-style credits_style_text:
-    xalign 0.0
-    font persistent.pref_text_font
-    idle_color "#EDD9C8"
-    outlines [
-                (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
-                (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
-             ]
+# style credits_style_text:
+#     idle_color "#B15B76"
+#     outlines [
+#                 (0.2, '#14000C'+"22", -1,1), (0.4, '#14000C'+"22", -1,1),  (0.8, '#14000C'+"22", -1,1),
+#                 (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
+#              ]
 
 
 transform creditsfade(delay=0):
@@ -79,6 +75,7 @@ screen credits_cynthia():
         $ delay = 3.0
         for field in cynthia_page:
             text field:
+                color "#B15B76"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -97,6 +94,7 @@ screen credits_jay():
         $ delay = 3.0
         for field in jay_page:
             text field:
+                color "#B15B76"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -117,6 +115,7 @@ screen credits_tina():
         $ delay = 3.0
         for field in tina_page:
             text field:
+                color "#B15B76"
                 at creditsfade(delay)
             $ delay += 0.5
 
@@ -136,6 +135,7 @@ screen credits_other():
         $ delay = 3.0
         for field in other_page:
             text field:
+                color "#B15B76"
                 at creditsfade(delay)
             $ delay += 0.5
 
