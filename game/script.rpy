@@ -60,6 +60,7 @@ label start:
     $ tutorial = False
     $ finished = False
     $ inventory = Inventory() # initialize inventory
+    $ show_quick_menu = True
     show screen keymap_screen
     jump case1_vn
     # menu:

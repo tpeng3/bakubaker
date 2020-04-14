@@ -629,4 +629,6 @@ label case1_vn_end(result=0):
     ...And those whose who wander in with dreams composed of worries, fears, and woes will provide the same satisfaction to the {ii}dream eaters{/ii}.
     """
     call endscene from _call_endscene
-    return # change this to jump to credits page for demo
+    jump credits_start
+
+    # return # change this to jump to credits page for demo

@@ -1,16 +1,27 @@
 # CREDITS SCREEN (we made it guys!!)
 label credits_start:
-    scene Solid("#D8CBC5")
+    $ show_quick_menu = False
+    show image "#D8CBC5"
     show screen credits_cynthia
     pause(10.0)
+    hide screen credits_cynthia with Dissolve(0.8)
     show screen credits_jay
     pause(10.0)
+    hide screen credits_jay with Dissolve(0.8)
     show screen credits_tina
     pause(10.0)
+    hide screen credits_tina with Dissolve(0.8)
     show screen credits_other
     pause(10.0)
-    # show screen credits(pagenum=4) a thanks for playing! screen
-    # pause(10.0)
+    hide screen credits_other with Dissolve(0.8)
+    show image "#000" with Dissolve(0.8)
+    show screen credits_thanks
+    pause(10.0)
+    hide screen credits_thanks with Dissolve(0.8)
+    scene black with Dissolve(0.8)
+    $ MainMenu(confirm=False)()
+    return
+
 return
 
 image creditsBG = "#D8CBC5"
@@ -46,28 +57,9 @@ transform inthecenter:
     xpos 375 ypos 70 alpha 0.0
     ease_quad 2.0 alpha 1.0
 
-screen credits(pagenum=0):
-    modal True
-    add "creditsBG"
-    style_prefix "credits_style"
-    $ page_order = ["credits_cynthia", "credits_jay", "credits_tina", "credits_other", "credits_thanks"]
-
-    if pagenum < len(page_order)-1:
-        use expression page_order[pagenum]
-
-        imagebutton:
-            idle Solid("#0000")
-            activate_sound 'audio/sfx/itemget.ogg'
-            action [Hide("credits_cynthia", transition=Dissolve(0.8)), SetScreenVariable("pagenum", pagenum+1)]
-    else:
-        use expression page_order[pagenum]
-
-        imagebutton:
-            idle Solid("#0000")
-            activate_sound 'audio/sfx/itemget.ogg'
-            action [Hide("creditsfade", transition=Dissolve(0.8)), MainMenu(confirm=False)]
-
 screen credits_cynthia():
+    zorder 99
+    modal True
     image "images/CG/credits_cy.png":
         at slideright
 
@@ -83,6 +75,8 @@ screen credits_cynthia():
             $ delay += 0.5
 
 screen credits_jay():
+    zorder 99
+    modal True
     image "images/CG/credits_j.png":
         at slideleft
 
@@ -98,11 +92,16 @@ screen credits_jay():
             $ delay += 0.5
 
 screen credits_tina():
-    image "images/CG/smash.png":
+    zorder 99
+    modal True
+    image "images/CG/credits_t.png":
+        xoffset -100
+        yoffset -15
         at slideright
 
     vbox:
         xalign 0.75
+        xoffset 200
         yalign 0.45
         xmaximum 800
 
@@ -113,7 +112,11 @@ screen credits_tina():
             $ delay += 0.5
 
 screen credits_other():
+    zorder 99
+    modal True
     image "images/CG/them.png":
+        xoffset 200
+        yoffset 600
         at slideleft
 
     vbox:
@@ -128,19 +131,15 @@ screen credits_other():
             $ delay += 0.5
 
 screen credits_thanks():
+    zorder 99
+    modal True
     image "images/CG/thanks.png":
         at inthecenter
 
-    vbox:
+    image "images/CG/thankswords.png":
         xalign 0.5
-        yalign 0.5
-        xmaximum 800
-
-        $ delay = 3.0
-        for field in other_page:
-            text field:
-                at creditsfade(delay)
-            $ delay += 0.5
+        xoffset 640
+        at inthecenter
 
 init python:
     cynthia_page = [
@@ -151,7 +150,7 @@ init python:
         "Programming:",
         " • Animation \n • Visual novel section",
         "Narrative writing",
-        "{i}\'I got myself a paperclip.\'{/i}"
+        "{i}\"I got myself a paperclip.\"{/i}"
     ]
 
     jay_page = [
@@ -161,7 +160,7 @@ init python:
         " • Character art \n • Character design \n • UI design",
         "Story concept",
         "Story revision",
-        "{i}\'Pitched corny JRPG title \"Bon Appétit: Karmic Unrest\" for the BAKU acronym but alas...'{/i}"
+        "{i}\"Pitched corny JRPG title \"Bon Appétit: Karmic Unrest\" for the BAKU acronym but alas...\"{/i}"
     ]
 
     tina_page = [
@@ -171,7 +170,7 @@ init python:
         "Programming:",
         " • Animation \n • Cooking section \n • Dream section",
         "Sound effects",
-        "\'If two guys were on the moon and one killed the other with a rock would that be fucked up or what-\'"
+        "{i}\"I hope you liked my clock puzzle that gave no helpful visual indicators whatsoever (I'm sorry)\"{/i}"
     ]
 
     other_page = [
@@ -186,10 +185,5 @@ init python:
         " • Netherland \n • Peas Corps \n • Thick Irony",
         "Ren'Py GUI template provided by:",
         "{a=https://tofurocks.itch.io/renpy-gui-template}tofurocks{/a}",
-
-    ]
-
-    thanks_page = [
-        "{size=60}Tanks 4 play{/s}", # I actually dont know what this looks like bc I cant find a shortcut here so itll be a surprise for everyone lol
 
     ]
