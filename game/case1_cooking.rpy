@@ -55,7 +55,7 @@ label smash_case1:
     s "In this case, a spoonful of ketchup~!"
     jump cooking_start
 
-label case1_cook_done(result):
+label case1_cook_done():
     $ renpy.stop_predict_screen("cooking")
     $ renpy.stop_predict(
         "images/BG/starry.png",
@@ -63,6 +63,7 @@ label case1_cook_done(result):
         "images/items/item_*.png",
         "images/items/dish_*.png",
     )
+    $ result = cook_status.result()
     show screen focus_dialogue
     if result == 0:
         s "Pretty good! Could use some more zing and pep, though."
@@ -70,8 +71,10 @@ label case1_cook_done(result):
     elif result == 1:
         s "Ah, such a dreamy looking dish! I almost don't want to eat it..."
         r "Not bad at all. Next time I'll be expecting more."
-    hide screen cooking with Dissolve(0.8)
     hide screen focus_dialogue
+    hide screen cooking with Dissolve(0.8)
+    scene black with Dissolve (0.8)
+    pause 1.0
     call case1_vn_end(result) from _call_case1_vn_end
 
 label inventory_stock:

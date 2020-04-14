@@ -176,7 +176,7 @@ screen cooking(dish):
             focus_mask True
             xalign 0.74 yalign 0.83
             activate_sound "audio/sfx/donecooking.ogg"
-            action [Call(case+"_cook_done", result=cook_status.result())]
+            action [Jump(case+"_cook_done")]
     elif set(inventory.selected) == set(cook_status.smashReq):
         imagebutton:
             idle "goEat"
@@ -187,7 +187,7 @@ screen cooking(dish):
             focus_mask True
             xalign 0.74 yalign 0.83
             activate_sound "audio/sfx/donecooking.ogg"
-            action [Call(case+"_cook_done", result=cook_status.result())]
+            action [Jump(case+"_cook_done")]
 
     # inventory positions
     $ x = 400
