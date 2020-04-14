@@ -54,21 +54,27 @@ transform slideright:
 transform slideleft:
     xpos 1200 ypos 0 alpha 0.0
     ease_quad 2.0 xpos 900 alpha 1.0
+transform slidedown:
+    zoom 0.8
+    xpos 375 ypos 20 alpha 0.0
+    ease_quad 2.0 ypos 80 alpha 1.0
 transform inthecenter:
     zoom 0.8
-    xpos 375 ypos 70 alpha 0.0
+    xpos 375 ypos 40 alpha 0.0
     ease_quad 2.0 alpha 1.0
 
 screen credits_cynthia():
     zorder 99
     modal True
     image "images/CG/credits_cy.png":
+        xoffset -20
+        yoffset 10
         at slideright
 
     vbox:
-        xalign 0.75
+        xalign 0.8
         yalign 0.45
-        xmaximum 800
+        xmaximum 700
 
         $ delay = 3.0
         for field in cynthia_page:
@@ -80,12 +86,13 @@ screen credits_jay():
     zorder 99
     modal True
     image "images/CG/credits_j.png":
+        yoffset 80
         at slideleft
 
     vbox:
-        xalign 0.25
+        xalign 0.2
         yalign 0.45
-        xmaximum 800
+        xmaximum 700
 
         $ delay = 3.0
         for field in jay_page:
@@ -98,14 +105,14 @@ screen credits_tina():
     modal True
     image "images/CG/credits_t.png":
         xoffset -110
-        yoffset -15
+        yoffset 50
         at slideright
 
     vbox:
-        xalign 0.75
+        xalign 0.8
         xoffset 200
         yalign 0.45
-        xmaximum 800
+        xmaximum 700
 
         $ delay = 3.0
         for field in tina_page:
@@ -118,7 +125,7 @@ screen credits_other():
     modal True
     image "images/CG/them.png":
         xoffset 200
-        yoffset 600
+        yoffset 400
         at slideleft
 
     vbox:
@@ -141,7 +148,7 @@ screen credits_thanks():
     image "images/CG/thankswords.png":
         xalign 0.5
         xoffset 640
-        at inthecenter
+        at slidedown
 
 screen block_clicking():
     zorder 100
