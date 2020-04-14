@@ -13,6 +13,8 @@ label credits_start:
     # pause(10.0)
 return
 
+image creditsBG = "#D8CBC5"
+
 # Credits styles
 style credits_style_text:
     xalign 0.0
@@ -23,10 +25,6 @@ style credits_style_text:
                 (1.6, '#14000C'+"11", -1,1), (2.4, '#14000C'+"11", -1,1),  (3.2, '#14000C'+"11", -1,1)
              ]
 
-# transform dropdown:
-#     alpha 0.0
-#     xpos 1000 ypos -300
-#     ease_quad 3.0 ypos 180 alpha 1.0
 
 transform creditsfade(delay=0):
     alpha 0.0
@@ -38,14 +36,21 @@ transform creditsfade(delay=0):
         linear 0.6 xoffset 0
 
 transform slideright:
-    xpos -800 ypos 0 alpha 0.0 # need to change positions afterwards
-    ease_quad 2.0 xpos -400 alpha 1.0
+    xpos 0 ypos 30 alpha 0.0
+    ease_quad 2.0 xpos 100 alpha 1.0
+transform slideleft:
+    xpos 1200 ypos 0 alpha 0.0
+    ease_quad 2.0 xpos 900 alpha 1.0
+transform inthecenter:
+    zoom 0.8
+    xpos 375 ypos 70 alpha 0.0
+    ease_quad 2.0 alpha 1.0
 
 screen credits(pagenum=0):
     modal True
-    add "images/CG/incense_in.png"
+    add "creditsBG"
     style_prefix "credits_style"
-    $ page_order = ["credits_cynthia", "credits_jay", "credits_tina", "credits_other"]
+    $ page_order = ["credits_cynthia", "credits_jay", "credits_tina", "credits_other", "credits_thanks"]
 
     if pagenum < len(page_order)-1:
         use expression page_order[pagenum]
@@ -63,11 +68,11 @@ screen credits(pagenum=0):
             action [Hide("creditsfade", transition=Dissolve(0.8)), MainMenu(confirm=False)]
 
 screen credits_cynthia():
-    image "images/CG/smash.png":
+    image "images/CG/credits_cy.png":
         at slideright
 
     vbox:
-        xalign 0.85
+        xalign 0.75
         yalign 0.45
         xmaximum 800
 
@@ -78,11 +83,11 @@ screen credits_cynthia():
             $ delay += 0.5
 
 screen credits_jay():
-    image "images/CG/smash.png":
-        at slideright
+    image "images/CG/credits_j.png":
+        at slideleft
 
     vbox:
-        xalign 0.85
+        xalign 0.25
         yalign 0.45
         xmaximum 800
 
@@ -97,7 +102,7 @@ screen credits_tina():
         at slideright
 
     vbox:
-        xalign 0.85
+        xalign 0.75
         yalign 0.45
         xmaximum 800
 
@@ -108,11 +113,11 @@ screen credits_tina():
             $ delay += 0.5
 
 screen credits_other():
-    image "images/CG/smash.png":
-        at slideright
+    image "images/CG/them.png":
+        at slideleft
 
     vbox:
-        xalign 0.85
+        xalign 0.25
         yalign 0.45
         xmaximum 800
 
@@ -122,6 +127,20 @@ screen credits_other():
                 at creditsfade(delay)
             $ delay += 0.5
 
+screen credits_thanks():
+    image "images/CG/thanks.png":
+        at inthecenter
+
+    vbox:
+        xalign 0.5
+        yalign 0.5
+        xmaximum 800
+
+        $ delay = 3.0
+        for field in other_page:
+            text field:
+                at creditsfade(delay)
+            $ delay += 0.5
 
 init python:
     cynthia_page = [
@@ -158,12 +177,19 @@ init python:
     other_page = [
         "{size=60}Resources{/s}",
         "Open source music provided by:",
-        "{a=https://www.soundofpicture.com/}Podington Bear:{/a}",
-        " • Netherland \n • Peas Corps \n • Thick Irony",
         "{a=http://amachamusic.chagasi.com/index.html}Amacha Music{/a}: {font=gui/fonts/MPLUS-light.ttf}午前2時の噴水{/font}",
+        "{a=http://www.hmix.net/music_gallery/music_top.html}H/MIX Gallery{/a}: {font=gui/fonts/MPLUS-light.ttf}移動式井戸{/font}",
         "{a=http://musmus.main.jp/music.html}MusMus:{/a}",
         " • {font=gui/fonts/MPLUS-light.ttf}なめこ大臣の策謀 \n • 朝露の小庭{/font}",
         "{a=https://pocket-se.info/}Pocket Sound{/a}: {font=gui/fonts/MPLUS-light.ttf}やっぱりチョコは手作りね{/font}",
-        "{a=http://www.hmix.net/music_gallery/music_top.html}H/MIX Gallery{/a}: {font=gui/fonts/MPLUS-light.ttf}移動式井戸{/font}",
+        "{a=https://www.soundofpicture.com/}Podington Bear:{/a}",
+        " • Netherland \n • Peas Corps \n • Thick Irony",
+        "Ren'Py GUI template provided by:",
+        "{a=https://tofurocks.itch.io/renpy-gui-template}tofurocks{/a}",
+
+    ]
+
+    thanks_page = [
+        "{size=60}Tanks 4 play{/s}", # I actually dont know what this looks like bc I cant find a shortcut here so itll be a surprise for everyone lol
 
     ]
