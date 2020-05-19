@@ -1,4 +1,5 @@
 label case1_dream:
+    call initialize_case1
     show screen focus_dialogue
     $ bun_name = "Dream bunnies"
     $ _skipping = False # disable skipping option
