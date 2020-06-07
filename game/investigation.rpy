@@ -220,7 +220,7 @@ screen focus_dialogue:
     key "mouseup_4" action ShowMenu('history') # access log on scrollup
 
 
-screen get_ingredient(ingredient):
+screen get_ingredient(ingredient, addon=None):
     zorder -1
     add "ingFrame":
         xalign 0.5
@@ -228,7 +228,11 @@ screen get_ingredient(ingredient):
     add "[ingredient]":
         xalign 0.5
         yalign 0.5
- 
+    if addon:
+        add "[addon]":
+            xalign 0.5
+            yalign 0.5
+    
 screen dream_actions(actions={}, mousepos):
     # for cancelling/hiding dream_actions if you click away from the menu
     imagebutton:

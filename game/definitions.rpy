@@ -19,6 +19,17 @@ init -1:
     image ooze = Transform("/images/items/GET_ooze.png")
     image egg = Transform("/images/items/GET_egg.png")
 
+    image clockup = "/images/items/clock_up.png"
+    image clockleft = "/images/items/clock_left.png"
+    image clockright = "/images/items/clock_right.png"
+    image clockdown = "/images/items/clock_down.png"
+    image clockhour = "/images/items/clock_hour.png"
+    image clockhour_left = "/images/items/clock_hour.png"
+    image clockhour_right = "/images/items/clock_hour.png"
+    image clockhour_up = "/images/items/clock_hour.png"
+    image clockhour_down = "/images/items/clock_hour.png"
+
+
     image cooksom = "images/interactables/cooksom.png"
     image cookrem = "images/interactables/cookrem.png"
 

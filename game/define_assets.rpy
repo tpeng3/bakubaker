@@ -327,6 +327,16 @@ init python:
 
     Shake = renpy.curry(_Shake)
 
+# Calculate clock turn degrees ----------------------------------------------------
+    def get_turn_degrees(start, end):
+        directions = {
+            "up": 0,
+            "right": 90,
+            "down": 180,
+            "left": 270
+        }
+        return (directions[end] - directions[start] + 360) % 360
+
 # Init -------------------------------------------------------------
 init:
     $ somnia_name = "Somnia"
