@@ -187,7 +187,7 @@ init python:
         "Programming:",
         " • Animation \n • Cooking section \n • Dream section",
         "Sound effects",
-        "{qq}\"I hope you liked my clock puzzle that gave no helpful visual indicators whatsoever (I'm sorry)\"{/qq}"
+        "{qq}\"Apologies to the folks who had trouble with my clock puzzle! In actuality, it could have been worse :D\"{/qq}"
     ]
 
     other_page = [
@@ -202,5 +202,6 @@ init python:
         " • Netherland \n • Peas Corps \n • Thick Irony",
         "Ren'Py GUI template provided by:",
         "{a=https://tofurocks.itch.io/renpy-gui-template}tofurocks{/a}",
-
+        "",
+        "Made during the 2020 NaNoRenO Game Jam!"
     ]

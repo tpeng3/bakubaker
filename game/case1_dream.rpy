@@ -631,7 +631,7 @@ label marcella_talk_end:
         bun "Big sib... Do you know where my shirt is? {ss}It has to be my favorite shirt!{/ss}"
         dreamMar "The kids are growing up... and that means their needs are growing too..."
         dreamMar "I can't let them down but there simply isn't enough time in the world to get all these things done!"
-        dreamMar "I can't afford to fall asleep, there's too work much left to be finished!"
+        dreamMar "I can't afford to fall asleep, there's too much work left to be finished!"
         bun "Big sib, can we go to the park? {ss}No, I want to go to the movies!{/ss}"
         dreamMar "Resting now means I'll be wasting my time!"
         bun "Big sib Marchie is the oldest, so they can do everything!"
