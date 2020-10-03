@@ -185,5 +185,5 @@ image cutin:
         "images/CG/smash2b.png" with Dissolve(0.5, alpha=True)
         linear 1.0 alpha 0.0
 
-screen keymap_screen:
-    key "mouseup_4" action ShowMenu("history")
+# screen keymap_screen:
+    # key "mouseup_4" action ShowMenu("history")

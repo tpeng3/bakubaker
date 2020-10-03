@@ -129,10 +129,6 @@ init -1:
 
 ## Music:
 # init -2 python:
-    # Careless-Summer_Looping = "audio/music/Careless-Summer_Looping.mp3"
-    # Future-Business_v001 = "audio/music/Future-Business_v001.mp3"
-    # Sculpture-Garden_Looping = "audio/music/Sculpture-Garden_Looping.mp3"
-    # The-Concrete-Bakes_Looping = "audio/music/The-Concrete-Bakes_Looping.mp3"
     define audio.splashscreen = "audio/music/Peas_Corps.mp3"
     define audio.storefront = "audio/music/MusMus-BGM-092.mp3"
     define audio.dreamoffice = "audio/music/gozennijinofunsui.mp3"
@@ -151,10 +147,6 @@ init -1:
     # The-Concrete-Bakes_Looping: _("")
 
 ## SFX:
-    # Chest-Drawer_Close = "audio/sfx/Chest-Drawer_Close.mp3"
-    # Chest-Drawer_Open = "audio/sfx/Chest-Drawer_Open.mp3"
-    # Edge-of-Ocean = "audio/sfx/Edge-of-Ocean.mp3"
-    # Interior-Door_Close = "audio/sfx/Interior-Door_Close.mp3"
     define audio.rimshot = "audio/sfx/rimshot.ogg"
     define audio.bubble = "audio/sfx/bubble.ogg"
     define audio.clockdong = "audio/sfx/clockdong.ogg"
@@ -173,20 +165,23 @@ init -1:
     define audio.whoosh = "audio/sfx/whoosh.ogg"
     define audio.paper = "audio/sfx/paper.ogg"
 
-
-
-
-
-
-
-
-
-
 ## SFX Caption:
     # Chest-Drawer_Close: _("")
     # Chest-Drawer_Open: _("")
     # Edge-of-Ocean: _("")
     # Interior-Door_Close: _("")
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Script to redefine the images:
 ## !!! DO NOT CHANGE THE CODE BELOW THIS POINT !!!

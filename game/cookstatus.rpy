@@ -79,6 +79,7 @@ init -1 python:
             self.combo = 0
             self.smashReq = smashReq # [] list of ideal dish ingredients
             self.smash = False
+            self.init_pos = {} # default positions for all the ingredients
         def update(self, item):
             if item in inventory.selected and item in self.smashReq:
                 self.combo += 1
@@ -88,7 +89,8 @@ init -1 python:
             elif item not in inventory.selected:
                 if self.combo > 0:
                     self.combo -= 1
-
+        def savePos(self, item, x, y):
+            self.init_pos[item.name] = (x, y)
         def reset(self):
             self.combo = 0
             self.smash = False
@@ -103,11 +105,26 @@ init -1 python:
                 return 1
             return 0 # ordinary score
 
+init python:
+    def ingredient_dragged(drags, drop):
+        item_name = drags[0].drag_name
+        if not drop:
+            drags[0].snap(cook_status.init_pos[item_name][0], cook_status.init_pos[item_name][1], 0) # x, y, seconds to move
+            return
+
+        if item_name in smashReq:
+            print("success!") 
+            drags[0].snap(9999, 9999, 0) # x, y, seconds to move
+        else:
+            print("dropped")
+            drags[0].snap(9999, 9999, 0) # x, y, seconds to move
+        return True
+
 
 #--------------------------------------------------------------------------
 # COOKING INVENTORY SCREEN
 #--------------------------------------------------------------------------
-# Required: inventory, goal
+# Required Global Variables: inventory, goal, item_pos
 screen cooking(dish):
     zorder -10
 
@@ -157,7 +174,9 @@ screen cooking(dish):
             focus_mask True
             xalign 0 yalign 0
             at itrfade()
-            action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
+            # action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
+            action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("testing_room")]
+
     else:
         image "goDream":
             xalign 0 yalign 0
@@ -192,29 +211,50 @@ screen cooking(dish):
     # inventory positions
     $ x = 400
     $ y = 284
+
+    # ingredient after images
     for i, item in enumerate(inventory.items):
         if i != 0 and i % 3 == 0:
             $ x = 400
             $ y += 150
-
-        if item in inventory.selected: # select border
-            add "selBorder":
-                xpos x ypos y
-                # add sfx
-
-        if not cook_status.smash:
-            imagebutton:
-                idle item.image
-                xpos x ypos y
-                mouse "hover"
-                hover_sound "audio/sfx/menuhover.ogg"
-                action [Function(inventory.toggleSelect, item), Function(cook_status.update, item), Jump("play_sound")]
-                tooltip item
-                at focus_effect
-        else:
-            image item.image xpos x ypos y
-
+        image item.image xpos x ypos y alpha 0.3
         $ x += 159
+
+    $ x = 400
+    $ y = 284
+    # actual draggable ingredients
+    draggroup:
+        drag:
+            drag_name "Cauldron"
+            draggable False
+            child "images/interactables/cauldron.png"
+            xpos 1140 ypos 422
+        for i, item in enumerate(inventory.items):
+            if i != 0 and i % 3 == 0:
+                $ x = 400
+                $ y += 150
+            $ cook_status.savePos(item, x, y)
+
+            drag:
+                drag_name item.name
+                child item.image
+                droppable False
+                dragged ingredient_dragged
+                xpos x ypos y
+
+            # if not cook_status.smash:
+            #     imagebutton:
+            #         idle item.image
+            #         xpos x ypos y
+            #         mouse "hover"
+            #         hover_sound "audio/sfx/menuhover.ogg"
+            #         action [Function(inventory.toggleSelect, item), Function(cook_status.update, item), Jump("play_sound")]
+            #         tooltip item
+            #         at focus_effect
+            # else:
+            #     image item.image xpos x ypos y
+
+            $ x += 159
 
     $ tooltip = GetTooltip()
     if tooltip:

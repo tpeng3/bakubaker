@@ -1,10 +1,9 @@
 label case1_dream:
-    call initialize_case1 from _call_initialize_case1
+    call initialize_case1
     show screen focus_dialogue
     $ bun_name = "Dream bunnies"
     $ _skipping = False # disable skipping option
     $ show_quick_menu = True
-    $ testmode = False # make sure testmode is False here, this is not the testing file!
 
     python:
         bg = "images/BG/bg_wonderland.png" # background image

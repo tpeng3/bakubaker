@@ -2,6 +2,7 @@
 tmp/
 game/cache/*
 game/*.rpyc
+game/*.rpyc.*
 game/saves/
 game/tl/None/*
 game/renedit/*

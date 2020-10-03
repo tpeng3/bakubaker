@@ -30,24 +30,25 @@ label splashscreen:
     #     $ persistent.caption = True
 
     ## Here begins our splashscreen animation.
-    pause(1.0)
-    play music splashscreen
-    call screen click_start(skipflip=False) with Dissolve(1.0)
+    # pause(1.0)
+    # play music splashscreen
+    # call screen click_start(skipflip=False) with Dissolve(1.0)
+    # ^ commented out for now because the animations take up too much time ajfkelwe
 
     ## The first time the game is launched, players cannot skip the animation.
-    if not persistent.seen_splash:
-        ## No input will be detected for the set time stated.
-        ## Set this to be a little longer than how long the animation takes.
-        $ renpy.pause(8.5, hard=True)
-        $ persistent.seen_splash = True
+    # if not persistent.seen_splash:
+    #     ## No input will be detected for the set time stated.
+    #     ## Set this to be a little longer than how long the animation takes.
+    #     $ renpy.pause(8.5, hard=True)
+    #     $ persistent.seen_splash = True
 
-    ## Players can skip the animation in subsequent launches of the game.
-    else:
-        if renpy.pause(8.5):
-            jump skip_splash
+    # ## Players can skip the animation in subsequent launches of the game.
+    # else:
+    #     if renpy.pause(8.5):
+    #         jump skip_splash
 
-    scene black
-    with fade
+    # scene black
+    # with fade
 
     label skip_splash:
         pass
@@ -61,19 +62,23 @@ label start:
     $ finished = False
     $ inventory = Inventory() # initialize inventory
     $ show_quick_menu = True
-    show screen keymap_screen
-    jump case1_vn
-    # menu:
-    #     "Start at vn (beginning)":
-    #         jump case1_vn
-    #     "Start at dream":
-    #         jump case1_dream
-    #     "Start at cooking":
-    #         jump case1_cook
-    #     "Start at vn (after dream)":
-    #         jump case1_vn_end
-    #     "Credits":
-    #         show screen credits()
+    # show screen keymap_screen # showing keymap disabled rollback
+    # jump case1_vn
+    # --- comment out when official build gets made
+    menu:
+        "Start at vn (beginning)":
+            jump case1_vn
+        "Start at dream":
+            jump case1_dream
+        "Start at cooking":
+            jump case1_cook
+        "Start at vn (after dream)":
+            jump case1_vn_end
+        "Jump to TESTING ROOM?":
+            jump testing_room
+        "Credits":
+            show screen credits()
+    # --- comment out above
 
 label credits:
     # End Credits

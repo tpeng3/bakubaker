@@ -138,7 +138,7 @@ screen goCook():
         at itrfade()
         action [Hide('dream', transition=Dissolve(.8)), Hide('goCook'), Jump(case+"_cook")]
 
-# Related Global Variables: bg, total_pages, page_width, interactions, unlocked_pages
+# Related Global Variables: bg, total_pages, page_width, interactions, unlocked_pages, testmode
 screen dream():
     default fixedposprev = 0
     default fixedposend = 0
@@ -158,6 +158,10 @@ screen dream():
                     ypos i.ystart
                     at itrfade()
             else:
+                if testmode:
+                    $ next_action = 'test_' + actionable[0]['label']
+                else:
+                    $ next_action = actionable[0]['label']
                 imagebutton:
                     idle i.image
                     xpos (i.page * page_width) + i.xstart
@@ -167,7 +171,7 @@ screen dream():
                     mouse "hover"
                     at itrfade()
                     action [If(len(actionable) == 1,
-                        true = [Call("disable_pause", next_label=actionable[0]['label'])], # if there's only one action, jump immediately to label
+                        true = [Call("disable_pause", next_label=next_action)], # if there's only one action, jump immediately to label
                         false = Show('dream_actions', actions=actionable, mousepos=renpy.get_mouse_pos()))]
 
     # hover tooltip
@@ -217,7 +221,7 @@ screen focus_dialogue:
         idle Solid("#0000")
         action renpy.curry(renpy.end_interaction)(True)
     key "K_SPACE" action renpy.curry(renpy.end_interaction)(True)
-    key "mouseup_4" action ShowMenu('history') # access log on scrollup
+    # key "mouseup_4" action ShowMenu('history') # access log on scrollup
 
 
 screen get_ingredient(ingredient, addon=None):
@@ -253,6 +257,10 @@ screen dream_actions(actions={}, mousepos):
         spacing 10
 
         for action in actions:
+            if testmode:
+                $ next_action = 'test_' + action['label']
+            else:
+                $ next_action = action['label']
             button:
                 mouse "hover"
                 hover_sound "audio/sfx/menuhover.ogg"
@@ -260,6 +268,6 @@ screen dream_actions(actions={}, mousepos):
                 style "dreamacts"
                 text action['name']:
                     style "dreamacts_text"
-                action [Hide('dream_actions'), Show('focus_dialogue'), Call(action['label'])]
+                action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
                 at dreamfade(delay)
             $delay += 0.2

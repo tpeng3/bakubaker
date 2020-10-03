@@ -75,7 +75,8 @@ define config.main_menu_music = "audio/music/Peas_Corps.mp3"
 ## Each variable should be set to a transition, or None to indicate that no
 ## transition should be used.
 
-define config.rollback_enabled = False
+# define config.rollback_enabled = False
+define config.rollback_enabled = True # enable to false when we build the game
 
 ## Entering or exiting the game menu.
 
