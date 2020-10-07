@@ -1,6 +1,7 @@
 label testing_room:
     scene black with dissolve
     call initialize_case_test from _call_initialize_case_test # resets the variables in test_definitions.rpy
+    $ case = "test"
     menu:
         "VN Testing Room":
             jump test_vn
@@ -19,7 +20,6 @@ label testing_room:
 label test_vn:
     $ _skipping = True # enable skipping option
     $ show_quick_menu = True
-    $ case = "test"
     $ somnia_name = "Somnia"
     $ remerie_name = "Remerie"
     $ marcella_name = "Marcella"

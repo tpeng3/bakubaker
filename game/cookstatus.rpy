@@ -8,6 +8,14 @@ label play_sound: # have to call this because sfx happens after combo is updated
     play sound "audio/sfx/combo{}.ogg".format(cook_status.combo)
     jump cooking_start
 
+label cooking_particles(type="drop", x=0.5, y=0.5):
+    if type == "drop":
+        show expression (ParticleBurst("gui/musicnote.png", explodeTime=0.2, numParticles=6, particleTime=1.0, particleXSpeed=5, particleYSpeed = 5).sm) onlayer screens:
+            xpos x ypos y
+    elif type == "special":
+        show expression (ParticleBurst("gui/musicnote2.png", explodeTime=0.2, numParticles=6, particleTime=1.0, particleXSpeed=5, particleYSpeed=5).sm) onlayer screens:
+            xpos x ypos y
+
 transform focus_effect: # brighten ingredient on focus, tho we can do other effects too
     on idle:
         linear 0.2 additive 0
@@ -22,7 +30,20 @@ transform diagonal:
 
 transform dish_appear:
     alpha 0.0
-    linear 0.5 alpha 1.0
+    xoffset 30
+    pause delay
+    parallel:
+        linear 0.5 alpha 1.0
+    parallel:
+        linear 0.6 xoffset 0
+
+transform bubble_appear:
+    alpha 0.0
+    # xoffset 30
+    parallel:
+        linear 0.5 alpha 1.0
+    parallel:
+        linear 0.6 xoffset 0
 
 image cooksom_ready:
     block:
@@ -35,16 +56,31 @@ image cooksom_ready:
 image letscookGO:
     anim.Filmstrip ("gui/button/letscook_filmstrip.png", (480,139), (1,7), 0.10, loop=True)
 
+style cooking_bubble:
+    # background Frame(
+    #     Transform("gui/frame.png", yzoom=-1), 
+    #     left = Borders(32, 80, 88, 33)
+    #     )
+    padding gui.frame_borders.padding
+    background Frame("gui/frame.png", gui.frame_borders, tile=gui.frame_tile)
+
+    # The distance between content and outer edge (left, top, right, base)
+    # padding (24, 73, 23, 22)
+
+    # minimum (121, 114)
+    # anchor (1.0, 0.0)
+    # offset (12, -7)
+
 #--------------------------------------------------------------------------
 # INITIALIZE COOKING INVENTORY
 #--------------------------------------------------------------------------
 init -1 python:
     class Item(store.object):
-        def __init__(self, name, image="", tooltip="", flavor=0):
+        def __init__(self, name, image="", tooltip="", key=""):
             self.name = name # name of item
             self.image = image # image url
             self.tooltip = tooltip # tooltip desc
-            self.flavor = flavor # flavor value
+            self.key = key # item key name (for labels)
 
         def __repr__(self): # for printing
             return str(self.name)
@@ -65,39 +101,34 @@ init -1 python:
                     toremove = i
             if toremove != -1:
                 self.items.remove(toremove)
-        def toggleSelect(self, item):
-            if item not in self.selected:
-                self.selected.append(item)
-            else:
-                self.selected.remove(item)
+        def addToCauldron(self, item):
+            self.selected.append(item)
         def reset(self):
+            for dragitem in self.selected:
+                dragitem.snap(cook_status.init_pos[dragitem.drag_name][0], cook_status.init_pos[dragitem.drag_name][1], 0)
             self.selected = []
+        def findKey(self, name):
+            for i in self.items:
+                if name == i.name:
+                    return i.key
+            return "" 
 
     class CookStatus(store.object):
-        def __init__(self, smashReq):
-            self.flavor = 0
-            self.combo = 0
+        def __init__(self, smashReq, dish):
+            self.dish = dish
             self.smashReq = smashReq # [] list of ideal dish ingredients
             self.smash = False
+            self.combo = 0
             self.init_pos = {} # default positions for all the ingredients
         def update(self, item):
-            if item in inventory.selected and item in self.smashReq:
-                self.combo += 1
-            elif item in inventory.selected and item not in self.smashReq:
-                self.combo = 0
-                inventory.reset()
-            elif item not in inventory.selected:
-                if self.combo > 0:
-                    self.combo -= 1
+            print("to be implemented")
+            # we aren't doing combos anymore
         def savePos(self, item, x, y):
             self.init_pos[item.name] = (x, y)
         def reset(self):
             self.combo = 0
             self.smash = False
             inventory.reset()
-        def smashSkill(self):
-            self.smash = True
-            self.combo = "FULL"
         def result(self):
             if set(inventory.selected) != set(self.smashReq):
                     return -1 # did not meet requirements
@@ -106,26 +137,47 @@ init -1 python:
             return 0 # ordinary score
 
 init python:
+    def ingredient_activated(drags):
+        # item_name = drags[0].drag_name
+        # item_key = inventory.findKey(item_name)
+        # renpy.show("strawberry", layer='overlay')
+        renpy.show_screen("som_bubble", "on activated")
+        renpy.restart_interaction() # holy heck somniarre from renpy discord I owe you my life!!!
+        return True
+
     def ingredient_dragged(drags, drop):
         item_name = drags[0].drag_name
+        item_key = inventory.findKey(item_name)
         if not drop:
+            renpy.show_screen("som_bubble", "where are you dropping?!")
             drags[0].snap(cook_status.init_pos[item_name][0], cook_status.init_pos[item_name][1], 0) # x, y, seconds to move
+            renpy.restart_interaction()
+            # renpy.call(item_key+"_ondrop")
             return
 
-        if item_name in smashReq:
-            print("success!") 
-            drags[0].snap(9999, 9999, 0) # x, y, seconds to move
-        else:
-            print("dropped")
-            drags[0].snap(9999, 9999, 0) # x, y, seconds to move
+        drags[0].snap(9999, 9999, 0) # x, y, seconds to move
+        inventory.addToCauldron(drags[0])
+
+        x, y = renpy.get_mouse_pos()
+
+        for item in smashReq:
+            if item_name == item.name:
+                renpy.show_screen("som_bubble", "just dropped something nice!")
+                renpy.call("cooking_particles", type="special", x=x-10, y=y-10)
+                # renpy.call(item_key+"_ondropsuccess")
+                return True
+
+        renpy.show_screen("som_bubble", "just dropped")
+        renpy.call("cooking_particles", type="drop", x=x-10, y=y-10)
+        # renpy.call(item_key+"_ondropsuccess")
         return True
 
 
 #--------------------------------------------------------------------------
 # COOKING INVENTORY SCREEN
 #--------------------------------------------------------------------------
-# Required Global Variables: inventory, goal, item_pos
-screen cooking(dish):
+# Required Global Variables: inventory, cook_status, goal
+screen cooking():
     zorder -10
 
     if renpy.has_screen("dream"):
@@ -141,78 +193,57 @@ screen cooking(dish):
         at diagonal
 
     # somnia and remerie sprites
-    if set(inventory.selected) == set(cook_status.smashReq) and cook_status.combo == len(cook_status.smashReq) and cook_status.smash == False:
-        imagebutton:
-            xpos 0 ypos 245
-            idle "cooksom_ready"
-            mouse "hover"
-            action [Jump("smash_"+case)] # use a jump label when we want to throw in atls
-    else:
+    if not renpy.get_screen("cook_result"):
         imagebutton:
             idle "cooksom"
             xpos 0 ypos 245
             mouse "hover"
             action [Jump(case+"_somcook")]
-
-    imagebutton:
-        idle "cookrem"
-        xpos 1629 ypos 245
-        mouse "hover"
-        action [Jump(case+"_remcook")]
+        imagebutton:
+            idle "cookrem"
+            xpos 1629 ypos 245
+            mouse "hover"
+            action [Jump(case+"_remcook")]
 
     # cookbook
     add "cookbook":
         xalign 0.5 yalign 0.5
 
-    if not cook_status.smash:
-        imagebutton: # go back to dream mode
-            idle "goDream"
-            hover "goDreamHov"
-            mouse "hover"
-            hover_sound "audio/sfx/menuhover.ogg"
-            activate_sound "audio/sfx/select.ogg"
-            focus_mask True
-            xalign 0 yalign 0
-            at itrfade()
-            # action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
-            action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("testing_room")]
+    imagebutton: # go back to dream mode
+        idle "goDream"
+        hover "goDreamHov"
+        mouse "hover"
+        hover_sound "audio/sfx/menuhover.ogg"
+        activate_sound "audio/sfx/select.ogg"
+        focus_mask True
+        xalign 0 yalign 0
+        at itrfade()
+        # action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("dream_return")]
+        action [Function(cook_status.reset), Hide('cooking', transition=Dissolve(.8)), Jump("testing_room")]
 
-    else:
-        image "goDream":
-            xalign 0 yalign 0
+    # reset button
+    textbutton "Reset":
+        xalign 0.8 yalign 0.1
+        mouse "hover"
+        action Function(cook_status.reset)
 
-    # textbutton "Reset":
-    #     xalign 0.8 yalign 0.1
-    #     mouse "hover"
-    #     action [Function(cook_status.reset), Function(inventory.reset)]
-
-    if cook_status.smash:
-        imagebutton:
-            idle "letscookGO"
-            hover "letscookGO"
-            mouse "hover"
-            hover_sound "audio/sfx/menuhover.ogg"
-            focus_mask True
-            xalign 0.74 yalign 0.83
-            activate_sound "audio/sfx/donecooking.ogg"
-            action [Jump(case+"_cook_done")]
-    elif set(inventory.selected) == set(cook_status.smashReq):
-        imagebutton:
-            idle "goEat"
-            hover "letscookGO"
-            mouse "hover"
-            hover_sound "audio/sfx/menuhover.ogg"
-            at itrfade()
-            focus_mask True
-            xalign 0.74 yalign 0.83
-            activate_sound "audio/sfx/donecooking.ogg"
-            action [Jump(case+"_cook_done")]
+    # serve button
+    imagebutton:
+        idle "goEat"
+        hover "letscookGO"
+        mouse "hover"
+        hover_sound "audio/sfx/menuhover.ogg"
+        at itrfade()
+        focus_mask True
+        xalign 0.74 yalign 0.83
+        activate_sound "audio/sfx/donecooking.ogg"
+        action [Jump("smash_"+case)]
 
     # inventory positions
     $ x = 400
     $ y = 284
 
-    # ingredient after images
+    # ingredient "ghost" after images
     for i, item in enumerate(inventory.items):
         if i != 0 and i % 3 == 0:
             $ x = 400
@@ -239,21 +270,9 @@ screen cooking(dish):
                 drag_name item.name
                 child item.image
                 droppable False
+                activated ingredient_activated
                 dragged ingredient_dragged
                 xpos x ypos y
-
-            # if not cook_status.smash:
-            #     imagebutton:
-            #         idle item.image
-            #         xpos x ypos y
-            #         mouse "hover"
-            #         hover_sound "audio/sfx/menuhover.ogg"
-            #         action [Function(inventory.toggleSelect, item), Function(cook_status.update, item), Jump("play_sound")]
-            #         tooltip item
-            #         at focus_effect
-            # else:
-            #     image item.image xpos x ypos y
-
             $ x += 159
 
     $ tooltip = GetTooltip()
@@ -268,18 +287,59 @@ screen cooking(dish):
                 xalign 0.5
                 color "#483e54"
 
-    # combo
-    image "gui/bar/flavorstars{}.png".format(cook_status.combo):
-        xpos 1140 ypos 238
-        at itrfade()
+    # text txt:
+    #     style "dreamacts_text"
+    #     at dish_appear
+    #     xpos 200 ypos 200
 
-    if cook_status.result() == 0:
-        image dish:
-            xalign 0.68 yalign 0.55
+screen cook_result():
+    zorder 0
+    modal True
+    imagebutton:
+        idle Solid("#0008")
+
+    if cook_status.result() == 1:
+        image cook_status.dish+"Best":
+            xalign 0.5 yalign 0.55
             xanchor 0.5 yanchor 0.5
             at dish_appear
-    elif cook_status.result() == 1:
-        image dish+"Best":
-            xalign 0.68 yalign 0.55
+    else:
+        image cook_status.dish+"Best":
+            xalign 0.5 yalign 0.55
             xanchor 0.5 yanchor 0.5
             at dish_appear
+
+    textbutton "Start Over":
+        xalign 0.4 yalign 0.8
+        mouse "hover"
+        action [Function(cook_status.reset), Hide("cook_result", transition=Dissolve(0.8))]
+
+    textbutton "Serve!":
+        xalign 0.6 yalign 0.8
+        mouse "hover"
+        action Jump("testing_room")
+
+    # somnia and remerie sprites
+    imagebutton:
+        xpos 0 ypos 245
+        idle "cooksom_ready"
+        mouse "hover"
+        # action [Jump("smash_"+case)] # use a jump label when we want to throw in atls
+
+    imagebutton:
+        idle "cookrem"
+        xpos 1629 ypos 245
+        mouse "hover"
+        # action [Jump(case+"_remcook")]
+
+screen som_bubble(txt="hello", duration=2.0):
+    timer duration action [Hide("som_bubble", transition=Dissolve(.8))]
+
+    # style_prefix "cooking_bubble"
+    frame:
+        style "cooking_bubble"
+        xpos 120 ypos 800
+
+        add Text(txt, slow=20, style="dreamacts_text"):
+            at bubble_appear
+            # xpos 200 ypos 200

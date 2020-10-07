@@ -10,8 +10,10 @@ label test_cook:
         for i in [c_strawberry, c_bunnyapples, c_herbs, c_medicine, c_clockegg]:
             inventory.add(i)
     $ smashReq = [c_strawberry, c_bunnyapples, c_herbs, c_clockegg]
-    $ cook_status = CookStatus(smashReq=smashReq)
-    show screen cooking(dish="omelette") with Dissolve (0.8)
+    $ cook_status = CookStatus(smashReq=smashReq, dish="omelette")
+    $ txt = "hello aaaa"
+    show screen cooking() with Dissolve (0.8)
+    # show screen som_bubble
     jump cooking_start
 
 label test_somcook:
@@ -36,17 +38,34 @@ label test_remcook:
         r "Well, in any case, we should clean up now."
     jump cooking_start
 
+label strawberry_onhover:
+    s "hey it's a strawberry!{w=2}{nw}"
+    r "yes it's a strawberry{w=3}{nw}"
+    jump cooking_start
+
+label strawberry_ondrag:
+    # s "are we going to add the strawberry into the cauldron?{w=2}{nw}"
+    show screen som_bubble
+    jump cooking_start
+
+label strawberry_ondrop:
+    # s "Hey don't drop the strawberry!"
+    show screen som_bubble("testtest on drop")
+    jump cooking_start
+
+label strawberry_ondropsuccess:
+    s "I wonder how the strawberry tastes..."
+    return
+
 label smash_test:
     show screen focus_dialogue
     $ somnia_name = "Somnia"
     show cutin onlayer overlay
-    pause 5.0
-    $ cook_status.smashSkill()
+    pause 4.0
     play sound "audio/sfx/comboFULL.ogg"
-    s "Viola~!"
-    r "W-what did you do?!"
-    s "Just a bit of {i}Somnia magic{/i}. I feel like it was missing something earlier."
-    s "In this case, a spoonful of love~!"
+    show expression (ParticleBurst("gui/star.png", explodeTime=0.2, numParticles=120, particleTime=0.5, particleXSpeed=40, particleYSpeed = 40).sm) onlayer overlay:
+        xpos 0.5 ypos 0.55
+    show screen cook_result
     jump cooking_start
 
 label test_cook_done():
