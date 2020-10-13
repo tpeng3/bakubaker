@@ -237,11 +237,11 @@ screen get_ingredient(ingredient, addon=None):
             xalign 0.5
             yalign 0.5
     
-screen dream_actions(actions={}, mousepos):
+screen dream_actions(actions={}, mousepos=(0, 0), mode="investigation"):
     # for cancelling/hiding dream_actions if you click away from the menu
     imagebutton:
         idle Solid("#0000")
-        action Hide('dream_actions')
+        action [Hide('dream_actions'), Hide('get_ingredient')]
 
     $ mx, my = mousepos
     if mx > gui.width - 530:
@@ -252,22 +252,44 @@ screen dream_actions(actions={}, mousepos):
     $ ystart = 0
     $ delay = 0
 
-    vbox:
-        xpos mx+10 ypos my
-        spacing 10
+    if mode == "puzzle":
+        grid 2 2:
+            xalign 0.5 yalign 0.9
+            spacing 10
 
-        for action in actions:
-            if testmode:
-                $ next_action = 'test_' + action['label']
-            else:
-                $ next_action = action['label']
-            button:
-                mouse "hover"
-                hover_sound "audio/sfx/menuhover.ogg"
-                activate_sound "audio/sfx/select.ogg"
-                style "dreamacts"
-                text action['name']:
-                    style "dreamacts_text"
-                action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
-                at dreamfade(delay)
-            $delay += 0.2
+            for action in actions[:4]: # only up to 4 actions are allowed for puzzle mode
+                if testmode:
+                    $ next_action = 'test_' + action['label']
+                else:
+                    $ next_action = action['label']
+                button:
+                    mouse "hover"
+                    hover_sound "audio/sfx/menuhover.ogg"
+                    activate_sound "audio/sfx/select.ogg"
+                    style "dreamacts"
+                    text action['name']:
+                        style "dreamacts_text"
+                    action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
+                    at dreamfade(delay)
+                $delay += 0.2
+
+    else:
+        vbox:
+            xpos mx+10 ypos my
+            spacing 10
+
+            for action in actions:
+                if testmode:
+                    $ next_action = 'test_' + action['label']
+                else:
+                    $ next_action = action['label']
+                button:
+                    mouse "hover"
+                    hover_sound "audio/sfx/menuhover.ogg"
+                    activate_sound "audio/sfx/select.ogg"
+                    style "dreamacts"
+                    text action['name']:
+                        style "dreamacts_text"
+                    action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
+                    at dreamfade(delay)
+                $delay += 0.2

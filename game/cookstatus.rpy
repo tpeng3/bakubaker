@@ -10,10 +10,17 @@ label play_sound: # have to call this because sfx happens after combo is updated
 
 label cooking_particles(type="drop", x=0.5, y=0.5):
     if type == "drop":
-        show expression (ParticleBurst("gui/musicnote.png", explodeTime=0.2, numParticles=6, particleTime=1.0, particleXSpeed=5, particleYSpeed = 5).sm) onlayer screens:
-            xpos x ypos y
+        $ star_type = "yellow"
     elif type == "special":
-        show expression (ParticleBurst("gui/musicnote2.png", explodeTime=0.2, numParticles=6, particleTime=1.0, particleXSpeed=5, particleYSpeed=5).sm) onlayer screens:
+        $ star_type = "rainbow"
+    show expression (ParticleBurst("gui/particle_cloud.png", explodeTime=0.2, numParticles=6, particleTime=1.5, particleXSpeed=5.5, particleYSpeed = 5.5, zOrder=0).sm) onlayer screens:
+            xpos x ypos y
+            alpha 0.5
+    show expression (ParticleBurst("gui/particle_star_{}.png".format(star_type), explodeTime=0.2, numParticles=6, particleTime=1.0, particleXSpeed=5.5, particleYSpeed = 5.5, zOrder=1).sm) onlayer screens:
+            xpos x ypos y
+    show expression (ParticleBurst("gui/particle_star2_{}.png".format(star_type), explodeTime=0.2, numParticles=3, particleTime=1.0, particleXSpeed=5, particleYSpeed=5, zOrder=1).sm) onlayer screens:
+            xpos x ypos y
+    show expression (ParticleBurst("gui/particle_star3_{}.png".format(star_type), explodeTime=0.2, numParticles=3, particleTime=1.0, particleXSpeed=5, particleYSpeed=5, zOrder=1).sm) onlayer screens:
             xpos x ypos y
 
 transform focus_effect: # brighten ingredient on focus, tho we can do other effects too

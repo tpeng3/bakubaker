@@ -705,15 +705,18 @@ label test_clock1_inspect:
     with Dissolve(0.8)
     dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
     dr "Currently the hour hand is facing {ii}[t_clockface1.state]{/ii}, while the minute hand remains stuck facing {b}down{/b}."
-    hide screen get_ingredient
-    hide clockhour onlayer screens
-    if not t_clockface1.viewed:
-        python:
-            interactions.update(t_clockface1.view())
-            interactions.update(t_clockface1.enable("clock1_up"))
-            interactions.update(t_clockface1.enable("clock1_down"))
-            interactions.update(t_clockface1.enable("clock1_left"))
-            interactions.update(t_clockface1.enable("clock1_right"))
+    $ actionable = [action for action in t_clockface1.actions if action.get('condition', True)]
+    show screen dream_actions(actionable, mode="puzzle")
+    # $ renpy.pause(hard=True)
+    # hide screen get_ingredient
+    # hide clockhour onlayer screens
+    # if not t_clockface1.viewed:
+    #     python:
+    #         interactions.update(t_clockface1.view())
+    #         interactions.update(t_clockface1.enable("clock1_up"))
+    #         interactions.update(t_clockface1.enable("clock1_down"))
+    #         interactions.update(t_clockface1.enable("clock1_left"))
+    #         interactions.update(t_clockface1.enable("clock1_right"))
     jump dream_start
 label test_clock1_up:
     pause(0.01)
@@ -723,7 +726,7 @@ label test_clock1_up:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("up"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock1_down:
     pause(0.01)
     show screen get_ingredient("clockdown")
@@ -732,7 +735,7 @@ label test_clock1_down:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("down"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock1_left:
     pause(0.01)
     show screen get_ingredient("clockdown")
@@ -741,7 +744,7 @@ label test_clock1_left:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("left"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock1_right:
     pause(0.01)
     show screen get_ingredient("clockdown")
@@ -750,7 +753,7 @@ label test_clock1_right:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand remains stuck facing {b}down{/b}."
     $ interactions.update(t_clockface1.updateState("right"))
-    jump .check_clocks
+    jump test_check_clocks
 
 # giant clock on second page
 label test_clock2_inspect:
@@ -778,7 +781,7 @@ label test_clock2_up:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("up"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock2_down:
     pause(0.01)
     show screen get_ingredient("clockup")
@@ -787,7 +790,7 @@ label test_clock2_down:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("down"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock2_left:
     pause(0.01)
     show screen get_ingredient("clockup")
@@ -796,7 +799,7 @@ label test_clock2_left:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("left"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock2_right:
     pause(0.01)
     show screen get_ingredient("clockup")
@@ -805,7 +808,7 @@ label test_clock2_right:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand remains stuck facing {b}up{/b}."
     $ interactions.update(t_clockface2.updateState("right"))
-    jump .check_clocks
+    jump test_check_clocks
 
 # first clock on last page
 label test_clock3_inspect:
@@ -839,7 +842,7 @@ label test_clock3_up:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("up"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock3_down:
     pause(0.01)
     show screen get_ingredient("clockright")
@@ -848,7 +851,7 @@ label test_clock3_down:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("down"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock3_left:
     pause(0.01)
     show screen get_ingredient("clockright")
@@ -857,7 +860,7 @@ label test_clock3_left:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("left"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock3_right:
     pause(0.01)
     show screen get_ingredient("clockright")
@@ -866,7 +869,7 @@ label test_clock3_right:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand remains stuck facing {b}right{/b}."
     $ interactions.update(t_clockface3.updateState("right"))
-    jump .check_clocks
+    jump test_check_clocks
 
 # second clock on last page
 label test_clock4_inspect:
@@ -899,7 +902,7 @@ label test_clock4_up:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("up"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock4_down:
     pause(0.01)
     show screen get_ingredient("clockleft")
@@ -908,7 +911,7 @@ label test_clock4_down:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("down"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock4_left:
     pause(0.01)
     show screen get_ingredient("clockleft")
@@ -917,7 +920,7 @@ label test_clock4_left:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("left"))
-    jump .check_clocks
+    jump test_check_clocks
 label test_clock4_right:
     pause(0.01)
     show screen get_ingredient("clockleft")
@@ -926,9 +929,9 @@ label test_clock4_right:
     play sound clocktwist
     dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand remains stuck facing {b}left{/b}."
     $ interactions.update(t_clockface4.updateState("right"))
-    jump .check_clocks
+    jump test_check_clocks
 
-label .check_clocks:
+label test_check_clocks:
     if t_clockface1.state == "right" and t_clockface2.state == "left" and t_clockface3.state == "up" and t_clockface4.state == "down":
         hide screen get_ingredient
         hide clockhour onlayer screens
@@ -997,6 +1000,8 @@ label .check_clocks:
             )
     else:
         dr "The clock hand was moved, but nothing happened."
-        hide screen get_ingredient
-        hide clockhour onlayer screens
+        $ actionable = [action for action in t_clockface1.actions if action.get('condition', True)]
+        show screen dream_actions(actionable, mode="puzzle")
+        # hide screen get_ingredient
+        # hide clockhour onlayer screens
     jump dream_start

@@ -330,7 +330,7 @@ init python:
 # Particular Bust -----------------------------------------------------------------
 # CaseyLoufek I owe you my life https://lemmasoft.renai.us/forums/viewtopic.php?t=12259
     class ParticleBurst(object):
-        def __init__(self, theDisplayable, explodeTime=0, numParticles=20, particleTime = 0.500, particleXSpeed = 3, particleYSpeed = 3):
+        def __init__(self, theDisplayable, explodeTime=0, numParticles=20, particleTime = 0.500, particleXSpeed = 3, particleYSpeed = 3, zOrder=0):
             self.sm = SpriteManager(update=self.update)
             # A list of (sprite, starting-x, speed).
             self.stars = [ ]
@@ -341,9 +341,11 @@ init python:
             self.particleXSpeed = particleXSpeed
             self.particleYSpeed = particleYSpeed
             self.timePassed = 0
+            self.zOrder = zOrder
            
         def add(self, d, speed, st):
             s = self.sm.create(d)
+            s.zorder = self.zOrder
             ySpeed = (renpy.random.random() - 0.5) * self.particleYSpeed
             xSpeed = (renpy.random.random() - 0.5) * self.particleXSpeed
             pTime = (renpy.random.random() * self.particleTime ) + st
