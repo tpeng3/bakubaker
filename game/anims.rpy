@@ -23,11 +23,11 @@ transform delay_fade():
     pause 1.0
     linear 0.8 alpha 1.0
 
-transform clock_twist(start, end):
+transform clock_twist(start, rot):
     xalign 0.5 yalign 0.5
     rotate get_turn_degrees("up", start)
     pause 0.5
-    linear (((get_turn_degrees(start, end))/360.0)*2.90) rotate get_turn_degrees("up", start) + get_turn_degrees(start, end)
+    linear 1.4 rotate get_turn_degrees("up", start) + rot
 
 # ATL
 label splash_transition:

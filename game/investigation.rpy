@@ -237,7 +237,7 @@ screen get_ingredient(ingredient, addon=None):
             xalign 0.5
             yalign 0.5
     
-screen dream_actions(actions={}, mousepos=(0, 0), mode="investigation"):
+screen dream_actions(actions={}, mousepos=(0, 0)):
     # for cancelling/hiding dream_actions if you click away from the menu
     imagebutton:
         idle Solid("#0000")
@@ -252,44 +252,62 @@ screen dream_actions(actions={}, mousepos=(0, 0), mode="investigation"):
     $ ystart = 0
     $ delay = 0
 
-    if mode == "puzzle":
-        grid 2 2:
-            xalign 0.5 yalign 0.9
+    vbox:
+        xpos mx+10 ypos my
+        spacing 10
+
+        for action in actions:
+            if testmode:
+                $ next_action = 'test_' + action['label']
+            else:
+                $ next_action = action['label']
+            button:
+                mouse "hover"
+                hover_sound "audio/sfx/menuhover.ogg"
+                activate_sound "audio/sfx/select.ogg"
+                style "dreamacts"
+                text action['name']:
+                    style "dreamacts_text"
+                action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
+                at dreamfade(delay)
+            $delay += 0.2
+
+# Related Global Variables: case
+screen dream_puzzle(interactable):
+    modal True
+
+    if case == "test" or case == "case1":
+        hbox:
+            xalign 0.5 yalign 0.8
             spacing 10
 
-            for action in actions[:4]: # only up to 4 actions are allowed for puzzle mode
-                if testmode:
-                    $ next_action = 'test_' + action['label']
-                else:
-                    $ next_action = action['label']
-                button:
-                    mouse "hover"
-                    hover_sound "audio/sfx/menuhover.ogg"
-                    activate_sound "audio/sfx/select.ogg"
-                    style "dreamacts"
-                    text action['name']:
-                        style "dreamacts_text"
-                    action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
-                    at dreamfade(delay)
-                $delay += 0.2
+            button:
+                mouse "hover"
+                hover_sound "audio/sfx/menuhover.ogg"
+                activate_sound "audio/sfx/select.ogg"
+                style "dreamacts"
+                text "Turn Counterclockwise":
+                    style "dreamacts_text"
+                action [Call("test_clock_twist", interactable, clockwise=False)]
+                at dreamfade(0)
+            
+            button:
+                mouse "hover"
+                hover_sound "audio/sfx/menuhover.ogg"
+                activate_sound "audio/sfx/select.ogg"
+                style "dreamacts"
+                text "Turn Clockwise":
+                    style "dreamacts_text"
+                action [Call("test_clock_twist", interactable, clockwise=True)]
+                at dreamfade(0.2)
 
-    else:
-        vbox:
-            xpos mx+10 ypos my
-            spacing 10
-
-            for action in actions:
-                if testmode:
-                    $ next_action = 'test_' + action['label']
-                else:
-                    $ next_action = action['label']
-                button:
-                    mouse "hover"
-                    hover_sound "audio/sfx/menuhover.ogg"
-                    activate_sound "audio/sfx/select.ogg"
-                    style "dreamacts"
-                    text action['name']:
-                        style "dreamacts_text"
-                    action [Hide('dream_actions'), Show('focus_dialogue'), Call(next_action)]
-                    at dreamfade(delay)
-                $delay += 0.2
+    button:
+        mouse "hover"
+        hover_sound "audio/sfx/menuhover.ogg"
+        activate_sound "audio/sfx/select.ogg"
+        style "dreamacts"
+        text "Look Elsewhere":
+            style "dreamacts_text"
+        action [Hide('dream_puzzle'), Show('focus_dialogue'), Call("test_clock_exit")]
+        at dreamfade(0.6)
+        xalign 0.5 yalign 0.91

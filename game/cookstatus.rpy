@@ -215,6 +215,8 @@ screen cooking():
     # cookbook
     add "cookbook":
         xalign 0.5 yalign 0.5
+    add "cauldron":
+        xpos 903+147 ypos 250-5
 
     imagebutton: # go back to dream mode
         idle "goDream"
@@ -265,8 +267,8 @@ screen cooking():
         drag:
             drag_name "Cauldron"
             draggable False
-            child "images/interactables/cauldron.png"
-            xpos 1140 ypos 422
+            child "cauldron_drop"
+            xpos 903+310 ypos 250+160
         for i, item in enumerate(inventory.items):
             if i != 0 and i % 3 == 0:
                 $ x = 400
@@ -340,7 +342,7 @@ screen cook_result():
         # action [Jump(case+"_remcook")]
 
 screen som_bubble(txt="hello", duration=2.0):
-    timer duration action [Hide("som_bubble", transition=Dissolve(.8))]
+    timer duration action [Hide("som_bubble")]
 
     # style_prefix "cooking_bubble"
     frame:

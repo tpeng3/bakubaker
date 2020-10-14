@@ -207,6 +207,26 @@ label initialize_case_test:
             ],
             state = "left"
         )
+        t_clockanswer = { # these are the minute hand markings, actual answer is minute - 90 degrees
+            "clockface1": "down", 
+            "clockface2": "up",
+            "clockface3": "right",
+            "clockface4": "left"
+        }
+        t_clockdegrees = {
+            "up": 0,
+            "right": 90,
+            "down": 180,
+            "left": 270
+        }
+        t_clockdirections = {
+            0: "up",
+            90: "right",
+            180: "down",
+            270: "left",
+            -90: "left",
+            360: "up"
+        }
 
 #--------------------------------------------------------------------------
 # CASE 1 INGREDIENTS

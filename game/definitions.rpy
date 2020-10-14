@@ -118,6 +118,16 @@ init -1:
 ## BGs:
     image wonderland2 = "images/BG/bg_wonderland_v2.png"
     image starry = "images/BG/starry.png"
+    image cauldron:
+        "images/BG/cauldronswirl.png"
+        rotate 0
+        linear 90.0 rotate 360
+        repeat
+    image cauldron_drop:
+        "images/BG/cauldronswirl.png"
+        alpha 0
+        xanchor 0.5 yanchor 0.5
+        size (180, 180)
     image cookbook = "images/BG/bg_cookbook.png"
 
 ## CGs:

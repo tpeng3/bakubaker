@@ -701,59 +701,30 @@ label test_marcella_talk_end:
 label test_clock1_inspect:
     pause(0.01) # hacky but seperates the dissolve transition
     show screen get_ingredient("clockdown")
-    show clockhour at clock_twist(t_clockface1.state, t_clockface1.state) onlayer screens
+    show clockhour at clock_twist(t_clockface1.state, 0) onlayer screens
     with Dissolve(0.8)
     dr "One of four prominent clock faces. The numbers have been clouded beyond readability."
     dr "Currently the hour hand is facing {ii}[t_clockface1.state]{/ii}, while the minute hand remains stuck facing {b}down{/b}."
-    $ actionable = [action for action in t_clockface1.actions if action.get('condition', True)]
-    show screen dream_actions(actionable, mode="puzzle")
-    # $ renpy.pause(hard=True)
-    # hide screen get_ingredient
-    # hide clockhour onlayer screens
-    # if not t_clockface1.viewed:
-    #     python:
-    #         interactions.update(t_clockface1.view())
-    #         interactions.update(t_clockface1.enable("clock1_up"))
-    #         interactions.update(t_clockface1.enable("clock1_down"))
-    #         interactions.update(t_clockface1.enable("clock1_left"))
-    #         interactions.update(t_clockface1.enable("clock1_right"))
+    show screen dream_puzzle(t_clockface1)
+    dr "Currently the hour hand is facing {ii}[t_clockface1.state]{/ii}, while the minute hand remains stuck facing {b}down{/b}.{fast}"
     jump dream_start
-label test_clock1_up:
+
+label test_clock_twist(focused_clock, clockwise=True):
     pause(0.01)
-    show screen get_ingredient("clockdown")
-    show clockhour at clock_twist(t_clockface1.state, "up") onlayer screens
-    with Dissolve(0.8)
+    $ rot = 90 if clockwise else -90
+    $ newhour = t_clockdirections[t_clockdegrees[focused_clock.state]+rot]
+    show clockhour at clock_twist(focused_clock.state, rot) onlayer screens
     play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}down{/b}."
-    $ interactions.update(t_clockface1.updateState("up"))
+    pause(2)
+    $ interactions.update(t_clockface1.updateState(newhour))
+    $ minutehand = t_clockanswer[focused_clock.key]
+    dr "The hour hand has been moved to face {ii}[focused_clock.state]{/ii}, while the minute hand remains stuck facing {b}[minutehand]{/b}."
     jump test_check_clocks
-label test_clock1_down:
-    pause(0.01)
-    show screen get_ingredient("clockdown")
-    show clockhour at clock_twist(t_clockface1.state, "down") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}down{/b}."
-    $ interactions.update(t_clockface1.updateState("down"))
-    jump test_check_clocks
-label test_clock1_left:
-    pause(0.01)
-    show screen get_ingredient("clockdown")
-    show clockhour at clock_twist(t_clockface1.state, "left") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}down{/b}."
-    $ interactions.update(t_clockface1.updateState("left"))
-    jump test_check_clocks
-label test_clock1_right:
-    pause(0.01)
-    show screen get_ingredient("clockdown")
-    show clockhour at clock_twist(t_clockface1.state, "right") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}right{/ii}, while the minute hand remains stuck facing {b}down{/b}."
-    $ interactions.update(t_clockface1.updateState("right"))
-    jump test_check_clocks
+
+label test_clock_exit:
+    hide screen get_ingredient
+    hide clockhour onlayer screens
+    jump dream_start
 
 # giant clock on second page
 label test_clock2_inspect:
@@ -773,34 +744,7 @@ label test_clock2_inspect:
             interactions.update(t_clockface2.enable("clock2_left"))
             interactions.update(t_clockface2.enable("clock2_right"))
     jump dream_start
-label test_clock2_up:
-    pause(0.01)
-    show screen get_ingredient("clockup")
-    show clockhour at clock_twist(t_clockface2.state, "up") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}up{/b}."
-    $ interactions.update(t_clockface2.updateState("up"))
-    jump test_check_clocks
-label test_clock2_down:
-    pause(0.01)
-    show screen get_ingredient("clockup")
-    show clockhour at clock_twist(t_clockface2.state, "down") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}up{/b}."
-    $ interactions.update(t_clockface2.updateState("down"))
-    jump test_check_clocks
-label test_clock2_left:
-    pause(0.01)
-    show screen get_ingredient("clockup")
-    show clockhour at clock_twist(t_clockface2.state, "left") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}up{/b}."
-    $ interactions.update(t_clockface2.updateState("left"))
-    jump test_check_clocks
-label test_clock2_right:
+
     pause(0.01)
     show screen get_ingredient("clockup")
     show clockhour at clock_twist(t_clockface2.state, "right") onlayer screens
@@ -834,34 +778,7 @@ label test_clock3_inspect:
     hide screen get_ingredient
     hide clockhour onlayer screens
     jump dream_start
-label test_clock3_up:
-    pause(0.01)
-    show screen get_ingredient("clockright")
-    show clockhour at clock_twist(t_clockface3.state, "up") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}right{/b}."
-    $ interactions.update(t_clockface3.updateState("up"))
-    jump test_check_clocks
-label test_clock3_down:
-    pause(0.01)
-    show screen get_ingredient("clockright")
-    show clockhour at clock_twist(t_clockface3.state, "down") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}right{/b}."
-    $ interactions.update(t_clockface3.updateState("down"))
-    jump test_check_clocks
-label test_clock3_left:
-    pause(0.01)
-    show screen get_ingredient("clockright")
-    show clockhour at clock_twist(t_clockface3.state, "left") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}right{/b}."
-    $ interactions.update(t_clockface3.updateState("left"))
-    jump test_check_clocks
-label test_clock3_right:
+
     pause(0.01)
     show screen get_ingredient("clockright")
     show clockhour at clock_twist(t_clockface3.state, "right") onlayer screens
@@ -894,34 +811,7 @@ label test_clock4_inspect:
     hide screen get_ingredient
     hide clockhour onlayer screens
     jump dream_start
-label test_clock4_up:
-    pause(0.01)
-    show screen get_ingredient("clockleft")
-    show clockhour at clock_twist(t_clockface4.state, "up") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}up{/ii}, while the minute hand remains stuck facing {b}left{/b}."
-    $ interactions.update(t_clockface4.updateState("up"))
-    jump test_check_clocks
-label test_clock4_down:
-    pause(0.01)
-    show screen get_ingredient("clockleft")
-    show clockhour at clock_twist(t_clockface4.state, "down") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}down{/ii}, while the minute hand remains stuck facing {b}left{/b}."
-    $ interactions.update(t_clockface4.updateState("down"))
-    jump test_check_clocks
-label test_clock4_left:
-    pause(0.01)
-    show screen get_ingredient("clockleft")
-    show clockhour at clock_twist(t_clockface4.state, "left") onlayer screens
-    with Dissolve(0.8)
-    play sound clocktwist
-    dr "The hour hand has been moved to face {ii}left{/ii}, while the minute hand remains stuck facing {b}left{/b}."
-    $ interactions.update(t_clockface4.updateState("left"))
-    jump test_check_clocks
-label test_clock4_right:
+
     pause(0.01)
     show screen get_ingredient("clockleft")
     show clockhour at clock_twist(t_clockface4.state, "right") onlayer screens
